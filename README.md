@@ -1,7 +1,5 @@
 # CIVL 418: Engineering Hydrology
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dankovacek/Engineering_Hydrology_Notebooks/HEAD?filepath=Notebook_1%2FNotebook_1.ipynb)
-
 A series of interactive notebooks are provided in this code repository.  The aim of the notebooks is to introduce students to working with data programmatically using the open-source *Jupyter* software, which is a powerful "integrated development environment" for data analysis.  **Students are not expected to have prior experience with programming.**  The emphasis of the notebooks is not computer programming; all requisite code is provided.  Each notebook will focus on a particular hydrologic concept, and students will be asked to answer questions about the hydrological concept.  The instructions provided with the code in the notebooks will facilitate the exploration of each concept.
 
 ## Getting Started with Interactive Python Notebooks
