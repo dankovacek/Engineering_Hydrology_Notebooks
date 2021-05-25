@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Markdown Files &#8212; My sample book</title>
+    <title>Markdown Files &#8212; Engineering Hydrology</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -75,7 +75,7 @@
   <img src="_static/logo.png" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">My sample book</h1>
+  <h1 class="site-logo" id="site-title">Engineering Hydrology</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -97,11 +97,6 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/Introduction/Data_Import_and_Review.html">
-   Data Import and Review
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="notebooks/Introduction/Example_Notebook.html">
    Example Notebook
   </a>
@@ -112,8 +107,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/Introduction/Untitled.html">
-   This is a Title
+  <a class="reference internal" href="notebooks/Introduction/Data_Import_and_Review.html">
+   Data Import and Review
   </a>
  </li>
 </ul>
@@ -129,13 +124,18 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/Notebook_1/Notebook_1.html#correct-conductivity-for-temperature">
-   Correct Conductivity for Temperature
+  <a class="reference internal" href="notebooks/Notebook_1/Notebook_1.html#temperature-correction-for-conductivity">
+   Temperature Correction for Conductivity
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/Notebook_1/Notebook_1.html#matplotlib-is-a-good-plotting-library-but">
-   Matplotlib is a good plotting library, but…
+  <a class="reference internal" href="notebooks/Notebook_1/Notebook_1.html#plot-the-calibration-and-best-fit-line">
+   Plot the calibration and best fit line
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/Notebook_1/Notebook_1.html#alternative-plotting-library-for-interactivity-bokeh">
+   Alternative Plotting Library for Interactivity: Bokeh
   </a>
  </li>
  <li class="toctree-l1">
@@ -407,7 +407,7 @@ role syntax <code class="docutils literal notranslate"><span class="pre">{doc}`i
 <h3>Adding a citation<a class="headerlink" href="#adding-a-citation" title="Permalink to this headline">¶</a></h3>
 <p>You can also cite references that are stored in a <code class="docutils literal notranslate"><span class="pre">bibtex</span></code> file. For example,
 the following syntax: <code class="docutils literal notranslate"><span class="pre">{cite}`holdgraf_evidence_2014`</span></code> will render like
-this: <span id="id1">[<span>holdgraf_evidence_2014</span>]</span>.</p>
+this: <a href="#id1"><span class="problematic" id="id2">:cite:`holdgraf_evidence_2014`</span></a>.</p>
 <p>Moreoever, you can insert a bibliography into your page with this syntax:
 The <code class="docutils literal notranslate"><span class="pre">{bibliography}</span></code> directive must be used for all the <code class="docutils literal notranslate"><span class="pre">{cite}</span></code> roles to
 render properly.
@@ -418,7 +418,7 @@ then the bibliography is inserted with:</p>
 </pre></div>
 </div>
 <p>Resulting in a rendered bibliography that looks like:</p>
-<span class="target" id="id2"></span></div>
+</div>
 <div class="section" id="executing-code-in-your-markdown-files">
 <h3>Executing code in your markdown files<a class="headerlink" href="#executing-code-in-your-markdown-files" title="Permalink to this headline">¶</a></h3>
 <p>If you’d like to include computational content inside these markdown files,
@@ -479,7 +479,7 @@ see <a class="reference external" href="https://myst-nb.readthedocs.io/">The MyS
     <div class="container">
       <p>
         
-          By The Jupyter Book Community<br/>
+          By Dan Kovacek<br/>
         
             &copy; Copyright 2020.<br/>
       </p>

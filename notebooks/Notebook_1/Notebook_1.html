@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notebook 1: Flow Measurement using the Salt Dilution Method &#8212; My sample book</title>
+    <title>Notebook 1: Flow Measurement using the Salt Dilution Method &#8212; Engineering Hydrology</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Notebook 2: Rating Curve Development" href="../Notebook_2/Notebook_2.html" />
-    <link rel="prev" title="This is a Title" href="../Introduction/Untitled.html" />
+    <link rel="prev" title="Data Import and Review" href="../Introduction/Data_Import_and_Review.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -79,7 +79,7 @@
   <img src="../../_static/logo.png" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">My sample book</h1>
+  <h1 class="site-logo" id="site-title">Engineering Hydrology</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -101,11 +101,6 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Introduction/Data_Import_and_Review.html">
-   Data Import and Review
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../Introduction/Example_Notebook.html">
    Example Notebook
   </a>
@@ -116,8 +111,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Introduction/Untitled.html">
-   This is a Title
+  <a class="reference internal" href="../Introduction/Data_Import_and_Review.html">
+   Data Import and Review
   </a>
  </li>
 </ul>
@@ -133,13 +128,18 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#correct-conductivity-for-temperature">
-   Correct Conductivity for Temperature
+  <a class="reference internal" href="#temperature-correction-for-conductivity">
+   Temperature Correction for Conductivity
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#matplotlib-is-a-good-plotting-library-but">
-   Matplotlib is a good plotting library, but…
+  <a class="reference internal" href="#plot-the-calibration-and-best-fit-line">
+   Plot the calibration and best fit line
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#alternative-plotting-library-for-interactivity-bokeh">
+   Alternative Plotting Library for Interactivity: Bokeh
   </a>
  </li>
  <li class="toctree-l1">
@@ -337,20 +337,18 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#correct-conductivity-for-temperature">
-   Correct Conductivity for Temperature
+  <a class="reference internal nav-link" href="#temperature-correction-for-conductivity">
+   Temperature Correction for Conductivity
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-calibration-and-best-fit-line">
-     Plot the calibration and best fit line
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#matplotlib-is-a-good-plotting-library-but">
-   Matplotlib is a good plotting library, but…
+  <a class="reference internal nav-link" href="#plot-the-calibration-and-best-fit-line">
+   Plot the calibration and best fit line
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternative-plotting-library-for-interactivity-bokeh">
+   Alternative Plotting Library for Interactivity: Bokeh
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -363,13 +361,13 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-measurement">
-     Plot the measurement
+    <a class="reference internal nav-link" href="#plot-the-salt-dilution-measurement">
+     Plot the salt dilution measurement
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calculate-the-discharge">
-     Calculate the Discharge
+    <a class="reference internal nav-link" href="#calculate-discharge">
+     Calculate Discharge
     </a>
    </li>
   </ul>
@@ -462,7 +460,7 @@
 <p>In a salt dilution measurement, we first calibrate the instrument.  The calibration data is provided in a file named *SD_cal.csv</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_file_path</span> <span class="o">=</span> <span class="s1">&#39;../data/notebook_1_data/&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_file_path</span> <span class="o">=</span> <span class="s1">&#39;../../data/notebook_1_data/&#39;</span>
 <span class="n">calibration_filename</span> <span class="o">=</span> <span class="s1">&#39;SD_cal.csv&#39;</span> <span class="c1"># this is the calibration data file</span>
 <span class="n">salt_dilution_filename</span> <span class="o">=</span> <span class="s1">&#39;SD_data.csv&#39;</span> <span class="c1"># this is the measurement data file</span>
 </pre></div>
@@ -481,69 +479,6 @@
 <span class="n">cal_solution_concn</span> <span class="o">=</span> <span class="mf">10.1</span> <span class="c1"># g/L - this is the NaCl concentration in the calibration solution</span>
 <span class="n">cal_vol</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># total calibration volume mL </span>
 <span class="n">cal_vol_increment</span> <span class="o">=</span> <span class="mf">1.1</span> <span class="c1"># [mL] increments for calibration solution</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">b4d43a45737</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># instrument calibration data</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># see how two strings can be combined with the &#39;+&#39; operator</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">sd_cal</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_file_path</span> <span class="o">+</span> <span class="n">calibration_filename</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># discharge measurement data</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">sd_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_file_path</span> <span class="o">+</span> <span class="n">salt_dilution_filename</span><span class="p">)</span>
-
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">608</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">609</span> 
-<span class="ne">--&gt; </span><span class="mi">610</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">611</span> 
-<span class="g g-Whitespace">    </span><span class="mi">612</span> 
-
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">460</span> 
-<span class="g g-Whitespace">    </span><span class="mi">461</span>     <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">462</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">463</span> 
-<span class="g g-Whitespace">    </span><span class="mi">464</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">817</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">818</span> 
-<span class="ne">--&gt; </span><span class="mi">819</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">820</span> 
-<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1048</span>             <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1049</span>         <span class="c1"># error: Too many arguments for &quot;ParserBase&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1050</span>         <span class="k">return</span> <span class="n">mapping</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1051</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1052</span>     <span class="k">def</span> <span class="nf">_failover_to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1865</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1866</span>         <span class="c1"># open handles</span>
-<span class="ne">-&gt; </span><span class="mi">1867</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open_handles</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1868</span>         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1869</span>         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="s2">&quot;compression&quot;</span><span class="p">):</span>
-
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_open_handles</span><span class="nt">(self, src, kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1360</span>         <span class="n">Let</span> <span class="n">the</span> <span class="n">readers</span> <span class="nb">open</span> <span class="n">IOHanldes</span> <span class="n">after</span> <span class="n">they</span> <span class="n">are</span> <span class="n">done</span> <span class="k">with</span> <span class="n">their</span> <span class="n">potential</span> <span class="n">raises</span><span class="o">.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1361</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1362</span><span class="s2">         self.handles = get_handle(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1363</span><span class="s2">             src,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1364</span><span class="s2">             &quot;r&quot;,</span>
-
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">640</span><span class="s2">                 errors = &quot;replace&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">641</span><span class="s2">             # Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">642</span><span class="s2">             handle = open(</span>
-<span class="g g-Whitespace">    </span><span class="mi">643</span><span class="s2">                 handle,</span>
-<span class="g g-Whitespace">    </span><span class="mi">644</span><span class="s2">                 ioargs.mode,</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../data/notebook_1_data/SD_cal.csv&#39;
 </pre></div>
 </div>
 </div>
@@ -818,8 +753,8 @@
 </div>
 </div>
 </div>
-<div class="section" id="correct-conductivity-for-temperature">
-<h1>Correct Conductivity for Temperature<a class="headerlink" href="#correct-conductivity-for-temperature" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="temperature-correction-for-conductivity">
+<h1>Temperature Correction for Conductivity<a class="headerlink" href="#temperature-correction-for-conductivity" title="Permalink to this headline">¶</a></h1>
 <p>The electrical conductivity (EC) of water is a function of temperature, so it is important that the water used for calibration is the same temperature as the water in the stream being measured.  Alternatively, a temperature correction can be applied.</p>
 <p>Presented below are two different methods of temperature compensation.</p>
 <p>The instrument used in both the calibration and the measurement already has temperature compensation within the instrument, so the values recorded are EC at 25 C.</p>
@@ -981,8 +916,9 @@
 </table>
 </div></div></div>
 </div>
+</div>
 <div class="section" id="plot-the-calibration-and-best-fit-line">
-<h2>Plot the calibration and best fit line<a class="headerlink" href="#plot-the-calibration-and-best-fit-line" title="Permalink to this headline">¶</a></h2>
+<h1>Plot the calibration and best fit line<a class="headerlink" href="#plot-the-calibration-and-best-fit-line" title="Permalink to this headline">¶</a></h1>
 <p>The calibration points are plotted with as red circles, which is represented in the call to the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function by the two-character combination <code class="docutils literal notranslate"><span class="pre">ro</span></code>.  The best fit line through the calibration points is represented by a dashed blue line, specified by the three character code <code class="docutils literal notranslate"><span class="pre">b--</span></code>.  Changing the appearance of the plotted series is a matter of <a class="reference external" href="https://matplotlib.org/3.1.0/api/markers_api.html#module-matplotlib.markers">looking up the short form</a>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">stats.linregress</span></code> function takes in two arrays and returns the equation of the best fit line through the data, along with information about the fit.  Note that the r-value is the correlation coefficient.  The coefficient of determination (<span class="math notranslate nohighlight">\(R^2\)</span>) is the correlation coefficient squared.</p>
 <div class="cell docutils container">
@@ -1024,16 +960,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fe7fcf13430&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7ff4ee7beee0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_1_13_1.png" src="../../_images/Notebook_1_13_1.png" />
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="matplotlib-is-a-good-plotting-library-but">
-<h1>Matplotlib is a good plotting library, but…<a class="headerlink" href="#matplotlib-is-a-good-plotting-library-but" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="alternative-plotting-library-for-interactivity-bokeh">
+<h1>Alternative Plotting Library for Interactivity: Bokeh<a class="headerlink" href="#alternative-plotting-library-for-interactivity-bokeh" title="Permalink to this headline">¶</a></h1>
 <p>If you can imagine a function or feature you wish were already built, chances are it exists.  The Bokeh plotting library allows for a higher level of interactivity.  In the plot below, note the toolbar on the right hand side.  You can use the tools to take a closer look at your data in this simple case.  Plots can also be linked in Bokeh, with which powerful ‘dashboards’ can be built.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1057,7 +992,7 @@
 <div class="output text_html">
 <div class="bk-root">
     <a href="https://bokeh.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"></a>
-    <span id="1001">Loading BokehJS ...</span>
+    <span id="1002">Loading BokehJS ...</span>
 </div></div><script type="application/javascript">
 (function(root) {
   function now() {
@@ -1126,7 +1061,7 @@
     var output = handle.output;
 
     // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
-    if ((output.output_type != "display_data") || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
       return
     }
 
@@ -1218,7 +1153,7 @@
      "</div>"}};
 
   function display_loaded() {
-    var el = document.getElementById("1001");
+    var el = document.getElementById("1002");
     if (el != null) {
       el.textContent = "BokehJS is loading...";
     }
@@ -1268,15 +1203,15 @@
       }
     }
 
-    function on_error() {
+    function on_error(url) {
       console.error("failed to load " + url);
     }
 
-    for (var i = 0; i < css_urls.length; i++) {
-      var url = css_urls[i];
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
       const element = document.createElement("link");
       element.onload = on_load;
-      element.onerror = on_error;
+      element.onerror = on_error.bind(null, url);
       element.rel = "stylesheet";
       element.type = "text/css";
       element.href = url;
@@ -1284,13 +1219,13 @@
       document.body.appendChild(element);
     }
 
-    const hashes = {"https://cdn.bokeh.org/bokeh/release/bokeh-2.2.1.min.js": "qkRvDQVAIfzsJo40iRBbxt6sttt0hv4lh74DG7OK4MCHv4C5oohXYoHUM5W11uqS", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.2.1.min.js": "Sb7Mr06a9TNlet/GEBeKaf5xH3eb6AlCzwjtU82wNPyDrnfoiVl26qnvlKjmcAd+", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.2.1.min.js": "HaJ15vgfmcfRtB4c4YBOI4f1MUujukqInOWVqZJZZGK7Q+ivud0OKGSTn/Vm2iso"};
+    const hashes = {"https://cdn.bokeh.org/bokeh/release/bokeh-2.3.1.min.js": "YF85VygJKMVnHE+lLv2AM93Vbstr0yo2TbIu5v8se5Rq3UQAUmcuh4aaJwNlpKwa", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.1.min.js": "KKuas3gevv3PvrlkyCMzffFeaMq5we/a2QsP5AUoS3mJ0jmaCL7jirFJN3GoE/lM", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.1.min.js": "MK/uFc3YT18pkvvXRl66tTHjP0/dxoSH2e/eiNMFIguKlun2+WVqaPTWmUy/zvh4"};
 
-    for (var i = 0; i < js_urls.length; i++) {
-      var url = js_urls[i];
-      var element = document.createElement('script');
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const element = document.createElement('script');
       element.onload = on_load;
-      element.onerror = on_error;
+      element.onerror = on_error.bind(null, url);
       element.async = false;
       element.src = url;
       if (url in hashes) {
@@ -1309,7 +1244,7 @@
   }
 
   
-  var js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.2.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.2.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.2.1.min.js"];
+  var js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.3.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.1.min.js"];
   var css_urls = [];
   
 
@@ -1338,7 +1273,7 @@
       console.log("Bokeh: BokehJS failed to load within specified timeout.");
       root._bokeh_failed_load = true;
     } else if (force !== true) {
-      var cell = $(document.getElementById("1001")).parents('.cell').data().cell;
+      var cell = $(document.getElementById("1002")).parents('.cell').data().cell;
       cell.output_area.append_execute_result(NB_LOAD_WARNING)
     }
 
@@ -1359,12 +1294,12 @@
 
 
 
-<div class="bk-root" id="2afe941a-acd3-4bde-bd03-931bb0e4d0f7" data-root-id="1002"></div>
+<div class="bk-root" id="2a061453-b38c-49ee-beac-2669a61cf6b5" data-root-id="1003"></div>
 </div><script type="application/javascript">(function(root) {
   function embed_document(root) {
     
-  var docs_json = {"af7fab6b-2a58-4d1e-9771-267b3898272a":{"roots":{"references":[{"attributes":{"below":[{"id":"1011"}],"center":[{"id":"1014"},{"id":"1018"}],"left":[{"id":"1015"}],"plot_height":400,"plot_width":800,"renderers":[{"id":"1036"},{"id":"1041"}],"title":{"id":"1044"},"toolbar":{"id":"1026"},"x_range":{"id":"1003"},"x_scale":{"id":"1007"},"y_range":{"id":"1005"},"y_scale":{"id":"1009"}},"id":"1002","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"1051","type":"Selection"},{"attributes":{},"id":"1052","type":"UnionRenderers"},{"attributes":{"line_alpha":0.1,"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1040","type":"Line"},{"attributes":{},"id":"1003","type":"DataRange1d"},{"attributes":{"bottom_units":"screen","fill_alpha":0.5,"fill_color":"lightgrey","left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","top_units":"screen"},"id":"1025","type":"BoxAnnotation"},{"attributes":{"data_source":{"id":"1038"},"glyph":{"id":"1039"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1040"},"selection_glyph":null,"view":{"id":"1042"}},"id":"1041","type":"GlyphRenderer"},{"attributes":{},"id":"1005","type":"DataRange1d"},{"attributes":{},"id":"1007","type":"LinearScale"},{"attributes":{"axis":{"id":"1011"},"ticker":null},"id":"1014","type":"Grid"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAXXXTRRRdzQC+66KKLPnNARhdddNFlc0BddNFFF41zQHTRRRddtHNAjC666KLbc0Cjiy666AJ0QLrooosuKnRA0UUXXXRRdEDpoosuunh0QAAAAAAAoHRAF1100UXHdEAvuuiii+50QEYXXXTRFXVAXXTRRRc9dUB00UUXXWR1QIwuuuiii3VAo4suuuiydUC66KKLLtp1QNJFF110AXZA6aKLLroodkAAAAAAAFB2QBdddNFFd3ZALrrooouedkBGF1100cV2QF100UUX7XZAdNFFF10Ud0CMLrroojt3QKOLLrroYndAuuiiiy6Kd0DSRRdddLF3QOmiiy662HdAAAAAAAAAeEAXXXTRRSd4QC666KKLTnhARhdddNF1eEBddNFFF514QHTRRRddxHhAjC666KLreECjiy666BJ5QLrooosuOnlA0kUXXXRheUDpoosuuoh5QAAAAAAAsHlAF1100UXXeUAuuuiii/55QEYXXXTRJXpAXXTRRRdNekB00UUXXXR6QIwuuuiim3pAo4suuujCekC66KKLLup6QNJFF110EXtA6aKLLro4e0AAAAAAAGB7QBhddNFFh3tALrrooouue0BGF1100dV7QF100UUX/XtAdNFFF10kfECMLrrookt8QKOLLrrocnxAuuiiiy6afEDSRRdddMF8QOmiiy666HxAAAAAAAAQfUAYXXTRRTd9QC666KKLXn1ARhdddNGFfUBddNFFF619QHTRRRdd1H1AjC666KL7fUCjiy666CJ+QLrooosuSn5A0kUXXXRxfkDpoosuuph+QAAAAAAAwH5AGF100UXnfkAuuuiiiw5/QEYXXXTRNX9AXXTRRRddf0B00UUXXYR/QIwuuuiiq39Ao4suuujSf0C66KKLLvp/QOmiiy66EIBAdNFFF10kgEAAAAAAADiAQIwuuuiiS4BAF1100UVfgECjiy666HKAQC666KKLhoBAuuiiiy6agEBGF1100a2AQNJFF110wYBAXXTRRRfVgEDpoosuuuiAQHTRRRdd/IBAAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[100]},"y":[0.7855584341419899,2.1106634889706015,3.435768543799213,4.760873598627825,6.085978653456408,7.41108370828502,8.736188763113631,10.061293817942214,11.386398872770826,12.71150392759941,14.03660898242805,15.361714037256633,16.686819092085244,18.011924146913856,19.337029201742467,20.66213425657105,21.987239311399662,23.312344366228274,24.637449421056886,25.96255447588547,27.28765953071411,28.612764585542692,29.937869640371275,31.262974695199887,32.58807975002847,33.91318480485711,35.23828985968569,36.563394914514305,37.88849996934292,39.21360502417153,40.53871007900011,41.86381513382875,43.188920188657335,44.51402524348592,45.83913029831453,47.16423535314311,48.48934040797175,49.814445462800336,51.13955051762895,52.46465557245756,53.78976062728617,55.114865682114754,56.439970736943394,57.76507579177198,59.09018084660059,60.41528590142917,61.740390956257755,63.065496011086395,64.39060106591498,65.71570612074359,67.0408111755722,68.36591623040081,69.6910212852294,71.01612634005804,72.34123139488662,73.66633644971523,74.99144150454384,76.31654655937243,77.64165161420104,78.96675666902965,80.29186172385823,81.61696677868684,82.94207183351546,84.26717688834404,85.59228194317268,86.91738699800126,88.24249205282987,89.56759710765849,90.89270216248707,92.21780721731568,93.54291227214426,94.86801732697288,96.19312238180149,97.5182274366301,98.84333249145871,100.16843754628732,101.49354260111593,102.81864765594449,104.14375271077316,105.46885776560171,106.79396282043032,108.11906787525893,109.44417293008755,110.76927798491616,112.09438303974477,113.41948809457332,114.744593149402,116.06969820423055,117.39480325905916,118.71990831388777,120.04501336871633,121.370118423545,122.69522347837355,124.02032853320216,125.34543358803077,126.67053864285944,127.995643697688,129.3207487525166,130.64585380734516,131.97095886217377]},"selected":{"id":"1051"},"selection_policy":{"id":"1052"}},"id":"1038","type":"ColumnDataSource"},{"attributes":{},"id":"1024","type":"HelpTool"},{"attributes":{"formatter":{"id":"1045"},"ticker":{"id":"1012"}},"id":"1011","type":"LinearAxis"},{"attributes":{},"id":"1012","type":"BasicTicker"},{"attributes":{"formatter":{"id":"1047"},"ticker":{"id":"1016"}},"id":"1015","type":"LinearAxis"},{"attributes":{},"id":"1045","type":"BasicTickFormatter"},{"attributes":{},"id":"1009","type":"LinearScale"},{"attributes":{"axis":{"id":"1015"},"dimension":1,"ticker":null},"id":"1018","type":"Grid"},{"attributes":{},"id":"1016","type":"BasicTicker"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1019"},{"id":"1020"},{"id":"1021"},{"id":"1022"},{"id":"1023"},{"id":"1024"}]},"id":"1026","type":"Toolbar"},{"attributes":{},"id":"1020","type":"WheelZoomTool"},{"attributes":{},"id":"1019","type":"PanTool"},{"attributes":{},"id":"1047","type":"BasicTickFormatter"},{"attributes":{"overlay":{"id":"1025"}},"id":"1021","type":"BoxZoomTool"},{"attributes":{},"id":"1022","type":"SaveTool"},{"attributes":{},"id":"1023","type":"ResetTool"},{"attributes":{},"id":"1049","type":"Selection"},{"attributes":{"source":{"id":"1033"}},"id":"1037","type":"CDSView"},{"attributes":{},"id":"1050","type":"UnionRenderers"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAAAAAAAHB1QAAAAAAAwHdAAAAAAACgekAAAAAAAAB9QAAAAAAAkH9AAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[7]},"y":{"__ndarray__":"AAAAAAAAAADRRG9K1Ss2QLhEQqpmH0ZA3ZOddkSOUEB86tEOswZWQJ/1cl4JeVtAk860x6hyYEA=","dtype":"float64","order":"little","shape":[7]}},"selected":{"id":"1049"},"selection_policy":{"id":"1050"}},"id":"1033","type":"ColumnDataSource"},{"attributes":{"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1039","type":"Line"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"red"},"line_alpha":{"value":0.1},"line_color":{"value":"red"},"size":{"units":"screen","value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1035","type":"Circle"},{"attributes":{"source":{"id":"1038"}},"id":"1042","type":"CDSView"},{"attributes":{"data_source":{"id":"1033"},"glyph":{"id":"1034"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1035"},"selection_glyph":null,"view":{"id":"1037"}},"id":"1036","type":"GlyphRenderer"},{"attributes":{"text":""},"id":"1044","type":"Title"},{"attributes":{"fill_alpha":{"value":0.5},"fill_color":{"value":"red"},"line_alpha":{"value":0.5},"line_color":{"value":"red"},"size":{"units":"screen","value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1034","type":"Circle"}],"root_ids":["1002"]},"title":"Bokeh Application","version":"2.2.1"}};
-  var render_items = [{"docid":"af7fab6b-2a58-4d1e-9771-267b3898272a","root_ids":["1002"],"roots":{"1002":"2afe941a-acd3-4bde-bd03-931bb0e4d0f7"}}];
+  var docs_json = {"4efe319d-ae35-49e9-8e92-bf71aafd09ba":{"defs":[],"roots":{"references":[{"attributes":{"below":[{"id":"1012"}],"center":[{"id":"1015"},{"id":"1019"}],"height":400,"left":[{"id":"1016"}],"renderers":[{"id":"1037"},{"id":"1042"}],"title":{"id":"1045"},"toolbar":{"id":"1027"},"width":800,"x_range":{"id":"1004"},"x_scale":{"id":"1008"},"y_range":{"id":"1006"},"y_scale":{"id":"1010"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"1013","type":"BasicTicker"},{"attributes":{"axis":{"id":"1012"},"ticker":null},"id":"1015","type":"Grid"},{"attributes":{"formatter":{"id":"1050"},"major_label_policy":{"id":"1049"},"ticker":{"id":"1017"}},"id":"1016","type":"LinearAxis"},{"attributes":{},"id":"1025","type":"HelpTool"},{"attributes":{"axis":{"id":"1016"},"dimension":1,"ticker":null},"id":"1019","type":"Grid"},{"attributes":{},"id":"1017","type":"BasicTicker"},{"attributes":{"fill_alpha":{"value":0.5},"fill_color":{"value":"red"},"line_alpha":{"value":0.5},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1035","type":"Circle"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"red"},"line_alpha":{"value":0.1},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1036","type":"Circle"},{"attributes":{"active_multi":null,"tools":[{"id":"1020"},{"id":"1021"},{"id":"1022"},{"id":"1023"},{"id":"1024"},{"id":"1025"}]},"id":"1027","type":"Toolbar"},{"attributes":{},"id":"1054","type":"Selection"},{"attributes":{},"id":"1021","type":"WheelZoomTool"},{"attributes":{},"id":"1020","type":"PanTool"},{"attributes":{},"id":"1055","type":"UnionRenderers"},{"attributes":{"overlay":{"id":"1026"}},"id":"1022","type":"BoxZoomTool"},{"attributes":{},"id":"1023","type":"SaveTool"},{"attributes":{},"id":"1024","type":"ResetTool"},{"attributes":{"source":{"id":"1034"}},"id":"1038","type":"CDSView"},{"attributes":{},"id":"1047","type":"BasicTickFormatter"},{"attributes":{"data_source":{"id":"1034"},"glyph":{"id":"1035"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1036"},"view":{"id":"1038"}},"id":"1037","type":"GlyphRenderer"},{"attributes":{},"id":"1010","type":"LinearScale"},{"attributes":{},"id":"1045","type":"Title"},{"attributes":{},"id":"1046","type":"AllLabels"},{"attributes":{},"id":"1006","type":"DataRange1d"},{"attributes":{"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1040","type":"Line"},{"attributes":{"formatter":{"id":"1047"},"major_label_policy":{"id":"1046"},"ticker":{"id":"1013"}},"id":"1012","type":"LinearAxis"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAXXXTRRRdzQC+66KKLPnNARhdddNFlc0BddNFFF41zQHTRRRddtHNAjC666KLbc0Cjiy666AJ0QLrooosuKnRA0UUXXXRRdEDpoosuunh0QAAAAAAAoHRAF1100UXHdEAvuuiii+50QEYXXXTRFXVAXXTRRRc9dUB00UUXXWR1QIwuuuiii3VAo4suuuiydUC66KKLLtp1QNJFF110AXZA6aKLLroodkAAAAAAAFB2QBdddNFFd3ZALrrooouedkBGF1100cV2QF100UUX7XZAdNFFF10Ud0CMLrroojt3QKOLLrroYndAuuiiiy6Kd0DSRRdddLF3QOmiiy662HdAAAAAAAAAeEAXXXTRRSd4QC666KKLTnhARhdddNF1eEBddNFFF514QHTRRRddxHhAjC666KLreECjiy666BJ5QLrooosuOnlA0kUXXXRheUDpoosuuoh5QAAAAAAAsHlAF1100UXXeUAuuuiii/55QEYXXXTRJXpAXXTRRRdNekB00UUXXXR6QIwuuuiim3pAo4suuujCekC66KKLLup6QNJFF110EXtA6aKLLro4e0AAAAAAAGB7QBhddNFFh3tALrrooouue0BGF1100dV7QF100UUX/XtAdNFFF10kfECMLrrookt8QKOLLrrocnxAuuiiiy6afEDSRRdddMF8QOmiiy666HxAAAAAAAAQfUAYXXTRRTd9QC666KKLXn1ARhdddNGFfUBddNFFF619QHTRRRdd1H1AjC666KL7fUCjiy666CJ+QLrooosuSn5A0kUXXXRxfkDpoosuuph+QAAAAAAAwH5AGF100UXnfkAuuuiiiw5/QEYXXXTRNX9AXXTRRRddf0B00UUXXYR/QIwuuuiiq39Ao4suuujSf0C66KKLLvp/QOmiiy66EIBAdNFFF10kgEAAAAAAADiAQIwuuuiiS4BAF1100UVfgECjiy666HKAQC666KKLhoBAuuiiiy6agEBGF1100a2AQNJFF110wYBAXXTRRRfVgEDpoosuuuiAQHTRRRdd/IBAAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[100]},"y":[0.7855584341419899,2.1106634889706015,3.435768543799213,4.760873598627825,6.085978653456408,7.41108370828502,8.736188763113631,10.061293817942214,11.386398872770826,12.71150392759941,14.03660898242805,15.361714037256633,16.686819092085244,18.011924146913856,19.337029201742467,20.66213425657105,21.987239311399662,23.312344366228274,24.637449421056886,25.96255447588547,27.28765953071411,28.612764585542692,29.937869640371275,31.262974695199887,32.58807975002847,33.91318480485711,35.23828985968569,36.563394914514305,37.88849996934292,39.21360502417153,40.53871007900011,41.86381513382875,43.188920188657335,44.51402524348592,45.83913029831453,47.16423535314311,48.48934040797175,49.814445462800336,51.13955051762895,52.46465557245756,53.78976062728617,55.114865682114754,56.439970736943394,57.76507579177198,59.09018084660059,60.41528590142917,61.740390956257755,63.065496011086395,64.39060106591498,65.71570612074359,67.0408111755722,68.36591623040081,69.6910212852294,71.01612634005804,72.34123139488662,73.66633644971523,74.99144150454384,76.31654655937243,77.64165161420104,78.96675666902965,80.29186172385823,81.61696677868684,82.94207183351546,84.26717688834404,85.59228194317268,86.91738699800126,88.24249205282987,89.56759710765849,90.89270216248707,92.21780721731568,93.54291227214426,94.86801732697288,96.19312238180149,97.5182274366301,98.84333249145871,100.16843754628732,101.49354260111593,102.81864765594449,104.14375271077316,105.46885776560171,106.79396282043032,108.11906787525893,109.44417293008755,110.76927798491616,112.09438303974477,113.41948809457332,114.744593149402,116.06969820423055,117.39480325905916,118.71990831388777,120.04501336871633,121.370118423545,122.69522347837355,124.02032853320216,125.34543358803077,126.67053864285944,127.995643697688,129.3207487525166,130.64585380734516,131.97095886217377]},"selected":{"id":"1054"},"selection_policy":{"id":"1055"}},"id":"1039","type":"ColumnDataSource"},{"attributes":{"line_alpha":0.1,"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1041","type":"Line"},{"attributes":{"source":{"id":"1039"}},"id":"1043","type":"CDSView"},{"attributes":{"bottom_units":"screen","fill_alpha":0.5,"fill_color":"lightgrey","left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","syncable":false,"top_units":"screen"},"id":"1026","type":"BoxAnnotation"},{"attributes":{"data_source":{"id":"1039"},"glyph":{"id":"1040"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1041"},"view":{"id":"1043"}},"id":"1042","type":"GlyphRenderer"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAAAAAAAHB1QAAAAAAAwHdAAAAAAACgekAAAAAAAAB9QAAAAAAAkH9AAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[7]},"y":{"__ndarray__":"AAAAAAAAAADRRG9K1Ss2QLhEQqpmH0ZA3ZOddkSOUEB86tEOswZWQJ/1cl4JeVtAk860x6hyYEA=","dtype":"float64","order":"little","shape":[7]}},"selected":{"id":"1052"},"selection_policy":{"id":"1053"}},"id":"1034","type":"ColumnDataSource"},{"attributes":{},"id":"1052","type":"Selection"},{"attributes":{},"id":"1049","type":"AllLabels"},{"attributes":{},"id":"1008","type":"LinearScale"},{"attributes":{},"id":"1053","type":"UnionRenderers"},{"attributes":{},"id":"1050","type":"BasicTickFormatter"},{"attributes":{},"id":"1004","type":"DataRange1d"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"2.3.1"}};
+  var render_items = [{"docid":"4efe319d-ae35-49e9-8e92-bf71aafd09ba","root_ids":["1003"],"roots":{"1003":"2a061453-b38c-49ee-beac-2669a61cf6b5"}}];
   root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
 
   }
@@ -1407,8 +1342,8 @@
 </div>
 </div>
 </div>
-<div class="section" id="plot-the-measurement">
-<h2>Plot the measurement<a class="headerlink" href="#plot-the-measurement" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="plot-the-salt-dilution-measurement">
+<h2>Plot the salt dilution measurement<a class="headerlink" href="#plot-the-salt-dilution-measurement" title="Permalink to this headline">¶</a></h2>
 <p>Now we’ll use the second data file.  Recall that the first file was for calibration.  The EC sensor was placed in a measured volume of water, and calibration solution was added in measured amounts to record the change in conductivity.</p>
 <p>For the actual measurement of flow in the creek, the EC sensor is placed in the creek some distance downstream of the where a known mass of salt is deposited and mixed.</p>
 <p>Below we plot the conductivity over time, and we also determine what the ‘background’ conductivity was in order to calculate the area under the conductivity curve.  It turns out there is a lot of interesting information about runoff processes contained in the background EC signal.</p>
@@ -1578,15 +1513,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fe7fa3c82b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7ff4eda15dc0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_1_23_1.png" src="../../_images/Notebook_1_23_1.png" />
 </div>
 </div>
 </div>
-<div class="section" id="calculate-the-discharge">
-<h2>Calculate the Discharge<a class="headerlink" href="#calculate-the-discharge" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="calculate-discharge">
+<h2>Calculate Discharge<a class="headerlink" href="#calculate-discharge" title="Permalink to this headline">¶</a></h2>
 <p>The volumetric flow (discharge) is equal to the area under the salt dilution curve, minus the background EC.</p>
 <p>Calculate the area under the curve:</p>
 <p>The area is: $<span class="math notranslate nohighlight">\(A_{curve} = \sum_{i=start}^{end} (ECT_i - ECT_{BG,i}) \cdot Slope_{calibration} \cdot t_{step,i} = \frac{\mu S}{cm} \cdot \frac {mg/L}{\mu S/cm} \cdot s = \frac {mg}{L} \cdot s\)</span><span class="math notranslate nohighlight">\(
@@ -1606,17 +1541,35 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
 <span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;Concentration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;ECT (uS/cm)&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">background_ect</span><span class="p">)</span> <span class="o">*</span> <span class="n">slope</span>
 
 <span class="n">time_step</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># the time step of the EC measurement device is 1s</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># trim the time series to the start and end time</span>
+<span class="n">msmt_slice</span> <span class="o">=</span> <span class="n">sd_data</span><span class="p">[(</span><span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">msmt_start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">msmt_end</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># approximating the area under the curve as the sum of small rectangles</span>
 <span class="c1"># of height &#39;concentration&#39; and widths of 1 time step (1 second in this case)</span>
-<span class="n">conc_Area</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;Concentration&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">time_step</span><span class="p">)</span>
-
-<span class="n">mass</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 1 kg salt was dumped in the river</span>
+<span class="n">concentration_area</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">msmt_slice</span><span class="p">[</span><span class="s1">&#39;Concentration&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">time_step</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mass</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 1 kg salt was dumped in the river</span>
 
 <span class="c1"># see the section above to convince yourself the units work out.</span>
-<span class="n">Q_calculated</span> <span class="o">=</span> <span class="n">mass</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="n">conc_Area</span>
+<span class="n">Q_calculated</span> <span class="o">=</span> <span class="n">mass</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="n">concentration_area</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The calculated discharge for the measurement is </span><span class="si">{:.2f}</span><span class="s1"> m^3/s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Q_calculated</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The calculated discharge for the measurement is 0.11 m^3/s
 </pre></div>
 </div>
 </div>
@@ -1668,7 +1621,7 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../Introduction/Untitled.html" title="previous page">This is a Title</a>
+    <a class='left-prev' id="prev-link" href="../Introduction/Data_Import_and_Review.html" title="previous page">Data Import and Review</a>
     <a class='right-next' id="next-link" href="../Notebook_2/Notebook_2.html" title="next page">Notebook 2: Rating Curve Development</a>
 
         </div>
@@ -1679,7 +1632,7 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
     <div class="container">
       <p>
         
-          By The Jupyter Book Community<br/>
+          By Dan Kovacek<br/>
         
             &copy; Copyright 2020.<br/>
       </p>
