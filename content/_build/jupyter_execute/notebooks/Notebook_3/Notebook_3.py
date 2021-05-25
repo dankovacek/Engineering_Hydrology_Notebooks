@@ -1,6 +1,6 @@
 # Notebook 3: Extreme Values, Uncertainty, and Risk
 
-### Introduction
+## Introduction
 
 In Notebook 2, we developed a rating curve from a set of discrete discharge measurements and a continuous record of water level.  At the end of the notebook, you were asked to reflect on how your confidence in the flow predicted by the rating curve changes as a function of water level.  In the near term, our confidence in the rating curve is greatest where we have the most measurements.  Recall that the shape of the rating curve is related to the geometry of the hydraulic control, and that the geometry of the river is constantly evolving.  Without continous validation of the rating curve, we should then be less confident in the rating curve over time, due to this *stream-channel geomorphic response*.  
 
@@ -25,11 +25,13 @@ from bokeh.plotting import figure, output_notebook, show
 from datetime import timedelta
 output_notebook()
 
-## Import the Daily Average Flow Data
+## Data Imports
+
+### Import the Daily Average Flow Data
 
 Daily average flow data provided by the Water Survey of Canada (WSC) for the [Stave River](https://wateroffice.ec.gc.ca/report/historical_e.html?y1Max=1&y1Min=1&scale=normal&mode=Graph&stn=08MH147&dataType=Daily&parameterType=Flow&year=2016) (WSC 08MH147) is saved in `data/notebook_3_data/Stave.csv`
 
-df = pd.read_csv('../data/notebook_3_data/Stave.csv', header=1, parse_dates=['Date'], index_col='Date')
+df = pd.read_csv('../../data/notebook_3_data/Stave.csv', header=1, parse_dates=['Date'], index_col='Date')
 df.head()
 
 Note in the csv file the first line tells us that there are two parameters being reported: stage (water level) and flow.  When the `PARAM` column equals 1, the value corresponds to discharge, and where it equals 2 the value corresponds to stage. 
@@ -53,7 +55,9 @@ print(flow_df.head())
 print('')
 print("There are {} values in the Stave River daily flow series.".format(len(flow_df)))
 
-### Plot the daily flow series
+## Plot the Data
+
+### Plot the Daily Average Flow Series
 
 # customize the tools for interacting with the bokeh plot
 TOOLS="pan,wheel_zoom,reset,hover,poly_select,box_select"
@@ -142,6 +146,10 @@ In the plot above, we can see that the annual maximum flow typically occurs from
 
 ## Check the record for completeness
 
+It is often necessary to use data collected by others.  It is common for datasets to be missing documentation containing important information about quality or limitations of the data.  **Even given well documented data, it is important to do your own quality assurance**.  Below, we will use a daily average flow dataset from the Water Survey of Canada to demonstrate a few ways of validating a dataset.  This is not a manual of quality assurance, but it is used to demonstrate how to incorporate other data to do basic validation.  The general idea is that there are many other environmental signals that have mutual information with the signal of primary interest, in this case daily average streamflow at the Stave River.  For example, would you trust a large spike in runoff if nearby precipitation gauges measured zero rainfall?  Also, how do we deal with missing data?
+
+### Completeness of Record
+
 Find the incomplete years, and consider what we observed above regarding the times of the year the annual maximum flood is more likely to occur.  
 
 df['year'] = df.index.values
@@ -163,14 +171,14 @@ To start, we can check precipitation records at the closest climate stations.  T
 There are no climate stations from the Meteorological Survey of Canada (MSC) in the immediate vicinity, but there are two within 100 km on either side of the Stave River basin.  
 
 # whistler is equidistant to the Stave catchment in the opposite direction from the climate station in Hope.
-whis_df = pd.read_csv('../data/notebook_3_data/Whistler_348_climate.csv', header=0, index_col='Date/Time', parse_dates=True)
+whis_df = pd.read_csv('../../data/notebook_3_data/Whistler_348_climate.csv', header=0, index_col='Date/Time', parse_dates=True)
 whis_df = whis_df[['Total Precip (mm)', 'Total Rain (mm)', 'Snow on Grnd (cm)']]
 name = 'whis'
 whis_df.columns = ['{}_total_precip'.format(name), '{}_total_rain'.format(name), 
                    '{}_snow_on_grnd'.format(name)]
 
 # the Laidlaw station is near Hope, BC
-hope_df = pd.read_csv('../data/notebook_3_data/Laidlaw_794_climate.csv', header=0, index_col='Date/Time', parse_dates=True)
+hope_df = pd.read_csv('../../data/notebook_3_data/Laidlaw_794_climate.csv', header=0, index_col='Date/Time', parse_dates=True)
 
 hope_df = hope_df[['Total Precip (mm)', 'Total Rain (mm)', 'Snow on Grnd (cm)']]
 name = 'hope'
@@ -460,6 +468,9 @@ There is a [large body of literature](https://scholar.google.ca/scholar?q=mixed+
 
 In the introduction, we laid out the extent to which we rely on extrapolation in estimating return period flows.  This question is analogous to the assumption that the error in measurement is a random variable following some distribution.  Considering this random error exists in our measurements, what happens to the LP3 fit if we change any of the peak values by some amount?  
 
-# Question for Submission on Canvas
+# Question for Reflection
 
-Recall the discussion in the previous notebooks concerning extrapolation.  Return periods in the range of 100 and 200 years are commonly used for input design parameters in hydraulic structures, and ultimately the design values reflect a tradeoff between risk (environmental, financial, worker safety) and construction costs.  Provide a brief discussion (500 words maximum) about the uncertainty introduced at various levels in deriving the estimate of the 100 year return period for Stave River.  Consider the difference (in this case) in the estimated 100 year return period flow based on using all the data vs. removing some years from the record, and compare it to the difference between the estimates generated between the GEV and LP3 distributions.  Consider how measurement uncertainty might affect the 100 year return flood estimate.
+Recall the discussion in the previous notebooks concerning extrapolation.  Return periods in the range of 100 and 200 years are commonly used for input design parameters in hydraulic structures, and ultimately the design values reflect a tradeoff between risk (environmental, financial, worker safety) and construction costs.  
+
+Provide a brief discussion (500 words maximum) about the uncertainty introduced at various levels in deriving the estimate of the 100 year return period for Stave River.  Consider the difference (in this case) in the estimated 100 year return period flow based on using all the data vs. removing some years from the record, and compare it to the difference between the estimates generated between the GEV and LP3 distributions.  Consider how measurement uncertainty might affect the 100 year return flood estimate.
+

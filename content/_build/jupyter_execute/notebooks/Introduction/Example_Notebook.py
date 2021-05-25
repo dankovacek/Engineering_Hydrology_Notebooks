@@ -5,7 +5,7 @@ import math
 
 from matplotlib import pyplot as plt
 
-# Notebook 1: Clausius-Clapeyron Equation
+# Example: Clausius-Clapeyron Equation
 
 ## Introduction
 

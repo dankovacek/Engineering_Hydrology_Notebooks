@@ -1,7 +1,5 @@
 # Notebook 2: Rating Curve Development
 
-
-
 import math
 import pandas as pd
 import numpy as np
@@ -72,11 +70,12 @@ rc_df = pd.read_csv('../data/project_QH_table_2020.csv', parse_dates=['Date'])
 # take a look at the discharge measurements
 rc_df.head(15)
 
-## Plot the Measured Discharge and corresponding stage (water level)
+## Plot the Data
+
+### Plot Measured Discharge and corresponding stage (water level)
 
 From previous site visits, we have collected a total of 9 discharge measurements as can be seen in the `rc_df` dataframe above.  During each measurement, we manually measure the water level to validate the data being recorded continuously by our pressure transducer and datalogger (hydrometric station).  We validate the pressure transducer reading because instrument calibration is not perfect, and can change over time for a number of reasons.  It is important to measure stage by some independent means before and after a discharge measurement in order to to assess the quality of the stage-discharge relationship and any analysis derived from it.  Validating the hydrometric station stage concurrent to a discharge measurement is typically done manually, such as with a benchmark survey.
 
-## Plot the measured discharge
 
 # plot the discharge measurements on the x-axis, and the corresponding stage on the y axis
 q_measured = 'Flow (m^3/s)'
@@ -86,7 +85,7 @@ rc_df.plot(q_measured, wl_measured,
            linestyle='',
            label='Discharge measurements')
 
-## Add the new discharge measurement
+### Add the new discharge measurement
 
 In Notebook 1, we processed a discharge measurement using salt dilution.  Let's update our rating curve with this latest data point.
 
@@ -119,9 +118,9 @@ print('The stage on {} was {} m.'.format(msmt_date, msmt_stage))
 test = stage_df.set_index('Date')
 test[test.index == '2010-09-10']
 
-### Enter the value of discharge calculated in Notebook 1
+### Add Latest Data
 
-In Notebook 1, we calculated a salt dilution discharge.  Include this new measurement and see how it compares to the rest of the measurements.
+In Notebook 1, we calculated discharge using the salt dilution method.  Include this new measurement and see how it compares to the rest of the measurements.
 
 # add a new point - get the discharge value 
 # you calculated in the previous tutorial
@@ -140,7 +139,7 @@ rc_df.loc[len(rc_df)] = [pd.to_datetime(msmt_date), 5, 0.36]
 # print out the updated dataframe and see the new point added
 rc_df
 
-## Plot the stage-discharge measurement points and the rating curve
+### Plot the stage-discharge measurement points and the rating curve
 
 The plot below is where you will be able to validate if your answer for question 4 is correct.
 
@@ -238,7 +237,7 @@ The linearized form of the best fit equation was shown in the last step: $log(h-
 
 The `st.linregress` function solved the ordinary least squares best fit and yielded the `slope` and `intercept` of the best fit line, so we have two unknowns.  When we plotted the general stage-discharge curve above, we set a variable `stage_range` to evaluate the range of water level over which we're interested in knowing the corresponding flow.  The remaining unknown is then the `log(Q)` term, but we want a function that will give us the discharge (`Q`) in linear space.  
 
-## Solve for Q
+### Solve for Q
 
 The last step is to rearrange the log form of the equation we derived previously ($log(h-h_0) = slope \cdot log(Q) + intercept$) in order to solve for flow (`Q`).  
 
@@ -273,7 +272,7 @@ bf_df.sort_values(by='stage', inplace=True)
 # now add the manual fit we developed above -- this way we can compare the two curves side-by-side
 bf_df['manual_fit_q'] = manual_fit_q
 
-## Plot the best fit curve
+### Plot the best fit curve
 
 
 fig, ax = plt.subplots(1, 1, figsize=(10,6))
@@ -401,8 +400,9 @@ It is typical that the hydrometric station will record a greater range of water 
 
 The 'measured flow series' is used in many applications in resource engineering.  Low flows are used to determine natural or baseline conditions for fish habitat impact assessments, high flows are used to size hydraulic structures, such as dam spillways.  Hydrometric stations are often installed in new locations to support projects that have multi-decade planning horizons.  
 
-# Questions for Submission on Canvas
+## Questions for Submission on Canvas
 
 Ultimately, the rating curve and measured discharge series are used to characterize a water resource to support decisions in policy and design.  In characterizing a water resource, not only is it common to extrapolate beyond the range of measured conditions, it is necessary to extrapolate into the future.  
 
 Provide a brief discussion (1-2 paragraphs) describing how your confidence in the flow predicted by the rating curve changes as a function of water level?  Compare your level of confidence in the rating curve accurately predicting flow tomorrow, versus one year from now, versus ten years from now.  How might these concerns be addressed?  
+

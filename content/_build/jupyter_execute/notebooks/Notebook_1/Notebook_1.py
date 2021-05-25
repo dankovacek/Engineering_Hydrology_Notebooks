@@ -1,7 +1,3 @@
-Flow Measurement using the Salt Dilution Method
-
-Go through this notebook and follow along with the calculation of discharge using the salt-dilution method.  At the end, there is an open ended question that requires you to reflect on the content of the notebook.  Written responses are to be submitted via Canvas, where a response field will be set up.
-
 # import required packages
 import pandas as pd
 import numpy as np
@@ -13,6 +9,10 @@ from matplotlib import pyplot as plt
 from scipy import stats
 
 %matplotlib inline
+
+# Notebook 1: Flow Measurement using the Salt Dilution Method
+
+Follow along in this notebook to learn about the salt dilution method for measuring streamflow.  At the end, there is an open ended question that requires you to reflect on the content of the notebook.  Written responses are to be submitted via Canvas, where a response field will be set up.
 
 ### Given Information:
 
@@ -26,7 +26,7 @@ from scipy import stats
 | Calibration Volume | 500 | $mL$ |
 | Calibration increments | 1.1 | $mL$ |
 
-### Import the Salt Dilution Data
+## Import the Salt Dilution Data
 
 In a salt dilution measurement, we first calibrate the instrument.  The calibration data is provided in a file named *SD_cal.csv
 
@@ -168,7 +168,7 @@ ax.plot(x_range, best_fit, 'b--', label='Best Fit (R^2 = {:.2f})'.format(r_value
 # by default a legend is not shown, so we need to call the attribute.
 plt.legend()
 
-## Alternative Plotting Library for Interactivity: Bokeh
+### Alternative Plotting Library for Interactivity: Bokeh
 
 If you can imagine a function or feature you wish were already built, chances are it exists.  The Bokeh plotting library allows for a higher level of interactivity.  In the plot below, note the toolbar on the right hand side.  You can use the tools to take a closer look at your data in this simple case.  Plots can also be linked in Bokeh, with which powerful 'dashboards' can be built.  
 
@@ -245,7 +245,7 @@ ax.plot((t[msmt_start], t[msmt_end]),
 
 plt.legend()
 
-### Calculate Discharge
+## Calculate Discharge
 
 The volumetric flow (discharge) is equal to the area under the salt dilution curve, minus the background EC.
 
@@ -308,3 +308,4 @@ Comment on the effect of errors in the *accuracy* of the three calibration varia
 ### Question 2: 
 
 Above, we manually set the start and end of the salt injection measurement (marked in the plot by the green dots) using the `msmt_start` and `msmt_end` variables.  In some flow conditions, the EC reading will take a very long time to return to baseline.  The realities of field work (time constraints, battery power, etc) occassionally result in the 'tail' of the measurement curve being cut off.  What happens to the calculated discharge if the EC measurement stops unexpectedly before the EC returns to baseline?  Go back in the notebook and change the `msmt_end` time and comment on the effect on the calculated discharge.
+

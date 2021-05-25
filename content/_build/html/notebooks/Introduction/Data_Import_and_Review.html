@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data Import and Review &#8212; Engineering Hydrology</title>
+    <title>Example: Data Import and Review &#8212; Engineering Hydrology</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -54,8 +54,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Given Information:" href="../Notebook_1/Notebook_1.html" />
-    <link rel="prev" title="Example Notebook" href="Example_Notebook.html" />
+    <link rel="next" title="Notebook 1: Flow Measurement using the Salt Dilution Method" href="../Notebook_1/Notebook_1.html" />
+    <link rel="prev" title="Example: Clausius-Clapeyron Equation" href="Example_Notebook.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -100,60 +100,30 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="Example_Notebook.html">
-   Example Notebook
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Example_Notebook.html#clausius-clapeyron-equation">
-   Clausius-Clapeyron Equation
+   Example: Clausius-Clapeyron Equation
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Data Import and Review
+   Example: Data Import and Review
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Notebook 1 - Salt Dilution Runoff Measurement
+  Flow Measurement
  </span>
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_1/Notebook_1.html">
-   Given Information:
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_1/Notebook_1.html#import-the-salt-dilution-data">
-   Import the Salt Dilution Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_1/Notebook_1.html#temperature-correction-for-conductivity">
-   Temperature Correction for Conductivity
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_1/Notebook_1.html#plot-the-calibration-and-best-fit-line">
-   Plot the calibration and best fit line
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_1/Notebook_1.html#alternative-plotting-library-for-interactivity-bokeh">
-   Alternative Plotting Library for Interactivity: Bokeh
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_1/Notebook_1.html#questions-to-consider">
-   Questions to Consider
+   Notebook 1: Flow Measurement using the Salt Dilution Method
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Notebook 2 - Rating Curve Development
+  Rating Curve Development
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -162,15 +132,10 @@
    Notebook 2: Rating Curve Development
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_2/Notebook_2.html#questions-for-submission-on-canvas">
-   Questions for Submission on Canvas
-  </a>
- </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Notebook 3 - Extreme Values, Uncertainty, and Risk
+  Extreme Values, Uncertainty, and Risk
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -185,14 +150,14 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_3/Notebook_3.html#question-for-submission-on-canvas">
-   Question for Submission on Canvas
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html#question-for-reflection">
+   Question for Reflection
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Notebook 4 - Regional Regression
+  Regional Regression
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -209,7 +174,7 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Notebook 5 - Spatial Tools
+  Spatial Tools
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -339,8 +304,8 @@
         
               <div>
                 
-  <div class="section" id="data-import-and-review">
-<h1>Data Import and Review<a class="headerlink" href="#data-import-and-review" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="example-data-import-and-review">
+<h1>Example: Data Import and Review<a class="headerlink" href="#example-data-import-and-review" title="Permalink to this headline">¶</a></h1>
 <p>When starting out learning to code in Python, there may be a few simple tasks that seem unneccessarily complex.  Importing data is one such task, where in Excel we click on a file to open it and most of the time the program already knows whether a cell contains a number or text.  In Python we don’t have to declare the type of data explicitly, but the example below demonstrates the process of importing a file of time series data where the raw data format requires an extra step before we can work with the data.</p>
 <p>There is a limit to the size of dataset we can manually review for anomalies.  As data gets bigger, it becomes necessary to evaluate our dataset in ways that don’t require scanning tens or hundreds of thousands of rows.  In this example, we import a comma-separated-value (csv) file from a measurement device.  This notebook provides an introduction to opening and reviewing files programmatically.</p>
 <p>One final note, the ‘#’ symbol used extensively below is used for adding comments that the code interpreter ignores.  The interpreter ignores all lines starting with ‘#’, as well as anything after a ‘#’ symbol on a line that doesn’t start with ‘#’.</p>
@@ -1031,8 +996,8 @@ dtype: float64
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="Example_Notebook.html" title="previous page">Example Notebook</a>
-    <a class='right-next' id="next-link" href="../Notebook_1/Notebook_1.html" title="next page">Given Information:</a>
+    <a class='left-prev' id="prev-link" href="Example_Notebook.html" title="previous page">Example: Clausius-Clapeyron Equation</a>
+    <a class='right-next' id="next-link" href="../Notebook_1/Notebook_1.html" title="next page">Notebook 1: Flow Measurement using the Salt Dilution Method</a>
 
         </div>
         
