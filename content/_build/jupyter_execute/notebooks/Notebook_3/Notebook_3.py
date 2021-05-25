@@ -113,7 +113,7 @@ print('Mean = {:.2f} m^3/s; Standard deviation = {:.2f} m^3/s'.format(mean_q, st
 print('Preview of the Annual Maximum Flow Series:')
 max_df.head()
 
-# Plot a histogram of annual maximum flows
+## Plot a histogram of annual maximum flows
 
 If we are going to use statistical methods to estimate return period floods, it is important to consider the shape of the probability distribution, and what that implies about the dominant mechanisms driving peak runoff.  
 
@@ -468,7 +468,7 @@ There is a [large body of literature](https://scholar.google.ca/scholar?q=mixed+
 
 In the introduction, we laid out the extent to which we rely on extrapolation in estimating return period flows.  This question is analogous to the assumption that the error in measurement is a random variable following some distribution.  Considering this random error exists in our measurements, what happens to the LP3 fit if we change any of the peak values by some amount?  
 
-# Question for Reflection
+## Question for Reflection
 
 Recall the discussion in the previous notebooks concerning extrapolation.  Return periods in the range of 100 and 200 years are commonly used for input design parameters in hydraulic structures, and ultimately the design values reflect a tradeoff between risk (environmental, financial, worker safety) and construction costs.  
 

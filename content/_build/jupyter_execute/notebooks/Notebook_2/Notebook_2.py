@@ -46,7 +46,7 @@ In this exercise, we will develop a stage-discharge relationship from a collecti
 ## Import the Data
 
 # import the stage data
-stage_df = pd.read_csv('../data/CIVL418_2020_Nameless_Creek_H_data.csv', parse_dates=['Date'])
+stage_df = pd.read_csv('../../data/CIVL418_2020_Nameless_Creek_H_data.csv', parse_dates=['Date'])
 # stage_df.dropna(inplace=True)
 stage_df.loc[:, 'Value'] = pd.to_numeric(stage_df.loc[:, 'Value'], errors='coerce')
 
@@ -65,7 +65,7 @@ stage_df = stage_df[['Date', 'Value']]
 stage_df.columns = ['Date', 'WL_m']
 
 # import the table of discrete discharge measurements
-rc_df = pd.read_csv('../data/project_QH_table_2020.csv', parse_dates=['Date'])
+rc_df = pd.read_csv('../../data/project_QH_table_2020.csv', parse_dates=['Date'])
 
 # take a look at the discharge measurements
 rc_df.head(15)
@@ -400,9 +400,8 @@ It is typical that the hydrometric station will record a greater range of water 
 
 The 'measured flow series' is used in many applications in resource engineering.  Low flows are used to determine natural or baseline conditions for fish habitat impact assessments, high flows are used to size hydraulic structures, such as dam spillways.  Hydrometric stations are often installed in new locations to support projects that have multi-decade planning horizons.  
 
-## Questions for Submission on Canvas
+## Questions for Reflection
 
 Ultimately, the rating curve and measured discharge series are used to characterize a water resource to support decisions in policy and design.  In characterizing a water resource, not only is it common to extrapolate beyond the range of measured conditions, it is necessary to extrapolate into the future.  
 
 Provide a brief discussion (1-2 paragraphs) describing how your confidence in the flow predicted by the rating curve changes as a function of water level?  Compare your level of confidence in the rating curve accurately predicting flow tomorrow, versus one year from now, versus ten years from now.  How might these concerns be addressed?  
-

@@ -17,15 +17,18 @@ output_notebook()
 
 ## Introduction
 
-In Notebook 2, we developed a rating curve for our location of interest based on discrete discharge measurements made during a series of visits, and we applied this stage-discharge relationship (rating curve) to the continous stage recorded at our hydrometric station (the datalogger recording from a pressure transducer).  Recall that our hydrometric station has only been running for a couple of years -- this isn't nearly enough data to estimate the flow characteristics (daily, seasonal, floods, droughts, etc.).  In this notebook, we look in the vicinity of our project location for other stations where records have been kept for much longer, i.e. several decades longer.
+In Notebook 2, we developed a rating curve for our location of interest based on discrete discharge measurements made during a series of visits, and we applied this stage-discharge relationship (rating curve) to the continous stage recorded at our hydrometric station (the datalogger recording from a pressure transducer).  
+
+Recall that our hydrometric station has only been running for a couple of years -- this isn't nearly enough data to estimate the **long term** flow characteristics (daily, seasonal, floods, droughts, etc.).  In this notebook, we look in the vicinity of our project location for other stations where records have been kept for much longer, i.e. several decades longer.  We can use concurrent data from nearby stations to develop a model to estimate flow for periods we didn't actually measure at our project location.
 
 First, we'll set up our rating curve as we did in Notebook 2 and rebuild the daily average flow series.
 
 ## Import the Data
 
 # import the stage data
-stage_df = pd.read_csv('../data/CIVL418_2020_Nameless_Creek_H_data.csv', parse_dates=['Date'])
+stage_df = pd.read_csv('../../Project_Data/CIVL418_2020_Nameless_Creek_H_data.csv', parse_dates=['Date'])
 stage_df.set_index('Date', inplace=True)
+
 stage_df.sort_index(inplace=True)
 stage_df['Value'] = stage_df['Value'].astype(float)
 
@@ -42,7 +45,7 @@ flow_label = 'Flow (m^3/s)'
 
 
 # import the discharge measurements
-rc_df = pd.read_csv('../data/project_QH_table_2020.csv', parse_dates=['Date'])
+rc_df = pd.read_csv('../../Project_Data/project_QH_table_2020.csv', parse_dates=['Date'])
 
 # take a look at the discharge measurements
 rc_df
@@ -173,7 +176,7 @@ layout = gridplot([[rc_plot, daily_flow_plot]])
 # show the results
 show(layout)
 
-## Characterizing Water Resources
+## Characterizing Water Resources using Regional Information
 
 Below are a few points to consider regarding the characterization of the water resource over the **long term**.
 
@@ -192,7 +195,7 @@ Water Survey of Canada (WSC) has operated and maintained hydrometric stations ac
 
 Typically regressions are done by chronological pairing, which effectively says "if the flow at the regional (proxy) station was $Q_p$ at time $t$, the flow at our project location at time $t$ will be approximately $C\cdot Q_p + D$ where $C$ and $D$ are constants.  
 
-### Steps to develop a correlation: Chronological Pairing (CP)
+### Chronological Pairing (CP)
 
 A lot of work goes into finding an appropriate long-term record comparable to our location of interest, but we will assume we have been given a long-term daily flow series to use.
 
@@ -222,13 +225,13 @@ Previewing the data shows line 1 has information about two distinct parameters. 
 # set the header row to index 1, tell the function to set the `Date` column as the index.
 # If you look at the raw csv file, you'll see that there's an information line at the very top,
 # and the second line (index 1 in programming) is where the column headers are
-regional_df = pd.read_csv('../data/notebook_2_data/Regional_data.csv', header=1, parse_dates=True, index_col='Date')
+regional_df = pd.read_csv('../../data/Stave Daily Avg Flow.csv', header=0, parse_dates=True, index_col='Date')
 
 # select only the discharge data (PARAM == 1)
 regional_df = regional_df[regional_df['PARAM'] == 1]
-
-regional_df.columns = ['PARAM', 'Regional Flow (m^3/s)', 'SYM']
-
+# 
+# regional_df.columns = ['ID', 'PARAM', 'year', 'month', 'day' 'Regional Flow (m^3/s)', 'SYM']
+# 
 # preview the data
 regional_df.head()
 
@@ -250,12 +253,12 @@ In the previous step, we can see that the regional dataset encompasses the date 
 concurrent_df = pd.concat([stage_df, regional_df], join='inner', axis=1)
 stage_df.index = pd.to_datetime(stage_df.index)
 # filter just the columns we want
-concurrent_df = concurrent_df[['Regional Flow (m^3/s)', 'RC Q (cms)']]
+concurrent_df = concurrent_df[['flow', 'RC Q (cms)']]
 
 # not rename the columns to something that is more indicative of the location of each data source
 concurrent_df.columns = ['Regional_Q', 'Project_Q']
 
-concurrent_df = concurrent_df[concurrent_df['Regional_Q'] < 6.0]
+# concurrent_df = concurrent_df[concurrent_df['Regional_Q'] < 6.0]
 
 concurrent_df.head()
 
@@ -264,7 +267,9 @@ concurrent_df.dropna(inplace=True)
 # find the best fit equation
 slope, intercept, rval, pval, stderr = st.linregress(concurrent_df['Regional_Q'], concurrent_df['Project_Q'])
 
-# Regression Plot
+print(slope)
+
+## Regression Plot
 
 #### Regression Plot
 reg_plot = figure(plot_width=700, plot_height=400,
@@ -277,7 +282,8 @@ reg_plot.scatter(concurrent_df['Regional_Q'], concurrent_df['Project_Q'],
 
 #plot the best fit
 q_range = np.linspace(0, concurrent_df['Regional_Q'].max(), 500)
-intercept = 0.5
+intercept = 0.2
+slope = 0.15
 reg_line = [slope * q + intercept for q in q_range]
 
 reg_plot.line(q_range, reg_line, legend_label='Q = {:.1f}*Qregional + {:.1f}'.format(slope, intercept),
@@ -292,7 +298,7 @@ show(reg_plot)
 
 The last step in the process of a long-term flow estimate for our project location is to use the equation of the best fit line (the model) to calculate estimated daily flows over periods where flow was not measured at our project location.
 
-lt_series = regional_df.copy()[['Regional Flow (m^3/s)']]
+lt_series = regional_df.copy()[['flow']]
 lt_series.columns = ['Regional_Q']
 # map the equation of the best fit line to the regional flow series
 lt_series['Proj_Q'] = lt_series.apply(lambda q: slope * q + intercept, axis=1)
@@ -345,18 +351,20 @@ fdc_plot.yaxis.axis_label = 'Flow [m^3/s]'
 fdc_plot.xaxis.axis_label = 'Percent of Time Exceeded [%]'
 show(fdc_plot)
 
-### Estimate the Long-Term Mean Annual Flow for our Project Location
+## Estimate the Long-Term Mean Annual Flow for our Project Location
 
 Compare the long term mean annual against the short term, then compare the long-term monthly and annual series.
 
 lt_mad = lt_series[['Proj_Q']].mean().to_numpy()[0]
 msd_mean = stage_df[['RC Q (cms)']].mean().to_numpy()[0]
 lt_series.dropna(inplace=True)
-median_lt_q = np.percentile(lt_series['Proj_Q'], 50)
+lt_median = np.percentile(lt_series['Proj_Q'], 50)
+msd_median = stage_df[['RC Q (cms)']].median().to_numpy()[0]
 
 print('The mean annual flow (MAD) at our project location is {:.1f} m^3/s'.format(lt_mad))
 print('To compare, the average flow over the measured period was {:.1f} m^3/s'.format(msd_mean))
-print('The median flow for the long-term period was {:.1f} m^3/s'.format(median_lt_q))
+print('The median flow for the long-term period was {:.1f} m^3/s'.format(lt_median))
+print('To compare, the median flow over the measured period was {:.1f} m^3/s'.format(msd_median))
 
 lt_series['year'] = lt_series.index.year
 annual_series = lt_series[['Proj_Q', 'year']].groupby('year').mean()
@@ -371,7 +379,7 @@ plt.title('Mean Annual Series')
 plt.legend()
 plt.show()
 
-## Questions for Submission on Canvas
+## Questions for Reflection
 
 1.  From our regression plot and from the comparison of measured and estimated daily flow series, what do you think about the quality of our model, i.e. how well does the best fit line approximate the concurrent daily flows (blue dots)?  
 2.  What range of flow is exceeded 67% OR MORE of the time, how well is this range modelled and what might this flow range be pertinent to?  
@@ -383,41 +391,3 @@ plt.show()
 
 1. A.S. Hamilton & R.D. Moore (2012). Quantifying Uncertainty in Streamflow Records , Canadian Water Resources Journal / Revue canadienne des ressources hydriques, 37:1, 3-21, DOI: 10.4296/cwrj3701865
 2. Environment Canada (2012).  Hydrometric Manual - Data Computations.  Water Survey of Canada, Weather and Environmental Monitoring Directorate.
-
-def calc_power(qd):
-    return qd * 100.4 * 0.76 * 9.81
-    
-def calc_energy(fe, qd):
-    return calc_power(qd) * 365 * 24 * fe / 1E6
-
-
-def calc_daily_flow(q_in, q_design, ifr):
-    if q_in < ifr:
-        return 0
-    elif q_in < ifr + q_design:
-        return q_in
-    else:
-        return q_design
-
-    
-    
-median = 4.14
-
-mad = 5.875
-
-qs = [median, mad, 1.2 * mad, 1.5 * mad]
-
-for qd in qs:
-    lt_series[f'q_turbine_{qd}'] = [calc_daily_flow(q, qd, 0.9) for q in lt_series['Proj_Q']]
-
-
-
-
-
-for q, fe in list(zip(qs, fes)):
-    power = calc_power(q)
-    mw = power / 1000
-    ann_energy = calc_energy(fe, q)
-    cost = 1 * q
-    rev = ann_energy * 0.04 * 1E6
-    print(f'power={power:.0f} kw ({mw:.2f} MW), energy = {ann_energy:.2f} GWh, cost=${cost:.1f}M, ann_rev=${rev:.0f}, ')

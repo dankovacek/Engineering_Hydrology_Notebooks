@@ -34,7 +34,7 @@ output_notebook()
 For this exercise, we will use historical climate data from the Meteorological Service of Canada (MSC) station at Whistler, BC.
 
 # calibration data
-df = pd.read_csv('../data/Whistler_348_climate.csv', 
+df = pd.read_csv('../../data/Whistler_348_climate.csv', 
                  index_col='Date/Time', parse_dates=True)
 # note that the 'head' command shows the first five rows of data, 
 # but in this case the columns are abbreviated. 
@@ -48,11 +48,9 @@ for c in df.columns:
     
 stn_name = df['Station Name'].values[0]
 
-### Plot the measurement
+### Plot the Data
 
-It's a good idea to visualize the data we're working with.
-
-
+It's always a good idea to begin by visualizing the data we're working with.
 
 # plot flow at Stave vs. precip at the closest climate stations
 p = figure(width=900, height=400, x_axis_type='datetime')
@@ -166,19 +164,19 @@ sample_df['flow_depth_m'] = sample_df['runoff_cms'].apply(lambda x: solve_depth(
 plt.plot(sample_df.index, sample_df['flow_depth_m'])
 plt.ylabel('Flow depth [m]')
 
-### Not only are our feet wet, but if we happen to be there the peak it's potentially dangerous.  As little as 10-15cm of water moving fast enough can sweep you off your feet.
+>**Not only are our feet wet, but if we happen to be there the peak it's potentially dangerous.  As little as 10-15cm of water moving fast enough can sweep you off your feet.**
 
 ![Recalculating Life](img/recalculating.png)
 
-## More Complex Implementation
+## More Complex Implementation: Spatial Data
 
 As discussed in class, precipitation takes time to travel from where it fell to the basin outlet.  Next we will estimate the runoff response in a real catchment, just upstream from the parking lot example in the FitzSimmons Creek basin.
 
-## Step 1: Instantiate a grid from a DEM raster
+### Step 1: Instantiate a grid from a DEM raster
 Some sample data is already included, but for extra data, see the [USGS hydrosheds project](https://www.hydrosheds.org/).
 
 # grid = Grid.from_raster('data/n45w125_con_grid/n45w125_con/n45w125_con', data_name='dem')
-grid = Grid.from_ascii(path='../data/notebook_5_data/n49w1235_con_grid.asc', 
+grid = Grid.from_ascii(path='../../data/notebook_5_data/n49w1235_con_grid.asc', 
                        data_name='dem')
 
 # reset the nodata from -32768 so it doesn't throw off the 
@@ -189,7 +187,7 @@ grid.nodata = 0
 map_extents = grid.extent
 min_x, max_x, min_y, max_y = map_extents
 
-## Plot the DEM
+### Plot the DEM
 
 **NOTE:** The cell below may take up to 30 seconds to load.  Please be patient, it is thinking really hard. 
 
@@ -251,11 +249,11 @@ show(p1)
 #-123.14657, 49.41080
 -123.14350, 49.40251
 
-## Resolve flats in DEM
+### Resolve flats in DEM
 
 grid.resolve_flats('dem', out_name='inflated_dem')
 
-## Specify flow direction values
+### Specify flow direction values
 
 #         N    NE    E    SE    S    SW    W    NW
 dirmap = (64,  128,  1,   2,    4,   8,    16,  32)
@@ -283,7 +281,7 @@ grid.dir
 # check the size of the raster
 grid.dir.size
 
-## Delineate a Catchment
+### Delineate a Catchment
 
 Note that once you've executed the code in the cells below,
 if you change the Point of Concentration (POC), you'll
@@ -341,7 +339,7 @@ plt.ylabel('Latitude')
 plt.title('Delineated Catchment')
 # plt.savefig('data/img/catchment.png', bbox_inches='tight')
 
-## Get flow accumulation
+### Get flow accumulation
 
 grid.accumulation(data='catch', dirmap=dirmap, out_name='acc')
 
@@ -359,7 +357,7 @@ plt.ylabel('Latitude')
 # plt.savefig('data/img/flow_accumulation.png', bbox_inches='tight')
 
 
-## Calculate distances to upstream cells
+### Calculate distances to upstream cells
 
 grid.flow_distance(data='catch', x=x, y=y, dirmap=dirmap, out_name='dist',
                    xytype='label', nodata_out=np.nan)
@@ -402,7 +400,7 @@ plt.xlabel('Longitude')
 plt.ylabel('Latitude')
 # plt.savefig('data/img/stream_network.png', bbox_inches='tight')
 
-## Calculate weighted travel distance
+### Calculate weighted travel distance
 
 Assign a travel time to each cell based on the assumption that water travels at one speed (slower) until it reaches a stream network, at which point its speed increases dramatically.
 
@@ -526,7 +524,7 @@ ax1.set_ylabel('Precipitation [mm]', color='green')
 ax1.tick_params(axis='y', colors='green')
 ax1.legend(loc='upper right')
 
-## Determine the Peak Unit Runoff
+### Determine the Peak Unit Runoff
 
 First, estimate the drainage area.  Then, find the peak hourly flow.
 
@@ -540,7 +538,7 @@ Discuss the limitations of the approach.  Where do uncertainties exist?
 * assumed constant runoff coefficient
 * assumed two weights for travel time, constant across time
 
-## Question for Submission on Canvas
+## Question for Reflection
 
 For the first part where we estimated the water level at the parking lot outlet based on an assumption that there was zero infiltration, assuming all else is equal, how could we reduce the maximum water level to 5 cm?  
 
