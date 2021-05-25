@@ -1,0 +1,6 @@
+Measurement team: B
+Date and time of measurement: 2012-04-13 13:32
+Salt concentration of calibration solution is: 10 g/l
+Salt mass injected: 100 Kg
+Probe location: Left Bank (probe 1)
+Mixing reach length: 200 m

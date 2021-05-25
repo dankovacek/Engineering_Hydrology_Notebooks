@@ -1,0 +1,30 @@
+# Table of content
+# Learn more at https://jupyterbook.org/customize/toc.html
+#
+- file: intro
+
+- part: Introduction
+  chapters: 
+  - file: notebooks/Introduction/Data_Import_and_Review
+  - file: notebooks/Introduction/Example_Notebook
+  - file: notebooks/Introduction/Untitled
+
+- part: Salt Dilution Runoff Measurement
+  chapters: 
+  - file: notebooks/Notebook_1/Notebook_1
+
+- part: Rating Curve Development
+  chapters: 
+  - file: notebooks/Notebook_2/Notebook_2
+
+- part: Extreme Values, Uncertainty, and Risk
+  chapters:
+  - file: notebooks/Notebook_3/Notebook_3
+
+- part: Regional Regression
+  chapters:
+  - file: notebooks/Notebook_4/Notebook_4
+  
+- part: Spatial Tools 
+  chapters:
+  - file: notebooks/Notebook_5/Notebook_5
