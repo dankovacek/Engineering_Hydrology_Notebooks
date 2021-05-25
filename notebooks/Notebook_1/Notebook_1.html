@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Given Information: &#8212; Engineering Hydrology</title>
+    <title>Notebook 1: Flow Measurement using the Salt Dilution Method &#8212; Engineering Hydrology</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Notebook 2: Rating Curve Development" href="../Notebook_2/Notebook_2.html" />
-    <link rel="prev" title="Data Import and Review" href="../Introduction/Data_Import_and_Review.html" />
+    <link rel="prev" title="Example: Data Import and Review" href="../Introduction/Data_Import_and_Review.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -102,60 +102,30 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="../Introduction/Example_Notebook.html">
-   Example Notebook
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Introduction/Example_Notebook.html#clausius-clapeyron-equation">
-   Clausius-Clapeyron Equation
+   Example: Clausius-Clapeyron Equation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Introduction/Data_Import_and_Review.html">
-   Data Import and Review
+   Example: Data Import and Review
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Notebook 1 - Salt Dilution Runoff Measurement
+  Flow Measurement
  </span>
 </p>
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Given Information:
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#import-the-salt-dilution-data">
-   Import the Salt Dilution Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#temperature-correction-for-conductivity">
-   Temperature Correction for Conductivity
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#plot-the-calibration-and-best-fit-line">
-   Plot the calibration and best fit line
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#alternative-plotting-library-for-interactivity-bokeh">
-   Alternative Plotting Library for Interactivity: Bokeh
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#questions-to-consider">
-   Questions to Consider
+   Notebook 1: Flow Measurement using the Salt Dilution Method
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Notebook 2 - Rating Curve Development
+  Rating Curve Development
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -164,15 +134,10 @@
    Notebook 2: Rating Curve Development
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_2/Notebook_2.html#questions-for-submission-on-canvas">
-   Questions for Submission on Canvas
-  </a>
- </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Notebook 3 - Extreme Values, Uncertainty, and Risk
+  Extreme Values, Uncertainty, and Risk
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -187,14 +152,14 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_3/Notebook_3.html#question-for-submission-on-canvas">
-   Question for Submission on Canvas
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html#question-for-reflection">
+   Question for Reflection
   </a>
  </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Notebook 4 - Regional Regression
+  Regional Regression
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -211,7 +176,7 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Notebook 5 - Spatial Tools
+  Spatial Tools
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -324,32 +289,32 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#given-information">
    Given Information:
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#import-the-salt-dilution-data">
    Import the Salt Dilution Data
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#temperature-correction-for-conductivity">
    Temperature Correction for Conductivity
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plot-the-calibration-and-best-fit-line">
    Plot the calibration and best fit line
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#alternative-plotting-library-for-interactivity-bokeh">
-   Alternative Plotting Library for Interactivity: Bokeh
-  </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#alternative-plotting-library-for-interactivity-bokeh">
+     Alternative Plotting Library for Interactivity: Bokeh
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#best-fit-slope-and-r-sup-2-sup-of-calibration-points">
      Best Fit slope and R
      <sup>
@@ -358,29 +323,29 @@
      of calibration points
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plot-the-salt-dilution-measurement">
      Plot the salt dilution measurement
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calculate-discharge">
-     Calculate Discharge
-    </a>
-   </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-discharge">
+   Calculate Discharge
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#questions-to-consider">
    Questions to Consider
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#question-1">
      Question 1:
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#question-2">
      Question 2:
     </a>
@@ -399,9 +364,7 @@
         
               <div>
                 
-  <p>Flow Measurement using the Salt Dilution Method</p>
-<p>Go through this notebook and follow along with the calculation of discharge using the salt-dilution method.  At the end, there is an open ended question that requires you to reflect on the content of the notebook.  Written responses are to be submitted via Canvas, where a response field will be set up.</p>
-<div class="cell docutils container">
+  <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import required packages</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -418,8 +381,11 @@
 </div>
 </div>
 </div>
+<div class="section" id="notebook-1-flow-measurement-using-the-salt-dilution-method">
+<h1>Notebook 1: Flow Measurement using the Salt Dilution Method<a class="headerlink" href="#notebook-1-flow-measurement-using-the-salt-dilution-method" title="Permalink to this headline">¶</a></h1>
+<p>Follow along in this notebook to learn about the salt dilution method for measuring streamflow.  At the end, there is an open ended question that requires you to reflect on the content of the notebook.  Written responses are to be submitted via Canvas, where a response field will be set up.</p>
 <div class="section" id="given-information">
-<h1>Given Information:<a class="headerlink" href="#given-information" title="Permalink to this headline">¶</a></h1>
+<h2>Given Information:<a class="headerlink" href="#given-information" title="Permalink to this headline">¶</a></h2>
 <p><em>(an example of a nicely formatted table using the Markdown notation)</em></p>
 <table class="colwidths-auto table">
 <thead>
@@ -453,7 +419,7 @@
 </table>
 </div>
 <div class="section" id="import-the-salt-dilution-data">
-<h1>Import the Salt Dilution Data<a class="headerlink" href="#import-the-salt-dilution-data" title="Permalink to this headline">¶</a></h1>
+<h2>Import the Salt Dilution Data<a class="headerlink" href="#import-the-salt-dilution-data" title="Permalink to this headline">¶</a></h2>
 <p>In a salt dilution measurement, we first calibrate the instrument.  The calibration data is provided in a file named *SD_cal.csv</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -750,7 +716,7 @@
 </div>
 </div>
 <div class="section" id="temperature-correction-for-conductivity">
-<h1>Temperature Correction for Conductivity<a class="headerlink" href="#temperature-correction-for-conductivity" title="Permalink to this headline">¶</a></h1>
+<h2>Temperature Correction for Conductivity<a class="headerlink" href="#temperature-correction-for-conductivity" title="Permalink to this headline">¶</a></h2>
 <p>The electrical conductivity (EC) of water is a function of temperature, so it is important that the water used for calibration is the same temperature as the water in the stream being measured.  Alternatively, a temperature correction can be applied.</p>
 <p>Presented below are two different methods of temperature compensation.</p>
 <p>The instrument used in both the calibration and the measurement already has temperature compensation within the instrument, so the values recorded are EC at 25 C.</p>
@@ -914,7 +880,7 @@
 </div>
 </div>
 <div class="section" id="plot-the-calibration-and-best-fit-line">
-<h1>Plot the calibration and best fit line<a class="headerlink" href="#plot-the-calibration-and-best-fit-line" title="Permalink to this headline">¶</a></h1>
+<h2>Plot the calibration and best fit line<a class="headerlink" href="#plot-the-calibration-and-best-fit-line" title="Permalink to this headline">¶</a></h2>
 <p>The calibration points are plotted with as red circles, which is represented in the call to the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function by the two-character combination <code class="docutils literal notranslate"><span class="pre">ro</span></code>.  The best fit line through the calibration points is represented by a dashed blue line, specified by the three character code <code class="docutils literal notranslate"><span class="pre">b--</span></code>.  Changing the appearance of the plotted series is a matter of <a class="reference external" href="https://matplotlib.org/3.1.0/api/markers_api.html#module-matplotlib.markers">looking up the short form</a>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">stats.linregress</span></code> function takes in two arrays and returns the equation of the best fit line through the data, along with information about the fit.  Note that the r-value is the correlation coefficient.  The coefficient of determination (<span class="math notranslate nohighlight">\(R^2\)</span>) is the correlation coefficient squared.</p>
 <div class="cell docutils container">
@@ -956,15 +922,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f6116ca4dc0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fe072c26ca0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_1_13_1.png" src="../../_images/Notebook_1_13_1.png" />
 </div>
 </div>
-</div>
 <div class="section" id="alternative-plotting-library-for-interactivity-bokeh">
-<h1>Alternative Plotting Library for Interactivity: Bokeh<a class="headerlink" href="#alternative-plotting-library-for-interactivity-bokeh" title="Permalink to this headline">¶</a></h1>
+<h3>Alternative Plotting Library for Interactivity: Bokeh<a class="headerlink" href="#alternative-plotting-library-for-interactivity-bokeh" title="Permalink to this headline">¶</a></h3>
 <p>If you can imagine a function or feature you wish were already built, chances are it exists.  The Bokeh plotting library allows for a higher level of interactivity.  In the plot below, note the toolbar on the right hand side.  You can use the tools to take a closer look at your data in this simple case.  Plots can also be linked in Bokeh, with which powerful ‘dashboards’ can be built.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1290,12 +1255,12 @@
 
 
 
-<div class="bk-root" id="a13227e3-3998-4ff7-93f6-d51fb8b18a69" data-root-id="1003"></div>
+<div class="bk-root" id="af565da2-695b-46cd-85de-d9ece8efd34f" data-root-id="1003"></div>
 </div><script type="application/javascript">(function(root) {
   function embed_document(root) {
     
-  var docs_json = {"3f617af1-8532-4015-baef-76ea2de110b5":{"defs":[],"roots":{"references":[{"attributes":{"below":[{"id":"1012"}],"center":[{"id":"1015"},{"id":"1019"}],"height":400,"left":[{"id":"1016"}],"renderers":[{"id":"1037"},{"id":"1042"}],"title":{"id":"1044"},"toolbar":{"id":"1027"},"width":800,"x_range":{"id":"1004"},"x_scale":{"id":"1008"},"y_range":{"id":"1006"},"y_scale":{"id":"1010"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"1013","type":"BasicTicker"},{"attributes":{},"id":"1052","type":"Selection"},{"attributes":{"axis":{"id":"1012"},"ticker":null},"id":"1015","type":"Grid"},{"attributes":{"formatter":{"id":"1047"},"major_label_policy":{"id":"1048"},"ticker":{"id":"1017"}},"id":"1016","type":"LinearAxis"},{"attributes":{},"id":"1050","type":"BasicTickFormatter"},{"attributes":{},"id":"1053","type":"UnionRenderers"},{"attributes":{},"id":"1051","type":"AllLabels"},{"attributes":{},"id":"1025","type":"HelpTool"},{"attributes":{"axis":{"id":"1016"},"dimension":1,"ticker":null},"id":"1019","type":"Grid"},{"attributes":{},"id":"1047","type":"BasicTickFormatter"},{"attributes":{},"id":"1017","type":"BasicTicker"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"red"},"line_alpha":{"value":0.1},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1036","type":"Circle"},{"attributes":{},"id":"1021","type":"WheelZoomTool"},{"attributes":{"active_multi":null,"tools":[{"id":"1020"},{"id":"1021"},{"id":"1022"},{"id":"1023"},{"id":"1024"},{"id":"1025"}]},"id":"1027","type":"Toolbar"},{"attributes":{},"id":"1020","type":"PanTool"},{"attributes":{"overlay":{"id":"1026"}},"id":"1022","type":"BoxZoomTool"},{"attributes":{},"id":"1023","type":"SaveTool"},{"attributes":{},"id":"1024","type":"ResetTool"},{"attributes":{},"id":"1054","type":"Selection"},{"attributes":{"source":{"id":"1034"}},"id":"1038","type":"CDSView"},{"attributes":{},"id":"1048","type":"AllLabels"},{"attributes":{"data_source":{"id":"1034"},"glyph":{"id":"1035"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1036"},"view":{"id":"1038"}},"id":"1037","type":"GlyphRenderer"},{"attributes":{},"id":"1010","type":"LinearScale"},{"attributes":{},"id":"1055","type":"UnionRenderers"},{"attributes":{},"id":"1006","type":"DataRange1d"},{"attributes":{"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1040","type":"Line"},{"attributes":{"fill_alpha":{"value":0.5},"fill_color":{"value":"red"},"line_alpha":{"value":0.5},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1035","type":"Circle"},{"attributes":{"formatter":{"id":"1050"},"major_label_policy":{"id":"1051"},"ticker":{"id":"1013"}},"id":"1012","type":"LinearAxis"},{"attributes":{},"id":"1004","type":"DataRange1d"},{"attributes":{"line_alpha":0.1,"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1041","type":"Line"},{"attributes":{"source":{"id":"1039"}},"id":"1043","type":"CDSView"},{"attributes":{"data_source":{"id":"1039"},"glyph":{"id":"1040"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1041"},"view":{"id":"1043"}},"id":"1042","type":"GlyphRenderer"},{"attributes":{},"id":"1044","type":"Title"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAAAAAAAHB1QAAAAAAAwHdAAAAAAACgekAAAAAAAAB9QAAAAAAAkH9AAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[7]},"y":{"__ndarray__":"AAAAAAAAAADRRG9K1Ss2QLhEQqpmH0ZA3ZOddkSOUEB86tEOswZWQJ/1cl4JeVtAk860x6hyYEA=","dtype":"float64","order":"little","shape":[7]}},"selected":{"id":"1052"},"selection_policy":{"id":"1053"}},"id":"1034","type":"ColumnDataSource"},{"attributes":{"bottom_units":"screen","fill_alpha":0.5,"fill_color":"lightgrey","left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","syncable":false,"top_units":"screen"},"id":"1026","type":"BoxAnnotation"},{"attributes":{},"id":"1008","type":"LinearScale"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAXXXTRRRdzQC+66KKLPnNARhdddNFlc0BddNFFF41zQHTRRRddtHNAjC666KLbc0Cjiy666AJ0QLrooosuKnRA0UUXXXRRdEDpoosuunh0QAAAAAAAoHRAF1100UXHdEAvuuiii+50QEYXXXTRFXVAXXTRRRc9dUB00UUXXWR1QIwuuuiii3VAo4suuuiydUC66KKLLtp1QNJFF110AXZA6aKLLroodkAAAAAAAFB2QBdddNFFd3ZALrrooouedkBGF1100cV2QF100UUX7XZAdNFFF10Ud0CMLrroojt3QKOLLrroYndAuuiiiy6Kd0DSRRdddLF3QOmiiy662HdAAAAAAAAAeEAXXXTRRSd4QC666KKLTnhARhdddNF1eEBddNFFF514QHTRRRddxHhAjC666KLreECjiy666BJ5QLrooosuOnlA0kUXXXRheUDpoosuuoh5QAAAAAAAsHlAF1100UXXeUAuuuiii/55QEYXXXTRJXpAXXTRRRdNekB00UUXXXR6QIwuuuiim3pAo4suuujCekC66KKLLup6QNJFF110EXtA6aKLLro4e0AAAAAAAGB7QBhddNFFh3tALrrooouue0BGF1100dV7QF100UUX/XtAdNFFF10kfECMLrrookt8QKOLLrrocnxAuuiiiy6afEDSRRdddMF8QOmiiy666HxAAAAAAAAQfUAYXXTRRTd9QC666KKLXn1ARhdddNGFfUBddNFFF619QHTRRRdd1H1AjC666KL7fUCjiy666CJ+QLrooosuSn5A0kUXXXRxfkDpoosuuph+QAAAAAAAwH5AGF100UXnfkAuuuiiiw5/QEYXXXTRNX9AXXTRRRddf0B00UUXXYR/QIwuuuiiq39Ao4suuujSf0C66KKLLvp/QOmiiy66EIBAdNFFF10kgEAAAAAAADiAQIwuuuiiS4BAF1100UVfgECjiy666HKAQC666KKLhoBAuuiiiy6agEBGF1100a2AQNJFF110wYBAXXTRRRfVgEDpoosuuuiAQHTRRRdd/IBAAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[100]},"y":[0.7855584341419899,2.1106634889706015,3.435768543799213,4.760873598627825,6.085978653456408,7.41108370828502,8.736188763113631,10.061293817942214,11.386398872770826,12.71150392759941,14.03660898242805,15.361714037256633,16.686819092085244,18.011924146913856,19.337029201742467,20.66213425657105,21.987239311399662,23.312344366228274,24.637449421056886,25.96255447588547,27.28765953071411,28.612764585542692,29.937869640371275,31.262974695199887,32.58807975002847,33.91318480485711,35.23828985968569,36.563394914514305,37.88849996934292,39.21360502417153,40.53871007900011,41.86381513382875,43.188920188657335,44.51402524348592,45.83913029831453,47.16423535314311,48.48934040797175,49.814445462800336,51.13955051762895,52.46465557245756,53.78976062728617,55.114865682114754,56.439970736943394,57.76507579177198,59.09018084660059,60.41528590142917,61.740390956257755,63.065496011086395,64.39060106591498,65.71570612074359,67.0408111755722,68.36591623040081,69.6910212852294,71.01612634005804,72.34123139488662,73.66633644971523,74.99144150454384,76.31654655937243,77.64165161420104,78.96675666902965,80.29186172385823,81.61696677868684,82.94207183351546,84.26717688834404,85.59228194317268,86.91738699800126,88.24249205282987,89.56759710765849,90.89270216248707,92.21780721731568,93.54291227214426,94.86801732697288,96.19312238180149,97.5182274366301,98.84333249145871,100.16843754628732,101.49354260111593,102.81864765594449,104.14375271077316,105.46885776560171,106.79396282043032,108.11906787525893,109.44417293008755,110.76927798491616,112.09438303974477,113.41948809457332,114.744593149402,116.06969820423055,117.39480325905916,118.71990831388777,120.04501336871633,121.370118423545,122.69522347837355,124.02032853320216,125.34543358803077,126.67053864285944,127.995643697688,129.3207487525166,130.64585380734516,131.97095886217377]},"selected":{"id":"1054"},"selection_policy":{"id":"1055"}},"id":"1039","type":"ColumnDataSource"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"2.3.1"}};
-  var render_items = [{"docid":"3f617af1-8532-4015-baef-76ea2de110b5","root_ids":["1003"],"roots":{"1003":"a13227e3-3998-4ff7-93f6-d51fb8b18a69"}}];
+  var docs_json = {"00251e48-7418-48cb-b3d9-2c4db5bd0e28":{"defs":[],"roots":{"references":[{"attributes":{"below":[{"id":"1012"}],"center":[{"id":"1015"},{"id":"1019"}],"height":400,"left":[{"id":"1016"}],"renderers":[{"id":"1037"},{"id":"1042"}],"title":{"id":"1045"},"toolbar":{"id":"1027"},"width":800,"x_range":{"id":"1004"},"x_scale":{"id":"1008"},"y_range":{"id":"1006"},"y_scale":{"id":"1010"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"1053","type":"UnionRenderers"},{"attributes":{"formatter":{"id":"1051"},"major_label_policy":{"id":"1049"},"ticker":{"id":"1017"}},"id":"1016","type":"LinearAxis"},{"attributes":{"axis":{"id":"1016"},"dimension":1,"ticker":null},"id":"1019","type":"Grid"},{"attributes":{},"id":"1054","type":"Selection"},{"attributes":{},"id":"1025","type":"HelpTool"},{"attributes":{},"id":"1017","type":"BasicTicker"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"red"},"line_alpha":{"value":0.1},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1036","type":"Circle"},{"attributes":{"active_multi":null,"tools":[{"id":"1020"},{"id":"1021"},{"id":"1022"},{"id":"1023"},{"id":"1024"},{"id":"1025"}]},"id":"1027","type":"Toolbar"},{"attributes":{},"id":"1049","type":"AllLabels"},{"attributes":{},"id":"1021","type":"WheelZoomTool"},{"attributes":{},"id":"1020","type":"PanTool"},{"attributes":{"overlay":{"id":"1026"}},"id":"1022","type":"BoxZoomTool"},{"attributes":{},"id":"1051","type":"BasicTickFormatter"},{"attributes":{},"id":"1023","type":"SaveTool"},{"attributes":{},"id":"1024","type":"ResetTool"},{"attributes":{"source":{"id":"1034"}},"id":"1038","type":"CDSView"},{"attributes":{},"id":"1055","type":"UnionRenderers"},{"attributes":{"data_source":{"id":"1034"},"glyph":{"id":"1035"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1036"},"view":{"id":"1038"}},"id":"1037","type":"GlyphRenderer"},{"attributes":{},"id":"1056","type":"Selection"},{"attributes":{},"id":"1006","type":"DataRange1d"},{"attributes":{},"id":"1004","type":"DataRange1d"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAXXXTRRRdzQC+66KKLPnNARhdddNFlc0BddNFFF41zQHTRRRddtHNAjC666KLbc0Cjiy666AJ0QLrooosuKnRA0UUXXXRRdEDpoosuunh0QAAAAAAAoHRAF1100UXHdEAvuuiii+50QEYXXXTRFXVAXXTRRRc9dUB00UUXXWR1QIwuuuiii3VAo4suuuiydUC66KKLLtp1QNJFF110AXZA6aKLLroodkAAAAAAAFB2QBdddNFFd3ZALrrooouedkBGF1100cV2QF100UUX7XZAdNFFF10Ud0CMLrroojt3QKOLLrroYndAuuiiiy6Kd0DSRRdddLF3QOmiiy662HdAAAAAAAAAeEAXXXTRRSd4QC666KKLTnhARhdddNF1eEBddNFFF514QHTRRRddxHhAjC666KLreECjiy666BJ5QLrooosuOnlA0kUXXXRheUDpoosuuoh5QAAAAAAAsHlAF1100UXXeUAuuuiii/55QEYXXXTRJXpAXXTRRRdNekB00UUXXXR6QIwuuuiim3pAo4suuujCekC66KKLLup6QNJFF110EXtA6aKLLro4e0AAAAAAAGB7QBhddNFFh3tALrrooouue0BGF1100dV7QF100UUX/XtAdNFFF10kfECMLrrookt8QKOLLrrocnxAuuiiiy6afEDSRRdddMF8QOmiiy666HxAAAAAAAAQfUAYXXTRRTd9QC666KKLXn1ARhdddNGFfUBddNFFF619QHTRRRdd1H1AjC666KL7fUCjiy666CJ+QLrooosuSn5A0kUXXXRxfkDpoosuuph+QAAAAAAAwH5AGF100UXnfkAuuuiiiw5/QEYXXXTRNX9AXXTRRRddf0B00UUXXYR/QIwuuuiiq39Ao4suuujSf0C66KKLLvp/QOmiiy66EIBAdNFFF10kgEAAAAAAADiAQIwuuuiiS4BAF1100UVfgECjiy666HKAQC666KKLhoBAuuiiiy6agEBGF1100a2AQNJFF110wYBAXXTRRRfVgEDpoosuuuiAQHTRRRdd/IBAAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[100]},"y":[0.7855584341419899,2.1106634889706015,3.435768543799213,4.760873598627825,6.085978653456408,7.41108370828502,8.736188763113631,10.061293817942214,11.386398872770826,12.71150392759941,14.03660898242805,15.361714037256633,16.686819092085244,18.011924146913856,19.337029201742467,20.66213425657105,21.987239311399662,23.312344366228274,24.637449421056886,25.96255447588547,27.28765953071411,28.612764585542692,29.937869640371275,31.262974695199887,32.58807975002847,33.91318480485711,35.23828985968569,36.563394914514305,37.88849996934292,39.21360502417153,40.53871007900011,41.86381513382875,43.188920188657335,44.51402524348592,45.83913029831453,47.16423535314311,48.48934040797175,49.814445462800336,51.13955051762895,52.46465557245756,53.78976062728617,55.114865682114754,56.439970736943394,57.76507579177198,59.09018084660059,60.41528590142917,61.740390956257755,63.065496011086395,64.39060106591498,65.71570612074359,67.0408111755722,68.36591623040081,69.6910212852294,71.01612634005804,72.34123139488662,73.66633644971523,74.99144150454384,76.31654655937243,77.64165161420104,78.96675666902965,80.29186172385823,81.61696677868684,82.94207183351546,84.26717688834404,85.59228194317268,86.91738699800126,88.24249205282987,89.56759710765849,90.89270216248707,92.21780721731568,93.54291227214426,94.86801732697288,96.19312238180149,97.5182274366301,98.84333249145871,100.16843754628732,101.49354260111593,102.81864765594449,104.14375271077316,105.46885776560171,106.79396282043032,108.11906787525893,109.44417293008755,110.76927798491616,112.09438303974477,113.41948809457332,114.744593149402,116.06969820423055,117.39480325905916,118.71990831388777,120.04501336871633,121.370118423545,122.69522347837355,124.02032853320216,125.34543358803077,126.67053864285944,127.995643697688,129.3207487525166,130.64585380734516,131.97095886217377]},"selected":{"id":"1056"},"selection_policy":{"id":"1055"}},"id":"1039","type":"ColumnDataSource"},{"attributes":{"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1040","type":"Line"},{"attributes":{"data_source":{"id":"1039"},"glyph":{"id":"1040"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1041"},"view":{"id":"1043"}},"id":"1042","type":"GlyphRenderer"},{"attributes":{"source":{"id":"1039"}},"id":"1043","type":"CDSView"},{"attributes":{"fill_alpha":{"value":0.5},"fill_color":{"value":"red"},"line_alpha":{"value":0.5},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1035","type":"Circle"},{"attributes":{"line_alpha":0.1,"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1041","type":"Line"},{"attributes":{},"id":"1045","type":"Title"},{"attributes":{"bottom_units":"screen","fill_alpha":0.5,"fill_color":"lightgrey","left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","syncable":false,"top_units":"screen"},"id":"1026","type":"BoxAnnotation"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAAAAAAAHB1QAAAAAAAwHdAAAAAAACgekAAAAAAAAB9QAAAAAAAkH9AAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[7]},"y":{"__ndarray__":"AAAAAAAAAADRRG9K1Ss2QLhEQqpmH0ZA3ZOddkSOUEB86tEOswZWQJ/1cl4JeVtAk860x6hyYEA=","dtype":"float64","order":"little","shape":[7]}},"selected":{"id":"1054"},"selection_policy":{"id":"1053"}},"id":"1034","type":"ColumnDataSource"},{"attributes":{"formatter":{"id":"1048"},"major_label_policy":{"id":"1046"},"ticker":{"id":"1013"}},"id":"1012","type":"LinearAxis"},{"attributes":{},"id":"1046","type":"AllLabels"},{"attributes":{"axis":{"id":"1012"},"ticker":null},"id":"1015","type":"Grid"},{"attributes":{},"id":"1013","type":"BasicTicker"},{"attributes":{},"id":"1048","type":"BasicTickFormatter"},{"attributes":{},"id":"1010","type":"LinearScale"},{"attributes":{},"id":"1008","type":"LinearScale"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"2.3.1"}};
+  var render_items = [{"docid":"00251e48-7418-48cb-b3d9-2c4db5bd0e28","root_ids":["1003"],"roots":{"1003":"af565da2-695b-46cd-85de-d9ece8efd34f"}}];
   root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
 
   }
@@ -1318,8 +1283,9 @@
   }
 })(window);</script></div>
 </div>
+</div>
 <div class="section" id="best-fit-slope-and-r-sup-2-sup-of-calibration-points">
-<h2>Best Fit slope and R<sup>2</sup> of calibration points<a class="headerlink" href="#best-fit-slope-and-r-sup-2-sup-of-calibration-points" title="Permalink to this headline">¶</a></h2>
+<h3>Best Fit slope and R<sup>2</sup> of calibration points<a class="headerlink" href="#best-fit-slope-and-r-sup-2-sup-of-calibration-points" title="Permalink to this headline">¶</a></h3>
 <p>Below, the print statement is comprised of a string.  In ths string, the <code class="docutils literal notranslate"><span class="pre">{}</span></code> symbols appear twice where I want to insert input from two different variables.  In this case, the values inside the curly brackets <code class="docutils literal notranslate"><span class="pre">{:.2f}</span></code> means I want a <strong>float</strong> of <strong>2</strong> decimal places.  There are a number of ways to insert variable values in strings for output.  More information on string formatting can be <a class="reference external" href="https://www.python.org/dev/peps/pep-3101/">found here</a>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">\n</span></code> in the string breaks the line in the printed output.</p>
 <div class="cell docutils container">
@@ -1339,7 +1305,7 @@
 </div>
 </div>
 <div class="section" id="plot-the-salt-dilution-measurement">
-<h2>Plot the salt dilution measurement<a class="headerlink" href="#plot-the-salt-dilution-measurement" title="Permalink to this headline">¶</a></h2>
+<h3>Plot the salt dilution measurement<a class="headerlink" href="#plot-the-salt-dilution-measurement" title="Permalink to this headline">¶</a></h3>
 <p>Now we’ll use the second data file.  Recall that the first file was for calibration.  The EC sensor was placed in a measured volume of water, and calibration solution was added in measured amounts to record the change in conductivity.</p>
 <p>For the actual measurement of flow in the creek, the EC sensor is placed in the creek some distance downstream of the where a known mass of salt is deposited and mixed.</p>
 <p>Below we plot the conductivity over time, and we also determine what the ‘background’ conductivity was in order to calculate the area under the conductivity curve.  It turns out there is a lot of interesting information about runoff processes contained in the background EC signal.</p>
@@ -1509,10 +1475,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f6115f0b6d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fe071e7db80&gt;
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_1_23_1.png" src="../../_images/Notebook_1_23_1.png" />
+</div>
 </div>
 </div>
 </div>
@@ -1571,9 +1538,8 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="questions-to-consider">
-<h1>Questions to Consider<a class="headerlink" href="#questions-to-consider" title="Permalink to this headline">¶</a></h1>
+<h2>Questions to Consider<a class="headerlink" href="#questions-to-consider" title="Permalink to this headline">¶</a></h2>
 <p>In this notebook, we demonstrated how a salt dilution measurement is processed, including calibration and calculation of volumetric flow.  There are a number of sources of uncertainty in this process.  Provide short written responses to the questions below.  It is recommended to use this notebook to get a sense of the sensitivity of the resulting volumetric flow calculation to various input parameters.</p>
 <ul class="simple">
 <li><p>Near the start of the notebook, we set variables associated with the calibration of the EC sensor:</p></li>
@@ -1582,13 +1548,14 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
 <li><p><code class="docutils literal notranslate"><span class="pre">cal_vol_increment</span></code>: the incremental volume of calibration solution added to the calibration volume</p></li>
 </ul>
 <div class="section" id="question-1">
-<h2>Question 1:<a class="headerlink" href="#question-1" title="Permalink to this headline">¶</a></h2>
+<h3>Question 1:<a class="headerlink" href="#question-1" title="Permalink to this headline">¶</a></h3>
 <p>Comment on the effect of errors in the <em>accuracy</em> of the three calibration variables.  Which variable results in the greatest change to the calculated discharge if the variable is changed by +/- 10%?</p>
 <p>(i.e. what happens to the calculated discharge if our calibration solution is off by 1 mg/L?  What happens if we mislabel the container and instead of 10.1 mg/L we write 100.1 mg/L?)</p>
 </div>
 <div class="section" id="question-2">
-<h2>Question 2:<a class="headerlink" href="#question-2" title="Permalink to this headline">¶</a></h2>
+<h3>Question 2:<a class="headerlink" href="#question-2" title="Permalink to this headline">¶</a></h3>
 <p>Above, we manually set the start and end of the salt injection measurement (marked in the plot by the green dots) using the <code class="docutils literal notranslate"><span class="pre">msmt_start</span></code> and <code class="docutils literal notranslate"><span class="pre">msmt_end</span></code> variables.  In some flow conditions, the EC reading will take a very long time to return to baseline.  The realities of field work (time constraints, battery power, etc) occassionally result in the ‘tail’ of the measurement curve being cut off.  What happens to the calculated discharge if the EC measurement stops unexpectedly before the EC returns to baseline?  Go back in the notebook and change the <code class="docutils literal notranslate"><span class="pre">msmt_end</span></code> time and comment on the effect on the calculated discharge.</p>
+</div>
 </div>
 </div>
 
@@ -1617,7 +1584,7 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../Introduction/Data_Import_and_Review.html" title="previous page">Data Import and Review</a>
+    <a class='left-prev' id="prev-link" href="../Introduction/Data_Import_and_Review.html" title="previous page">Example: Data Import and Review</a>
     <a class='right-next' id="next-link" href="../Notebook_2/Notebook_2.html" title="next page">Notebook 2: Rating Curve Development</a>
 
         </div>
