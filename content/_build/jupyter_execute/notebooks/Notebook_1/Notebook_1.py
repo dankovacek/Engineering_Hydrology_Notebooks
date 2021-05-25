@@ -1,4 +1,4 @@
-## Notebook 1: Flow Measurement using the Salt Dilution Method
+Flow Measurement using the Salt Dilution Method
 
 Go through this notebook and follow along with the calculation of discharge using the salt-dilution method.  At the end, there is an open ended question that requires you to reflect on the content of the notebook.  Written responses are to be submitted via Canvas, where a response field will be set up.
 
