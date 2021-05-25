@@ -2,25 +2,6 @@
 
 A series of interactive notebooks are provided in this code repository.  The aim of the notebooks is to introduce students to working with data programmatically using the open-source *Jupyter* software, which is a powerful "integrated development environment" for data analysis.  **Students are not expected to have prior experience with programming.**  The emphasis of the notebooks is not computer programming; all requisite code is provided.  Each notebook will focus on a particular hydrologic concept, and students will be asked to answer questions about the hydrological concept.  The instructions provided with the code in the notebooks will facilitate the exploration of each concept.
 
-## Jupyter Book and Binder
-
-Launch the main notebook using Binder:
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dankovacek/run_of_river_intro.git/main)
-
-
-Info for [building books and hosting on Github Pages](https://jupyterbook.org/publish/gh-pages.html)
-
-After updating any content, rebuilt the repo:
-
-`jupyter-book build content/`
-
-Then, update the github pages site. Use the gh-pages branch update tool:
-
-`ghp-import -n -p -f content/_build/html`
-
-[Visit the site](https://dankovacek.github.io/Engineering_Hydrology_Notebooks/) at Github sites
-
-`https://dankovacek.github.io/Engineering_Hydrology_Notebooks/`
 
 ## Getting Started with Interactive Python Notebooks
 
