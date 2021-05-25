@@ -1,0 +1,1056 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Import and Review &#8212; My sample book</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Example Notebook" href="Example_Notebook.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="../../intro.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">My sample book</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Data Import and Review
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Example_Notebook.html">
+   Example Notebook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Example_Notebook.html#clausius-clapeyron-equation">
+   Clausius-Clapeyron Equation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Untitled.html">
+   This is a Title
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Salt Dilution Runoff Measurement
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_1/Notebook_1.html">
+   Notebook 1: Flow Measurement using the Salt Dilution Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_1/Notebook_1.html#correct-conductivity-for-temperature">
+   Correct Conductivity for Temperature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_1/Notebook_1.html#matplotlib-is-a-good-plotting-library-but">
+   Matplotlib is a good plotting library, but…
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_1/Notebook_1.html#questions-to-consider">
+   Questions to Consider
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Rating Curve Development
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_2/Notebook_2.html">
+   Notebook 2: Rating Curve Development
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_2/Notebook_2.html#questions-for-submission-on-canvas">
+   Questions for Submission on Canvas
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Extreme Values, Uncertainty, and Risk
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html">
+   Notebook 3: Extreme Values, Uncertainty, and Risk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html#plot-a-histogram-of-annual-maximum-flows">
+   Plot a histogram of annual maximum flows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html#question-for-submission-on-canvas">
+   Question for Submission on Canvas
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Regional Regression
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_4/Notebook_4.html">
+   Notebook 4: Characterization of Long-Term Runoff
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_4/Notebook_4.html#regression-plot">
+   Regression Plot
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Spatial Tools
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_5/Notebook_5.html">
+   Notebook 5: Rational Method and Travel Times
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Introduction/Data_Import_and_Review.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Introduction/Data_Import_and_Review.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/notebooks/Introduction/Data_Import_and_Review.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-data">
+   Import Data
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="data-import-and-review">
+<h1>Data Import and Review<a class="headerlink" href="#data-import-and-review" title="Permalink to this headline">¶</a></h1>
+<p>When starting out learning to code in Python, there may be a few simple tasks that seem unneccessarily complex.  Importing data is one such task, where in Excel we click on a file to open it and most of the time the program already knows whether a cell contains a number or text.  In Python we don’t have to declare the type of data explicitly, but the example below demonstrates the process of importing a file of time series data where the raw data format requires an extra step before we can work with the data.</p>
+<p>There is a limit to the size of dataset we can manually review for anomalies.  As data gets bigger, it becomes necessary to evaluate our dataset in ways that don’t require scanning tens or hundreds of thousands of rows.  In this example, we import a comma-separated-value (csv) file from a measurement device.  This notebook provides an introduction to opening and reviewing files programmatically.</p>
+<p>One final note, the ‘#’ symbol used extensively below is used for adding comments that the code interpreter ignores.  The interpreter ignores all lines starting with ‘#’, as well as anything after a ‘#’ symbol on a line that doesn’t start with ‘#’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
+<span class="c1"># pandas is a library that manipulates &quot;dataframes&quot;, table-like structures,</span>
+<span class="c1"># to efficiently run operations on large datasets</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># numpy is a fundamental library for scientific computing</span>
+<span class="c1"># based on the representation of data as arrays</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># matplotlib is a plotting library</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># this is a command to tell the notebook to display figures</span>
+<span class="c1"># within the notebook instead of creating new windows.</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="import-data">
+<h2>Import Data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+<p>Now we want to import data from a folder.  Another common difficulty is in recognizing how the program interprets file paths.  If we want to open a data file from within this notebook, it is important to know that Jupyter interprets file paths <strong>relative</strong> to the location of the Jupyter notebook file.</p>
+<p>In this case, the file we are working with is “Data_Import_and_Review.ipynb”, and it’s saved under “<em>(something)</em>/Engineering_Hydrology_Notebooks/Introduction/Data_Import_and_Review.ipynb”, where <em>(something)</em> is wherever you saved and unpacked the main repository file on your computer.</p>
+<p>If we had a datafile (let’s call it <em>CIVL418_Hidden_Creek_H_data.csv</em>) in the same folder as our notebook file, we can simply call the filename.  With pandas, it would be like so:</p>
+<p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.read_csv('CIVL418_Hidden_Creek_H_data.csv')</span></code></p>
+<p>Looking at our file structure, there is a folder called <em>data_review</em> that contains a number of csv files.  If we try and import one of these files using strictly the filename, we’ll see an error like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">FileNotFoundError</span>                         <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="n">b872b6bb0ac8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+      <span class="mi">3</span> <span class="c1"># in this case  is located in the</span>
+      <span class="mi">4</span> <span class="c1"># Open the folder and navigate to where</span>
+<span class="o">----&gt;</span> <span class="mi">5</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;CIVL418_Hidden_Creek_H_data.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This error occurs because Jupyter looks for the file in the same level directory as our file.  We can tell it to look up one level in the file directory by starting the path string with double ellipsis, <code class="docutils literal notranslate"><span class="pre">..</span></code>.</p>
+<p>If we try the script below, our notebook will look for <em>CIVL418_Hidden_Creek_H_data.csv</em> one level up from the <em>Introduction</em> folder, which puts us at the level of <code class="docutils literal notranslate"><span class="pre">Engineering_Hydrology_Notebooks/</span></code>.  Before moving on, ask yourself if this path will work?</p>
+<p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.read_csv('../CIVL418_Hidden_Creek_H_data.csv')</span></code></p>
+<p>The path won’t work because there is no file named <em>CIVL418_Hidden_Creek_H_data.csv</em> found in the folder <code class="docutils literal notranslate"><span class="pre">Engineering_Hydrology_Notebooks/</span></code>.  The file is saved in the <code class="docutils literal notranslate"><span class="pre">data_review</span></code> folder that is however in this folder, so we construct the path as follows:</p>
+<p><code class="docutils literal notranslate"><span class="pre">../data_review/CIVL418_Hidden_Creek_H_data.csv</span></code></p>
+<p>Let’s import our data now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import data from the </span>
+<span class="c1"># note the file path is RELATIVE to the location of the notebook file we&#39;re working in</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data_review/CIVL418_Hidden_Creek_H_data.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">9</span><span class="n">fa471aa9f1a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import data from the</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># note the file path is RELATIVE to the location of the notebook file we&#39;re working in</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data_review/CIVL418_Hidden_Creek_H_data.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span> 
+<span class="ne">--&gt; </span><span class="mi">610</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">611</span> 
+<span class="g g-Whitespace">    </span><span class="mi">612</span> 
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">460</span> 
+<span class="g g-Whitespace">    </span><span class="mi">461</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">462</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">463</span> 
+<span class="g g-Whitespace">    </span><span class="mi">464</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span> 
+<span class="ne">--&gt; </span><span class="mi">819</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">820</span> 
+<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1048</span>             <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span>         <span class="c1"># error: Too many arguments for &quot;ParserBase&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1050</span>         <span class="k">return</span> <span class="n">mapping</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1051</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1052</span>     <span class="k">def</span> <span class="nf">_failover_to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1865</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1866</span>         <span class="c1"># open handles</span>
+<span class="ne">-&gt; </span><span class="mi">1867</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open_handles</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1868</span>         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1869</span>         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="s2">&quot;compression&quot;</span><span class="p">):</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_open_handles</span><span class="nt">(self, src, kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1360</span>         <span class="n">Let</span> <span class="n">the</span> <span class="n">readers</span> <span class="nb">open</span> <span class="n">IOHanldes</span> <span class="n">after</span> <span class="n">they</span> <span class="n">are</span> <span class="n">done</span> <span class="k">with</span> <span class="n">their</span> <span class="n">potential</span> <span class="n">raises</span><span class="o">.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1361</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1362</span><span class="s2">         self.handles = get_handle(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1363</span><span class="s2">             src,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1364</span><span class="s2">             &quot;r&quot;,</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">640</span><span class="s2">                 errors = &quot;replace&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">641</span><span class="s2">             # Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">642</span><span class="s2">             handle = open(</span>
+<span class="g g-Whitespace">    </span><span class="mi">643</span><span class="s2">                 handle,</span>
+<span class="g g-Whitespace">    </span><span class="mi">644</span><span class="s2">                 ioargs.mode,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../data_review/CIVL418_Hidden_Creek_H_data.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Looking at the stats of the above dataframe, it appears as though the ‘Value’ column has non-numeric values.  We can tell this by trying to perform a calculation on the column.  If calculating the mean doesn’t work, there could be a few explanations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1426</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1427</span>             <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1428</span>         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: could not convert string to float: &#39; 0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02&#39;
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1430</span>             <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1431</span>                 <span class="n">x</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1432</span>             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: complex() arg is a malformed string
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="mi">8</span><span class="n">bb43d6bee5e</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/generic.py</span> in <span class="ni">stat_func</span><span class="nt">(self, axis, skipna, level, numeric_only, **kwargs)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11455</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agg_by_level</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11456</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce</span><span class="p">(</span>
+<span class="ne">&gt; </span><span class="mi">11457</span>             <span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="n">numeric_only</span>
+<span class="g g-Whitespace">  </span><span class="mi">11458</span>         <span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11459</span> 
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/series.py</span> in <span class="ni">_reduce</span><span class="nt">(self, op, name, axis, skipna, numeric_only, filter_type, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4234</span>                 <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4235</span>             <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">4236</span>                 <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">delegate</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4237</span> 
+<span class="g g-Whitespace">   </span><span class="mi">4238</span>     <span class="k">def</span> <span class="nf">_reindex_indexer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_index</span><span class="p">,</span> <span class="n">indexer</span><span class="p">,</span> <span class="n">copy</span><span class="p">):</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>             <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>                 <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">71</span>                     <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>                 <span class="c1"># we want to transform an object array</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">f</span><span class="nt">(values, axis, skipna, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>                     <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span>             <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">129</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span> 
+<span class="g g-Whitespace">    </span><span class="mi">131</span>             <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">nanmean</span><span class="nt">(values, axis, skipna, mask)</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span>         <span class="n">dtype_count</span> <span class="o">=</span> <span class="n">dtype</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span>     <span class="n">count</span> <span class="o">=</span> <span class="n">_get_counts</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_count</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">563</span>     <span class="n">the_sum</span> <span class="o">=</span> <span class="n">_ensure_numeric</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_sum</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">564</span> 
+<span class="g g-Whitespace">    </span><span class="mi">565</span>     <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">the_sum</span><span class="p">,</span> <span class="s2">&quot;ndim&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1432</span>             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1433</span>                 <span class="c1"># e.g. &quot;foo&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1434</span>                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not convert </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> to numeric&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">1435</span>     <span class="k">return</span> <span class="n">x</span>
+<span class="g g-Whitespace">   </span><span class="mi">1436</span> 
+
+<span class="ne">TypeError</span>: Could not convert  0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02 to numeric
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see the mean calculation throws an informative error:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ValueError: could not convert string to float:
+</pre></div>
+</div>
+<p>When you import a csv with pandas, it will try to figure out the type of each column.  If pandas can’t figure it out, it will leave the values as strings.  In this case, and this is very common when working with files coming from different places (other software, hardware systems, etc.), some values which are non-numeric are included somewhere in the file.  We don’t want to go through a big csv and manually change the files, because what if we have to deal with hundreds of files, or millions of rows?</p>
+<p>We can verify the type of values in the column by calling type, (and we need to check one row, so I’ve indexed row 0 below).  Indeed, the type is string.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can change the type of values in a few ways.  Let’s try using the <code class="docutils literal notranslate"><span class="pre">.astype()</span></code> function from pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;numpy.float64&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see the type is now float.  Let’s try calculating a mean again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0374559322033898
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now if we plot the value, we can see there are a couple of breaks in the series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f21518a8748&gt;
+</pre></div>
+</div>
+<img alt="../../_images/Data_Import_and_Review_13_1.png" src="../../_images/Data_Import_and_Review_13_1.png" />
+</div>
+</div>
+<p>We can also see what periods correspond to gaps by filtering for the <code class="docutils literal notranslate"><span class="pre">nan</span></code> values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gaps</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span>
+
+<span class="n">gaps</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>PARAM</th>
+      <th>Date</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>284</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2011/06/05</td>
+      <td>2011</td>
+      <td>6</td>
+      <td>5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>285</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2011/06/06</td>
+      <td>2011</td>
+      <td>6</td>
+      <td>6</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>286</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2011/06/07</td>
+      <td>2011</td>
+      <td>6</td>
+      <td>7</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>287</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2011/06/08</td>
+      <td>2011</td>
+      <td>6</td>
+      <td>8</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>288</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2011/06/09</td>
+      <td>2011</td>
+      <td>6</td>
+      <td>9</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>638</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012/05/24</td>
+      <td>2012</td>
+      <td>5</td>
+      <td>24</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>639</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012/05/25</td>
+      <td>2012</td>
+      <td>5</td>
+      <td>25</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>640</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012/05/26</td>
+      <td>2012</td>
+      <td>5</td>
+      <td>26</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>641</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012/05/27</td>
+      <td>2012</td>
+      <td>5</td>
+      <td>27</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>642</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012/05/28</td>
+      <td>2012</td>
+      <td>5</td>
+      <td>28</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>87 rows × 7 columns</p>
+</div></div></div>
+</div>
+<p>What else can we do to avoid all this work?</p>
+<p>Now that we know how the <code class="docutils literal notranslate"><span class="pre">nan</span></code> values are represented in the file, if we know we’ll be dealing with more files from this source in the future, we can either address it at the source (change how values are recorded and saved).  Usually we don’t have control over this, but we can address it at the point of import.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data_review/CIVL418_2019_Hidden_Creek_H_data.csv&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NaN&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1303</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1304</span>             <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1305</span>         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: could not convert string to float: &#39; 0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02&#39;
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1306</span>             <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1307</span>                 <span class="n">x</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1308</span>             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: complex() arg is a malformed string
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">f</span><span class="nt">(values, axis, skipna, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span>                 <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">120</span>                     <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span>             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">nanmean</span><span class="nt">(values, axis, skipna, mask)</span>
+<span class="g g-Whitespace">    </span><span class="mi">550</span>     <span class="n">count</span> <span class="o">=</span> <span class="n">_get_counts</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_count</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">551</span>     <span class="n">the_sum</span> <span class="o">=</span> <span class="n">_ensure_numeric</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_sum</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">552</span> 
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1309</span>                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<span class="ne">-&gt; </span><span class="mi">1310</span>                     <span class="s2">&quot;Could not convert </span><span class="si">{value!s}</span><span class="s2"> to numeric&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1311</span>                 <span class="p">)</span>
+
+<span class="ne">TypeError</span>: Could not convert  0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02 to numeric
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1303</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1304</span>             <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1305</span>         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: could not convert string to float: &#39; 0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02&#39;
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1306</span>             <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1307</span>                 <span class="n">x</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1308</span>             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: complex() arg is a malformed string
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">98</span><span class="o">-</span><span class="mi">706</span><span class="n">d35b3cf3e</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data_review/CIVL418_2019_Hidden_Creek_H_data.csv&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NaN&#39;</span><span class="p">])</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/generic.py</span> in <span class="ni">stat_func</span><span class="nt">(self, axis, skipna, level, numeric_only, **kwargs)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11616</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agg_by_level</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11617</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce</span><span class="p">(</span>
+<span class="ne">&gt; </span><span class="mi">11618</span>             <span class="n">f</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="n">numeric_only</span>
+<span class="g g-Whitespace">  </span><span class="mi">11619</span>         <span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">11620</span> 
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/series.py</span> in <span class="ni">_reduce</span><span class="nt">(self, op, name, axis, skipna, numeric_only, filter_type, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4088</span>                 <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4089</span>             <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">4090</span>                 <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">delegate</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4091</span> 
+<span class="g g-Whitespace">   </span><span class="mi">4092</span>         <span class="c1"># TODO(EA) dispatch to Index</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>             <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>                 <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">70</span>                     <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>                 <span class="c1"># we want to transform an object array</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">f</span><span class="nt">(values, axis, skipna, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span>             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span>                 <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">123</span>                     <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>                 <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>                     <span class="c1"># we want to transform an object array</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">nanmean</span><span class="nt">(values, axis, skipna, mask)</span>
+<span class="g g-Whitespace">    </span><span class="mi">549</span>         <span class="n">dtype_count</span> <span class="o">=</span> <span class="n">dtype</span>
+<span class="g g-Whitespace">    </span><span class="mi">550</span>     <span class="n">count</span> <span class="o">=</span> <span class="n">_get_counts</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_count</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">551</span>     <span class="n">the_sum</span> <span class="o">=</span> <span class="n">_ensure_numeric</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_sum</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">552</span> 
+<span class="g g-Whitespace">    </span><span class="mi">553</span>     <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">the_sum</span><span class="p">,</span> <span class="s2">&quot;ndim&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.6/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1308</span>             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1309</span>                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<span class="ne">-&gt; </span><span class="mi">1310</span>                     <span class="s2">&quot;Could not convert </span><span class="si">{value!s}</span><span class="s2"> to numeric&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1311</span>                 <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1312</span>     <span class="k">return</span> <span class="n">x</span>
+
+<span class="ne">TypeError</span>: Could not convert  0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02 to numeric
+</pre></div>
+</div>
+</div>
+</div>
+<p>Hmmm.  That didn’t work.  Why not?  Let’s try and figure it out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;NaN&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>PARAM</th>
+      <th>Date</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Why didn’t that work?  We can see above in the error there is <code class="docutils literal notranslate"><span class="pre">NaN</span></code> before our very eyes…  Is it because Excel hates us and wants to fill us with the rage of a thousand suns?  The answer is yes.</p>
+<p>This is where the creative aspect of looking at data comes in.</p>
+<p>Let’s get all the <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values in an array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_values</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="c1"># show a sample of the first ten values</span>
+<span class="n">all_values</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39; 0.83&#39;, &#39;0.876&#39;, &#39; 1.16&#39;, &#39;0.867&#39;, &#39;0.711&#39;, &#39;0.632&#39;, &#39;0.696&#39;,
+       &#39;0.807&#39;, &#39;0.714&#39;, &#39;0.685&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we can see that not only are the values strings, but in a few cases, we can even see there are spaces included!  How annoying!</p>
+<p>Let’s check the entire list for any strings containing <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># start off with an empty array.  This is where we&#39;ll store any strings that contain `NaN`</span>
+<span class="n">nan_values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># iterate through each of the values</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">all_values</span><span class="p">:</span>
+    <span class="c1"># check if the string contains the substring `Nan`</span>
+    <span class="c1"># if so, append it to the `nan_values` array.</span>
+    <span class="k">if</span> <span class="s1">&#39;NaN&#39;</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+        <span class="n">nan_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+           
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">len</span></code> function tells us how many values have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> in the string.  The <code class="docutils literal notranslate"><span class="pre">set</span></code> function reduces the <code class="docutils literal notranslate"><span class="pre">nan_values</span></code> array to eliminate all duplicates – i.e. <code class="docutils literal notranslate"><span class="pre">set</span></code> returns the <em>unique</em> values in an array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nan_values</span><span class="p">))</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">nan_values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;  NaN&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Aha!!  There are a bunch of blank spaces in the ‘NaN’ string!  We can now use this at the point of import.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nan_string</span> <span class="o">=</span> <span class="s1">&#39;  NaN&#39;</span>
+<span class="n">new_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data_review/CIVL418_2019_Hidden_Creek_H_data.csv&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="n">nan_string</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PARAM       2.000000
+year     2011.079764
+month       6.446086
+day        15.819793
+Value       1.037456
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Hooray, it worked!</p>
+<p>That seemed like a lot of work, but when you see it a few times, you quickly become proficient at basic data review using programmatic methods rather than manually (visually) walking through the entire dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f21518981d0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/Data_Import_and_Review_30_1.png" src="../../_images/Data_Import_and_Review_30_1.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Introduction"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../../intro.html" title="previous page">Welcome to your Jupyter Book</a>
+    <a class='right-next' id="next-link" href="Example_Notebook.html" title="next page">Example Notebook</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book Community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
