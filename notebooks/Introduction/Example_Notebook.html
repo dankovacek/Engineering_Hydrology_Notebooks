@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Example Notebook &#8212; Engineering Hydrology</title>
+    <title>Notebook 1: Clausius-Clapeyron Equation &#8212; Engineering Hydrology</title>
     
   <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -102,12 +102,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Example Notebook
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#clausius-clapeyron-equation">
-   Clausius-Clapeyron Equation
+   Notebook 1: Clausius-Clapeyron Equation
   </a>
  </li>
  <li class="toctree-l1">
@@ -324,12 +319,19 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Example Notebook
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#errors">
+     Errors
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clausius-clapeyron-equation">
    Clausius-Clapeyron Equation
   </a>
@@ -348,7 +350,8 @@
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import a few useful libraries</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">math</span>
 
@@ -357,8 +360,10 @@
 </div>
 </div>
 </div>
-<div class="section" id="example-notebook">
-<h1>Example Notebook<a class="headerlink" href="#example-notebook" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="notebook-1-clausius-clapeyron-equation">
+<h1>Notebook 1: Clausius-Clapeyron Equation<a class="headerlink" href="#notebook-1-clausius-clapeyron-equation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This notebook is an interactive development environment (IDE) where you can run Python code to do calculations, numerical simuluation, and much more.</p>
 <p>For this example, we’ll plot the atmospheric water vapour pressure for a range of air temperatures.</p>
 <div class="cell docutils container">
@@ -368,12 +373,17 @@
 <span class="c1"># set the range of temperatures we&#39;re interested in </span>
 <span class="c1"># calculating the vapour pressure</span>
 
-<span class="c1"># this creates an array starting at -5 and ending at 30 with 500 steps</span>
+<span class="c1"># the numpy (np) library has a &#39;linspace&#39; function that</span>
+<span class="c1"># creates an array starting at -5 and ending at 30 with 500 steps</span>
 <span class="n">temperature_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="section" id="errors">
+<h3>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h3>
+<p>Did you get an error that says <code class="docutils literal notranslate"><span class="pre">NameError:</span> <span class="pre">name</span> <span class="pre">'np'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code>?</p>
+<p>Recall that code cells must be executed in order to load the requisite libraries, variables, etc. into memory.  The error above suggests the very first cell in this notebook wasn’t executed, so the numpy library is not yet accessible in the variable <code class="docutils literal notranslate"><span class="pre">np</span></code>.  Note the line <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code> loads the numpy library and makes its many functions available from the variable <code class="docutils literal notranslate"><span class="pre">np</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature_range</span>
@@ -513,8 +523,9 @@
 <p>This cell is for “markdown” which is an easy way to format text nicely.  <a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Working%20With%20Markdown%20Cells.html">More information on markdown can be found here</a>.</p>
 <p>Let’s use markdown to write the Clausius-Clapeyron equation nicely:</p>
 </div>
+</div>
 <div class="section" id="clausius-clapeyron-equation">
-<h1>Clausius-Clapeyron Equation<a class="headerlink" href="#clausius-clapeyron-equation" title="Permalink to this headline">¶</a></h1>
+<h2>Clausius-Clapeyron Equation<a class="headerlink" href="#clausius-clapeyron-equation" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[\frac{de_s}{dT} = \frac{L_v(T)e_s}{R_v T^2}\]</div>
 <p>Or, using an approximation:</p>
@@ -630,7 +641,8 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Saturation Vapour Pressure (kPa)&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/Example_Notebook_14_1.png" src="../../_images/Example_Notebook_14_1.png" />
+<img alt="../../_images/Example_Notebook_15_1.png" src="../../_images/Example_Notebook_15_1.png" />
+</div>
 </div>
 </div>
 </div>
