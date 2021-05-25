@@ -5,9 +5,8 @@
 
 - part: Introduction
   chapters: 
-  - file: notebooks/Introduction/Data_Import_and_Review
   - file: notebooks/Introduction/Example_Notebook
-  - file: notebooks/Introduction/Untitled
+  - file: notebooks/Introduction/Data_Import_and_Review
 
 - part: Salt Dilution Runoff Measurement
   chapters: 

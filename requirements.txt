@@ -1,5 +1,6 @@
-bokeh==2.3.0
+bokeh
 numpy
 pandas
 scipy
 matplotlib
+pysheds
