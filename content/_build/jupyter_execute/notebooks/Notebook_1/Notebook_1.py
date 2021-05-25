@@ -30,7 +30,7 @@ from scipy import stats
 
 In a salt dilution measurement, we first calibrate the instrument.  The calibration data is provided in a file named *SD_cal.csv
 
-data_file_path = '../data/notebook_1_data/'
+data_file_path = '../../data/notebook_1_data/'
 calibration_filename = 'SD_cal.csv' # this is the calibration data file
 salt_dilution_filename = 'SD_data.csv' # this is the measurement data file
 
@@ -65,7 +65,7 @@ sd_cal.dropna(how='any', inplace=True)
 # see how the calibration data has been updated
 sd_cal
 
-## Correct Conductivity for Temperature
+## Temperature Correction for Conductivity
 
 The electrical conductivity (EC) of water is a function of temperature, so it is important that the water used for calibration is the same temperature as the water in the stream being measured.  Alternatively, a temperature correction can be applied.
 
@@ -128,7 +128,7 @@ for i, row in sd_cal.iterrows():
 
 sd_cal
 
-### Plot the calibration and best fit line
+## Plot the calibration and best fit line
 
 The calibration points are plotted with as red circles, which is represented in the call to the `plot` function by the two-character combination `ro`.  The best fit line through the calibration points is represented by a dashed blue line, specified by the three character code `b--`.  Changing the appearance of the plotted series is a matter of [looking up the short form](https://matplotlib.org/3.1.0/api/markers_api.html#module-matplotlib.markers).  
 
@@ -168,7 +168,7 @@ ax.plot(x_range, best_fit, 'b--', label='Best Fit (R^2 = {:.2f})'.format(r_value
 # by default a legend is not shown, so we need to call the attribute.
 plt.legend()
 
-## Matplotlib is a good plotting library, but...
+## Alternative Plotting Library for Interactivity: Bokeh
 
 If you can imagine a function or feature you wish were already built, chances are it exists.  The Bokeh plotting library allows for a higher level of interactivity.  In the plot below, note the toolbar on the right hand side.  You can use the tools to take a closer look at your data in this simple case.  Plots can also be linked in Bokeh, with which powerful 'dashboards' can be built.  
 
@@ -196,7 +196,7 @@ The `\n` in the string breaks the line in the printed output.
 print("The calibration best fit slope is {:.2f} [[mg/L] / [uS/cm]] \n and the coefficient of determination of the calibration is {}.".format(slope, 
                                                                                                                                          round(r_value**2, 3)))
 
-### Plot the measurement
+### Plot the salt dilution measurement
 
 Now we'll use the second data file.  Recall that the first file was for calibration.  The EC sensor was placed in a measured volume of water, and calibration solution was added in measured amounts to record the change in conductivity.  
 
@@ -245,7 +245,7 @@ ax.plot((t[msmt_start], t[msmt_end]),
 
 plt.legend()
 
-### Calculate the Discharge
+### Calculate Discharge
 
 The volumetric flow (discharge) is equal to the area under the salt dilution curve, minus the background EC.
 
@@ -276,14 +276,17 @@ sd_data['Concentration'] = (sd_data['ECT (uS/cm)'] - background_ect) * slope
 
 time_step = 1 # the time step of the EC measurement device is 1s
 
+# trim the time series to the start and end time
+msmt_slice = sd_data[(sd_data['Time (s)'] > msmt_start) & (sd_data['Time (s)'] < msmt_end)].copy()
+
 # approximating the area under the curve as the sum of small rectangles
 # of height 'concentration' and widths of 1 time step (1 second in this case)
-conc_Area = sum(sd_data['Concentration'] * time_step)
+concentration_area = sum(msmt_slice['Concentration'] * time_step)
 
 mass = 1 # 1 kg salt was dumped in the river
 
 # see the section above to convince yourself the units work out.
-Q_calculated = mass * 1000 / conc_Area
+Q_calculated = mass * 1000 / concentration_area
 
 print('The calculated discharge for the measurement is {:.2f} m^3/s'.format(Q_calculated))
 
@@ -305,4 +308,3 @@ Comment on the effect of errors in the *accuracy* of the three calibration varia
 ### Question 2: 
 
 Above, we manually set the start and end of the salt injection measurement (marked in the plot by the green dots) using the `msmt_start` and `msmt_end` variables.  In some flow conditions, the EC reading will take a very long time to return to baseline.  The realities of field work (time constraints, battery power, etc) occassionally result in the 'tail' of the measurement curve being cut off.  What happens to the calculated discharge if the EC measurement stops unexpectedly before the EC returns to baseline?  Go back in the notebook and change the `msmt_end` time and comment on the effect on the calculated discharge.
-
