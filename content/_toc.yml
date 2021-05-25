@@ -24,6 +24,6 @@
   chapters:
   - file: notebooks/Notebook_4/Notebook_4
   
-- part: Spatial Tools
+- part: Rainfall-Runoff Model
   chapters:
   - file: notebooks/Notebook_5/Notebook_5
