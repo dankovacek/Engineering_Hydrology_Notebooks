@@ -17,69 +17,97 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# import data from the 
-# note the file path is RELATIVE to the location of the notebook file we're working in
-df = pd.read_csv('../data_review/CIVL418_Hidden_Creek_H_data.csv')
-df.describe(include='all')
+df['Value'].mean()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
-[0;32m<ipython-input-2-9fa471aa9f1a>[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;31m# import data from the[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      2[0m [0;31m# note the file path is RELATIVE to the location of the notebook file we're working in[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 3[0;31m [0mdf[0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mread_csv[0m[0;34m([0m[0;34m'../data_review/CIVL418_Hidden_Creek_H_data.csv'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      4[0m [0mdf[0m[0;34m.[0m[0mdescribe[0m[0;34m([0m[0minclude[0m[0;34m=[0m[0;34m'all'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py[0m in [0;36m_ensure_numeric[0;34m(x)[0m
+[1;32m   1534[0m         [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1535[0;31m             [0mx[0m [0;34m=[0m [0mfloat[0m[0;34m([0m[0mx[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1536[0m         [0;32mexcept[0m [0mValueError[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py[0m in [0;36mread_csv[0;34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)[0m
-[1;32m    608[0m     [0mkwds[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0mkwds_defaults[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    609[0m [0;34m[0m[0m
-[0;32m--> 610[0;31m     [0;32mreturn[0m [0m_read[0m[0;34m([0m[0mfilepath_or_buffer[0m[0;34m,[0m [0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    611[0m [0;34m[0m[0m
-[1;32m    612[0m [0;34m[0m[0m
+[0;31mValueError[0m: could not convert string to float: ' 0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02'
 
-[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py[0m in [0;36m_read[0;34m(filepath_or_buffer, kwds)[0m
-[1;32m    460[0m [0;34m[0m[0m
-[1;32m    461[0m     [0;31m# Create the parser.[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 462[0;31m     [0mparser[0m [0;34m=[0m [0mTextFileReader[0m[0;34m([0m[0mfilepath_or_buffer[0m[0;34m,[0m [0;34m**[0m[0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    463[0m [0;34m[0m[0m
-[1;32m    464[0m     [0;32mif[0m [0mchunksize[0m [0;32mor[0m [0miterator[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+During handling of the above exception, another exception occurred:
 
-[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py[0m in [0;36m__init__[0;34m(self, f, engine, **kwds)[0m
-[1;32m    817[0m             [0mself[0m[0;34m.[0m[0moptions[0m[0;34m[[0m[0;34m"has_index_names"[0m[0;34m][0m [0;34m=[0m [0mkwds[0m[0;34m[[0m[0;34m"has_index_names"[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[1;32m    818[0m [0;34m[0m[0m
-[0;32m--> 819[0;31m         [0mself[0m[0;34m.[0m[0m_engine[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_make_engine[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mengine[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    820[0m [0;34m[0m[0m
-[1;32m    821[0m     [0;32mdef[0m [0mclose[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py[0m in [0;36m_ensure_numeric[0;34m(x)[0m
+[1;32m   1538[0m             [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1539[0;31m                 [0mx[0m [0;34m=[0m [0mcomplex[0m[0;34m([0m[0mx[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1540[0m             [0;32mexcept[0m [0mValueError[0m [0;32mas[0m [0merr[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py[0m in [0;36m_make_engine[0;34m(self, engine)[0m
-[1;32m   1048[0m             )
-[1;32m   1049[0m         [0;31m# error: Too many arguments for "ParserBase"[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m-> 1050[0;31m         [0;32mreturn[0m [0mmapping[0m[0;34m[[0m[0mengine[0m[0;34m][0m[0;34m([0m[0mself[0m[0;34m.[0m[0mf[0m[0;34m,[0m [0;34m**[0m[0mself[0m[0;34m.[0m[0moptions[0m[0;34m)[0m  [0;31m# type: ignore[call-arg][0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m   1051[0m [0;34m[0m[0m
-[1;32m   1052[0m     [0;32mdef[0m [0m_failover_to_python[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;31mValueError[0m: complex() arg is a malformed string
 
-[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py[0m in [0;36m__init__[0;34m(self, src, **kwds)[0m
-[1;32m   1865[0m [0;34m[0m[0m
-[1;32m   1866[0m         [0;31m# open handles[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m-> 1867[0;31m         [0mself[0m[0;34m.[0m[0m_open_handles[0m[0;34m([0m[0msrc[0m[0;34m,[0m [0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m   1868[0m         [0;32massert[0m [0mself[0m[0;34m.[0m[0mhandles[0m [0;32mis[0m [0;32mnot[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   1869[0m         [0;32mfor[0m [0mkey[0m [0;32min[0m [0;34m([0m[0;34m"storage_options"[0m[0;34m,[0m [0;34m"encoding"[0m[0;34m,[0m [0;34m"memory_map"[0m[0;34m,[0m [0;34m"compression"[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+The above exception was the direct cause of the following exception:
 
-[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py[0m in [0;36m_open_handles[0;34m(self, src, kwds)[0m
-[1;32m   1360[0m         [0mLet[0m [0mthe[0m [0mreaders[0m [0mopen[0m [0mIOHanldes[0m [0mafter[0m [0mthey[0m [0mare[0m [0mdone[0m [0;32mwith[0m [0mtheir[0m [0mpotential[0m [0mraises[0m[0;34m.[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   1361[0m         """
-[0;32m-> 1362[0;31m         self.handles = get_handle(
-[0m[1;32m   1363[0m             [0msrc[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m   1364[0m             [0;34m"r"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-3-8bb43d6bee5e>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mdf[0m[0;34m[[0m[0;34m'Value'[0m[0;34m][0m[0;34m.[0m[0mmean[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/generic.py[0m in [0;36mmean[0;34m(self, axis, skipna, level, numeric_only, **kwargs)[0m
+[1;32m  11116[0m         )
+[1;32m  11117[0m         [0;32mdef[0m [0mmean[0m[0;34m([0m[0mself[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mskipna[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mlevel[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mnumeric_only[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m> 11118[0;31m             [0;32mreturn[0m [0mNDFrame[0m[0;34m.[0m[0mmean[0m[0;34m([0m[0mself[0m[0;34m,[0m [0maxis[0m[0;34m,[0m [0mskipna[0m[0;34m,[0m [0mlevel[0m[0;34m,[0m [0mnumeric_only[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m  11119[0m [0;34m[0m[0m
+[1;32m  11120[0m         [0;31m# pandas\core\generic.py:10924: error: Cannot assign to a method[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/common.py[0m in [0;36mget_handle[0;34m(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)[0m
-[1;32m    640[0m                 [0merrors[0m [0;34m=[0m [0;34m"replace"[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    641[0m             [0;31m# Encoding[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 642[0;31m             handle = open(
-[0m[1;32m    643[0m                 [0mhandle[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    644[0m                 [0mioargs[0m[0;34m.[0m[0mmode[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/generic.py[0m in [0;36mmean[0;34m(self, axis, skipna, level, numeric_only, **kwargs)[0m
+[1;32m  10724[0m [0;34m[0m[0m
+[1;32m  10725[0m     [0;32mdef[0m [0mmean[0m[0;34m([0m[0mself[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mskipna[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mlevel[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mnumeric_only[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m> 10726[0;31m         return self._stat_function(
+[0m[1;32m  10727[0m             [0;34m"mean"[0m[0;34m,[0m [0mnanops[0m[0;34m.[0m[0mnanmean[0m[0;34m,[0m [0maxis[0m[0;34m,[0m [0mskipna[0m[0;34m,[0m [0mlevel[0m[0;34m,[0m [0mnumeric_only[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m[0m[0;34m[0m[0m
+[1;32m  10728[0m         )
 
-[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '../data_review/CIVL418_Hidden_Creek_H_data.csv'
-FileNotFoundError: [Errno 2] No such file or directory: '../data_review/CIVL418_Hidden_Creek_H_data.csv'
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/generic.py[0m in [0;36m_stat_function[0;34m(self, name, func, axis, skipna, level, numeric_only, **kwargs)[0m
+[1;32m  10709[0m         [0;32mif[0m [0mlevel[0m [0;32mis[0m [0;32mnot[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m  10710[0m             [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_agg_by_level[0m[0;34m([0m[0mname[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0maxis[0m[0;34m,[0m [0mlevel[0m[0;34m=[0m[0mlevel[0m[0;34m,[0m [0mskipna[0m[0;34m=[0m[0mskipna[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m> 10711[0;31m         return self._reduce(
+[0m[1;32m  10712[0m             [0mfunc[0m[0;34m,[0m [0mname[0m[0;34m=[0m[0mname[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0maxis[0m[0;34m,[0m [0mskipna[0m[0;34m=[0m[0mskipna[0m[0;34m,[0m [0mnumeric_only[0m[0;34m=[0m[0mnumeric_only[0m[0;34m[0m[0;34m[0m[0m
+[1;32m  10713[0m         )
+
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/series.py[0m in [0;36m_reduce[0;34m(self, op, name, axis, skipna, numeric_only, filter_type, **kwds)[0m
+[1;32m   4180[0m                 )
+[1;32m   4181[0m             [0;32mwith[0m [0mnp[0m[0;34m.[0m[0merrstate[0m[0;34m([0m[0mall[0m[0;34m=[0m[0;34m"ignore"[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 4182[0;31m                 [0;32mreturn[0m [0mop[0m[0;34m([0m[0mdelegate[0m[0;34m,[0m [0mskipna[0m[0;34m=[0m[0mskipna[0m[0;34m,[0m [0;34m**[0m[0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   4183[0m [0;34m[0m[0m
+[1;32m   4184[0m     [0;32mdef[0m [0m_reindex_indexer[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mnew_index[0m[0;34m,[0m [0mindexer[0m[0;34m,[0m [0mcopy[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py[0m in [0;36m_f[0;34m(*args, **kwargs)[0m
+[1;32m     69[0m             [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     70[0m                 [0;32mwith[0m [0mnp[0m[0;34m.[0m[0merrstate[0m[0;34m([0m[0minvalid[0m[0;34m=[0m[0;34m"ignore"[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 71[0;31m                     [0;32mreturn[0m [0mf[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     72[0m             [0;32mexcept[0m [0mValueError[0m [0;32mas[0m [0me[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     73[0m                 [0;31m# we want to transform an object array[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py[0m in [0;36mf[0;34m(values, axis, skipna, **kwds)[0m
+[1;32m    131[0m                     [0mresult[0m [0;34m=[0m [0malt[0m[0;34m([0m[0mvalues[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0maxis[0m[0;34m,[0m [0mskipna[0m[0;34m=[0m[0mskipna[0m[0;34m,[0m [0;34m**[0m[0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    132[0m             [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 133[0;31m                 [0mresult[0m [0;34m=[0m [0malt[0m[0;34m([0m[0mvalues[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0maxis[0m[0;34m,[0m [0mskipna[0m[0;34m=[0m[0mskipna[0m[0;34m,[0m [0;34m**[0m[0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    134[0m [0;34m[0m[0m
+[1;32m    135[0m             [0;32mreturn[0m [0mresult[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py[0m in [0;36mnew_func[0;34m(values, axis, skipna, mask, **kwargs)[0m
+[1;32m    390[0m             [0mmask[0m [0;34m=[0m [0misna[0m[0;34m([0m[0mvalues[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    391[0m [0;34m[0m[0m
+[0;32m--> 392[0;31m         [0mresult[0m [0;34m=[0m [0mfunc[0m[0;34m([0m[0mvalues[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0maxis[0m[0;34m,[0m [0mskipna[0m[0;34m=[0m[0mskipna[0m[0;34m,[0m [0mmask[0m[0;34m=[0m[0mmask[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    393[0m [0;34m[0m[0m
+[1;32m    394[0m         [0;32mif[0m [0mdatetimelike[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py[0m in [0;36mnanmean[0;34m(values, axis, skipna, mask)[0m
+[1;32m    629[0m [0;34m[0m[0m
+[1;32m    630[0m     [0mcount[0m [0;34m=[0m [0m_get_counts[0m[0;34m([0m[0mvalues[0m[0;34m.[0m[0mshape[0m[0;34m,[0m [0mmask[0m[0;34m,[0m [0maxis[0m[0;34m,[0m [0mdtype[0m[0;34m=[0m[0mdtype_count[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 631[0;31m     [0mthe_sum[0m [0;34m=[0m [0m_ensure_numeric[0m[0;34m([0m[0mvalues[0m[0;34m.[0m[0msum[0m[0;34m([0m[0maxis[0m[0;34m,[0m [0mdtype[0m[0;34m=[0m[0mdtype_sum[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    632[0m [0;34m[0m[0m
+[1;32m    633[0m     [0;32mif[0m [0maxis[0m [0;32mis[0m [0;32mnot[0m [0;32mNone[0m [0;32mand[0m [0mgetattr[0m[0;34m([0m[0mthe_sum[0m[0;34m,[0m [0;34m"ndim"[0m[0;34m,[0m [0;32mFalse[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py[0m in [0;36m_ensure_numeric[0;34m(x)[0m
+[1;32m   1540[0m             [0;32mexcept[0m [0mValueError[0m [0;32mas[0m [0merr[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1541[0m                 [0;31m# e.g. "foo"[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1542[0;31m                 [0;32mraise[0m [0mTypeError[0m[0;34m([0m[0;34mf"Could not convert {x} to numeric"[0m[0;34m)[0m [0;32mfrom[0m [0merr[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1543[0m     [0;32mreturn[0m [0mx[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1544[0m [0;34m[0m[0m
+
+[0;31mTypeError[0m: Could not convert  0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02 to numeric
+TypeError: Could not convert  0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02 to numeric
 

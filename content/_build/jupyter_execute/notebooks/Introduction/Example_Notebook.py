@@ -101,7 +101,7 @@ for t in temperature_range:
     vapour_pressures.append(sat_vapour_pressure)
 
 # now plot the result
-fig, ax = plt.subplots(1, 1, figsize=(18, 5))
+fig, ax = plt.subplots(1, 1, figsize=(10, 6))
 
 ax.plot(temperature_range, vapour_pressures, 'b-')
 ax.set_title('Saturation Vapour Pressure')

@@ -26,7 +26,7 @@ First, we'll set up our rating curve as we did in Notebook 2 and rebuild the dai
 ## Import the Data
 
 # import the stage data
-stage_df = pd.read_csv('../../Project_Data/CIVL418_2020_Nameless_Creek_H_data.csv', parse_dates=['Date'])
+stage_df = pd.read_csv('../../Project_Data/Hidden_Creek_stage_data.csv', parse_dates=['Date'])
 stage_df.set_index('Date', inplace=True)
 
 stage_df.sort_index(inplace=True)
@@ -45,7 +45,7 @@ flow_label = 'Flow (m^3/s)'
 
 
 # import the discharge measurements
-rc_df = pd.read_csv('../../Project_Data/project_QH_table_2020.csv', parse_dates=['Date'])
+rc_df = pd.read_csv('../../Project_Data/Project_QH_table_2021.csv', parse_dates=['Date'])
 
 # take a look at the discharge measurements
 rc_df
@@ -238,8 +238,6 @@ regional_df.head()
 # check the date range covered by the regional data
 print('REGIONAL DATA: Start date = {}, End date = {}'.format(regional_df.index[0], regional_df.index[-1]))
 
-# we need to set the index again to the date for stage_df
-stage_df.set_index('Date', inplace=True)
 # check the date range covered by our data measured at site
 print('SITE DATA: Start date = {}, End date = {}'.format(stage_df.index[0], stage_df.index[-1]))
 

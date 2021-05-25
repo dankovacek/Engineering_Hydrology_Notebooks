@@ -54,22 +54,24 @@ Let's import our data now.
 
 # import data from the 
 # note the file path is RELATIVE to the location of the notebook file we're working in
-df = pd.read_csv('../data_review/CIVL418_Hidden_Creek_H_data.csv')
+df = pd.read_csv('../../Project_Data/Hidden_Creek_stage_data.csv')
 df.describe(include='all')
 
 Looking at the stats of the above dataframe, it appears as though the 'Value' column has non-numeric values.  We can tell this by trying to perform a calculation on the column.  If calculating the mean doesn't work, there could be a few explanations.
 
 df['Value'].mean()
 
-We can see the mean calculation throws an informative error:
+We can see the mean calculation throws a big, ugly error:
 
-    ValueError: could not convert string to float:
+    ValueError: could not convert ... to numeric:
 
 When you import a csv with pandas, it will try to figure out the type of each column.  If pandas can't figure it out, it will leave the values as strings.  In this case, and this is very common when working with files coming from different places (other software, hardware systems, etc.), some values which are non-numeric are included somewhere in the file.  We don't want to go through a big csv and manually change the files, because what if we have to deal with hundreds of files, or millions of rows?
 
-We can verify the type of values in the column by calling type, (and we need to check one row, so I've indexed row 0 below).  Indeed, the type is string.
+We can verify the type of values in the column by calling type, (and we need to check one row, so I've indexed row 0 below).
 
 print(type(df['Value'][0]))
+
+Indeed, the data type of the elements of the `Value` column are string.
 
 We can change the type of values in a few ways.  Let's try using the `.astype()` function from pandas.
 
@@ -84,63 +86,22 @@ Now if we plot the value, we can see there are a couple of breaks in the series.
 
 df.plot('Date', 'Value')
 
-We can also see what periods correspond to gaps by filtering for the `nan` values.
+We can also see what periods correspond to gaps by filtering for all rows the `nan` values.
 
 gaps = df[df['Value'].isnull()]
 
 gaps
 
-What else can we do to avoid all this work?
+If we know we'll be dealing with more files from this source in the future, we could begin by addressing it at the source (change how values are recorded and saved).  
 
-Now that we know how the `nan` values are represented in the file, if we know we'll be dealing with more files from this source in the future, we can either address it at the source (change how values are recorded and saved).  Usually we don't have control over this, but we can address it at the point of import.
+print(len(gaps))
 
-df = pd.read_csv('data_review/CIVL418_2019_Hidden_Creek_H_data.csv', na_values=['NaN'])
-df['Value'].mean()
-
-Hmmm.  That didn't work.  Why not?  Let's try and figure it out.
-
-df[df['Value'] == 'NaN']
-
-Why didn't that work?  We can see above in the error there is `NaN` before our very eyes...  Is it because Excel hates us and wants to fill us with the rage of a thousand suns?  The answer is yes.  
-
-This is where the creative aspect of looking at data comes in. 
-
-Let's get all the `NaN` values in an array.
-
-all_values = df['Value'].to_numpy()
-# show a sample of the first ten values
-all_values[:10]
-
-Here we can see that not only are the values strings, but in a few cases, we can even see there are spaces included!  How annoying!
-
-Let's check the entire list for any strings containing `NaN`.
+The `len` function tells us how many non-numeric values (`NaN`) there are in our dataset by checking the length of the filtered dataframe called `gaps` .  
 
 
-# start off with an empty array.  This is where we'll store any strings that contain `NaN`
-nan_values = []
-# iterate through each of the values
-for value in all_values:
-    # check if the string contains the substring `Nan`
-    # if so, append it to the `nan_values` array.
-    if 'NaN' in value:
-        nan_values.append(value)
-           
+df.mean()
 
-The `len` function tells us how many values have `NaN` in the string.  The `set` function reduces the `nan_values` array to eliminate all duplicates -- i.e. `set` returns the *unique* values in an array.
+The mean function will skip over the non-numeric values and not include them in the calculation of summary statistics.
 
-print(len(nan_values))
-set(nan_values)
-
-Aha!!  There are a bunch of blank spaces in the 'NaN' string!  We can now use this at the point of import.
-
-nan_string = '  NaN'
-new_df = pd.read_csv('data_review/CIVL418_2019_Hidden_Creek_H_data.csv', na_values=[nan_string])
-
-new_df.mean()
-
-Hooray, it worked!
-
-That seemed like a lot of work, but when you see it a few times, you quickly become proficient at basic data review using programmatic methods rather than manually (visually) walking through the entire dataset.
-
-new_df.plot('Date', 'Value')
+This may seem like a lot of work for not much value, but you quickly become proficient at basic data review using programmatic methods over manually (visually) walking through the entire dataset.  This skill is especially important as datasets grow in size.
 

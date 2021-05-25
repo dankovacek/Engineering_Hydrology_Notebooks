@@ -46,7 +46,7 @@ In this exercise, we will develop a stage-discharge relationship from a collecti
 ## Import the Data
 
 # import the stage data
-stage_df = pd.read_csv('../../data/CIVL418_2020_Nameless_Creek_H_data.csv', parse_dates=['Date'])
+stage_df = pd.read_csv('../../Project_Data/Hidden_Creek_stage_data.csv', parse_dates=['Date'])
 # stage_df.dropna(inplace=True)
 stage_df.loc[:, 'Value'] = pd.to_numeric(stage_df.loc[:, 'Value'], errors='coerce')
 
@@ -56,7 +56,7 @@ stage_df
 # looking at the data preview above, the water level (stage) label is quite long
 stage_label = 'Value'
 
-stage_df = stage_df[['Date', 'Value']]
+stage_df = stage_df[['Date', 'Value']].copy()
 
 # let's shorten it by renaming the column
 # We want a name to be descriptive, and it should also contain the units
@@ -65,7 +65,7 @@ stage_df = stage_df[['Date', 'Value']]
 stage_df.columns = ['Date', 'WL_m']
 
 # import the table of discrete discharge measurements
-rc_df = pd.read_csv('../../data/project_QH_table_2020.csv', parse_dates=['Date'])
+rc_df = pd.read_csv('../../Project_Data/Project_QH_table_2021.csv', parse_dates=['Date'])
 
 # take a look at the discharge measurements
 rc_df.head(15)
@@ -405,3 +405,6 @@ The 'measured flow series' is used in many applications in resource engineering.
 Ultimately, the rating curve and measured discharge series are used to characterize a water resource to support decisions in policy and design.  In characterizing a water resource, not only is it common to extrapolate beyond the range of measured conditions, it is necessary to extrapolate into the future.  
 
 Provide a brief discussion (1-2 paragraphs) describing how your confidence in the flow predicted by the rating curve changes as a function of water level?  Compare your level of confidence in the rating curve accurately predicting flow tomorrow, versus one year from now, versus ten years from now.  How might these concerns be addressed?  
+
+
+
