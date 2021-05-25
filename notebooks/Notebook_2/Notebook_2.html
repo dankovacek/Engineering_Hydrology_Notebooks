@@ -1,0 +1,1903 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notebook 2: Rating Curve Development &#8212; My sample book</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Notebook 3: Extreme Values, Uncertainty, and Risk" href="../Notebook_3/Notebook_3.html" />
+    <link rel="prev" title="Notebook 1: Flow Measurement using the Salt Dilution Method" href="../Notebook_1/Notebook_1.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">My sample book</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Introduction
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Data_Import_and_Review.html">
+   Data Import and Review
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Example_Notebook.html">
+   Example Notebook
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Example_Notebook.html#clausius-clapeyron-equation">
+   Clausius-Clapeyron Equation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Untitled.html">
+   This is a Title
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Salt Dilution Runoff Measurement
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_1/Notebook_1.html">
+   Notebook 1: Flow Measurement using the Salt Dilution Method
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_1/Notebook_1.html#correct-conductivity-for-temperature">
+   Correct Conductivity for Temperature
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_1/Notebook_1.html#matplotlib-is-a-good-plotting-library-but">
+   Matplotlib is a good plotting library, but…
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_1/Notebook_1.html#questions-to-consider">
+   Questions to Consider
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Rating Curve Development
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Notebook 2: Rating Curve Development
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#questions-for-submission-on-canvas">
+   Questions for Submission on Canvas
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Extreme Values, Uncertainty, and Risk
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html">
+   Notebook 3: Extreme Values, Uncertainty, and Risk
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html#plot-a-histogram-of-annual-maximum-flows">
+   Plot a histogram of annual maximum flows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html#question-for-submission-on-canvas">
+   Question for Submission on Canvas
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Regional Regression
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_4/Notebook_4.html">
+   Notebook 4: Characterization of Long-Term Runoff
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_4/Notebook_4.html#regression-plot">
+   Regression Plot
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Spatial Tools
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_5/Notebook_5.html">
+   Notebook 5: Rational Method and Travel Times
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Notebook_2/Notebook_2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Notebook_2/Notebook_2.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/notebooks/Notebook_2/Notebook_2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Notebook 2: Rating Curve Development
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introduction">
+     Introduction
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stage-discharge-rating-curve-development">
+     Stage-Discharge (Rating Curve) Development
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-the-data">
+     Import the Data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-measured-discharge-and-corresponding-stage-water-level">
+     Plot the Measured Discharge and corresponding stage (water level)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-measured-discharge">
+     Plot the measured discharge
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-the-new-discharge-measurement">
+     Add the new discharge measurement
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#find-the-stage-on-the-measurement-date-26-september-2010">
+       Find the stage on the measurement date (26 September 2010)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#enter-the-value-of-discharge-calculated-in-notebook-1">
+       Enter the value of discharge calculated in Notebook 1
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-stage-discharge-measurement-points-and-the-rating-curve">
+     Plot the stage-discharge measurement points and the rating curve
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-a-curve-representing-the-standard-stage-discharge-relationship">
+       Plot a Curve Representing the Standard Stage-Discharge Relationship
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#curve-fitting-method">
+     Curve Fitting Method
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solve-for-q">
+     Solve for Q
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-best-fit-curve">
+     Plot the best fit curve
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-the-daily-average-hydrograph-from-the-rating-curve">
+       Plot the Daily Average Hydrograph From the Rating Curve
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-the-resulting-flow-series-and-the-rating-curve">
+       Plot the Resulting Flow series and the rating curve
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#summary-and-reflection">
+     Summary and Reflection
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#questions-for-submission-on-canvas">
+   Questions for Submission on Canvas
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="notebook-2-rating-curve-development">
+<h1>Notebook 2: Rating Curve Development<a class="headerlink" href="#notebook-2-rating-curve-development" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">st</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">register_matplotlib_converters</span>
+<span class="n">register_matplotlib_converters</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">show</span><span class="p">,</span> <span class="n">output_file</span>
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">ColumnDataSource</span><span class="p">,</span> <span class="n">Band</span>
+<span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="kn">import</span> <span class="n">output_notebook</span>
+<span class="kn">from</span> <span class="nn">bokeh.layouts</span> <span class="kn">import</span> <span class="n">gridplot</span>
+<span class="n">output_notebook</span><span class="p">()</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pandas.core.common</span> <span class="kn">import</span> <span class="n">SettingWithCopyWarning</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">SettingWithCopyWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="bk-root">
+    <a href="https://bokeh.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"></a>
+    <span id="1002">Loading BokehJS ...</span>
+</div></div><script type="application/javascript">
+(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  var force = true;
+
+  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
+    root._bokeh_onload_callbacks = [];
+    root._bokeh_is_loading = undefined;
+  }
+
+  var JS_MIME_TYPE = 'application/javascript';
+  var HTML_MIME_TYPE = 'text/html';
+  var EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
+  var CLASS_NAME = 'output_bokeh rendered_html';
+
+  /**
+   * Render data to the DOM node
+   */
+  function render(props, node) {
+    var script = document.createElement("script");
+    node.appendChild(script);
+  }
+
+  /**
+   * Handle when an output is cleared or removed
+   */
+  function handleClearOutput(event, handle) {
+    var cell = handle.cell;
+
+    var id = cell.output_area._bokeh_element_id;
+    var server_id = cell.output_area._bokeh_server_id;
+    // Clean up Bokeh references
+    if (id != null && id in Bokeh.index) {
+      Bokeh.index[id].model.document.clear();
+      delete Bokeh.index[id];
+    }
+
+    if (server_id !== undefined) {
+      // Clean up Bokeh references
+      var cmd = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
+      cell.notebook.kernel.execute(cmd, {
+        iopub: {
+          output: function(msg) {
+            var id = msg.content.text.trim();
+            if (id in Bokeh.index) {
+              Bokeh.index[id].model.document.clear();
+              delete Bokeh.index[id];
+            }
+          }
+        }
+      });
+      // Destroy server and session
+      var cmd = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
+      cell.notebook.kernel.execute(cmd);
+    }
+  }
+
+  /**
+   * Handle when a new output is added
+   */
+  function handleAddOutput(event, handle) {
+    var output_area = handle.output_area;
+    var output = handle.output;
+
+    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
+    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
+      return
+    }
+
+    var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+
+    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
+      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
+      // store reference to embed id on output_area
+      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
+    }
+    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+      var bk_div = document.createElement("div");
+      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+      var script_attrs = bk_div.children[0].attributes;
+      for (var i = 0; i < script_attrs.length; i++) {
+        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
+        toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
+      }
+      // store reference to server id on output_area
+      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+    }
+  }
+
+  function register_renderer(events, OutputArea) {
+
+    function append_mime(data, metadata, element) {
+      // create a DOM node to render to
+      var toinsert = this.create_output_subarea(
+        metadata,
+        CLASS_NAME,
+        EXEC_MIME_TYPE
+      );
+      this.keyboard_manager.register_events(toinsert);
+      // Render to node
+      var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+      render(props, toinsert[toinsert.length - 1]);
+      element.append(toinsert);
+      return toinsert
+    }
+
+    /* Handle when an output is cleared or removed */
+    events.on('clear_output.CodeCell', handleClearOutput);
+    events.on('delete.Cell', handleClearOutput);
+
+    /* Handle when a new output is added */
+    events.on('output_added.OutputArea', handleAddOutput);
+
+    /**
+     * Register the mime type and append_mime function with output_area
+     */
+    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+      /* Is output safe? */
+      safe: true,
+      /* Index of renderer in `output_area.display_order` */
+      index: 0
+    });
+  }
+
+  // register the mime type if in Jupyter Notebook environment and previously unregistered
+  if (root.Jupyter !== undefined) {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  }
+
+  
+  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  var NB_LOAD_WARNING = {'data': {'text/html':
+     "<div style='background-color: #fdd'>\n"+
+     "<p>\n"+
+     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
+     "may be due to a slow or bad network connection. Possible fixes:\n"+
+     "</p>\n"+
+     "<ul>\n"+
+     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
+     "<li>use INLINE resources instead, as so:</li>\n"+
+     "</ul>\n"+
+     "<code>\n"+
+     "from bokeh.resources import INLINE\n"+
+     "output_notebook(resources=INLINE)\n"+
+     "</code>\n"+
+     "</div>"}};
+
+  function display_loaded() {
+    var el = document.getElementById("1002");
+    if (el != null) {
+      el.textContent = "BokehJS is loading...";
+    }
+    if (root.Bokeh !== undefined) {
+      if (el != null) {
+        el.textContent = "BokehJS " + root.Bokeh.version + " successfully loaded.";
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(display_loaded, 100)
+    }
+  }
+
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+
+    root._bokeh_onload_callbacks.push(callback);
+    if (root._bokeh_is_loading > 0) {
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    }
+    if (js_urls == null || js_urls.length === 0) {
+      run_callbacks();
+      return null;
+    }
+    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+    root._bokeh_is_loading = css_urls.length + js_urls.length;
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+
+    function on_error(url) {
+      console.error("failed to load " + url);
+    }
+
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }
+
+    const hashes = {"https://cdn.bokeh.org/bokeh/release/bokeh-2.3.1.min.js": "YF85VygJKMVnHE+lLv2AM93Vbstr0yo2TbIu5v8se5Rq3UQAUmcuh4aaJwNlpKwa", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.1.min.js": "KKuas3gevv3PvrlkyCMzffFeaMq5we/a2QsP5AUoS3mJ0jmaCL7jirFJN3GoE/lM", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.1.min.js": "MK/uFc3YT18pkvvXRl66tTHjP0/dxoSH2e/eiNMFIguKlun2+WVqaPTWmUy/zvh4"};
+
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.async = false;
+      element.src = url;
+      if (url in hashes) {
+        element.crossOrigin = "anonymous";
+        element.integrity = "sha384-" + hashes[url];
+      }
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  
+  var js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.3.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.1.min.js"];
+  var css_urls = [];
+  
+
+  var inline_js = [
+    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+    function(Bokeh) {
+    
+    
+    }
+  ];
+
+  function run_inline_js() {
+    
+    if (root.Bokeh !== undefined || force === true) {
+      
+    for (var i = 0; i < inline_js.length; i++) {
+      inline_js[i].call(root, root.Bokeh);
+    }
+    if (force === true) {
+        display_loaded();
+      }} else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    } else if (force !== true) {
+      var cell = $(document.getElementById("1002")).parents('.cell').data().cell;
+      cell.output_area.append_execute_result(NB_LOAD_WARNING)
+    }
+
+  }
+
+  if (root._bokeh_is_loading === 0) {
+    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
+    run_inline_js();
+  } else {
+    load_libs(css_urls, js_urls, function() {
+      console.debug("Bokeh: BokehJS plotting callback run at", now());
+      run_inline_js();
+    });
+  }
+}(window));</script></div>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>It isn’t typically possible to accurately measure surface runoff directly on a <em>continuous</em> basis.  Instead, in practice it is much easier and more reliable to install an instrument in the river to measure pressure, which recall is linearly proportional to the depth of water.  A hydrometric station is simply a pressure transducer connected to a device to store measurements in memory (such as a data logger).  We then need a way to map these recorded water depth measurements – referred to as ‘stage’ measurements – to <strong>volumetric flow</strong>, i.e. (<span class="math notranslate nohighlight">\(\frac{m^3}{s}\)</span>).</p>
+<p>In the last exercise, we processed a single discharge measurement taken using the salt dilution method.  Typically we want to collect discharge measurements to describe as much of the expected range of natural flow conditions as possible, from very low flows in the dry season, to the highest flows we can (safely) measure.</p>
+<p><strong>Note</strong>: A folder of references is provided containing governing standards for hydrometric data collection, as well as a discussion paper on uncertainty in hydrometric data collection.</p>
+<p>Go through this notebook and follow along with the development of the stage-discharge rating curve. At the end, there is an open ended question that requires you to reflect on the content of the notebook. Written responses are to be submitted via Canvas, where a response field will be set up.</p>
+</div>
+<div class="section" id="stage-discharge-rating-curve-development">
+<h2>Stage-Discharge (Rating Curve) Development<a class="headerlink" href="#stage-discharge-rating-curve-development" title="Permalink to this headline">¶</a></h2>
+<p>The purpose of establishing continuous collection of stage data, and collecting many discharge (flow) measurements is to establish (and validate) a relationship between the water level and the volumetric flow over a wide range of conditions:</p>
+<p><img alt="Stage-Discharge Relationship (source: Hamilton &amp; Moore (2012))" src="../../_images/rating_curve_ex.png" /></p>
+<p>Each point in the above plot represents an ‘instantaneous’ discharge measurement, and the water level (stage) at the time the discharge measurement was taken.</p>
+<p>In this exercise, we will develop a stage-discharge relationship from a collection of discharge measurements and the corresponding stage record. Once a valid stage-discharge relationship has been established, it can be used to translate the time series of <strong>stage measurements</strong> to a time series of <strong>discharge measurements</strong>.</p>
+</div>
+<div class="section" id="import-the-data">
+<h2>Import the Data<a class="headerlink" href="#import-the-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the stage data</span>
+<span class="n">stage_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/CIVL418_2020_Nameless_Creek_H_data.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+<span class="c1"># stage_df.dropna(inplace=True)</span>
+<span class="n">stage_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">stage_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Value&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">e8f5ef1c82d4</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import the stage data</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">stage_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/CIVL418_2020_Nameless_Creek_H_data.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># stage_df.dropna(inplace=True)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">stage_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">stage_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Value&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span> 
+<span class="ne">--&gt; </span><span class="mi">610</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">611</span> 
+<span class="g g-Whitespace">    </span><span class="mi">612</span> 
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">460</span> 
+<span class="g g-Whitespace">    </span><span class="mi">461</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">462</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">463</span> 
+<span class="g g-Whitespace">    </span><span class="mi">464</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span> 
+<span class="ne">--&gt; </span><span class="mi">819</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">820</span> 
+<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1048</span>             <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span>         <span class="c1"># error: Too many arguments for &quot;ParserBase&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1050</span>         <span class="k">return</span> <span class="n">mapping</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1051</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1052</span>     <span class="k">def</span> <span class="nf">_failover_to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1865</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1866</span>         <span class="c1"># open handles</span>
+<span class="ne">-&gt; </span><span class="mi">1867</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open_handles</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1868</span>         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1869</span>         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="s2">&quot;compression&quot;</span><span class="p">):</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers.py</span> in <span class="ni">_open_handles</span><span class="nt">(self, src, kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1360</span>         <span class="n">Let</span> <span class="n">the</span> <span class="n">readers</span> <span class="nb">open</span> <span class="n">IOHanldes</span> <span class="n">after</span> <span class="n">they</span> <span class="n">are</span> <span class="n">done</span> <span class="k">with</span> <span class="n">their</span> <span class="n">potential</span> <span class="n">raises</span><span class="o">.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1361</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1362</span><span class="s2">         self.handles = get_handle(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1363</span><span class="s2">             src,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1364</span><span class="s2">             &quot;r&quot;,</span>
+
+<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">640</span><span class="s2">                 errors = &quot;replace&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">641</span><span class="s2">             # Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">642</span><span class="s2">             handle = open(</span>
+<span class="g g-Whitespace">    </span><span class="mi">643</span><span class="s2">                 handle,</span>
+<span class="g g-Whitespace">    </span><span class="mi">644</span><span class="s2">                 ioargs.mode,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../data/CIVL418_2020_Nameless_Creek_H_data.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># take a quick look at what we&#39;re dealing with</span>
+<span class="n">stage_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>PARAM</th>
+      <th>Date</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010-08-25</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>25</td>
+      <td>0.830</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010-08-26</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>26</td>
+      <td>0.876</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010-08-27</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>27</td>
+      <td>1.160</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010-08-28</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>28</td>
+      <td>0.867</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010-08-29</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>29</td>
+      <td>0.711</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>672</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012-06-27</td>
+      <td>2012</td>
+      <td>6</td>
+      <td>27</td>
+      <td>1.950</td>
+    </tr>
+    <tr>
+      <th>673</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012-06-28</td>
+      <td>2012</td>
+      <td>6</td>
+      <td>28</td>
+      <td>2.000</td>
+    </tr>
+    <tr>
+      <th>674</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012-06-29</td>
+      <td>2012</td>
+      <td>6</td>
+      <td>29</td>
+      <td>2.380</td>
+    </tr>
+    <tr>
+      <th>675</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012-06-30</td>
+      <td>2012</td>
+      <td>6</td>
+      <td>30</td>
+      <td>2.710</td>
+    </tr>
+    <tr>
+      <th>676</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012-07-01</td>
+      <td>2012</td>
+      <td>7</td>
+      <td>1</td>
+      <td>3.020</td>
+    </tr>
+  </tbody>
+</table>
+<p>677 rows × 7 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># looking at the data preview above, the water level (stage) label is quite long</span>
+<span class="n">stage_label</span> <span class="o">=</span> <span class="s1">&#39;Value&#39;</span>
+
+<span class="n">stage_df</span> <span class="o">=</span> <span class="n">stage_df</span><span class="p">[[</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Value&#39;</span><span class="p">]]</span>
+
+<span class="c1"># let&#39;s shorten it by renaming the column</span>
+<span class="c1"># We want a name to be descriptive, and it should also contain the units</span>
+<span class="c1"># note the Date column is unchanged, but needs to be included in the </span>
+<span class="c1"># order the columns appear from left to right</span>
+<span class="n">stage_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;WL_m&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the table of discrete discharge measurements</span>
+<span class="n">rc_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/project_QH_table_2020.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># take a look at the discharge measurements</span>
+<span class="n">rc_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Flow (m^3/s)</th>
+      <th>water level (m above 0 flow ref)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2010-12-24</td>
+      <td>4.340</td>
+      <td>1.130</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2011-01-11</td>
+      <td>0.217</td>
+      <td>0.149</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2011-05-04</td>
+      <td>3.470</td>
+      <td>1.020</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2011-09-19</td>
+      <td>4.280</td>
+      <td>0.966</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2011-10-24</td>
+      <td>4.510</td>
+      <td>1.070</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2011-12-17</td>
+      <td>0.997</td>
+      <td>0.443</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2012-01-26</td>
+      <td>2.480</td>
+      <td>0.648</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2012-02-18</td>
+      <td>1.330</td>
+      <td>0.624</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2012-02-24</td>
+      <td>1.540</td>
+      <td>0.516</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="plot-the-measured-discharge-and-corresponding-stage-water-level">
+<h2>Plot the Measured Discharge and corresponding stage (water level)<a class="headerlink" href="#plot-the-measured-discharge-and-corresponding-stage-water-level" title="Permalink to this headline">¶</a></h2>
+<p>From previous site visits, we have collected a total of 9 discharge measurements as can be seen in the <code class="docutils literal notranslate"><span class="pre">rc_df</span></code> dataframe above.  During each measurement, we manually measure the water level to validate the data being recorded continuously by our pressure transducer and datalogger (hydrometric station).  We validate the pressure transducer reading because instrument calibration is not perfect, and can change over time for a number of reasons.  It is important to measure stage by some independent means before and after a discharge measurement in order to to assess the quality of the stage-discharge relationship and any analysis derived from it.  Validating the hydrometric station stage concurrent to a discharge measurement is typically done manually, such as with a benchmark survey.</p>
+</div>
+<div class="section" id="plot-the-measured-discharge">
+<h2>Plot the measured discharge<a class="headerlink" href="#plot-the-measured-discharge" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the discharge measurements on the x-axis, and the corresponding stage on the y axis</span>
+<span class="n">q_measured</span> <span class="o">=</span> <span class="s1">&#39;Flow (m^3/s)&#39;</span>
+<span class="n">wl_measured</span> <span class="o">=</span> <span class="s1">&#39;water level (m above 0 flow ref)&#39;</span>
+<span class="n">rc_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">q_measured</span><span class="p">,</span> <span class="n">wl_measured</span><span class="p">,</span> 
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
+           <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Discharge measurements&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Flow (m^3/s)&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/Notebook_2_11_11.png" src="../../_images/Notebook_2_11_11.png" />
+</div>
+</div>
+</div>
+<div class="section" id="add-the-new-discharge-measurement">
+<h2>Add the new discharge measurement<a class="headerlink" href="#add-the-new-discharge-measurement" title="Permalink to this headline">¶</a></h2>
+<p>In Notebook 1, we processed a discharge measurement using salt dilution.  Let’s update our rating curve with this latest data point.</p>
+<div class="section" id="find-the-stage-on-the-measurement-date-26-september-2010">
+<h3>Find the stage on the measurement date (26 September 2010)<a class="headerlink" href="#find-the-stage-on-the-measurement-date-26-september-2010" title="Permalink to this headline">¶</a></h3>
+<p>Instead of manually looking up what the water level was on a particular date, we can use an indexing method to directly return the value at the time of interest./</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># measurement_date</span>
+<span class="n">msmt_date</span> <span class="o">=</span> <span class="s1">&#39;2010-09-20&#39;</span>
+ 
+<span class="c1"># here, we are indexing the stage dataframe to return </span>
+<span class="c1"># just the row corresponding to the date we&#39;re interested in</span>
+<span class="n">msmt_date_data</span> <span class="o">=</span> <span class="n">stage_df</span><span class="p">[</span><span class="n">stage_df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">msmt_date</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># now just extract the stage</span>
+<span class="c1"># and round to 3 decimals</span>
+<span class="n">msmt_date_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;WL_m&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">msmt_date_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;WL_m&#39;</span><span class="p">])</span>
+<span class="n">msmt_stage</span> <span class="o">=</span> <span class="n">msmt_date_data</span><span class="p">[</span><span class="s1">&#39;WL_m&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Note that when we index this way,  </span>
+<span class="c1"># a dataframe is still returned</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">msmt_stage</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># To get just the value</span>
+<span class="n">msmt_stage</span> <span class="o">=</span> <span class="n">msmt_stage</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The stage on </span><span class="si">{}</span><span class="s1"> was </span><span class="si">{}</span><span class="s1"> m.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msmt_date</span><span class="p">,</span> <span class="n">msmt_stage</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26    2.74
+Name: WL_m, dtype: float64
+------
+
+The stage on 2010-09-20 was 2.74 m.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">stage_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">test</span><span class="p">[</span><span class="n">test</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="s1">&#39;2010-09-10&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WL_m</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2010-09-10</th>
+      <td>0.626</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="enter-the-value-of-discharge-calculated-in-notebook-1">
+<h3>Enter the value of discharge calculated in Notebook 1<a class="headerlink" href="#enter-the-value-of-discharge-calculated-in-notebook-1" title="Permalink to this headline">¶</a></h3>
+<p>In Notebook 1, we calculated a salt dilution discharge.  Include this new measurement and see how it compares to the rest of the measurements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add a new point - get the discharge value </span>
+<span class="c1"># you calculated in the previous tutorial</span>
+<span class="c1"># Here we can enter the additional point for the rating curve </span>
+<span class="c1"># from the salt dilution measurement calculation exercise</span>
+<span class="c1"># set variables corresponding to the discharge and stage from that measurement</span>
+
+<span class="n">Q_calculated</span> <span class="o">=</span> <span class="mi">12</span> <span class="c1"># enter the value you calculated from Tutorial 1</span>
+<span class="n">concurrent_stage</span> <span class="o">=</span> <span class="n">msmt_stage</span> <span class="c1"># we determined msmst_stage in the previous cell</span>
+
+<span class="c1"># Add the newly measured point to the rating curve (discharge data) dataframe</span>
+<span class="c1"># len(stage_df) + 1 makes it add a row at the bottom</span>
+<span class="n">rc_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rc_df</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">msmt_date</span><span class="p">),</span> <span class="n">Q_calculated</span><span class="p">,</span> <span class="n">msmt_stage</span><span class="p">]</span>
+<span class="n">rc_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rc_df</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">msmt_date</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.36</span><span class="p">]</span>
+
+<span class="c1"># print out the updated dataframe and see the new point added</span>
+<span class="n">rc_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Flow (m^3/s)</th>
+      <th>water level (m above 0 flow ref)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2010-12-24</td>
+      <td>4.340</td>
+      <td>1.130</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2011-01-11</td>
+      <td>0.217</td>
+      <td>0.149</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2011-05-04</td>
+      <td>3.470</td>
+      <td>1.020</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2011-09-19</td>
+      <td>4.280</td>
+      <td>0.966</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2011-10-24</td>
+      <td>4.510</td>
+      <td>1.070</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2011-12-17</td>
+      <td>0.997</td>
+      <td>0.443</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2012-01-26</td>
+      <td>2.480</td>
+      <td>0.648</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2012-02-18</td>
+      <td>1.330</td>
+      <td>0.624</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2012-02-24</td>
+      <td>1.540</td>
+      <td>0.516</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2010-09-20</td>
+      <td>12.000</td>
+      <td>2.740</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2010-09-20</td>
+      <td>5.000</td>
+      <td>0.360</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-stage-discharge-measurement-points-and-the-rating-curve">
+<h2>Plot the stage-discharge measurement points and the rating curve<a class="headerlink" href="#plot-the-stage-discharge-measurement-points-and-the-rating-curve" title="Permalink to this headline">¶</a></h2>
+<p>The plot below is where you will be able to validate if your answer for question 4 is correct.</p>
+<div class="section" id="plot-a-curve-representing-the-standard-stage-discharge-relationship">
+<h3>Plot a Curve Representing the Standard Stage-Discharge Relationship<a class="headerlink" href="#plot-a-curve-representing-the-standard-stage-discharge-relationship" title="Permalink to this headline">¶</a></h3>
+<p>The standard stage-discharge relationship takes the form <span class="math notranslate nohighlight">\(Q = C(h-h_0)^b\)</span> where:</p>
+<ul class="simple">
+<li><p>Q = flow <span class="math notranslate nohighlight">\([\frac {m^3}{s}]\)</span></p></li>
+<li><p>C = rating coefficient <span class="math notranslate nohighlight">\([-]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(h_0\)</span> = elevation offset <span class="math notranslate nohighlight">\([m]\)</span> corresponding to the point of zero flow</p></li>
+<li><p>b = hydraulic control shape coefficient <span class="math notranslate nohighlight">\([-]\)</span></p></li>
+</ul>
+<p>The rating exponent (b) is related to some extent to the cross sectional shape of the hydraulic control.  Values for the rating exponent suggested by Environment Canada (2012) are as follows:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Shape</p></th>
+<th class="head"><p>Value of exponent (b)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Rectangular</p></td>
+<td><p>1.3 to 1.8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Parabolic</p></td>
+<td><p>1.7 to 2.3</p></td>
+</tr>
+<tr class="row-even"><td><p>Triangular</p></td>
+<td><p>2.5 to 3</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># definition of rating curve: calculate Q from h, given the parameters.</span>
+<span class="k">def</span> <span class="nf">calc_q</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Standard form of the rating curve equation.</span>
+<span class="sd">        Q = flow [m^3/s]</span>
+<span class="sd">        C = rating coefficient [-]</span>
+<span class="sd">        h0 = elevation offset [m] - corresponds to point of zero flow</span>
+<span class="sd">        b = hydraulic control shape coefficient [-]</span>
+<span class="sd">    Return volumetric flow [m^3/s]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">C</span><span class="o">*</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="n">h0</span><span class="p">)</span><span class="o">**</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below are rating curve parameters (<code class="docutils literal notranslate"><span class="pre">h0</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code>) that are purposely not a great fit to the discharge data.</p>
+<p>Try changing the values to see the effect on how the curve fits the measured discharge data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h0</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>   <span class="c1"># offset parameter</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">1.8</span>      <span class="c1"># exponent (shape) parameter</span>
+<span class="n">C</span> <span class="o">=</span> <span class="mf">8.0</span>      <span class="c1"># coefficient parameter</span>
+
+<span class="c1"># here, set a range of stage values over which</span>
+<span class="c1"># we will calculate discharge based on our rating curve parameters</span>
+<span class="n">stage_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># here we calculate flow (q) for every value of stage</span>
+<span class="c1"># we defined in stage_range above</span>
+<span class="n">manual_fit_q</span> <span class="o">=</span> <span class="p">[</span><span class="n">calc_q</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">stage_range</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">manual_fit_q</span><span class="p">,</span> <span class="n">stage_range</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Manual Fit RC&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rc_df</span><span class="p">[</span><span class="n">q_measured</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">rc_df</span><span class="p">[</span><span class="n">wl_measured</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> 
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
+           <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Discharge measurements&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Stage - Discharge Rating Curve&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Discharge [m^3/s]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Stage [m]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Notebook_2_22_0.png" src="../../_images/Notebook_2_22_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="curve-fitting-method">
+<h2>Curve Fitting Method<a class="headerlink" href="#curve-fitting-method" title="Permalink to this headline">¶</a></h2>
+<p>Above, we plotted the stage-discharge curve using made up parameters for C, h0, and b.  We can use a “guess-and-check” method to change the parameters until they have a ‘good’ visual fit, but let’s be more efficient and systematic and use a “best fit” method.</p>
+<p>Because our equation is not linear (normally <span class="math notranslate nohighlight">\(b \neq 1\)</span>), we can’t use the linear best fit function shown in Tutorial 1.  Or can we?</p>
+<p>Recall the rating curve equation from above is: <span class="math notranslate nohighlight">\(Q = C(H-h_0)^b\)</span>.</p>
+<p>If we transform the data to log space, we get the following: <span class="math notranslate nohighlight">\(log(Q) = log(C) + b\cdot log(h-h_0)\)</span></p>
+<p>We can then rearrange the terms to match the linear form: <span class="math notranslate nohighlight">\(y = slope \cdot x + intercept\)</span>.</p>
+<p>Recall the x and y axis parameters are discharge (Q) and water level (h), respectively, so the linear form of the equation is then:</p>
+<div class="math notranslate nohighlight">
+\[log(h-h_0) = slope \cdot log(Q) + intercept\]</div>
+<p>Using this linear form of the equation, we can use the ordinary least squares (OLS) method to find the slope and intercept corresponding to the best fit line (in log-log space).  The last step is to transform the values back to linear space.</p>
+<p>Note that <span class="math notranslate nohighlight">\(h_0\)</span> cannot be fitted this way, and has to be set manually. In this case we start by assuming <span class="math notranslate nohighlight">\(h_0=0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">rc_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         Date  Flow (m^3/s)  water level (m above 0 flow ref)
+0  2010-12-24         4.340                             1.130
+1  2011-01-11         0.217                             0.149
+2  2011-05-04         3.470                             1.020
+3  2011-09-19         4.280                             0.966
+4  2011-10-24         4.510                             1.070
+5  2011-12-17         0.997                             0.443
+6  2012-01-26         2.480                             0.648
+7  2012-02-18         1.330                             0.624
+8  2012-02-24         1.540                             0.516
+9  2010-09-20        12.000                             2.740
+10 2010-09-20         5.000                             0.360
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the best-fit line in log-log space</span>
+<span class="c1"># set our stage offset to zero</span>
+<span class="n">h0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># take the logarithm of the measured streamflows and the stage</span>
+<span class="n">q_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">rc_df</span><span class="p">[</span><span class="s1">&#39;Flow (m^3/s)&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">h0</span><span class="p">)</span>
+<span class="n">stage_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">rc_df</span><span class="p">[</span><span class="s1">&#39;water level (m above 0 flow ref)&#39;</span><span class="p">])</span>
+
+<span class="c1"># find the slope and intercept parameters describing the linear best fit using ordinary least squares (OLS)</span>
+<span class="n">log_slope</span><span class="p">,</span> <span class="n">log_intercept</span><span class="p">,</span> <span class="n">log_rval</span><span class="p">,</span> <span class="n">log_pval</span><span class="p">,</span> <span class="n">log_stderr</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">q_log</span><span class="p">,</span> <span class="n">stage_log</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The linearized form of the best fit equation was shown in the last step: <span class="math notranslate nohighlight">\(log(h-h_0) = slope \cdot log(Q) + intercept\)</span>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">st.linregress</span></code> function solved the ordinary least squares best fit and yielded the <code class="docutils literal notranslate"><span class="pre">slope</span></code> and <code class="docutils literal notranslate"><span class="pre">intercept</span></code> of the best fit line, so we have two unknowns.  When we plotted the general stage-discharge curve above, we set a variable <code class="docutils literal notranslate"><span class="pre">stage_range</span></code> to evaluate the range of water level over which we’re interested in knowing the corresponding flow.  The remaining unknown is then the <code class="docutils literal notranslate"><span class="pre">log(Q)</span></code> term, but we want a function that will give us the discharge (<code class="docutils literal notranslate"><span class="pre">Q</span></code>) in linear space.</p>
+</div>
+<div class="section" id="solve-for-q">
+<h2>Solve for Q<a class="headerlink" href="#solve-for-q" title="Permalink to this headline">¶</a></h2>
+<p>The last step is to rearrange the log form of the equation we derived previously (<span class="math notranslate nohighlight">\(log(h-h_0) = slope \cdot log(Q) + intercept\)</span>) in order to solve for flow (<code class="docutils literal notranslate"><span class="pre">Q</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the discharge based on the best fit</span>
+<span class="c1"># parameters found by ordinary least squares above</span>
+<span class="k">def</span> <span class="nf">ols_rc_q</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">h0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate flow (Q) from the linear best fit parameters.</span>
+<span class="sd">        -slope: the `log_slope` calculated above (constant)</span>
+<span class="sd">        -intercept: `log_intercept` calculated above (constant)</span>
+<span class="sd">        -h0 is the same PZF offset used above (constant)</span>
+<span class="sd">        -h is the independent variable</span>
+<span class="sd">    Returns Q, the discharge in m^3/s.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">slope</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">h0</span><span class="p">)</span> <span class="o">-</span> <span class="n">intercept</span><span class="p">)</span> <span class="o">/</span> <span class="n">slope</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># put best fit results into a dataframe for plotting</span>
+<span class="c1"># use 0 as the PZF (point of zero flow) (the h0 parameter)</span>
+<span class="n">bf_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">bf_df</span><span class="p">[</span><span class="s1">&#39;stage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stage_range</span>
+
+<span class="c1"># now as before, apply the `ols_rc_q` function to create the stage-discharge</span>
+<span class="c1"># curve based on the best-fit equation</span>
+<span class="n">bf_df</span><span class="p">[</span><span class="s1">&#39;best_fit_q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ols_rc_q</span><span class="p">(</span><span class="n">log_slope</span><span class="p">,</span> <span class="n">log_intercept</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">stage_range</span><span class="p">]</span>
+<span class="n">bf_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;stage&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># now add the manual fit we developed above -- this way we can compare the two curves side-by-side</span>
+<span class="n">bf_df</span><span class="p">[</span><span class="s1">&#39;manual_fit_q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">manual_fit_q</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-best-fit-curve">
+<h2>Plot the best fit curve<a class="headerlink" href="#plot-the-best-fit-curve" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">manual_fit_q</span><span class="p">,</span> <span class="n">stage_range</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Manual Fit RC&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bf_df</span><span class="p">[</span><span class="s1">&#39;best_fit_q&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">bf_df</span><span class="p">[</span><span class="s1">&#39;stage&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;OLS Best Fit&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rc_df</span><span class="p">[</span><span class="n">q_measured</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">rc_df</span><span class="p">[</span><span class="n">wl_measured</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> 
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+           <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Discharge measurements&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Stage - Discharge Rating Curve&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Discharge [m^3/s]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Stage [m]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Notebook_2_30_0.png" src="../../_images/Notebook_2_30_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if you want to export this data to continue working in excel (or another program)</span>
+<span class="c1"># You can call a function to write a dataframe directly to csv using the command below.</span>
+<span class="c1"># The string is the filename, and you can additionally add path information</span>
+<span class="c1"># just remove the &#39;#&#39; symbol at the start of the line below and execute this cell by pressing shift + enter, or by hitting the &#39;play&#39; button at the top</span>
+<span class="c1"># bf_df.to_csv(&#39;rating_curve_data.csv&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-daily-average-hydrograph-from-the-rating-curve">
+<h3>Plot the Daily Average Hydrograph From the Rating Curve<a class="headerlink" href="#plot-the-daily-average-hydrograph-from-the-rating-curve" title="Permalink to this headline">¶</a></h3>
+<p>Now that we’ve established the relationship between stage and discharge, we can transform the continuous stage record into a continuous flow record.</p>
+<p>Apply the rating curve equation we developed above to the long-term water level (stage) time series from our hydrometric station.  Add the result as a new column in the <code class="docutils literal notranslate"><span class="pre">stage_df</span></code> dataframe.  Note the distinction between the stage measured during the discrete measurements, and the “continuous” stage (water level) recorded by our pressure transducer.  It is the pressure-transducer series we want to apply the rating curve equation to, not the water level from the discharge measurements!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate a dicharge based on the best fit or manually fit rating curve</span>
+<span class="c1"># for each water level recorded in the measured stage record (stage_df)</span>
+
+<span class="n">stage_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;RC Q (cms)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stage_df</span><span class="p">[</span><span class="s1">&#39;WL_m&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="n">ols_rc_q</span><span class="p">(</span><span class="n">log_slope</span><span class="p">,</span> <span class="n">log_intercept</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># add in the parameters we set manually</span>
+<span class="n">stage_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Manual Q (cms)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stage_df</span><span class="p">[</span><span class="s1">&#39;WL_m&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="n">calc_q</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stage_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>WL_m</th>
+      <th>RC Q (cms)</th>
+      <th>Manual Q (cms)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2010-08-25</td>
+      <td>0.830</td>
+      <td>3.348681</td>
+      <td>5.720455</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2010-08-26</td>
+      <td>0.876</td>
+      <td>3.661432</td>
+      <td>6.303727</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2010-08-27</td>
+      <td>1.160</td>
+      <td>5.828026</td>
+      <td>10.449954</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2010-08-28</td>
+      <td>0.867</td>
+      <td>3.599373</td>
+      <td>6.187630</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2010-08-29</td>
+      <td>0.711</td>
+      <td>2.591931</td>
+      <td>4.329675</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>672</th>
+      <td>2012-06-27</td>
+      <td>1.950</td>
+      <td>13.769525</td>
+      <td>26.616582</td>
+    </tr>
+    <tr>
+      <th>673</th>
+      <td>2012-06-28</td>
+      <td>2.000</td>
+      <td>14.358850</td>
+      <td>27.857618</td>
+    </tr>
+    <tr>
+      <th>674</th>
+      <td>2012-06-29</td>
+      <td>2.380</td>
+      <td>19.150173</td>
+      <td>38.100310</td>
+    </tr>
+    <tr>
+      <th>675</th>
+      <td>2012-06-30</td>
+      <td>2.710</td>
+      <td>23.742096</td>
+      <td>48.132089</td>
+    </tr>
+    <tr>
+      <th>676</th>
+      <td>2012-07-01</td>
+      <td>3.020</td>
+      <td>28.404072</td>
+      <td>58.492810</td>
+    </tr>
+  </tbody>
+</table>
+<p>677 rows × 4 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># again, if you want to export this dataframe to csv for use in Excel</span>
+<span class="c1"># or other program, use the command below</span>
+<span class="c1"># stage_df.to_csv(&#39;derived_flow_series.csv&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-the-resulting-flow-series-and-the-rating-curve">
+<h3>Plot the Resulting Flow series and the rating curve<a class="headerlink" href="#plot-the-resulting-flow-series-and-the-rating-curve" title="Permalink to this headline">¶</a></h3>
+<p>The two plots below are linked.  Check the selection tools, and select points on one plot.  When validating data, it is helpful to be able to link the measurements on the rating curve plot and the daily flow series plot.  Consider how you would you check if the low flows were subject to a shift in the hydraulic control over time?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">stage_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rc_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Date&#39;, &#39;WL_m&#39;, &#39;RC Q (cms)&#39;, &#39;Manual Q (cms)&#39;], dtype=&#39;object&#39;)
+Index([&#39;Date&#39;, &#39;Flow (m^3/s)&#39;, &#39;water level (m above 0 flow ref)&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># output to static HTML file</span>
+<span class="c1">#output_file(&quot;filename.html&quot;)</span>
+
+<span class="c1"># customize the tools for interacting with the bokeh plot</span>
+<span class="n">TOOLS</span><span class="o">=</span><span class="s2">&quot;pan,wheel_zoom,reset,hover,poly_select,box_select&quot;</span>
+
+<span class="c1"># Bokeh uses a ColumnDataSource data structure to </span>
+<span class="c1"># link plots and make them more interactive</span>
+
+<span class="n">stage_df</span> <span class="o">=</span> <span class="n">stage_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># set data sources for plot linking</span>
+<span class="n">rc_source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">())</span>
+<span class="n">rc_source</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">rc_source</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">rc_df</span><span class="p">)</span>
+
+<span class="n">ts_source</span> <span class="o">=</span> <span class="n">ColumnDataSource</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">())</span>
+<span class="n">ts_source</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">ts_source</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">stage_df</span><span class="p">)</span>
+
+<span class="c1">#### RATING CURVE PLOT (LET)</span>
+<span class="n">rc_plot</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">plot_width</span><span class="o">=</span><span class="mi">550</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Rating Curve Plot&#39;</span><span class="p">,</span>
+                <span class="n">tools</span><span class="o">=</span><span class="n">TOOLS</span><span class="p">)</span>
+
+<span class="c1"># plot the measured discharge points</span>
+<span class="n">rc_plot</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="s1">&#39;Flow (m^3/s)&#39;</span><span class="p">,</span> <span class="s1">&#39;water level (m above 0 flow ref)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+              <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;Measured Q&#39;</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">rc_source</span><span class="p">)</span>
+
+<span class="c1"># plot the rating curve based on the manual rating curve fit</span>
+<span class="n">rc_plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">manual_fit_q</span><span class="p">,</span> <span class="n">stage_range</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">,</span>
+             <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;Manual Fit&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot the rating curve based on the OLS best fit</span>
+<span class="n">rc_plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">bf_df</span><span class="p">[</span><span class="s1">&#39;best_fit_q&#39;</span><span class="p">],</span> <span class="n">bf_df</span><span class="p">[</span><span class="s1">&#39;stage&#39;</span><span class="p">],</span>
+             <span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;OLS Fit&#39;</span><span class="p">)</span>
+
+<span class="c1">#### DAILY FLOW SERIES PLOT (RIGHT)</span>
+<span class="n">daily_flow_plot</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">plot_width</span><span class="o">=</span><span class="mi">550</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> 
+                        <span class="n">x_axis_type</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Daily Flow Hydrograph&#39;</span><span class="p">)</span>
+
+<span class="c1"># # plot the flow series based on the OLS best fit</span>
+<span class="n">daily_flow_plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;RC Q (cms)&#39;</span><span class="p">,</span> 
+                    <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;OLS-based RC Flow&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span>
+                    <span class="n">source</span><span class="o">=</span><span class="n">ts_source</span><span class="p">)</span>
+
+<span class="c1"># plot the flow series based on the manual fit</span>
+<span class="n">daily_flow_plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Manual Q (cms)&#39;</span><span class="p">,</span> 
+                    <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;Manual RC Flow&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">,</span>
+                    <span class="n">source</span><span class="o">=</span><span class="n">ts_source</span><span class="p">)</span>
+
+<span class="c1"># plot the daily flow series generated from the manual rating curve</span>
+<span class="n">daily_flow_plot</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Flow (m^3/s)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+              <span class="n">source</span><span class="o">=</span><span class="n">rc_source</span><span class="p">,</span> <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;Measured Q&#39;</span><span class="p">)</span>
+
+<span class="c1"># daily_flow_plot.line(&#39;Date&#39;, &#39;RC Q (cms)&#39;)</span>
+<span class="c1"># label the axes</span>
+<span class="n">daily_flow_plot</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Date&#39;</span>
+<span class="n">daily_flow_plot</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Flow (m³/s)&#39;</span>
+<span class="n">daily_flow_plot</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s2">&quot;top_left&quot;</span>
+<span class="n">rc_plot</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Flow (m³/s)&#39;</span>
+<span class="n">rc_plot</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Stage (m)&#39;</span>
+<span class="n">rc_plot</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s2">&quot;bottom_right&quot;</span>
+
+<span class="n">layout</span> <span class="o">=</span> <span class="n">gridplot</span><span class="p">([[</span><span class="n">rc_plot</span><span class="p">,</span> <span class="n">daily_flow_plot</span><span class="p">]])</span>
+
+<span class="c1"># show the results</span>
+<span class="n">show</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+
+
+
+
+
+<div class="bk-root" id="442a4139-c959-4d20-b5ec-cdfbbd1d443d" data-root-id="1244"></div>
+</div><script type="application/javascript">(function(root) {
+  function embed_document(root) {
+    
+  var docs_json = {"9728f9cd-e9c3-401b-aa92-98cbd80d0d6d":{"roots":{"references":[{"attributes":{"children":[{"id":"1243"},{"id":"1241"}]},"id":"1244","type":"Column"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"red"},"line_alpha":{"value":0.1},"line_color":{"value":"red"},"size":{"units":"screen","value":5},"x":{"field":"Flow (m^3/s)"},"y":{"field":"water level (m above 0 flow ref)"}},"id":"1040","type":"Circle"},{"attributes":{"data":{"Date":{"__ndarray__":"AABAzFrRckIAAMDzJddyQgAAgN2E+3JCAAAAt+8nc0IAAECgMzNzQgAAwBaVRHNCAADA/HRRc0IAAAAh3FhzQgAAgIPKWnNCAAAACseyckIAAAAKx7JyQg==","dtype":"float64","order":"little","shape":[11]},"Flow (m^3/s)":{"__ndarray__":"XI/C9ShcEUAtsp3vp8bLP8P1KFyPwgtAH4XrUbgeEUAK16NwPQoSQIGVQ4ts5+8/16NwPQrXA0BI4XoUrkf1P6RwPQrXo/g/AAAAAAAAKEAAAAAAAAAUQA==","dtype":"float64","order":"little","shape":[11]},"index":[0,1,2,3,4,5,6,7,8,9,10],"water level (m above 0 flow ref)":{"__ndarray__":"FK5H4XoU8j/fT42XbhLDP1K4HoXrUfA/tvP91Hjp7j8fhetRuB7xPyYxCKwcWtw/I9v5fmq85D8rhxbZzvfjP1CNl24Sg+A/7FG4HoXrBUAK16NwPQrXPw==","dtype":"float64","order":"little","shape":[11]}},"selected":{"id":"1049"},"selection_policy":{"id":"1048"}},"id":"1002","type":"ColumnDataSource"},{"attributes":{"axis":{"id":"1015"},"ticker":null},"id":"1018","type":"Grid"},{"attributes":{"fill_alpha":{"value":0.8},"fill_color":{"value":"red"},"line_alpha":{"value":0.8},"line_color":{"value":"red"},"size":{"units":"screen","value":5},"x":{"field":"Date"},"y":{"field":"Flow (m^3/s)"}},"id":"1177","type":"Circle"},{"attributes":{"source":{"id":"1003"}},"id":"1127","type":"CDSView"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"red"},"line_alpha":{"value":0.1},"line_color":{"value":"red"},"size":{"units":"screen","value":5},"x":{"field":"Date"},"y":{"field":"Flow (m^3/s)"}},"id":"1178","type":"Circle"},{"attributes":{},"id":"1009","type":"DataRange1d"},{"attributes":{"line_alpha":0.1,"line_color":"green","x":{"field":"Date"},"y":{"field":"RC Q (cms)"}},"id":"1125","type":"Line"},{"attributes":{"data":{"Date":{"__ndarray__":"AACAtGiqckIAAEAau6pyQgAAAIANq3JCAADA5V+rckIAAIBLsqtyQgAAQLEErHJCAAAAF1esckIAAMB8qaxyQgAAgOL7rHJCAABASE6tckIAAACuoK1yQgAAwBPzrXJCAACAeUWuckIAAEDfl65yQgAAAEXqrnJCAADAqjyvckIAAIAQj69yQgAAQHbhr3JCAAAA3DOwckIAAMBBhrByQgAAgKfYsHJCAABADSuxckIAAABzfbFyQgAAwNjPsXJCAACAPiKyckIAAECkdLJyQgAAAArHsnJCAADAbxmzckIAAIDVa7NyQgAAQDu+s3JCAAAAoRC0ckIAAMAGY7RyQgAAgGy1tHJCAABA0ge1ckIAAAA4WrVyQgAAwJ2stXJCAACAA/+1ckIAAEBpUbZyQgAAAM+jtnJCAADANPa2ckIAAICaSLdyQgAAQACbt3JCAAAAZu23ckIAAMDLP7hyQgAAgDGSuHJCAABAl+S4ckIAAAD9NrlyQgAAwGKJuXJCAACAyNu5ckIAAEAuLrpyQgAAAJSAunJCAADA+dK6ckIAAIBfJbtyQgAAQMV3u3JCAAAAK8q7ckIAAMCQHLxyQgAAgPZuvHJCAABAXMG8ckIAAADCE71yQgAAwCdmvXJCAACAjbi9ckIAAEDzCr5yQgAAAFldvnJCAADAvq++ckIAAIAkAr9yQgAAQIpUv3JCAAAA8Ka/ckIAAMBV+b9yQgAAgLtLwHJCAABAIZ7AckIAAACH8MByQgAAwOxCwXJCAACAUpXBckIAAEC458FyQgAAAB46wnJCAADAg4zCckIAAIDp3sJyQgAAQE8xw3JCAAAAtYPDckIAAMAa1sNyQgAAgIAoxHJCAABA5nrEckIAAABMzcRyQgAAwLEfxXJCAACAF3LFckIAAEB9xMVyQgAAAOMWxnJCAADASGnGckIAAICuu8ZyQgAAQBQOx3JCAAAAemDHckIAAMDfssdyQgAAgEUFyHJCAABAq1fIckIAAAARqshyQgAAwHb8yHJCAACA3E7JckIAAEBCoclyQgAAAKjzyXJCAADADUbKckIAAIBzmMpyQgAAQNnqynJCAAAAPz3LckIAAMCkj8tyQgAAgAriy3JCAABAcDTMckIAAADWhsxyQgAAwDvZzHJCAACAoSvNckIAAEAHfs1yQgAAAG3QzXJCAADA0iLOckIAAIA4dc5yQgAAQJ7HznJCAAAABBrPckIAAMBpbM9yQgAAgM++z3JCAABANRHQckIAAACbY9ByQgAAwAC20HJCAACAZgjRckIAAEDMWtFyQgAAADKt0XJCAADAl//RckIAAID9UdJyQgAAQGOk0nJCAAAAyfbSckIAAMAuSdNyQgAAgJSb03JCAABA+u3TckIAAABgQNRyQgAAwMWS1HJCAACAK+XUckIAAECRN9VyQgAAAPeJ1XJCAADAXNzVckIAAIDCLtZyQgAAQCiB1nJCAAAAjtPWckIAAMDzJddyQgAAgFl413JCAABAv8rXckIAAAAlHdhyQgAAwIpv2HJCAACA8MHYckIAAEBWFNlyQgAAALxm2XJCAADAIbnZckIAAICHC9pyQgAAQO1d2nJCAAAAU7DackIAAMC4AttyQgAAgB5V23JCAABAhKfbckIAAADq+dtyQgAAwE9M3HJCAACAtZ7cckIAAEAb8dxyQgAAAIFD3XJCAADA5pXdckIAAIBM6N1yQgAAQLI63nJCAAAAGI3eckIAAMB9395yQgAAgOMx33JCAABASYTfckIAAACv1t9yQgAAwBQp4HJCAACAenvgckIAAEDgzeByQgAAAEYg4XJCAADAq3LhckIAAIARxeFyQgAAQHcX4nJCAAAA3WnickIAAMBCvOJyQgAAgKgO43JCAABADmHjckIAAAB0s+NyQgAAwNkF5HJCAACAP1jkckIAAEClquRyQgAAAAv95HJCAADAcE/lckIAAIDWoeVyQgAAQDz05XJCAAAAokbmckIAAMAHmeZyQgAAgG3r5nJCAABA0z3nckIAAAA5kOdyQgAAwJ7i53JCAACABDXockIAAEBqh+hyQgAAANDZ6HJCAADANSzpckIAAICbfulyQgAAQAHR6XJCAAAAZyPqckIAAMDMdepyQgAAgDLI6nJCAABAmBrrckIAAAD+bOtyQgAAwGO/63JCAACAyRHsckIAAEAvZOxyQgAAAJW27HJCAADA+gjtckIAAIBgW+1yQgAAQMat7XJCAAAALADuckIAAMCRUu5yQgAAgPek7nJCAABAXffuckIAAADDSe9yQgAAwCic73JCAACAju7vckIAAED0QPByQgAAAFqT8HJCAADAv+XwckIAAIAlOPFyQgAAQIuK8XJCAAAA8dzxckIAAMBWL/JyQgAAgLyB8nJC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","dtype":"float64","order":"little","shape":[677]},"Manual Q (cms)":{"__ndarray__":"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","dtype":"float64","order":"little","shape":[677]},"RC Q (cms)":{"__ndarray__":"w8wmSRnKCkCYAvCdnEoNQAQF9/nlTxdAeiFVJoTLDEB2MXY/RrwEQNAFUXX6DwFA6UCW9S4EBEA/syhoYpIJQJ5YvZZm4QRAyez/udJ+A0D9ia/h2/oCQI3XO2Ym9wFA5aEsfCzUAUC+Z3hr2pIAQGGpminXAABA2/FLVu2E/T+8+KG+jMsAQCpSfou/EgNAO+exOz73HUC6rS80ilEYQKf7TsEOrg1ABHv61M96CEAI96Pr+RkJQPh+TlOLTQZAgUhm7dw3C0BbDXGCjiYqQJmghFrBLThA8DZ9ACUfKEA6tlE9LvsXQCPTKE0hthRAI/jaWL4II0A757E7PvcdQAeYfWyyNTlAHEFUhpZIM0AosdZCec45QEL5KTOnPSdAG1CRIKqCHED3lGM1pAcVQAacMGB7uBBAw8wmSRnKCkAZAJ5r1EAGQLG1kqoc1wJAvmd4a9qSAEAHjDjqNRn9P4X9fLrBHP4/I/jaWL4II0Chuc1iuQ85QAD97/Q+3SBAuq0vNIpRGECX6o5a9gUSQIczIHRlIwxAewOkyS5OB0B43uGVAPgDQDTpHmn5ggFAstAoqNif/j9TUekyMhn8P7taScI2ofg/8POPQUQE9j/Y9mPA0Z8NQMPMJkkZygpAUTa5IRWUMUD06qaGuJYmQPFhmN7UpCNA8CWTfalhGkD3lGM1pAcVQHdHDPKkWRVAn448d3KJEkBcRwnqcdYhQO25gxLX6ThA6GWsoCijNECsEgKYsoQlQBnex9BCQCFAI/jaWL4II0CpeYNxpA4hQFE2uSEVlDFA6QHqgPIIIkDwJZN9qWEaQCPTKE0hthRAr0VVfmD0EEBOlO9wr+cMQGWGeKvCXAlA7SJVgxdoB0BMqsp9BRIOQAD97/Q+3SBAuq0vNIpRGECfl9yfHGUUQOA9S73TiQ9AyCX4r90j+j9/7JCgESLsP1lo95wk6AVAnPaXfRKsIEB84LZm+voWQB0s7O9ZYAFAifJE5Y6L9j+itYqymi75P/Dzj0FEBPY/dv1FWmoG9D/HP5IwJ3j2P94XnlQRFfg/UYdFpz9+9T+TPEeTNzzzP6TLBL9SjvE/NcWB5Ygf5j9GVw2MbXjwP811NI2syvU/YsAuzka0HkBJWFguH3sgQEExhZaPxBNA4yFhmt1BCkDTGdJirfQsQEP1XGFi4y5AMRVvw4ZOJUDiR1t3I8sbQEExhZaPxBNAmALwnZxKDUATpZUPD6kHQKKKT35kxwNADe4+0E/iAEDtxVgkW0j+Pzj5sXMbrvw/Wh47s7zL/j97u0U0llIWQMiZNF7xxStAJq7LIsWhIkB1JXE/YKgYQJp/CConbRFATRFD+jQZCkBzC1oFEZoGQIKpWEj2hAlAslLJEgAMAEBgb+I8iwQBQLZOYypysvY/RcuD9jNr8T9Fy4P2M2vxP3b9RVpqBvQ/oDPRwsRyA0Aksh4cKK8DQO3mcAdOH/U/Kfg8Qo4/8j9WZL2TJ/jIP61hoHoFL9I/KFh6hYvF9z9iwC7ORrQeQOHXHPEWAixADrayMRM6MkBOmbtBgHM2QKV3TVaoPSlAio9BjiBzH0BpU15aiqYWQH0e3+mQZRFAckbyYwnCC0Ai0IIA3KYGQHje4ZUA+ANAh9UKSqs2A0Aksh4cKK8DQIxoRTptOAVA9iWFIqEGBUAJQ88KLNAHQAVhY5/uigRAf6Fq3wcj8D93rO0IDjTwP60on07S0/Q/wA7Mb/s8+D/fsbIC3lj8P6AJ/jO2YAJAygT2AeImAUCgM9HCxHIDQPV8OvErSQJAB+2vMDFe/j+gjLJCGE36P604Wkb6UPg/De4+0E/iAECMaEU6bTgFQOMhYZrdQQpAkJ3upnISEUBQdb1WDqMDQBlsCZPHtf4/wA7Mb/s8+D+NcFPpSc/yP3es7QgONPA/Zi1yY1FC7D+ZntganAbqPzYllCUzleY/70RH5Z0e4z9YBddxxAvuP1TxPHPsVug/OeAJMuAw4D+PBVypILPgP3SNSN2k/d0/MJu/Q5Je4j9kVSb8gLDiP1TgH35ezeA/VOAffl7N4D/Wh0V1XmLeP8E92hNGrNs/Ifd6Suta2j8mMcLslKHhPwuBAzMgi/o/rR3nHlsiAEA5XCa3bBsBQI1MvatPJwlAA2gyw1S7GkB1JXE/YKgYQHUlcT9gqBhAs2f8QkhNDECxtZKqHNcCQGRn77dVb/0/3heeVBEV+D9+n3C47cX2P3kR8XXnQvk/fwrLbbqx9z9cjeQEZQz1P5wvTqvKKvY/tjOf4++d9z/T7p+ht2L3PxUrti7IqPk/y0abn6So/z8ZmH9jIDQGQBtQkSCqghxAA2gyw1S7GkBEVAQOCHUTQKf7TsEOrg1AfHZ84/U4CED2JYUioQYFQFvfmzrMBgNAy0abn6So/z8LgQMzIIv6P+K/kWOo3fg/FjIpvGHJ+j+EYR53gHYOQCs9bLE+QQdAEQYlOXizAkBE0CxaOxoCQFUDD3XCOABAByLSXorb/T8R/wG0AvP6PyhYeoWLxfc/UYdFpz9+9T8dFDTgoQXzP+bHPd2/fPE/eYkO7oPO8D/aBXZQVvjxPzvU7zj9nvY/1EFHDh/5AEAJMkBmtrUFQOoY4WlpUwtA2PZjwNGfDUDQrMuanm0IQBn9dGDH9AVAL6pbDwKQBUAnd8indBUMQJ+OPHdyiRJAP/NwEHnXEkA3FeQdI6wVQBBgCyx5VxlAlYR6u3cVG0DwJZN9qWEaQNEl4rVMpRdAW+zMlqsmHEBE2mAhu7csQGlGZdaFZi5AyovqRfgNJEB+l5HodeYnQK3drr5xJjNAQXfQ2XiPMEDRKdo7OpwqQKbMe58UuyVAYQhYPpEYJUCfyEl+QE4rQGk+QBe2rzBAq5TYCXPqLUAMa9rRbz4sQKV3TVaoPSlAWW37bW/KKEAwB9moKm8tQH6Xkeh15idA8WGY3tSkI0A+9yQDS9kjQJ/ISX5ATitAu/IwMP+JK0BD9VxhYuMuQO9R/oC1rC1A4dcc8RYCLEDwiGiX0jEtQAAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H/VsiQJdt8vQEP1XGFi4y5ARNpgIbu3LEAMa9rRbz4sQO9R/oC1rC1ApXdNVqg9KUCmzHufFLslQI5p7akG7ClAUBXSZUphKkAyB9/9oTExQFsNcYKOJipApsx7nxS7JUAxFW/Dhk4lQJshkee2dSdAjmntqQbsKUCOae2pBuwpQJshkee2dSdAsyDC5yfOJkAxFW/Dhk4lQCP42li+CCNAdzXNrimkIUCpeYNxpA4hQO8u4q15Ex9AlsQIExJwG0B1JXE/YKgYQHzgtmb6+hZAfOC2Zvr6FkA6tlE9LvsXQAQF9/nlTxdAmZpXXLuvGUBraTUgaZkdQPA2fQAlHyhABoU1e5N3KUA60GEqZUogQFRxeyU70x9Aa2k1IGmZHUDwJZN9qWEaQJWEert3FRtAG1CRIKqCHEAQYAsseVcZQPAlk32pYRpAI9MoTSG2FECmIiI+3+wQQOgJ0OhQpgtAwJYUB+UAC0Dj6nrpAG8LQEqjrqpDdwxAs2f8QkhNDEDrgdbRHecNQJvjlasEsRBAQ2xOP42LEUA/83AQedcSQCS7oEDp7hFAmke4eEXED0AE0g3RGioLQP2/YL/pzwtAJkiOrcQkEkDSrFuZcBUPQLqtLzSKURhAF/8q6iY4EUBNIVqKJNoGQMfArJPvVAJA3EiNJdLiJECqCVkH+r03QGEIWD6RGCVA9OqmhriWJkDrxzAINjo0QAd8FLWLgD1AMAfZqCpvLUAdKjqV5BkgQOwX51Qe/xVABNEcmX51EECBSGbt3DcLQElYWC4feyBAnsCxOYhVHkA3FeQdI6wVQP2aUPFmAxFANKLvQwenD0D9v2C/6c8LQJ+OPHdyiRJAaVNeWoqmFkDRUYnNzC89QC1Wlth5BTdAUBXSZUphKkBJWFguH3sgQDq2UT0u+xdAt6dxP6qxEUCBSGbt3DcLQBkAnmvUQAZAFwZ40AU1BED3lGM1pAcVQFvszJarJhxASVhYLh97IEBUcXslO9MfQJ+X3J8cZRRAodix0fhmDUBBFtleO90HQPqZkHKjyARAyoAevsVZBEBUwo0SC5wHQNx97ck28A9An5fcnxxlFECrM4uwsusLQJZub9L95gZAjGhFOm04BUARBiU5eLMCQL5neGvakgBAuleHpr0D/T8rzWzLvPr5P9K+JCRWtfg/mczzlRQG+T+D9/1Rf9sOQAEEKGRj1hBAy7qYlnK9DED9c8gdTs0GQElEV4T3lgNAwE4qefpwAEAZbAmTx7X+P9LgNBweZv8/ZFkEYpKv+z/HP5IwJ3j2P3b+KcJiY/Q/n2LuLHyb9D/GeC141BwQQEaB5D52CBpACPej6/kZCUDHwKyT71QCQLz4ob6MywBAVwnQs5ncQEA/DMMYHCIvQAD97/Q+3SBAOrZRPS77F0DnzJVnACYTQKjGY5hy+A5AXbidSE00CkBcUQjAAWcGQIs9GtREuwNAYUnAHdLfAUDPSLYRNk8AQAeMOOo1Gf0/ZkuH1Jq0+j+UnI+H9H/5P5WHiSlj2fc/rSifTtLT9D+AMPYwhiv0P15n6N0Kc/M/9h7j4kB18j9sCBs4NcPxP7HlEbB98/I/2/FLVu2E/T/Raf8GL976P4gn8AR8yfg/hpsz2Bc+9j9eWcebG6rzPx0UNOChBfM/rxwgwD0y9T9P+4dhlGv5P4X9fLrBHP4/uleHpr0D/T+6rS80ilEYQD73JANL2SNAOrZRPS77F0CmIiI+3+wQQHaRT04yyghAN3BX88AaBkDWFr7LrkEQQE9gz+7apC5A1bIkCXbfL0BUcXslO9MfQDcV5B0jrBVAAQQoZGPWEEDRJeK1TKUXQHzgtmb6+hZAdg4tub50EUBG/P7GK7QLQCl5PH9/GgdAY11FBKB+BECRIVMM1QICQMGQ8kCNLQBAuleHpr0D/T+PyR33HRT3P5nM85UUBvk//sjVWEHt9z8ksh4cKK8DQB0s7O9ZYAFARxFyWS+w/T+hqit1tC79P1A4RZMLZgRAYynr3InIAUCysi9Ov9n7P7Yzn+Pvnfc/XwzI0X9sAkCHMyB0ZSMMQIczIHRlIwxAviJvyTNhC0B1F21ldoMFQM7BmBOvKgNAyoAevsVZBEBQdb1WDqMDQGFJwB3S3wFADe4+0E/iAECtHeceWyIAQIWqZC4rngBArgxNpeOKA0ChnqSjV6EMQEb8/sYrtAtAi3oJjB/DB0AFYWOf7ooEQOWhLHws1AFArx3ANs8j/z9TUekyMhn8P0sQ3tzVtABAXyUeN4ua/T+IJ/AEfMn4P0LEi6NdO/c/8M3Z1X6F+z9mS4fUmrT6P2KTZKH/ZPg/Ux9kfG529z87UDknp+b0P3es7QgONPA/KuL0G73J7T9919Ku/ILsP9vTO4F2sug/ZR0yPWll5z9JoWIf5JPoP0ZcIuC5l/M/FwZ40AU1BEDy/9XN3b7/P4nyROWOi/Y/IStb7MwX8z91aqVIwoj0P3r391GLMv4//Ymv4dv6AkCDu9Ow1T0BQIit1KLCmPw/sEIhBwvx9T/SHC4EHIQCQCl5PH9/GgdAvmd4a9qSAEAVK7YuyKj5Pyoasi00RfU/2XzSqpnm8T/mYKJSp5zvPwjhdfsBBe0/G6eDUsZh6z98TcH8VS3pP58356DhJeo/6Bv7XeET8T85rglHHj70P4O707DVPQFAl+qOWvYFEkA9tcuKJrAOQFya2uIVtgdAD7OkbEx4AkCyUskSAAwAQLnPAP9+qQBAEQYlOXizAkAN7j7QT+IAQJPg117+Bv4/C0+/sYRb+z/rsG8wvRz7P8oE9gHiJgFAEWOE5OH+D0BGgeQ+dggaQJbECBMScBtAA2gyw1S7GkAQYAsseVcZQNEl4rVMpRdAOrZRPS77F0BGgeQ+dggaQHzgtmb6+hZAAAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H8AAAAAAAD4fwAAAAAAAPh/AAAAAAAA+H+fyEl+QE4rQPA2fQAlHyhAWw1xgo4mKkAw4hSHU8Y0QEdV+ug7TzZA8m73YVRvMEBbDXGCjiYqQAaFNXuTdylAXR3z3CGRKEBXOvLUzAUnQJrDqfSysSlAMRVvw4ZOJUA+9yQDS9kjQEL5KTOnPSdAaUZl1oVmLkCXCIWCWlIxQNWyJAl23y9AmsOp9LKxKUCXCIWCWlIxQOam3JqTUjtA5oip2tuXNkCxEcS5SE8wQNMZ0mKt9CxAlwiFglpSMUCVFthJGdIzQNVFCQREmzVAHEFUhpZIM0Bj+4wtYyguQO9R/oC1rC1Au/IwMP+JK0BE2mAhu7csQK3drr5xJjNAqglZB/q9N0Bi7dU6cWc8QA==","dtype":"float64","order":"little","shape":[677]},"WL_m":{"__ndarray__":"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","dtype":"float64","order":"little","shape":[677]},"index":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428,429,430,431,432,433,434,435,436,437,438,439,440,441,442,443,444,445,446,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,504,505,506,507,508,509,510,511,512,513,514,515,516,517,518,519,520,521,522,523,524,525,526,527,528,529,530,531,532,533,534,535,536,537,538,539,540,541,542,543,544,545,546,547,548,549,550,551,552,553,554,555,556,557,558,559,560,561,562,563,564,565,566,567,568,569,570,571,572,573,574,575,576,577,578,579,580,581,582,583,584,585,586,587,588,589,590,591,592,593,594,595,596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,623,624,625,626,627,628,629,630,631,632,633,634,635,636,637,638,639,640,641,642,643,644,645,646,647,648,649,650,651,652,653,654,655,656,657,658,659,660,661,662,663,664,665,666,667,668,669,670,671,672,673,674,675,676]},"selected":{"id":"1146"},"selection_policy":{"id":"1145"}},"id":"1003","type":"ColumnDataSource"},{"attributes":{"source":{"id":"1002"}},"id":"1180","type":"CDSView"},{"attributes":{"label":{"value":"Manual RC Flow"},"renderers":[{"id":"1153"}]},"id":"1175","type":"LegendItem"},{"attributes":{},"id":"1132","type":"DatetimeTickFormatter"},{"attributes":{"below":[{"id":"1015"}],"center":[{"id":"1018"},{"id":"1022"},{"id":"1052"}],"left":[{"id":"1019"}],"plot_height":400,"plot_width":550,"renderers":[{"id":"1041"},{"id":"1057"},{"id":"1074"}],"title":{"id":"1005"},"toolbar":{"id":"1031"},"toolbar_location":null,"x_range":{"id":"1007"},"x_scale":{"id":"1011"},"y_range":{"id":"1009"},"y_scale":{"id":"1013"}},"id":"1004","subtype":"Figure","type":"Plot"},{"attributes":{"source":{"id":"1003"}},"id":"1154","type":"CDSView"},{"attributes":{"line_alpha":0.1,"line_color":"dodgerblue","x":{"field":"Date"},"y":{"field":"Manual Q (cms)"}},"id":"1152","type":"Line"},{"attributes":{"data_source":{"id":"1003"},"glyph":{"id":"1151"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1152"},"selection_glyph":null,"view":{"id":"1154"}},"id":"1153","type":"GlyphRenderer"},{"attributes":{"axis_label":"Flow (m\u00b3/s)","formatter":{"id":"1047"},"ticker":{"id":"1016"}},"id":"1015","type":"LinearAxis"},{"attributes":{"axis_label":"Stage (m)","formatter":{"id":"1045"},"ticker":{"id":"1020"}},"id":"1019","type":"LinearAxis"},{"attributes":{"line_color":"dodgerblue","x":{"field":"Date"},"y":{"field":"Manual Q (cms)"}},"id":"1151","type":"Line"},{"attributes":{},"id":"1016","type":"BasicTicker"},{"attributes":{},"id":"1011","type":"LinearScale"},{"attributes":{"data":{"x":[0.12908282451100986,0.1659842133248819,0.20694943773913288,0.2518798124855584,0.3006895095261458,0.3533027815596579,0.4096519811729917,0.46967610054603626,0.5333196655658702,0.6005318792937172,0.6712659457789726,0.7454785274161557,0.8231293032154441,0.9041806046920848,0.9885971123947462,1.0763456004666323,1.1673947197264198,1.261714811984723,1.359277749944484,1.4600567982479256,1.5640264921481368,1.6711625309821068,1.7814416841615515,1.894841707818755,2.011341270576193,2.130919887172223,2.2535578588862513,2.3792362198773276,2.5079366886887855,2.6396416242851073,2.774333986080753,2.911997297498252,3.0526156126574606,3.1961734858520665,3.3426559435149863,3.4920484584128753,3.6443369258427216,3.7995076416314695,3.957547281763519,4.118442883481587,4.282181827724137,4.448751822777981,4.618140889038054,4.790337344777923,4.965329792844871,5.143107108202255,5.323658426249687,5.506973131858523,5.693040849066239,5.8818514313786725,6.073394952633916,6.267661698385944,6.46464215776981,6.664327015813735,6.866707146166361,7.071773604210265,7.279517620535229,7.489930594746993,7.7030040895892276,7.918729825358233,8.137099674591546,8.358105657013052,8.58173993471864,8.807994807587532,9.036862708905668,9.268336201188404,9.502407972190827,9.739070831094748,9.978317704862262,10.220141634746438,10.464535772950395,10.711493379426539,10.96100781880842,11.213072557468019,11.46768116069184,11.724827289969618,11.98450470038979,12.246707238136278,12.51142883808149,12.778663521470744,13.048405393693578,13.320648642137755,13.595387534121981,13.872616414903545,14.152329705757406,14.434521902123377,14.719187571818281,15.006321353310122,15.295917954051452,15.587972148869351,15.882478778409467,16.17943274763179,16.4788290243559,16.78066263785364,17.084928677487106,17.391622291390114,17.700738685191382,18.01227312077761,18.326220915094915,18.642577438987065],"y":{"__ndarray__":"/Knx0k1iUD9m7mT3X4eQPxZhzYhNBKA/+UroFevEpz/cNAOjiIWvP2APDxgTo7M/UYSc3mGDtz9C+SmlsGO7PzRut2v/Q78/k3EiGSeSwT8MLGl8ToLDP4Tmr991csU//aD2Qp1ixz92Wz2mxFLJP+4VhAnsQss/Z9DKbBMzzT/gihHQOiPPP6wirBmxidA/6X9Py8SB0T8l3fJ82HnSP2I6li7scdM/npc54P9p1D/a9NyRE2LVPxdSgEMnWtY/U68j9TpS1z+PDMemTkrYP8xpalhiQtk/CMcNCnY62j9EJLG7iTLbP4GBVG2dKtw/vd73HrEi3T/6O5vQxBrePzaZPoLYEt8/OfvwGXYF4D/XqcLyf4HgP3ZYlMuJ/eA/FAdmpJN54T+ytTd9nfXhP1BkCVanceI/7hLbLrHt4j+NwawHu2njPytwfuDE5eM/yR5Quc5h5D9nzSGS2N3kPwV882riWeU/oyrFQ+zV5T9C2ZYc9lHmP+CHaPX/zeY/fjY6zglK5z8c5QunE8bnP7qT3X8dQug/WUKvWCe+6D/38IAxMTrpP5WfUgo7tuk/M04k40Qy6j/R/PW7Tq7qP2+rx5RYKus/DlqZbWKm6z+sCGtGbCLsP0q3PB92nuw/6GUO+H8a7T+GFODQiZbtPyXDsamTEu4/w3GDgp2O7j9hIFVbpwrvP//OJjSxhu8/zj58hl0B8D8dFuVyYj/wP2ztTV9nffA/u8S2S2y78D8LnB84cfnwP1pziCR2N/E/qUrxEHt18T/4IVr9f7PxP0f5wumE8fE/ltAr1okv8j/lp5TCjm3yPzR//a6Tq/I/g1Zmm5jp8j/SLc+HnSfzPyIFOHSiZfM/cdygYKej8z/AswlNrOHzPw+LcjmxH/Q/XmLbJbZd9D+tOUQSu5v0P/wQrf6/2fQ/S+gV68QX9T+av37XyVX1P+mW58POk/U/OG5QsNPR9T+IRbmc2A/2P9ccIondTfY/JvSKdeKL9j91y/Nh58n2P8SiXE7sB/c/E3rFOvFF9z9iUS4n9oP3P7EolxP7wfc/AAAAAAAA+D8=","dtype":"float64","order":"little","shape":[100]}},"selected":{"id":"1067"},"selection_policy":{"id":"1066"}},"id":"1054","type":"ColumnDataSource"},{"attributes":{},"id":"1007","type":"DataRange1d"},{"attributes":{},"id":"1013","type":"LinearScale"},{"attributes":{"text":"Rating Curve Plot"},"id":"1005","type":"Title"},{"attributes":{"axis":{"id":"1019"},"dimension":1,"ticker":null},"id":"1022","type":"Grid"},{"attributes":{},"id":"1020","type":"BasicTicker"},{"attributes":{"data_source":{"id":"1054"},"glyph":{"id":"1055"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1056"},"selection_glyph":null,"view":{"id":"1058"}},"id":"1057","type":"GlyphRenderer"},{"attributes":{"overlay":{"id":"1030"}},"id":"1027","type":"PolySelectTool"},{"attributes":{"children":[[{"id":"1004"},0,0],[{"id":"1090"},0,1]]},"id":"1241","type":"GridBox"},{"attributes":{},"id":"1024","type":"WheelZoomTool"},{"attributes":{},"id":"1023","type":"PanTool"},{"attributes":{},"id":"1025","type":"ResetTool"},{"attributes":{"mantissas":[1,2,5],"max_interval":500.0,"num_minor_ticks":0},"id":"1133","type":"AdaptiveTicker"},{"attributes":{"callback":null},"id":"1026","type":"HoverTool"},{"attributes":{"base":60,"mantissas":[1,2,5,10,15,20,30],"max_interval":1800000.0,"min_interval":1000.0,"num_minor_ticks":0},"id":"1134","type":"AdaptiveTicker"},{"attributes":{"data_source":{"id":"1002"},"glyph":{"id":"1177"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1178"},"selection_glyph":null,"view":{"id":"1180"}},"id":"1179","type":"GlyphRenderer"},{"attributes":{"overlay":{"id":"1029"}},"id":"1028","type":"BoxSelectTool"},{"attributes":{"days":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]},"id":"1136","type":"DaysTicker"},{"attributes":{"base":24,"mantissas":[1,2,4,6,8,12],"max_interval":43200000.0,"min_interval":3600000.0,"num_minor_ticks":0},"id":"1135","type":"AdaptiveTicker"},{"attributes":{"months":[0,1,2,3,4,5,6,7,8,9,10,11]},"id":"1140","type":"MonthsTicker"},{"attributes":{"data_source":{"id":"1003"},"glyph":{"id":"1124"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1125"},"selection_glyph":null,"view":{"id":"1127"}},"id":"1126","type":"GlyphRenderer"},{"attributes":{"label":{"value":"Measured Q"},"renderers":[{"id":"1179"}]},"id":"1203","type":"LegendItem"},{"attributes":{"months":[0,2,4,6,8,10]},"id":"1141","type":"MonthsTicker"},{"attributes":{"days":[1,4,7,10,13,16,19,22,25,28]},"id":"1137","type":"DaysTicker"},{"attributes":{"data":{"x":{"__ndarray__":"aQfR7ADaCT/GJr6Idyx0PwWV9SLyKI4/i9OQB1b8nD8hcVYxBSCnP6576hSbo7A/clTJ7IFrtj/Om3n7x9y8PwSwGwha98E/BSFtaQrNxT/PMYMza+zJP9K+lofeUs4/eUrBaA1/0T9El6brDPbTPzQAoyGGjdY/pHCqHahE2T/879cOtRrcPz2dOGX/Dt8/LdGhxHMQ4T+YEPUA7afiP/KkwPemTeQ/3lxk5GEB5j8iPRQm4sLnP3S2V83vkek/nVNpOlZu6z8GSF7J41ftPzv2qIlpTu8/s2GFf92o8D8tBjb11rDxP5Z8rgwNv/I/IIWenWzT8z/Q2Zpd4+30P0mcLM9fDvY/dDqqMtE09z/MAZ14J2H4P4w9gDVTk/k/e5yulkXL+j/LFVlY8Aj8P27fZ7xFTP0/f30qgjiV/j9rq7/eu+P/P4iAELvhmwBAHm1gqqFIAUACotX0F/gBQAVOjgA/qgJAXRfBXxFfA0DcQ23OiRYEQPEtNjCj0ARAmf9ljliNBUCaHxQWpUwGQAMibBaEDgdAkmQS//DSB0BBzKNe55kIQHpcTuFiYwlAlZuAT18vCkCX7K2M2P0KQA80JpbKzgtA/0b/gTGiDEDqxg5+CXgNQIQu885OUA5ASe8qz/0qD0D0TBx3CQQQQGWR6VfFcxBAILSQ1bDkEEBzGQBFylYRQKX8KAQQyhFAf9+reYA+EkCKOokUGrQSQA4n1kvbKhNAjcF0nsKiE0CJCNCSzhsUQOr/mrb9lRRAteWSnk4RFUBdSETmv40VQNTS0i9QCxZAMqXDI/6JFkBUFMpwyAkXQNWslsutihdA1Vio7qwMGEDSiR+axI8YQDpKk5PzExlA+hvopTiZGUBqiyihkh8aQDJfX1oApxpAlk9zq4AvG0DdMARzErkbQLt9SZS0QxxA1i/y9mXPHEDu1QWHJVwdQInXxjTy6R1AyNeV9Mp4HkATKda+rggfQPVE04+cmR9AwZ3Ts8kVIEBpBxElSV8gQNr3WB9MqSBAgigmKNLzIEAN5KvG2j4hQJlYy4NliiFAXEcJ6nHWIUA=","dtype":"float64","order":"little","shape":[100]},"y":{"__ndarray__":"/Knx0k1iUD9m7mT3X4eQPxZhzYhNBKA/+UroFevEpz/cNAOjiIWvP2APDxgTo7M/UYSc3mGDtz9C+SmlsGO7PzRut2v/Q78/k3EiGSeSwT8MLGl8ToLDP4Tmr991csU//aD2Qp1ixz92Wz2mxFLJP+4VhAnsQss/Z9DKbBMzzT/gihHQOiPPP6wirBmxidA/6X9Py8SB0T8l3fJ82HnSP2I6li7scdM/npc54P9p1D/a9NyRE2LVPxdSgEMnWtY/U68j9TpS1z+PDMemTkrYP8xpalhiQtk/CMcNCnY62j9EJLG7iTLbP4GBVG2dKtw/vd73HrEi3T/6O5vQxBrePzaZPoLYEt8/OfvwGXYF4D/XqcLyf4HgP3ZYlMuJ/eA/FAdmpJN54T+ytTd9nfXhP1BkCVanceI/7hLbLrHt4j+NwawHu2njPytwfuDE5eM/yR5Quc5h5D9nzSGS2N3kPwV882riWeU/oyrFQ+zV5T9C2ZYc9lHmP+CHaPX/zeY/fjY6zglK5z8c5QunE8bnP7qT3X8dQug/WUKvWCe+6D/38IAxMTrpP5WfUgo7tuk/M04k40Qy6j/R/PW7Tq7qP2+rx5RYKus/DlqZbWKm6z+sCGtGbCLsP0q3PB92nuw/6GUO+H8a7T+GFODQiZbtPyXDsamTEu4/w3GDgp2O7j9hIFVbpwrvP//OJjSxhu8/zj58hl0B8D8dFuVyYj/wP2ztTV9nffA/u8S2S2y78D8LnB84cfnwP1pziCR2N/E/qUrxEHt18T/4IVr9f7PxP0f5wumE8fE/ltAr1okv8j/lp5TCjm3yPzR//a6Tq/I/g1Zmm5jp8j/SLc+HnSfzPyIFOHSiZfM/cdygYKej8z/AswlNrOHzPw+LcjmxH/Q/XmLbJbZd9D+tOUQSu5v0P/wQrf6/2fQ/S+gV68QX9T+av37XyVX1P+mW58POk/U/OG5QsNPR9T+IRbmc2A/2P9ccIondTfY/JvSKdeKL9j91y/Nh58n2P8SiXE7sB/c/E3rFOvFF9z9iUS4n9oP3P7EolxP7wfc/AAAAAAAA+D8=","dtype":"float64","order":"little","shape":[100]}},"selected":{"id":"1086"},"selection_policy":{"id":"1085"}},"id":"1071","type":"ColumnDataSource"},{"attributes":{"days":[1,15]},"id":"1139","type":"DaysTicker"},{"attributes":{"months":[0,6]},"id":"1143","type":"MonthsTicker"},{"attributes":{"toolbars":[{"id":"1031"},{"id":"1116"}],"tools":[{"id":"1023"},{"id":"1024"},{"id":"1025"},{"id":"1026"},{"id":"1027"},{"id":"1028"},{"id":"1109"},{"id":"1110"},{"id":"1111"},{"id":"1112"},{"id":"1113"},{"id":"1114"}]},"id":"1242","type":"ProxyToolbar"},{"attributes":{"label":{"value":"Measured Q"},"renderers":[{"id":"1041"}]},"id":"1053","type":"LegendItem"},{"attributes":{"days":[1,8,15,22]},"id":"1138","type":"DaysTicker"},{"attributes":{"items":[{"id":"1053"},{"id":"1070"},{"id":"1089"}],"location":"bottom_right"},"id":"1052","type":"Legend"},{"attributes":{},"id":"1144","type":"YearsTicker"},{"attributes":{"months":[0,4,8]},"id":"1142","type":"MonthsTicker"},{"attributes":{"data_source":{"id":"1071"},"glyph":{"id":"1072"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1073"},"selection_glyph":null,"view":{"id":"1075"}},"id":"1074","type":"GlyphRenderer"},{"attributes":{"toolbar":{"id":"1242"},"toolbar_location":"above"},"id":"1243","type":"ToolbarBox"},{"attributes":{"bottom_units":"screen","fill_alpha":0.5,"fill_color":"lightgrey","left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","top_units":"screen"},"id":"1029","type":"BoxAnnotation"},{"attributes":{},"id":"1145","type":"UnionRenderers"},{"attributes":{},"id":"1146","type":"Selection"},{"attributes":{"fill_alpha":0.5,"fill_color":"lightgrey","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"xs_units":"screen","ys_units":"screen"},"id":"1030","type":"PolyAnnotation"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1023"},{"id":"1024"},{"id":"1025"},{"id":"1026"},{"id":"1027"},{"id":"1028"}]},"id":"1031","type":"Toolbar"},{"attributes":{"label":{"value":"OLS Fit"},"renderers":[{"id":"1074"}]},"id":"1089","type":"LegendItem"},{"attributes":{"data_source":{"id":"1002"},"glyph":{"id":"1039"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1040"},"selection_glyph":null,"view":{"id":"1042"}},"id":"1041","type":"GlyphRenderer"},{"attributes":{"line_color":"green","x":{"field":"Date"},"y":{"field":"RC Q (cms)"}},"id":"1124","type":"Line"},{"attributes":{"line_color":"dodgerblue","x":{"field":"x"},"y":{"field":"y"}},"id":"1055","type":"Line"},{"attributes":{"line_color":"green","x":{"field":"x"},"y":{"field":"y"}},"id":"1072","type":"Line"},{"attributes":{"source":{"id":"1002"}},"id":"1042","type":"CDSView"},{"attributes":{"source":{"id":"1054"}},"id":"1058","type":"CDSView"},{"attributes":{"line_alpha":0.1,"line_color":"green","x":{"field":"x"},"y":{"field":"y"}},"id":"1073","type":"Line"},{"attributes":{"source":{"id":"1071"}},"id":"1075","type":"CDSView"},{"attributes":{},"id":"1093","type":"DataRange1d"},{"attributes":{},"id":"1045","type":"BasicTickFormatter"},{"attributes":{},"id":"1085","type":"UnionRenderers"},{"attributes":{},"id":"1086","type":"Selection"},{"attributes":{},"id":"1047","type":"BasicTickFormatter"},{"attributes":{},"id":"1095","type":"DataRange1d"},{"attributes":{"text":"Daily Flow Hydrograph"},"id":"1091","type":"Title"},{"attributes":{"label":{"value":"OLS-based RC Flow"},"renderers":[{"id":"1126"}]},"id":"1149","type":"LegendItem"},{"attributes":{"axis_label":"Date","formatter":{"id":"1132"},"ticker":{"id":"1102"}},"id":"1101","type":"DatetimeAxis"},{"attributes":{"num_minor_ticks":5,"tickers":[{"id":"1133"},{"id":"1134"},{"id":"1135"},{"id":"1136"},{"id":"1137"},{"id":"1138"},{"id":"1139"},{"id":"1140"},{"id":"1141"},{"id":"1142"},{"id":"1143"},{"id":"1144"}]},"id":"1102","type":"DatetimeTicker"},{"attributes":{},"id":"1099","type":"LinearScale"},{"attributes":{},"id":"1097","type":"LinearScale"},{"attributes":{"axis":{"id":"1101"},"ticker":null},"id":"1104","type":"Grid"},{"attributes":{},"id":"1114","type":"HelpTool"},{"attributes":{"axis_label":"Flow (m\u00b3/s)","formatter":{"id":"1130"},"ticker":{"id":"1106"}},"id":"1105","type":"LinearAxis"},{"attributes":{"axis":{"id":"1105"},"dimension":1,"ticker":null},"id":"1108","type":"Grid"},{"attributes":{},"id":"1106","type":"BasicTicker"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1109"},{"id":"1110"},{"id":"1111"},{"id":"1112"},{"id":"1113"},{"id":"1114"}]},"id":"1116","type":"Toolbar"},{"attributes":{},"id":"1110","type":"WheelZoomTool"},{"attributes":{},"id":"1109","type":"PanTool"},{"attributes":{"overlay":{"id":"1115"}},"id":"1111","type":"BoxZoomTool"},{"attributes":{},"id":"1112","type":"SaveTool"},{"attributes":{},"id":"1113","type":"ResetTool"},{"attributes":{},"id":"1048","type":"UnionRenderers"},{"attributes":{},"id":"1049","type":"Selection"},{"attributes":{"label":{"value":"Manual Fit"},"renderers":[{"id":"1057"}]},"id":"1070","type":"LegendItem"},{"attributes":{},"id":"1130","type":"BasicTickFormatter"},{"attributes":{"items":[{"id":"1149"},{"id":"1175"},{"id":"1203"}],"location":"top_left"},"id":"1148","type":"Legend"},{"attributes":{"line_alpha":0.1,"line_color":"dodgerblue","x":{"field":"x"},"y":{"field":"y"}},"id":"1056","type":"Line"},{"attributes":{"below":[{"id":"1101"}],"center":[{"id":"1104"},{"id":"1108"},{"id":"1148"}],"left":[{"id":"1105"}],"plot_height":400,"plot_width":550,"renderers":[{"id":"1126"},{"id":"1153"},{"id":"1179"}],"title":{"id":"1091"},"toolbar":{"id":"1116"},"toolbar_location":null,"x_range":{"id":"1093"},"x_scale":{"id":"1097"},"y_range":{"id":"1095"},"y_scale":{"id":"1099"}},"id":"1090","subtype":"Figure","type":"Plot"},{"attributes":{"bottom_units":"screen","fill_alpha":0.5,"fill_color":"lightgrey","left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","top_units":"screen"},"id":"1115","type":"BoxAnnotation"},{"attributes":{"fill_alpha":{"value":0.5},"fill_color":{"value":"red"},"line_alpha":{"value":0.5},"line_color":{"value":"red"},"size":{"units":"screen","value":5},"x":{"field":"Flow (m^3/s)"},"y":{"field":"water level (m above 0 flow ref)"}},"id":"1039","type":"Circle"},{"attributes":{},"id":"1066","type":"UnionRenderers"},{"attributes":{},"id":"1067","type":"Selection"}],"root_ids":["1244"]},"title":"Bokeh Application","version":"2.2.1"}};
+  var render_items = [{"docid":"9728f9cd-e9c3-401b-aa92-98cbd80d0d6d","root_ids":["1244"],"roots":{"1244":"442a4139-c959-4d20-b5ec-cdfbbd1d443d"}}];
+  root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    var attempts = 0;
+    var timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else {
+        attempts++;
+        if (attempts > 100) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 10, root)
+  }
+})(window);</script></div>
+</div>
+</div>
+</div>
+<div class="section" id="summary-and-reflection">
+<h2>Summary and Reflection<a class="headerlink" href="#summary-and-reflection" title="Permalink to this headline">¶</a></h2>
+<p>In this notebook we have used discrete measurements to develop a relationship between water level and volumetric flow.  We’ve used this relationship to develop what is commonly called a ‘measured flow series’ (the plot above at right), but it’s really just an estimate of a relationship that changes in time due to natural morphological processes.  As we saw in Notebook 1 there is uncertainty in the measurements themselves, and in this notebook we see there is uncertainty in the stage-discharge relationship.</p>
+<p>It is typical that the hydrometric station will record a greater range of water level than what is captured during site visits when discrete discharge measurements are taken.  This is because the hydrometric station is installed and left running to measure water level ‘continuously’ (at some frequency, such as 2 minutes or 15 minutes) for years at a time.  In many cases it isn’t practical or cost effective to make more than three or four visits per year to the station to collect measurements, download stage data, check datalogger batteries, etc.  As a result, it is typical to have discrete discharge measurements over a narrower range of flow conditions than is measured by the hydrometric station, so our ‘measured flow series’ then must <em>extrapolate</em> from the range of conditions we have actually taken discrete measurements for.</p>
+<p>The ‘measured flow series’ is used in many applications in resource engineering.  Low flows are used to determine natural or baseline conditions for fish habitat impact assessments, high flows are used to size hydraulic structures, such as dam spillways.  Hydrometric stations are often installed in new locations to support projects that have multi-decade planning horizons.</p>
+</div>
+</div>
+<div class="section" id="questions-for-submission-on-canvas">
+<h1>Questions for Submission on Canvas<a class="headerlink" href="#questions-for-submission-on-canvas" title="Permalink to this headline">¶</a></h1>
+<p>Ultimately, the rating curve and measured discharge series are used to characterize a water resource to support decisions in policy and design.  In characterizing a water resource, not only is it common to extrapolate beyond the range of measured conditions, it is necessary to extrapolate into the future.</p>
+<p>Provide a brief discussion (1-2 paragraphs) describing how your confidence in the flow predicted by the rating curve changes as a function of water level?  Compare your level of confidence in the rating curve accurately predicting flow tomorrow, versus one year from now, versus ten years from now.  How might these concerns be addressed?</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/Notebook_2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../Notebook_1/Notebook_1.html" title="previous page">Notebook 1: Flow Measurement using the Salt Dilution Method</a>
+    <a class='right-next' id="next-link" href="../Notebook_3/Notebook_3.html" title="next page">Notebook 3: Extreme Values, Uncertainty, and Risk</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book Community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
