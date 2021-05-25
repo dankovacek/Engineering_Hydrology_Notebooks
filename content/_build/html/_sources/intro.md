@@ -1,4 +1,4 @@
-# Introduction
+# Foreword
 
 This book consists of a set of interactive notebooks on the topic of applied hydrology for CIVL 418 and IWME 502 at the University of British Columbia.  The aim of the notebooks is to introduce students to programmatic data analysis using the open-source *Jupyter* software, which is a powerful "integrated development environment" for data analysis.
 
