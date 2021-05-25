@@ -1,10 +1,13 @@
+# import a few useful libraries
 import pandas as pd
 import numpy as np
 import math
 
 from matplotlib import pyplot as plt
 
-## Example Notebook
+# Notebook 1: Clausius-Clapeyron Equation
+
+## Introduction
 
 This notebook is an interactive development environment (IDE) where you can run Python code to do calculations, numerical simuluation, and much more.
 
@@ -15,8 +18,15 @@ For this example, we'll plot the atmospheric water vapour pressure for a range o
 # set the range of temperatures we're interested in 
 # calculating the vapour pressure
 
-# this creates an array starting at -5 and ending at 30 with 500 steps
+# the numpy (np) library has a 'linspace' function that
+# creates an array starting at -5 and ending at 30 with 500 steps
 temperature_range = np.linspace(-5, 30, 500)
+
+### Errors
+
+Did you get an error that says `NameError: name 'np' is not defined`?
+
+Recall that code cells must be executed in order to load the requisite libraries, variables, etc. into memory.  The error above suggests the very first cell in this notebook wasn't executed, so the numpy library is not yet accessible in the variable `np`.  Note the line `import numpy as np` loads the numpy library and makes its many functions available from the variable `np`. 
 
 temperature_range
 
