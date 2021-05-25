@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to your Jupyter Book &#8212; My sample book</title>
+    <title>CIVL 418: Engineering Hydrology &#8212; My sample book</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -73,6 +73,8 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="index.html">
   
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
   
   <h1 class="site-logo" id="site-title">My sample book</h1>
   
@@ -85,7 +87,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="reference internal" href="#">
-   Welcome to your Jupyter Book
+   CIVL 418: Engineering Hydrology
   </a>
  </li>
 </ul>
@@ -291,6 +293,57 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jupyter-book-and-binder">
+   Jupyter Book and Binder
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-started-with-interactive-python-notebooks">
+   Getting Started with Interactive Python Notebooks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-up-and-preparation">
+     Set up and Preparation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learning-resources">
+     Learning Resources
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-comprehensive-list-of-interesting-useful-and-powerful-jupyter-notebook-examples-can-be-found-here">
+     A comprehensive list of interesting, useful, and powerful Jupyter notebook examples can be found here.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-information">
+   Other Information
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#package-installation">
+     Package Installation
+    </a>
+    <ul class="nav section-nav flex-column">
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
         </div>
     </div>
 </div>
@@ -299,11 +352,57 @@
         
               <div>
                 
-  <div class="section" id="welcome-to-your-jupyter-book">
-<h1>Welcome to your Jupyter Book<a class="headerlink" href="#welcome-to-your-jupyter-book" title="Permalink to this headline">¶</a></h1>
-<p>This is a small sample book to give you a feel for how book content is
-structured.</p>
-<p>Check out the content pages bundled with this sample book to get started.</p>
+  <div class="section" id="civl-418-engineering-hydrology">
+<h1>CIVL 418: Engineering Hydrology<a class="headerlink" href="#civl-418-engineering-hydrology" title="Permalink to this headline">¶</a></h1>
+<p>A series of interactive notebooks are provided in this code repository.  The aim of the notebooks is to introduce students to working with data programmatically using the open-source <em>Jupyter</em> software, which is a powerful “integrated development environment” for data analysis.  <strong>Students are not expected to have prior experience with programming.</strong>  The emphasis of the notebooks is not computer programming; all requisite code is provided.  Each notebook will focus on a particular hydrologic concept, and students will be asked to answer questions about the hydrological concept.  The instructions provided with the code in the notebooks will facilitate the exploration of each concept.</p>
+<div class="section" id="jupyter-book-and-binder">
+<h2>Jupyter Book and Binder<a class="headerlink" href="#jupyter-book-and-binder" title="Permalink to this headline">¶</a></h2>
+<p>Launch the main notebook using Binder:
+<a class="reference external" href="https://mybinder.org/v2/gh/dankovacek/run_of_river_intro.git/main"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<p>Info for <a class="reference external" href="https://jupyterbook.org/publish/gh-pages.html">building books and hosting on Github Pages</a></p>
+<p>After updating any content, rebuilt the repo:</p>
+<p><code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span> <span class="pre">content/</span></code></p>
+<p>Then, update the github pages site. Use the gh-pages branch update tool:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ghp-import</span> <span class="pre">-n</span> <span class="pre">-p</span> <span class="pre">-f</span> <span class="pre">content/_build/html</span></code></p>
+<p><a class="reference external" href="https://dankovacek.github.io/Engineering_Hydrology_Notebooks/">Visit the site</a> at Github sites</p>
+<p><code class="docutils literal notranslate"><span class="pre">https://dankovacek.github.io/Engineering_Hydrology_Notebooks/</span></code></p>
+</div>
+<div class="section" id="getting-started-with-interactive-python-notebooks">
+<h2>Getting Started with Interactive Python Notebooks<a class="headerlink" href="#getting-started-with-interactive-python-notebooks" title="Permalink to this headline">¶</a></h2>
+<p>The Jupyter notebook exercises in this course can be accessed in the following ways:</p>
+<ul class="simple">
+<li><p><strong>on your computer</strong>: The package and environment manager <a class="reference external" href="https://www.anaconda.com/">Anaconda</a> is recommended.  Programming in Python is exciting and accessible because it uses powerful functions written in application-specific libraries.  Anaconda is the software that does its best to make sure everything cooperates and runs smoothly.  After installing Anaconda, you can then install <a class="reference external" href="https://jupyter.org/">Jupyter Lab</a>.</p></li>
+<li><p><strong>in the cloud</strong>: notebooks can also be run ‘in the cloud’ using <a class="reference external" href="https://mybinder.org/">Binder</a> which you can then access in your web browser.  Binder is a great way to share your code with others and to demonstrate your work remotely with full functionality.  It’s important to note that files accessed this way <strong>may not be saved</strong> in the cloud instance, and any changes made will have to be saved locally to your computer, or rewritten if you exit and restart the instance.</p></li>
+</ul>
+<div class="section" id="set-up-and-preparation">
+<h3>Set up and Preparation<a class="headerlink" href="#set-up-and-preparation" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://nbviewer.jupyter.org/github/ehmatthes/intro_programming/blob/master/notebooks/programming_environment.ipynb">Detailed installation instructions can be found here.</a>  Please ensure you have Python installed (version should be Python 3.6 or greater) and you have set up your programming environment and can create and run a Jupyter notebook.</p>
+<p>A discussion thread dedicated to installation and setup will be created on Canvas.  If you still have difficulty after reviewing the resources provided here, please post questions (with as much detail as you can provide) to the Canvas discussion forum and the TA will be available to help.</p>
+</div>
+<div class="section" id="learning-resources">
+<h3>Learning Resources<a class="headerlink" href="#learning-resources" title="Permalink to this headline">¶</a></h3>
+<p>Programming is a different paradigm compared to spreadsheet-based software.  At the start, the number of new concepts can be overwhelming and it is easy (and normal) to feel discouraged.  However, the web is full of excellent learning resources.  An investment in learning some fundamental concepts is well worth your time.  A few resources to get you started are provided below:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Running%20Code.ipynb">How to run code in the notebook</a>.  Basics of Python syntax and programming in the Jupyter notebook.</p></li>
+<li><p><a class="reference external" href="http://nbviewer.ipython.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-4-Matplotlib.ipynb">Matplotlib</a> is a popular library for creating a wide variety of plots.</p></li>
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/ehmatthes/intro_programming/blob/master/notebooks/index.ipynb">Introduction to Python</a>.  An introductory course taught through an interactive Python notebook in Jupyter.</p></li>
+</ul>
+</div>
+<div class="section" id="a-comprehensive-list-of-interesting-useful-and-powerful-jupyter-notebook-examples-can-be-found-here">
+<h3>A comprehensive list of interesting, useful, and powerful Jupyter notebook examples can be found <a class="reference external" href="https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks">here</a>.<a class="headerlink" href="#a-comprehensive-list-of-interesting-useful-and-powerful-jupyter-notebook-examples-can-be-found-here" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="other-information">
+<h2>Other Information<a class="headerlink" href="#other-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="package-installation">
+<h3>Package Installation<a class="headerlink" href="#package-installation" title="Permalink to this headline">¶</a></h3>
+<p>If when running a code cell in Jupyter you encounter the following type of error:</p>
+<p><img alt="Example Package Error" src="_images/package_error.png" /></p>
+<p>This generally means a package has not been installed.  In this case, the package is <code class="docutils literal notranslate"><span class="pre">Pandas</span></code>, which can be installed by creating a new cell:</p>
+<p><img alt="new cell" src="_images/new_cell.png" /></p>
+<p>Typing the following (you can replace <code class="docutils literal notranslate"><span class="pre">pandas</span></code> with the name of the package you need to install)</p>
+<p><img alt="" src="_images/package_install.png" /></p>
+<p>And executing the cell (shift + enter), or the ‘run’ button.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
@@ -315,6 +414,8 @@ structured.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
+</div>
+</div>
 </div>
 </div>
 
