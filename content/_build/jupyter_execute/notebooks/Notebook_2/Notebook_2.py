@@ -25,7 +25,12 @@ warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
 
 ## Introduction
 
-It isn't typically possible to accurately measure surface runoff directly on a *continuous* basis.  Instead, in practice it is much easier and more reliable to install an instrument in the river to measure pressure, which recall is linearly proportional to the depth of water.  A hydrometric station is simply a pressure transducer connected to a device to store measurements in memory (such as a data logger).  We then need a way to map these recorded water depth measurements -- referred to as 'stage' measurements -- to **volumetric flow**, i.e. ($\frac{m^3}{s}$).
+It isn't typically possible to accurately measure surface runoff directly on a *continuous* basis.  Instead, in practice it is much easier and more reliable to install an instrument in the river to measure pressure, which recall is a linear function of the depth of water.  A hydrometric station is often simply a pressure transducer (below) connected to a device to store measurements in memory (such as a data logger).  We then need a way to map these recorded water depth measurements -- referred to as 'stage' measurements -- to **volumetric flow**, i.e. ($\frac{m^3}{s}$).
+
+![Pressure Transducer](img/transducer.png)
+
+
+![Hydrometric Station](img/station.png)
 
 In the last exercise, we processed a single discharge measurement taken using the salt dilution method.  Typically we want to collect discharge measurements to describe as much of the expected range of natural flow conditions as possible, from very low flows in the dry season, to the highest flows we can (safely) measure.
 
