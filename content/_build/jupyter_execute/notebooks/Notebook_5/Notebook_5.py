@@ -1,8 +1,14 @@
-# Notebook 5: Rational Method and Travel Times
+#!/usr/bin/env python
+# coding: utf-8
 
-In this notebook, we look at two ways of estimating a runoff hydrograph from precipitation data.
+# # Notebook 5: Rational Method and Travel Times
+# 
+# In this notebook, we look at two ways of estimating a runoff hydrograph from precipitation data.
+# 
+# First, we'll use the rational method to approximate peak flow and the maximum water level at the basin outlet, and then we'll use an open-source library to make a higher resolution estimate of flow accumulation paths and stream networks using a digital elevation model.
 
-First, we'll use the rational method to approximate peak flow and the maximum water level at the basin outlet, and then we'll use an open-source library to make a higher resolution estimate of flow accumulation paths and stream networks using a digital elevation model.
+# In[1]:
+
 
 # import required packages
 import pandas as pd
@@ -27,11 +33,15 @@ from bokeh.models import LinearColorMapper, LogTicker, ColorBar, BasicTickFormat
 from bokeh.io import output_notebook
 output_notebook()
 
-%matplotlib inline
+get_ipython().run_line_magic('matplotlib', 'inline')
 
-### Import Precipitation Data
 
-For this exercise, we will use historical climate data from the Meteorological Service of Canada (MSC) station at Whistler, BC.
+# ### Import Precipitation Data
+# 
+# For this exercise, we will use historical climate data from the Meteorological Service of Canada (MSC) station at Whistler, BC.
+
+# In[2]:
+
 
 # calibration data
 df = pd.read_csv('../../data/Whistler_348_climate.csv', 
@@ -48,9 +58,13 @@ for c in df.columns:
     
 stn_name = df['Station Name'].values[0]
 
-### Plot the Data
 
-It's always a good idea to begin by visualizing the data we're working with.
+# ### Plot the Data
+# 
+# It's always a good idea to begin by visualizing the data we're working with.
+
+# In[3]:
+
 
 # plot flow at Stave vs. precip at the closest climate stations
 p = figure(width=900, height=400, x_axis_type='datetime')
@@ -70,9 +84,13 @@ p.yaxis.axis_label = 'Daily Rain [mm] / Snow[cm] Volume'
 
 show(p)
 
-### Simplified Version of Rainfall-Runoff
 
-First, isolate a single precipitation event to use for estimating a runoff hydrograph.  Let's find a nice week for skiing:  
+# ### Simplified Version of Rainfall-Runoff
+# 
+# First, isolate a single precipitation event to use for estimating a runoff hydrograph.  Let's find a nice week for skiing:  
+
+# In[4]:
+
 
 fig, ax = plt.subplots(1, 1, figsize=(16,4))
 
@@ -92,19 +110,27 @@ ax.set_ylabel('Precipitation')
 ax.set_title('{}'.format(stn_name))
 plt.legend()
 
-First, imagine we are some unfortunate parking lot attendant working a shift in Whistler Village at Parking Lot 5, and we are told by our cruel supervisor we have stand at the lowest point of the parking lot: a catchment basin with an area of $1 km^2$ where water runs off into FitzSimmons Creek.  The sky looks angry, but we're running late for work and put on our running shoes instead of our sturdy waterproof boots.  
 
-Next, assume the travel time is effectively zero across our entire basin (precipitation takes no time to travel to the outlet once it falls on the parking lot surface).  Is this a reasonable assumption in general?  
+# First, imagine we are some unfortunate parking lot attendant working a shift in Whistler Village at Parking Lot 5, and we are told by our cruel supervisor we have stand at the lowest point of the parking lot: a catchment basin with an area of $1 km^2$ where water runs off into FitzSimmons Creek.  The sky looks angry, but we're running late for work and put on our running shoes instead of our sturdy waterproof boots.  
+# 
+# Next, assume the travel time is effectively zero across our entire basin (precipitation takes no time to travel to the outlet once it falls on the parking lot surface).  Is this a reasonable assumption in general?  
+# 
+# Under these assumptions, lets reconstruct a runoff hydrograph at the outlet.  First, look at the precipitation data over the twelve days of the big storm. 
 
-Under these assumptions, lets reconstruct a runoff hydrograph at the outlet.  First, look at the precipitation data over the twelve days of the big storm. 
+# In[5]:
+
 
 print(sample_df)
 
-### Convert Volume to volmeteric flow units
 
-Runoff is typically measured in $\frac{m^3}{s}$, so convert $\frac{mm}{day}$ precipitation to $\frac{m^3}{s}$ runoff.
+# ### Convert Volume to volmeteric flow units
+# 
+# Runoff is typically measured in $\frac{m^3}{s}$, so convert $\frac{mm}{day}$ precipitation to $\frac{m^3}{s}$ runoff.
+# 
+# $$1 \frac{mm}{day} \times \frac{1 m}{1000 mm} \times \frac{1 day}{24 h} \times \frac{1 h}{ 3600 s} \times 1 km^2 \times \frac{1000 m \times 1000 m}{1 km^2}= \frac{1}{86.4} \frac{m^3}{s}$$
 
-$$1 \frac{mm}{day} \times \frac{1 m}{1000 mm} \times \frac{1 day}{24 h} \times \frac{1 h}{ 3600 s} \times 1 km^2 \times \frac{1000 m \times 1000 m}{1 km^2}= \frac{1}{86.4} \frac{m^3}{s}$$
+# In[6]:
+
 
 # convert to runoff volume
 drainage_area = 1 # km^2
@@ -114,17 +140,21 @@ drainage_area = 1 # km^2
 sample_df['runoff_cms'] = sample_df['Total Rain (mm)'] / 86.4
 print(sample_df)
 
-If the channel outlet has a rectangular shape of width 2m, how tall should our boots be?  Assume a 2% slope, and find a reasonable assumption for the roughness of asphalt.
 
-Recall the Manning equation:
+# If the channel outlet has a rectangular shape of width 2m, how tall should our boots be?  Assume a 2% slope, and find a reasonable assumption for the roughness of asphalt.
+# 
+# Recall the Manning equation:
+# 
+# $$Q = \frac{1}{n} A R^{2/3} S^{1/2}$$
+# 
+# Where:
+# * **n** is the manning roughness
+# * **A** is cross sectional area of the flow
+# * **R** hydraulic radius (area / wetted perimeter)
+# * **S** is the channel slope
 
-$$Q = \frac{1}{n} A R^{2/3} S^{1/2}$$
+# In[7]:
 
-Where:
-* **n** is the manning roughness
-* **A** is cross sectional area of the flow
-* **R** hydraulic radius (area / wetted perimeter)
-* **S** is the channel slope
 
 w_channel = 1.5 # m
 S = 0.005 # channel slope
@@ -157,57 +187,80 @@ def solve_depth(w, n_factor, Q, S):
     return d 
     
 
+
+# In[8]:
+
+
 # For each timestep, we want to solve for the depth of water at our outlet
 sample_df['flow_depth_m'] = sample_df['runoff_cms'].apply(lambda x: solve_depth(w_channel, n_factor, x, S))
+
+
+# In[9]:
 
 
 plt.plot(sample_df.index, sample_df['flow_depth_m'])
 plt.ylabel('Flow depth [m]')
 
->**Not only are our feet wet, but if we happen to be there the peak it's potentially dangerous.  As little as 10-15cm of water moving fast enough can sweep you off your feet.**
 
-![Recalculating Life](img/recalculating.png)
+# >**Not only are our feet wet, but if we happen to be there the peak it's potentially dangerous.  As little as 10-15cm of water moving fast enough can sweep you off your feet.**
 
-## More Complex Implementation: Spatial Data
+# ![Recalculating Life](img/recalculating.png)
 
-As discussed in class, precipitation takes time to travel from where it fell to the basin outlet.  Next we will estimate the runoff response in a real catchment, just upstream from the parking lot example in the FitzSimmons Creek basin.
+# ## More Complex Implementation: Spatial Data
+# 
+# As discussed in class, precipitation takes time to travel from where it fell to the basin outlet.  Next we will estimate the runoff response in a real catchment, just upstream from the parking lot example in the FitzSimmons Creek basin.
 
-### Step 1: Instantiate a grid from a DEM raster
-Some sample data is already included, but for extra data, see the [USGS hydrosheds project](https://www.hydrosheds.org/).
+# ### Step 1: Instantiate a grid from a DEM raster
+# Some sample data is already included, but for extra data, see the [USGS hydrosheds project](https://www.hydrosheds.org/).
+
+# In[10]:
+
 
 # grid = Grid.from_raster('data/n45w125_con_grid/n45w125_con/n45w125_con', data_name='dem')
 grid = Grid.from_ascii(path='../../data/notebook_5_data/n49w1235_con_grid.asc', 
                        data_name='dem')
 
+
+# In[11]:
+
+
 # reset the nodata from -32768 so it doesn't throw off the 
 # DEM plot
 grid.nodata = 0
+
+
+# In[12]:
+
 
 # store the extents of the map
 map_extents = grid.extent
 min_x, max_x, min_y, max_y = map_extents
 
-### Plot the DEM
 
-**NOTE:** The cell below may take up to 30 seconds to load.  Please be patient, it is thinking really hard. 
+# ### Plot the DEM
+# 
+# **NOTE:** The cell below may take up to 30 seconds to load.  Please be patient, it is thinking really hard. 
+# 
+# The code below will plot the Digital Elevation Model (DEM).  
+# 
+# Do you recognize any features of the terrain?  Can you locate where it is?
+# 
+# Hover over the map (or touch if using a touchscreen) to see the coordinates in decimal degree units.
+# 
+# What does the [precision of the coordinates represent](http://wiki-1-1930356585.us-east-1.elb.amazonaws.com/wiki/index.php/Decimal_degrees)?  
+# * i.e. what does 5 decimal places in decimal degrees equate to in kilometers?
+# 
+# You can interact with the plot by using the tools on the left (in vertical order from top to bottom):
+# * **pan:** move around the map
+# * **box zoom:** draw a square to zoom in on
+# * **wheel zoom:** use the mousewheel (or pinch gesture on a touchscreen) to zoom in
+# * **box zoom:** draw a square to zoom in on
+# * **tap**: not yet implemented (but you can see the coordinates)
+# * **refresh**: reset the map
+# * **hover**: see the coordinates when hovering over the map with a mouse or pointer
 
-The code below will plot the Digital Elevation Model (DEM).  
+# In[13]:
 
-Do you recognize any features of the terrain?  Can you locate where it is?
-
-Hover over the map (or touch if using a touchscreen) to see the coordinates in decimal degree units.
-
-What does the [precision of the coordinates represent](http://wiki-1-1930356585.us-east-1.elb.amazonaws.com/wiki/index.php/Decimal_degrees)?  
-* i.e. what does 5 decimal places in decimal degrees equate to in kilometers?
-
-You can interact with the plot by using the tools on the left (in vertical order from top to bottom):
-* **pan:** move around the map
-* **box zoom:** draw a square to zoom in on
-* **wheel zoom:** use the mousewheel (or pinch gesture on a touchscreen) to zoom in
-* **box zoom:** draw a square to zoom in on
-* **tap**: not yet implemented (but you can see the coordinates)
-* **refresh**: reset the map
-* **hover**: see the coordinates when hovering over the map with a mouse or pointer
 
 # set bokeh plot tools
 tools = "pan,wheel_zoom,box_zoom,reset,tap"
@@ -249,16 +302,32 @@ show(p1)
 #-123.14657, 49.41080
 -123.14350, 49.40251
 
-### Resolve flats in DEM
+
+# ### Resolve flats in DEM
+
+# In[14]:
+
 
 grid.resolve_flats('dem', out_name='inflated_dem')
 
-### Specify flow direction values
+
+# ### Specify flow direction values
+
+# In[15]:
+
 
 #         N    NE    E    SE    S    SW    W    NW
 dirmap = (64,  128,  1,   2,    4,   8,    16,  32)
 
+
+# In[16]:
+
+
 grid.flowdir(data='inflated_dem', out_name='dir', dirmap=dirmap)
+
+
+# In[17]:
+
 
 fig = plt.figure(figsize=(8,6))
 fig.patch.set_alpha(0)
@@ -274,26 +343,37 @@ plt.grid(zorder=-1)
 plt.tight_layout()
 # plt.savefig('data/img/flow_direction.png', bbox_inches='tight')
 
+
+# In[18]:
+
+
 # view the values of the raster as an array
 grid.dir
+
+
+# In[19]:
 
 
 # check the size of the raster
 grid.dir.size
 
-### Delineate a Catchment
 
-Note that once you've executed the code in the cells below,
-if you change the Point of Concentration (POC), you'll
-need to go back to Step 1 and execute the code from there again.
+# ### Delineate a Catchment
+# 
+# Note that once you've executed the code in the cells below,
+# if you change the Point of Concentration (POC), you'll
+# need to go back to Step 1 and execute the code from there again.
+# 
+# This needs to be done to re-initialize the extents of the data 
+# that are loaded into memory.  The intermediary steps trim the extent
+# of the DEM and you will get an error message saying:
+# 
+# 
+# >`ValueError: Pour point (-123.94307, 49.40783) is out of bounds for dataset with bbox (-123.195000000122, 49.39999999984, -123.15333333347199, 49.421666666498).`
+# 
+# 
 
-This needs to be done to re-initialize the extents of the data 
-that are loaded into memory.  The intermediary steps trim the extent
-of the DEM and you will get an error message saying:
-
-
->`ValueError: Pour point (-123.94307, 49.40783) is out of bounds for dataset with bbox (-123.195000000122, 49.39999999984, -123.15333333347199, 49.421666666498).`
-
+# In[20]:
 
 
 # Specify the Point of Concentration (POC) / Catchment Outlet (a.k.a. pour point) 
@@ -312,11 +392,23 @@ grid.clip_to('dem')
 grid.catchment(data='dir', x=x, y=y, dirmap=dirmap, out_name='catch',
                recursionlimit=15000, xytype='label', nodata_out=0)
 
+
+# In[21]:
+
+
 # Clip the bounding box to the catchment we've chosen
 grid.clip_to('catch', pad=(1,1,1,1))
 
+
+# In[22]:
+
+
 # Create a view of the catchment
 catch = grid.view('catch', nodata=np.nan)
+
+
+# In[23]:
+
 
 # check the shape to see if we've estimated close enough to the 
 # actual river to delineate the catchment successfully
@@ -324,8 +416,16 @@ print(catch.shape)
 # if we get dimensions of < 10, we've missed and instead pointed at some 
 # little hillslope
 
+
+# In[24]:
+
+
 print(grid.extent)
 ext_1 = grid.extent
+
+
+# In[25]:
+
 
 # Plot the catchment
 fig, ax = plt.subplots(figsize=(8,6))
@@ -339,9 +439,17 @@ plt.ylabel('Latitude')
 plt.title('Delineated Catchment')
 # plt.savefig('data/img/catchment.png', bbox_inches='tight')
 
-### Get flow accumulation
+
+# ### Get flow accumulation
+
+# In[26]:
+
 
 grid.accumulation(data='catch', dirmap=dirmap, out_name='acc')
+
+
+# In[27]:
+
 
 fig, ax = plt.subplots(figsize=(8,6))
 fig.patch.set_alpha(0)
@@ -357,12 +465,23 @@ plt.ylabel('Latitude')
 # plt.savefig('data/img/flow_accumulation.png', bbox_inches='tight')
 
 
+# In[36]:
 
 
-### Calculate distances to upstream cells
+
+
+
+# ### Calculate distances to upstream cells
+
+# In[28]:
+
 
 grid.flow_distance(data='catch', x=x, y=y, dirmap=dirmap, out_name='dist',
                    xytype='label', nodata_out=np.nan)
+
+
+# In[29]:
+
 
 fig, ax = plt.subplots(figsize=(8,6))
 fig.patch.set_alpha(0)
@@ -374,6 +493,10 @@ plt.xlabel('Longitude')
 plt.ylabel('Latitude')
 plt.title('Flow Distance')
 # plt.savefig('data/img/flow_distance.png', bbox_inches='tight'),
+
+
+# In[33]:
+
 
 area_threshold=20
 fig, ax = plt.subplots(figsize=(8,6))
@@ -402,9 +525,13 @@ plt.xlabel('Longitude')
 plt.ylabel('Latitude')
 # plt.savefig('data/img/stream_network.png', bbox_inches='tight')
 
-### Calculate weighted travel distance
 
-Assign a travel time to each cell based on the assumption that water travels at one speed (slower) until it reaches a stream network, at which point its speed increases dramatically.
+# ### Calculate weighted travel distance
+# 
+# Assign a travel time to each cell based on the assumption that water travels at one speed (slower) until it reaches a stream network, at which point its speed increases dramatically.
+
+# In[34]:
+
 
 fig, ax = plt.subplots(figsize=(8,6))
 fig.patch.set_alpha(0)
@@ -430,11 +557,15 @@ plt.title('Stream network')
 plt.xlabel('Longitude')
 plt.ylabel('Latitude')
 
-## Develop Rainfall-Runoff Model
 
-Now that we have weighted flow distances for each cell in the delineated catchment, we can apply precipitation to each 'cell' in order to reconstruct a flow hydrograph.  
+# ## Develop Rainfall-Runoff Model
+# 
+# Now that we have weighted flow distances for each cell in the delineated catchment, we can apply precipitation to each 'cell' in order to reconstruct a flow hydrograph.  
+# 
+# First, we must figure out the cell dimensions.  From the [USGS Hydrosheds information](https://hydrosheds.cr.usgs.gov/datadownload.php), we know the resolution is 15 (degree) seconds.  Because of the odd shape of the earth, and the projection of coordinate systems onto the earth, there is a little bit of work involved in converting the DEM resolution to equivalent distances.  For the purpose of this exercise, we will assume cells are 300x300m.  You can check the approximation [here](https://opendem.info/arc2meters.html) for a latitude of 49 degrees.
 
-First, we must figure out the cell dimensions.  From the [USGS Hydrosheds information](https://hydrosheds.cr.usgs.gov/datadownload.php), we know the resolution is 15 (degree) seconds.  Because of the odd shape of the earth, and the projection of coordinate systems onto the earth, there is a little bit of work involved in converting the DEM resolution to equivalent distances.  For the purpose of this exercise, we will assume cells are 300x300m.  You can check the approximation [here](https://opendem.info/arc2meters.html) for a latitude of 49 degrees.
+# In[37]:
+
 
 # cells can be grouped by their weighted distance to the outlet to simplify 
 # the process of calculating the contribution of each cell to flow at the outlet
@@ -445,6 +576,10 @@ dist_df['weighted_dist'] = weighted_dist.flatten()
 # and round the travel time to the nearest one (hour)
 dist_df = dist_df[dist_df['weighted_dist'] > 0].round(0)
 
+
+# In[38]:
+
+
 start_date = sample_df.index.values[0]
 end_date = sample_df.index.values[-1]
 # create an hourly dataframe based on the sample precipitation event
@@ -452,13 +587,21 @@ end_date = sample_df.index.values[-1]
 # precipitation to hourly precipitation
 resampled_df = sample_df.resample('1H').pad() / 24
 
-Note that our 'weighted distance' has just provided a relative difference between the flow accumulation cells and non-flow-accumulation cells.  We still must convert these values to some time-dependent form.
 
-For this exercise, we will assume the average velocity of water is 1 m/s value for the flow accumulation cells, and 0.1 m/s for the other cells.  Therefore precipitation will take on average 300s (0.0833 h) and 3000s (0.833 h) to travel to the outlet for flow-accumulation and non-flow-accumulation cells, respectively.
+# Note that our 'weighted distance' has just provided a relative difference between the flow accumulation cells and non-flow-accumulation cells.  We still must convert these values to some time-dependent form.
+# 
+# For this exercise, we will assume the average velocity of water is 1 m/s value for the flow accumulation cells, and 0.1 m/s for the other cells.  Therefore precipitation will take on average 300s (0.0833 h) and 3000s (0.833 h) to travel to the outlet for flow-accumulation and non-flow-accumulation cells, respectively.
+
+# In[39]:
+
 
 # get the number of cells of each distance
 grouped_dists = pd.DataFrame(dist_df.groupby('weighted_dist').size())
 grouped_dists.columns = ['num_cells']
+
+
+# In[40]:
+
 
 # create unit hydrographs for each timestep
 runoff_df = pd.DataFrame(np.zeros(len(resampled_df)))
@@ -476,7 +619,10 @@ runoff_df = runoff_df.append(extended_df)
 runoff_df['Runoff (cms)'] = 0
 
 
-**NOTE**: if you re-run the cell below, you need to run the cell above as well, or the runoff dataframe will not reset and the values will keep increasing.
+# **NOTE**: if you re-run the cell below, you need to run the cell above as well, or the runoff dataframe will not reset and the values will keep increasing.
+
+# In[41]:
+
 
 cell_size = 300 # assume each pixel represents 300m x 300m 
 runoff_coefficient = 0.3
@@ -496,6 +642,10 @@ for ind, row in resampled_df.iterrows():
             break
 #             print(err)
 #             print(ind, row)
+
+
+# In[42]:
+
 
 fig, ax = plt.subplots(1, 1, figsize=(16,4))
 
@@ -526,23 +676,37 @@ ax1.set_ylabel('Precipitation [mm]', color='green')
 ax1.tick_params(axis='y', colors='green')
 ax1.legend(loc='upper right')
 
-### Determine the Peak Unit Runoff
 
-First, estimate the drainage area.  Then, find the peak hourly flow.
+# ### Determine the Peak Unit Runoff
+# 
+# First, estimate the drainage area.  Then, find the peak hourly flow.
+
+# In[44]:
+
 
 DA = round(grouped_dists.sum().values[0] * 0.3 * 0.3, 0)
 max_UR = runoff_df['Runoff (cms)'].max() / DA * 1000
 print('The drainage area is {} km^2 and the peak Unit Runoff is {} L/s/km^2'.format(DA, int(max_UR)))
 
-Discuss the limitations of the approach.  Where do uncertainties exist?
 
-* assumed precipitation is constant across days
-* assumed constant runoff coefficient
-* assumed two weights for travel time, constant across time
+# Discuss the limitations of the approach.  Where do uncertainties exist?
+# 
+# * assumed precipitation is constant across days
+# * assumed constant runoff coefficient
+# * assumed two weights for travel time, constant across time
 
-## Question for Reflection
+# ## Question for Reflection
+# 
+# For the first part where we estimated the water level at the parking lot outlet based on an assumption that there was zero infiltration, assuming all else is equal, how could we reduce the maximum water level to 5 cm?  
 
-For the first part where we estimated the water level at the parking lot outlet based on an assumption that there was zero infiltration, assuming all else is equal, how could we reduce the maximum water level to 5 cm?  
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
 
 
 

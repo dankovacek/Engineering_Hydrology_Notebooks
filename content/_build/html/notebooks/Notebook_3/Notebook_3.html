@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Notebook 3: Extreme Values, Uncertainty, and Risk &#8212; Engineering Hydrology</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,48 +20,64 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Notebook 4: Characterization of Long-Term Runoff" href="../Notebook_4/Notebook_4.html" />
     <link rel="prev" title="Notebook 2: Rating Curve Development" href="../Notebook_2/Notebook_2.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -68,10 +86,15 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
       
       <img src="../../_static/logo.png" class="logo" alt="logo">
       
@@ -82,33 +105,34 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Foreword
-  </a>
- </li>
-</ul>
-<p class="caption">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Foreword
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Introduction/Example_Notebook.html">
-   Example: Clausius-Clapeyron Equation
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../Introduction/Data_Import_and_Review.html">
    Example: Data Import, Review, and Workflow
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Example_Notebook.html">
+   Example: Clausius-Clapeyron Equation
+  </a>
+ </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Flow Measurement
  </span>
@@ -120,7 +144,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Rating Curve Development
  </span>
@@ -132,7 +156,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Extreme Values, Uncertainty, and Risk
  </span>
@@ -144,7 +168,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Regional Information Transfer
  </span>
@@ -156,7 +180,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Rainfall-Runoff Model
  </span>
@@ -170,107 +194,209 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/Notebook_3/Notebook_3.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Notebook_3/Notebook_3.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/dankovacek/Engineering_Hydrology_Notebooks/main?urlpath=tree/content/notebooks/Notebook_3/Notebook_3.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/dankovacek/Engineering_Hydrology_Notebooks/main?urlpath=tree/content/notebooks/Notebook_3/Notebook_3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Notebook_3/Notebook_3.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/Notebook_3/Notebook_3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
@@ -411,25 +537,181 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Notebook 3: Extreme Values, Uncertainty, and Risk</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-libraries">
+     Import libraries
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-imports">
+   Data Imports
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-the-daily-average-flow-data">
+     Import the Daily Average Flow Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-data">
+   Plot the Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-daily-average-flow-series">
+     Plot the Daily Average Flow Series
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cumulative-frequency-the-flow-duration-curve">
+   Cumulative Frequency: The Flow Duration Curve
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#annual-maximum-flow-series">
+   Annual Maximum Flow Series
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-series-representing-the-maximum-flow-in-each-year">
+     Create a series representing the maximum flow in each year
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-a-histogram-of-annual-maximum-flows">
+   Plot a histogram of annual maximum flows
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#in-what-months-does-the-annual-maximum-flow-typically-occur">
+     In what months does the annual maximum flow typically occur?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#check-the-record-for-completeness">
+   Check the record for completeness
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#completeness-of-record">
+     Completeness of Record
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reviewing-the-data">
+   Reviewing the Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-flow-records-against-precipitation-records">
+     Check flow records against precipitation records
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#different-ways-of-fitting-a-probability-distribution-to-measured-data">
+   Different Ways of Fitting a Probability Distribution to Measured Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#method-of-moments">
+     Method of Moments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-results-against-the-measured-data">
+     Plot the results against the measured data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#log-pearson-iii-distribution">
+   Log Pearson III Distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#risk-and-uncertainty-in-design">
+   Risk and Uncertainty in Design
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-considerations-regarding-distribution-selection">
+   Additional Considerations regarding Distribution Selection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mixed-populations">
+     Mixed Populations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#measurement-error-sensitivity">
+     Measurement Error &amp; Sensitivity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#question-for-reflection">
+   Question for Reflection
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="section" id="notebook-3-extreme-values-uncertainty-and-risk">
-<h1>Notebook 3: Extreme Values, Uncertainty, and Risk<a class="headerlink" href="#notebook-3-extreme-values-uncertainty-and-risk" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="notebook-3-extreme-values-uncertainty-and-risk">
+<h1>Notebook 3: Extreme Values, Uncertainty, and Risk<a class="headerlink" href="#notebook-3-extreme-values-uncertainty-and-risk" title="Permalink to this headline">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>In Notebook 2, we developed a rating curve from a set of discrete discharge measurements and a continuous record of water level.  At the end of the notebook, you were asked to reflect on how your confidence in the flow predicted by the rating curve changes as a function of water level.  In the near term, our confidence in the rating curve is greatest where we have the most measurements.  Recall that the shape of the rating curve is related to the geometry of the hydraulic control, and that the geometry of the river is constantly evolving.  Without continous validation of the rating curve, we should then be less confident in the rating curve over time, due to this <em>stream-channel geomorphic response</em>.</p>
 <p>Estimating the volume of water passing a given location during a major flood is necessary for designing infrastructure such as bridge abutments, hydraulic control structures like weirs and dams, and for designing erosion control measures.  In this notebook, we’ll take a closer look at the upper end of the rating curve that governs high-magnitude flow events, where by definition we have fewer opportunities to record discrete flow measurements to robustly define a rating curve, and where measurements can be difficult to obtain accurately.</p>
 <p>It is often very difficult or impossible to get measurements at high flows due to safety, but also due to timing.  Hydrometric stations are often situated in remote locations, and high flow measurement requires additional planning and consideration for safe work procedures, and unique measurement approaches.  With this understanding of uncertainty in the largest <em>measured</em> flows, and recognizing that the highest stage recorded by the hydrometric station is generally substantially greater than the stage corresponding to the largest measured flows, extrapolation is unavoidable.</p>
 <p>Beyond extrapolation of the measured flow series at our sites of interest where <em>in situ</em> data collection may cover as little as one or two years, the estimation of peak flows for structural design extrapolates event further from measured values.  How can a 1 in 500 year flow be estimated from just two years of data measured on site? The aim of this notebook is to demonstrate the process of flood estimation, building upon the concepts developed in the previous tutorials.</p>
-<div class="section" id="import-libraries">
-<h3>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">¶</a></h3>
+<section id="import-libraries">
+<h3>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -448,307 +730,25 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-<div class="bk-root">
-    <a href="https://bokeh.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"></a>
-    <span id="1002">Loading BokehJS ...</span>
-</div></div><script type="application/javascript">
-(function(root) {
-  function now() {
-    return new Date();
-  }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">math</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">st</span>
 
-  const force = true;
-
-  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
-    root._bokeh_onload_callbacks = [];
-    root._bokeh_is_loading = undefined;
-  }
-
-  const JS_MIME_TYPE = 'application/javascript';
-  const HTML_MIME_TYPE = 'text/html';
-  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
-  const CLASS_NAME = 'output_bokeh rendered_html';
-
-  /**
-   * Render data to the DOM node
-   */
-  function render(props, node) {
-    const script = document.createElement("script");
-    node.appendChild(script);
-  }
-
-  /**
-   * Handle when an output is cleared or removed
-   */
-  function handleClearOutput(event, handle) {
-    const cell = handle.cell;
-
-    const id = cell.output_area._bokeh_element_id;
-    const server_id = cell.output_area._bokeh_server_id;
-    // Clean up Bokeh references
-    if (id != null && id in Bokeh.index) {
-      Bokeh.index[id].model.document.clear();
-      delete Bokeh.index[id];
-    }
-
-    if (server_id !== undefined) {
-      // Clean up Bokeh references
-      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
-      cell.notebook.kernel.execute(cmd_clean, {
-        iopub: {
-          output: function(msg) {
-            const id = msg.content.text.trim();
-            if (id in Bokeh.index) {
-              Bokeh.index[id].model.document.clear();
-              delete Bokeh.index[id];
-            }
-          }
-        }
-      });
-      // Destroy server and session
-      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
-      cell.notebook.kernel.execute(cmd_destroy);
-    }
-  }
-
-  /**
-   * Handle when a new output is added
-   */
-  function handleAddOutput(event, handle) {
-    const output_area = handle.output_area;
-    const output = handle.output;
-
-    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
-    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
-      return
-    }
-
-    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
-
-    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
-      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
-      // store reference to embed id on output_area
-      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
-    }
-    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
-      const bk_div = document.createElement("div");
-      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
-      const script_attrs = bk_div.children[0].attributes;
-      for (let i = 0; i < script_attrs.length; i++) {
-        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
-        toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
-      }
-      // store reference to server id on output_area
-      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
-    }
-  }
-
-  function register_renderer(events, OutputArea) {
-
-    function append_mime(data, metadata, element) {
-      // create a DOM node to render to
-      const toinsert = this.create_output_subarea(
-        metadata,
-        CLASS_NAME,
-        EXEC_MIME_TYPE
-      );
-      this.keyboard_manager.register_events(toinsert);
-      // Render to node
-      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
-      render(props, toinsert[toinsert.length - 1]);
-      element.append(toinsert);
-      return toinsert
-    }
-
-    /* Handle when an output is cleared or removed */
-    events.on('clear_output.CodeCell', handleClearOutput);
-    events.on('delete.Cell', handleClearOutput);
-
-    /* Handle when a new output is added */
-    events.on('output_added.OutputArea', handleAddOutput);
-
-    /**
-     * Register the mime type and append_mime function with output_area
-     */
-    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
-      /* Is output safe? */
-      safe: true,
-      /* Index of renderer in `output_area.display_order` */
-      index: 0
-    });
-  }
-
-  // register the mime type if in Jupyter Notebook environment and previously unregistered
-  if (root.Jupyter !== undefined) {
-    const events = require('base/js/events');
-    const OutputArea = require('notebook/js/outputarea').OutputArea;
-
-    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
-      register_renderer(events, OutputArea);
-    }
-  }
-
-  
-  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
-    root._bokeh_timeout = Date.now() + 5000;
-    root._bokeh_failed_load = false;
-  }
-
-  const NB_LOAD_WARNING = {'data': {'text/html':
-     "<div style='background-color: #fdd'>\n"+
-     "<p>\n"+
-     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
-     "may be due to a slow or bad network connection. Possible fixes:\n"+
-     "</p>\n"+
-     "<ul>\n"+
-     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
-     "<li>use INLINE resources instead, as so:</li>\n"+
-     "</ul>\n"+
-     "<code>\n"+
-     "from bokeh.resources import INLINE\n"+
-     "output_notebook(resources=INLINE)\n"+
-     "</code>\n"+
-     "</div>"}};
-
-  function display_loaded() {
-    const el = document.getElementById("1002");
-    if (el != null) {
-      el.textContent = "BokehJS is loading...";
-    }
-    if (root.Bokeh !== undefined) {
-      if (el != null) {
-        el.textContent = "BokehJS " + root.Bokeh.version + " successfully loaded.";
-      }
-    } else if (Date.now() < root._bokeh_timeout) {
-      setTimeout(display_loaded, 100)
-    }
-  }
-
-
-  function run_callbacks() {
-    try {
-      root._bokeh_onload_callbacks.forEach(function(callback) {
-        if (callback != null)
-          callback();
-      });
-    } finally {
-      delete root._bokeh_onload_callbacks
-    }
-    console.debug("Bokeh: all callbacks have finished");
-  }
-
-  function load_libs(css_urls, js_urls, callback) {
-    if (css_urls == null) css_urls = [];
-    if (js_urls == null) js_urls = [];
-
-    root._bokeh_onload_callbacks.push(callback);
-    if (root._bokeh_is_loading > 0) {
-      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
-      return null;
-    }
-    if (js_urls == null || js_urls.length === 0) {
-      run_callbacks();
-      return null;
-    }
-    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
-    root._bokeh_is_loading = css_urls.length + js_urls.length;
-
-    function on_load() {
-      root._bokeh_is_loading--;
-      if (root._bokeh_is_loading === 0) {
-        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
-        run_callbacks()
-      }
-    }
-
-    function on_error(url) {
-      console.error("failed to load " + url);
-    }
-
-    for (let i = 0; i < css_urls.length; i++) {
-      const url = css_urls[i];
-      const element = document.createElement("link");
-      element.onload = on_load;
-      element.onerror = on_error.bind(null, url);
-      element.rel = "stylesheet";
-      element.type = "text/css";
-      element.href = url;
-      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
-      document.body.appendChild(element);
-    }
-
-    for (let i = 0; i < js_urls.length; i++) {
-      const url = js_urls[i];
-      const element = document.createElement('script');
-      element.onload = on_load;
-      element.onerror = on_error.bind(null, url);
-      element.async = false;
-      element.src = url;
-      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
-      document.head.appendChild(element);
-    }
-  };
-
-  function inject_raw_css(css) {
-    const element = document.createElement("style");
-    element.appendChild(document.createTextNode(css));
-    document.body.appendChild(element);
-  }
-
-  
-  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.1.min.js"];
-  const css_urls = [];
-  
-
-  const inline_js = [
-    function(Bokeh) {
-      Bokeh.set_log_level("info");
-    },
-    function(Bokeh) {
-    
-    
-    }
-  ];
-
-  function run_inline_js() {
-    
-    if (root.Bokeh !== undefined || force === true) {
-      
-    for (let i = 0; i < inline_js.length; i++) {
-      inline_js[i].call(root, root.Bokeh);
-    }
-    if (force === true) {
-        display_loaded();
-      }} else if (Date.now() < root._bokeh_timeout) {
-      setTimeout(run_inline_js, 100);
-    } else if (!root._bokeh_failed_load) {
-      console.log("Bokeh: BokehJS failed to load within specified timeout.");
-      root._bokeh_failed_load = true;
-    } else if (force !== true) {
-      const cell = $(document.getElementById("1002")).parents('.cell').data().cell;
-      cell.output_area.append_execute_result(NB_LOAD_WARNING)
-    }
-
-  }
-
-  if (root._bokeh_is_loading === 0) {
-    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
-    run_inline_js();
-  } else {
-    load_libs(css_urls, js_urls, function() {
-      console.debug("Bokeh: BokehJS plotting callback run at", now());
-      run_inline_js();
-    });
-  }
-}(window));</script></div>
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="data-imports">
-<h2>Data Imports<a class="headerlink" href="#data-imports" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="import-the-daily-average-flow-data">
-<h3>Import the Daily Average Flow Data<a class="headerlink" href="#import-the-daily-average-flow-data" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="data-imports">
+<h2>Data Imports<a class="headerlink" href="#data-imports" title="Permalink to this headline">#</a></h2>
+<section id="import-the-daily-average-flow-data">
+<h3>Import the Daily Average Flow Data<a class="headerlink" href="#import-the-daily-average-flow-data" title="Permalink to this headline">#</a></h3>
 <p>Daily average flow data provided by the Water Survey of Canada (WSC) for the <a class="reference external" href="https://wateroffice.ec.gc.ca/report/historical_e.html?y1Max=1&amp;y1Min=1&amp;scale=normal&amp;mode=Graph&amp;stn=08MH147&amp;dataType=Daily%C2%B6meterType=Flow&amp;year=2016">Stave River</a> (WSC 08MH147) is saved in <code class="docutils literal notranslate"><span class="pre">data/notebook_3_data/Stave.csv</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -758,82 +758,76 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../data/notebook_3_data/Stave.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/util/_decorators.py:311,</span> in <span class="ni">deprecate_nonkeyword_arguments.&lt;locals&gt;.decorate.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_allow_args</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">306</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span>         <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="n">arguments</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span>         <span class="ne">FutureWarning</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">309</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">310</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">311</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers/readers.py:680,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">665</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">666</span>     <span class="n">dialect</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">667</span>     <span class="n">delimiter</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">676</span>     <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">},</span>
-<span class="g g-Whitespace">    </span><span class="mi">677</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">678</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">680</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers/readers.py:575,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">572</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">574</span> <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">575</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">577</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">578</span>     <span class="k">return</span> <span class="n">parser</span>
-
-<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers/readers.py:934,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">931</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">933</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">--&gt; </span><span class="mi">934</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers/readers.py:1218,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1214</span>     <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;rb&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1215</span> <span class="c1"># error: No overload variant of &quot;get_handle&quot; matches argument types</span>
-<span class="g g-Whitespace">   </span><span class="mi">1216</span> <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1217</span> <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1218</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1219</span>     <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1220</span>     <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1221</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1222</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1223</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1224</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1225</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1226</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1227</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1228</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1229</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
-
-<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/common.py:786,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">781</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">782</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
-<span class="g g-Whitespace">    </span><span class="mi">783</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
-<span class="g g-Whitespace">    </span><span class="mi">784</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">785</span>         <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">786</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">787</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">788</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">789</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">790</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">791</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">792</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">793</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">794</span>         <span class="c1"># Binary mode</span>
-<span class="g g-Whitespace">    </span><span class="mi">795</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../../data/notebook_3_data/Stave.csv&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>PARAM</th>
+      <th>Value</th>
+      <th>SYM</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1983-02-03</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>6.59</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>1983-02-04</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>6.40</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1983-02-05</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>5.93</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1983-02-06</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>6.21</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1983-02-07</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>7.04</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Note in the csv file the first line tells us that there are two parameters being reported: stage (water level) and flow.  When the <code class="docutils literal notranslate"><span class="pre">PARAM</span></code> column equals 1, the value corresponds to discharge, and where it equals 2 the value corresponds to stage.</p>
 <p>The SYM column refers to data quality information.</p>
@@ -887,12 +881,12 @@ There are 12386 values in the Stave River daily flow series.
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="plot-the-data">
-<h2>Plot the Data<a class="headerlink" href="#plot-the-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="plot-the-daily-average-flow-series">
-<h3>Plot the Daily Average Flow Series<a class="headerlink" href="#plot-the-daily-average-flow-series" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="plot-the-data">
+<h2>Plot the Data<a class="headerlink" href="#plot-the-data" title="Permalink to this headline">#</a></h2>
+<section id="plot-the-daily-average-flow-series">
+<h3>Plot the Daily Average Flow Series<a class="headerlink" href="#plot-the-daily-average-flow-series" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># customize the tools for interacting with the bokeh plot</span>
@@ -943,10 +937,10 @@ There are 12386 values in the Stave River daily flow series.
   }
 })(window);</script></div>
 </div>
-</div>
-</div>
-<div class="section" id="cumulative-frequency-the-flow-duration-curve">
-<h2>Cumulative Frequency: The Flow Duration Curve<a class="headerlink" href="#cumulative-frequency-the-flow-duration-curve" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="cumulative-frequency-the-flow-duration-curve">
+<h2>Cumulative Frequency: The Flow Duration Curve<a class="headerlink" href="#cumulative-frequency-the-flow-duration-curve" title="Permalink to this headline">#</a></h2>
 <p>In order to illustrate the variability of flow in a river, it is common to map flow magnitude to cumulative frequency.  A flow duration curve presents flow magnitude from 0% to 100% exceedance, where 0 is exceeded least often, 100% is “always” exceeded (based on the sample), and 50% represents the median flow.</p>
 <p>Let’s plot a flow duration curve for Stave River.</p>
 <div class="cell docutils container">
@@ -999,12 +993,12 @@ There are 12386 values in the Stave River daily flow series.
 })(window);</script></div>
 </div>
 <p>The shape of the FDC gives some insight into the nature of the watershed.  A flatter curvature suggests less dramatic ‘flashes’ of rainfall-runoff response, while a steeper curve suggests more synchronization – larger peak runoff on a unit area basis.</p>
-</div>
-<div class="section" id="annual-maximum-flow-series">
-<h2>Annual Maximum Flow Series<a class="headerlink" href="#annual-maximum-flow-series" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="annual-maximum-flow-series">
+<h2>Annual Maximum Flow Series<a class="headerlink" href="#annual-maximum-flow-series" title="Permalink to this headline">#</a></h2>
 <p>Estimating return period floods is typically done by deriving a series corresponding to the highest flow recorded in each year.  This series is commonly referred to as the <strong>Annual Maximum Series</strong> (AMS).  It is necessary to use the data collected and managed by others to derive the AMS, and we will consider what this implies as we progress through the notebook.</p>
-<div class="section" id="create-a-series-representing-the-maximum-flow-in-each-year">
-<h3>Create a series representing the maximum flow in each year<a class="headerlink" href="#create-a-series-representing-the-maximum-flow-in-each-year" title="Permalink to this headline">¶</a></h3>
+<section id="create-a-series-representing-the-maximum-flow-in-each-year">
+<h3>Create a series representing the maximum flow in each year<a class="headerlink" href="#create-a-series-representing-the-maximum-flow-in-each-year" title="Permalink to this headline">#</a></h3>
 <p>Derive the AMS.  Also calculate the mean and standard deviation of the series.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1136,10 +1130,10 @@ Preview of the Annual Maximum Flow Series:
 </table>
 </div></div></div>
 </div>
-</div>
-</div>
-<div class="section" id="plot-a-histogram-of-annual-maximum-flows">
-<h2>Plot a histogram of annual maximum flows<a class="headerlink" href="#plot-a-histogram-of-annual-maximum-flows" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="plot-a-histogram-of-annual-maximum-flows">
+<h2>Plot a histogram of annual maximum flows<a class="headerlink" href="#plot-a-histogram-of-annual-maximum-flows" title="Permalink to this headline">#</a></h2>
 <p>If we are going to use statistical methods to estimate return period floods, it is important to consider the shape of the probability distribution, and what that implies about the dominant mechanisms driving peak runoff.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1160,8 +1154,8 @@ Preview of the Annual Maximum Flow Series:
 </div>
 <p>In flood frequency analysis, the shape of the sample distribution has implications for the way the parameters of a probability distribution are estimated.  The <em>sample</em> in this case is the set of annual maximum flows.  The model parameters that we will use to estimate return period floods assume certain characteristics about the data.  Namely, that values are <em>independent</em> (the annual maximum in one year does not have an observable effect on the annual maximum of other years), and <em>identically distributed</em> (values are derived from the same distribution, and are stationary over time).  In some cases these are reasonable assumptions (short planning horizon, large sample), and in others not (long planning horizon, small sample).</p>
 <p>Above it appears as though there are two distinct ‘modes’, or peaks.  Take a moment to consider what might cause multiple modes in the distribution.</p>
-<div class="section" id="in-what-months-does-the-annual-maximum-flow-typically-occur">
-<h3>In what months does the annual maximum flow typically occur?<a class="headerlink" href="#in-what-months-does-the-annual-maximum-flow-typically-occur" title="Permalink to this headline">¶</a></h3>
+<section id="in-what-months-does-the-annual-maximum-flow-typically-occur">
+<h3>In what months does the annual maximum flow typically occur?<a class="headerlink" href="#in-what-months-does-the-annual-maximum-flow-typically-occur" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -1185,13 +1179,13 @@ Preview of the Annual Maximum Flow Series:
 </div>
 </div>
 <p>In the plot above, we can see that the annual maximum flow typically occurs from October to January.  Also note that the orange series has been labelled ‘complete years’.  Earlier in this notebook it was pointed out that we have to rely on data collected by others.  Below we’ll derive a flood frequency curve for Stave River, and in the process we’ll illustrate why <strong>quality review of data is critical</strong>.</p>
-</div>
-</div>
-<div class="section" id="check-the-record-for-completeness">
-<h2>Check the record for completeness<a class="headerlink" href="#check-the-record-for-completeness" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="check-the-record-for-completeness">
+<h2>Check the record for completeness<a class="headerlink" href="#check-the-record-for-completeness" title="Permalink to this headline">#</a></h2>
 <p>It is often necessary to use data collected by others.  It is common for datasets to be missing documentation containing important information about quality or limitations of the data.  <strong>Even given well documented data, it is important to do your own quality assurance</strong>.  Below, we will use a daily average flow dataset from the Water Survey of Canada to demonstrate a few ways of validating a dataset.  This is not a manual of quality assurance, but it is used to demonstrate how to incorporate other data to do basic validation.  The general idea is that there are many other environmental signals that have mutual information with the signal of primary interest, in this case daily average streamflow at the Stave River.  For example, would you trust a large spike in runoff if nearby precipitation gauges measured zero rainfall?  Also, how do we deal with missing data?</p>
-<div class="section" id="completeness-of-record">
-<h3>Completeness of Record<a class="headerlink" href="#completeness-of-record" title="Permalink to this headline">¶</a></h3>
+<section id="completeness-of-record">
+<h3>Completeness of Record<a class="headerlink" href="#completeness-of-record" title="Permalink to this headline">#</a></h3>
 <p>Find the incomplete years, and consider what we observed above regarding the times of the year the annual maximum flood is more likely to occur.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1220,10 +1214,10 @@ Date
 <p>It appears as though 1984 and 2001 are the years missing the most data.  Does this mean we should exclude these years from the AMS we use as input in the flood frequency analysis?  Are the years where only a few days of records are missing good enough?</p>
 <p>Even though we obtained our Stave data from WSC, the organizational body governing hydrometric data collection and standards in Canada, we still must review the data for completeness and quality.</p>
 <p>Looking at the printout above showing all of the years with missing days, it might be easy to justify removing 2001 from the dataset, as it is missing more than half of the year, and because we need as large a dataset as possible to buttress our statistical analysis, it is tempting to keep years with only a few missing days.</p>
-</div>
-</div>
-<div class="section" id="reviewing-the-data">
-<h2>Reviewing the Data<a class="headerlink" href="#reviewing-the-data" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="reviewing-the-data">
+<h2>Reviewing the Data<a class="headerlink" href="#reviewing-the-data" title="Permalink to this headline">#</a></h2>
 <p>Consider the possibility that the annual maximum flood is itself the reason the data is missing.  How might we determine this?</p>
 <p>To start, we can check precipitation records at the closest climate stations.  The monthly count plot shown above suggests the annual maximum typically occurs in October to January, and on the basis that synoptic-scale precipitation events typically occur in winter, perhaps we can determine if a major precipitation event occurred during a period when there is a gap in the data.</p>
 <p>There are no climate stations from the Meteorological Survey of Canada (MSC) in the immediate vicinity, but there are two within 100 km on either side of the Stave River basin.</p>
@@ -1268,8 +1262,8 @@ Date
 </div>
 </div>
 </div>
-<div class="section" id="check-flow-records-against-precipitation-records">
-<h3>Check flow records against precipitation records<a class="headerlink" href="#check-flow-records-against-precipitation-records" title="Permalink to this headline">¶</a></h3>
+<section id="check-flow-records-against-precipitation-records">
+<h3>Check flow records against precipitation records<a class="headerlink" href="#check-flow-records-against-precipitation-records" title="Permalink to this headline">#</a></h3>
 <p>It is common for historical records to be missing data.  Comparing flow records against precipitation records is just one way of checking to see if the gaps in the record might correspond to peak events.  Code is provided to automatically identify gaps in the record to help you see where they occur.  Note that this doesn’t guarantee anything about the conditions in Stave River where we have no data, but it does provide some information with which to build a case for treating the dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1421,12 +1415,12 @@ Date
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="different-ways-of-fitting-a-probability-distribution-to-measured-data">
-<h2>Different Ways of Fitting a Probability Distribution to Measured Data<a class="headerlink" href="#different-ways-of-fitting-a-probability-distribution-to-measured-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="method-of-moments">
-<h3>Method of Moments<a class="headerlink" href="#method-of-moments" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="different-ways-of-fitting-a-probability-distribution-to-measured-data">
+<h2>Different Ways of Fitting a Probability Distribution to Measured Data<a class="headerlink" href="#different-ways-of-fitting-a-probability-distribution-to-measured-data" title="Permalink to this headline">#</a></h2>
+<section id="method-of-moments">
+<h3>Method of Moments<a class="headerlink" href="#method-of-moments" title="Permalink to this headline">#</a></h3>
 <p>The method of moments is used to estimate the parameters of a distribution.  The parameters dictate the shape of the PDF, or the curve that approximates the histogram of measured data.</p>
 <p><img alt="GEV Densities" src="../../_images/GEV_densities.png" /></p>
 <p>Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution">Wikipedia</a></p>
@@ -1491,9 +1485,9 @@ Date
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plot-the-results-against-the-measured-data">
-<h3>Plot the results against the measured data<a class="headerlink" href="#plot-the-results-against-the-measured-data" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="plot-the-results-against-the-measured-data">
+<h3>Plot the results against the measured data<a class="headerlink" href="#plot-the-results-against-the-measured-data" title="Permalink to this headline">#</a></h3>
 <p>The appropriate method of fitting a probability distribution to measured data has been argued for decades.</p>
 <p>In the case of Stave River, we have 34 years of record.  It’s intuitive to think that the highest flow measured in that time has a probability of <span class="math notranslate nohighlight">\(\frac{1}{34}\)</span>, and a return period of 34 years, but this is incorrect.  Various adjustments to the way in which probabilities are assigned have been proposed over the decades (reference). These adjustments are referred to as <em>plotting positions</em>, and their aim is to apply a transformation to the measured data such that the data form a straight line.  If the data fall on the line exactly, the plotting position is said to be unbiased.</p>
 <p>A general plotting position formula is as follows:</p>
@@ -1583,10 +1577,10 @@ Date
 <img alt="../../_images/Notebook_3_42_1.png" src="../../_images/Notebook_3_42_1.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="log-pearson-iii-distribution">
-<h2>Log Pearson III Distribution<a class="headerlink" href="#log-pearson-iii-distribution" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="log-pearson-iii-distribution">
+<h2>Log Pearson III Distribution<a class="headerlink" href="#log-pearson-iii-distribution" title="Permalink to this headline">#</a></h2>
 <p>A distribution commonly used for estimating return period floods in BC is the Log-Pearson III distribution.  Here we will plot it against the GEV1 previously developed, and we’ll take a look at the effects of our data review, where we’ll plot both the GEV and LP3 using the entire dataset (without excluding any years) as well as a filtered dataset where we remove years where there is some likelihood the annual peak was missing from the record.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1649,18 +1643,18 @@ Date
 <img alt="../../_images/Notebook_3_46_0.png" src="../../_images/Notebook_3_46_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="risk-and-uncertainty-in-design">
-<h2>Risk and Uncertainty in Design<a class="headerlink" href="#risk-and-uncertainty-in-design" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="risk-and-uncertainty-in-design">
+<h2>Risk and Uncertainty in Design<a class="headerlink" href="#risk-and-uncertainty-in-design" title="Permalink to this headline">#</a></h2>
 <p>It is often the case that engineers are asked to extrapolate well beyond the range of measured data.</p>
-</div>
-<div class="section" id="additional-considerations-regarding-distribution-selection">
-<h2>Additional Considerations regarding Distribution Selection<a class="headerlink" href="#additional-considerations-regarding-distribution-selection" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="additional-considerations-regarding-distribution-selection">
+<h2>Additional Considerations regarding Distribution Selection<a class="headerlink" href="#additional-considerations-regarding-distribution-selection" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://water.usgs.gov/osw/bulletin17b/dl_flow.pdf">Bulletin 17B</a> of the USDOE Hydrology Subcommittee of the Water Resources Council recommends the Log-Pearson Type III as the distribution for defining annual flood series.  Consider what Bulletin 17B says about sample size and extrapolation.</p>
 <p>The annual maximum flood events are assumed to be <strong>independent and identically distributed (IID).</strong></p>
 <p>Parts D and E (pg 7 in Bulletin 17B) discuss <strong>mixed populations</strong> and <strong>measurement error</strong>, respectively. These will be addressed sequentially.</p>
-<div class="section" id="mixed-populations">
-<h3>Mixed Populations<a class="headerlink" href="#mixed-populations" title="Permalink to this headline">¶</a></h3>
+<section id="mixed-populations">
+<h3>Mixed Populations<a class="headerlink" href="#mixed-populations" title="Permalink to this headline">#</a></h3>
 <p>Here, we’ll briefly revisit the histogram of annual maximum flows we saw near the beginning of this notebook.</p>
 <p>The mechanisms driving flood events may not be homogeneous.  For instance, the annual maximum flow may be due to snowmelt, precipitation, or a combination of the two. Recall from above (and please forgive my bad sketch of a PDF):</p>
 <p><img alt="Bimodal Distribution" src="../../_images/bimodal_diagram.png" /></p>
@@ -1672,18 +1666,18 @@ Date
 <li><p>Look at temperature records</p></li>
 </ul>
 <p>There is a <a class="reference external" href="https://scholar.google.ca/scholar?q=mixed+modes+in+flood+frequency+analysis%27&amp;hl=en&amp;as_sdt=0&amp;as_vis=1&amp;oi=scholart">large body of literature</a> investigating the treatment of mixed modes in flood frequency analysis.</p>
-</div>
-<div class="section" id="measurement-error-sensitivity">
-<h3>Measurement Error &amp; Sensitivity<a class="headerlink" href="#measurement-error-sensitivity" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="measurement-error-sensitivity">
+<h3>Measurement Error &amp; Sensitivity<a class="headerlink" href="#measurement-error-sensitivity" title="Permalink to this headline">#</a></h3>
 <p>In the introduction, we laid out the extent to which we rely on extrapolation in estimating return period flows.  This question is analogous to the assumption that the error in measurement is a random variable following some distribution.  Considering this random error exists in our measurements, what happens to the LP3 fit if we change any of the peak values by some amount?</p>
-</div>
-</div>
-<div class="section" id="question-for-reflection">
-<h2>Question for Reflection<a class="headerlink" href="#question-for-reflection" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="question-for-reflection">
+<h2>Question for Reflection<a class="headerlink" href="#question-for-reflection" title="Permalink to this headline">#</a></h2>
 <p>Recall the discussion in the previous notebooks concerning extrapolation.  Return periods in the range of 100 and 200 years are commonly used for input design parameters in hydraulic structures, and ultimately the design values reflect a tradeoff between risk (environmental, financial, worker safety) and construction costs.</p>
 <p>Provide a brief discussion (500 words maximum) about the uncertainty introduced at various levels in deriving the estimate of the 100 year return period for Stave River.  Consider the difference (in this case) in the estimated 100 year return period flow based on using all the data vs. removing some years from the record, and compare it to the difference between the estimates generated between the GEV and LP3 distributions.  Consider how measurement uncertainty might affect the 100 year return flood estimate.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1707,34 +1701,48 @@ Date
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
-            
-    <a class='left-prev' id="prev-link" href="../Notebook_2/Notebook_2.html" title="previous page">Notebook 2: Rating Curve Development</a>
-    <a class='right-next' id="next-link" href="../Notebook_4/Notebook_4.html" title="next page">Notebook 4: Characterization of Long-Term Runoff</a>
-
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../Notebook_2/Notebook_2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Notebook 2: Rating Curve Development</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="../Notebook_4/Notebook_4.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Notebook 4: Characterization of Long-Term Runoff</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Dan Kovacek<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dan Kovacek<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
     </div>
-  </footer>
-</main>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  
+
   </body>
 </html>

@@ -1,16 +1,22 @@
-# Notebook 3: Extreme Values, Uncertainty, and Risk
+#!/usr/bin/env python
+# coding: utf-8
 
-## Introduction
+# # Notebook 3: Extreme Values, Uncertainty, and Risk
+# 
+# ## Introduction
+# 
+# In Notebook 2, we developed a rating curve from a set of discrete discharge measurements and a continuous record of water level.  At the end of the notebook, you were asked to reflect on how your confidence in the flow predicted by the rating curve changes as a function of water level.  In the near term, our confidence in the rating curve is greatest where we have the most measurements.  Recall that the shape of the rating curve is related to the geometry of the hydraulic control, and that the geometry of the river is constantly evolving.  Without continous validation of the rating curve, we should then be less confident in the rating curve over time, due to this *stream-channel geomorphic response*.  
+# 
+# Estimating the volume of water passing a given location during a major flood is necessary for designing infrastructure such as bridge abutments, hydraulic control structures like weirs and dams, and for designing erosion control measures.  In this notebook, we'll take a closer look at the upper end of the rating curve that governs high-magnitude flow events, where by definition we have fewer opportunities to record discrete flow measurements to robustly define a rating curve, and where measurements can be difficult to obtain accurately.  
+# 
+# It is often very difficult or impossible to get measurements at high flows due to safety, but also due to timing.  Hydrometric stations are often situated in remote locations, and high flow measurement requires additional planning and consideration for safe work procedures, and unique measurement approaches.  With this understanding of uncertainty in the largest *measured* flows, and recognizing that the highest stage recorded by the hydrometric station is generally substantially greater than the stage corresponding to the largest measured flows, extrapolation is unavoidable.  
+# 
+# Beyond extrapolation of the measured flow series at our sites of interest where *in situ* data collection may cover as little as one or two years, the estimation of peak flows for structural design extrapolates event further from measured values.  How can a 1 in 500 year flow be estimated from just two years of data measured on site? The aim of this notebook is to demonstrate the process of flood estimation, building upon the concepts developed in the previous tutorials.
 
-In Notebook 2, we developed a rating curve from a set of discrete discharge measurements and a continuous record of water level.  At the end of the notebook, you were asked to reflect on how your confidence in the flow predicted by the rating curve changes as a function of water level.  In the near term, our confidence in the rating curve is greatest where we have the most measurements.  Recall that the shape of the rating curve is related to the geometry of the hydraulic control, and that the geometry of the river is constantly evolving.  Without continous validation of the rating curve, we should then be less confident in the rating curve over time, due to this *stream-channel geomorphic response*.  
+# ### Import libraries
 
-Estimating the volume of water passing a given location during a major flood is necessary for designing infrastructure such as bridge abutments, hydraulic control structures like weirs and dams, and for designing erosion control measures.  In this notebook, we'll take a closer look at the upper end of the rating curve that governs high-magnitude flow events, where by definition we have fewer opportunities to record discrete flow measurements to robustly define a rating curve, and where measurements can be difficult to obtain accurately.  
+# In[1]:
 
-It is often very difficult or impossible to get measurements at high flows due to safety, but also due to timing.  Hydrometric stations are often situated in remote locations, and high flow measurement requires additional planning and consideration for safe work procedures, and unique measurement approaches.  With this understanding of uncertainty in the largest *measured* flows, and recognizing that the highest stage recorded by the hydrometric station is generally substantially greater than the stage corresponding to the largest measured flows, extrapolation is unavoidable.  
-
-Beyond extrapolation of the measured flow series at our sites of interest where *in situ* data collection may cover as little as one or two years, the estimation of peak flows for structural design extrapolates event further from measured values.  How can a 1 in 500 year flow be estimated from just two years of data measured on site? The aim of this notebook is to demonstrate the process of flood estimation, building upon the concepts developed in the previous tutorials.
-
-### Import libraries
 
 import math
 import pandas as pd
@@ -25,28 +31,36 @@ from bokeh.plotting import figure, output_notebook, show
 from datetime import timedelta
 output_notebook()
 
-## Data Imports
 
-### Import the Daily Average Flow Data
+# ## Data Imports
+# 
+# ### Import the Daily Average Flow Data
+# 
+# Daily average flow data provided by the Water Survey of Canada (WSC) for the [Stave River](https://wateroffice.ec.gc.ca/report/historical_e.html?y1Max=1&y1Min=1&scale=normal&mode=Graph&stn=08MH147&dataType=Daily&parameterType=Flow&year=2016) (WSC 08MH147) is saved in `data/notebook_3_data/Stave.csv`
 
-Daily average flow data provided by the Water Survey of Canada (WSC) for the [Stave River](https://wateroffice.ec.gc.ca/report/historical_e.html?y1Max=1&y1Min=1&scale=normal&mode=Graph&stn=08MH147&dataType=Daily&parameterType=Flow&year=2016) (WSC 08MH147) is saved in `data/notebook_3_data/Stave.csv`
+# In[2]:
+
 
 df = pd.read_csv('../../data/notebook_3_data/Stave.csv', header=1, parse_dates=['Date'], index_col='Date')
 df.head()
 
-Note in the csv file the first line tells us that there are two parameters being reported: stage (water level) and flow.  When the `PARAM` column equals 1, the value corresponds to discharge, and where it equals 2 the value corresponds to stage. 
 
-The SYM column refers to data quality information.  
+# Note in the csv file the first line tells us that there are two parameters being reported: stage (water level) and flow.  When the `PARAM` column equals 1, the value corresponds to discharge, and where it equals 2 the value corresponds to stage. 
+# 
+# The SYM column refers to data quality information.  
+# 
+# | SYM | Description |
+# |---|---|
+# | A | **Partial Day**: The symbol A indicates that the daily mean value of water level or streamflow was estimated despite gaps of more than 120 minutes in the data string or missing data not significant enough to warrant the use of the E symbol. |
+# | B | **Ice Conditions**: The symbol B indicates that the streamflow value was estimated with consideration for the presence of ice in the stream. Ice conditions alter the open water relationship between water levels and streamflow. |
+# | D | **Dry:** The symbol D indicates that the stream or lake is "dry" or that there is no water at the gauge. This symbol is used for water level data only. |
+# | E | **Estimate:** The symbol E indicates that there was no measured data available for the day or missing period, and the water level or streamflow value was estimated by an indirect method such as interpolation, extrapolation, comparison with other streams or by correlation with meteorological data. |
+# | R | **Revised**: The symbol R indicates that a revision, correction or addition has been made to the historical discharge database after January 1, 1989. |
+# 
+# (from [Water Survey of Canada](https://wateroffice.ec.gc.ca/contactus/faq_e.html#Q12))
 
-| SYM | Description |
-|---|---|
-| A | **Partial Day**: The symbol A indicates that the daily mean value of water level or streamflow was estimated despite gaps of more than 120 minutes in the data string or missing data not significant enough to warrant the use of the E symbol. |
-| B | **Ice Conditions**: The symbol B indicates that the streamflow value was estimated with consideration for the presence of ice in the stream. Ice conditions alter the open water relationship between water levels and streamflow. |
-| D | **Dry:** The symbol D indicates that the stream or lake is "dry" or that there is no water at the gauge. This symbol is used for water level data only. |
-| E | **Estimate:** The symbol E indicates that there was no measured data available for the day or missing period, and the water level or streamflow value was estimated by an indirect method such as interpolation, extrapolation, comparison with other streams or by correlation with meteorological data. |
-| R | **Revised**: The symbol R indicates that a revision, correction or addition has been made to the historical discharge database after January 1, 1989. |
+# In[3]:
 
-(from [Water Survey of Canada](https://wateroffice.ec.gc.ca/contactus/faq_e.html#Q12))
 
 # select just the flow data (PARAM == 1)
 flow_df = df[df['PARAM'] == 1].copy()
@@ -55,9 +69,13 @@ print(flow_df.head())
 print('')
 print("There are {} values in the Stave River daily flow series.".format(len(flow_df)))
 
-## Plot the Data
 
-### Plot the Daily Average Flow Series
+# ## Plot the Data
+# 
+# ### Plot the Daily Average Flow Series
+
+# In[4]:
+
 
 # customize the tools for interacting with the bokeh plot
 TOOLS="pan,wheel_zoom,reset,hover,poly_select,box_select"
@@ -70,11 +88,15 @@ daily_flow_plot = figure(plot_width=700, plot_height=400,
 daily_flow_plot.line(flow_df.index, flow_df['Value'].to_numpy())
 show(daily_flow_plot)
 
-## Cumulative Frequency: The Flow Duration Curve
 
-In order to illustrate the variability of flow in a river, it is common to map flow magnitude to cumulative frequency.  A flow duration curve presents flow magnitude from 0% to 100% exceedance, where 0 is exceeded least often, 100% is "always" exceeded (based on the sample), and 50% represents the median flow.  
+# ## Cumulative Frequency: The Flow Duration Curve
+# 
+# In order to illustrate the variability of flow in a river, it is common to map flow magnitude to cumulative frequency.  A flow duration curve presents flow magnitude from 0% to 100% exceedance, where 0 is exceeded least often, 100% is "always" exceeded (based on the sample), and 50% represents the median flow.  
+# 
+# Let's plot a flow duration curve for Stave River.
 
-Let's plot a flow duration curve for Stave River.
+# In[5]:
+
 
 fdc_plot = figure(width=700, height=400, title='Stave River Flow Duration Curve')
 
@@ -86,16 +108,20 @@ fdc_plot.yaxis.axis_label = 'Flow [m^3/s]'
 fdc_plot.xaxis.axis_label = 'Percent of Time Exceeded [%]'
 show(fdc_plot)
 
-The shape of the FDC gives some insight into the nature of the watershed.  A flatter curvature suggests less dramatic 'flashes' of rainfall-runoff response, while a steeper curve suggests more synchronization -- larger peak runoff on a unit area basis.  
 
+# The shape of the FDC gives some insight into the nature of the watershed.  A flatter curvature suggests less dramatic 'flashes' of rainfall-runoff response, while a steeper curve suggests more synchronization -- larger peak runoff on a unit area basis.  
+# 
 
-## Annual Maximum Flow Series
+# ## Annual Maximum Flow Series
+# 
+# Estimating return period floods is typically done by deriving a series corresponding to the highest flow recorded in each year.  This series is commonly referred to as the **Annual Maximum Series** (AMS).  It is necessary to use the data collected and managed by others to derive the AMS, and we will consider what this implies as we progress through the notebook.
 
-Estimating return period floods is typically done by deriving a series corresponding to the highest flow recorded in each year.  This series is commonly referred to as the **Annual Maximum Series** (AMS).  It is necessary to use the data collected and managed by others to derive the AMS, and we will consider what this implies as we progress through the notebook.
+# ### Create a series representing the maximum flow in each year 
+# 
+# Derive the AMS.  Also calculate the mean and standard deviation of the series.
 
-### Create a series representing the maximum flow in each year 
+# In[6]:
 
-Derive the AMS.  Also calculate the mean and standard deviation of the series.
 
 # create a series representing the annual maximum daily flow
 # use the 'groupby' function and get the maximum value from each year
@@ -105,6 +131,10 @@ max_df['rank'] = max_df['Value'].rank(ascending=False)
 max_df['month'] = max_df.index.month
 max_df['count'] = flow_df.groupby('year').count()['Value'].values
 
+
+# In[7]:
+
+
 # calculate the mean and standard deviation of the sample
 mean_q, stdev_q = max_df['Value'].mean(), max_df['Value'].std()
 start, end = pd.to_datetime(max_df.index.to_numpy()[0]).strftime('%Y-%m-%d'), pd.to_datetime(max_df.index.to_numpy()[-1]).strftime('%Y-%m-%d')
@@ -113,9 +143,13 @@ print('Mean = {:.2f} m^3/s; Standard deviation = {:.2f} m^3/s'.format(mean_q, st
 print('Preview of the Annual Maximum Flow Series:')
 max_df.head()
 
-## Plot a histogram of annual maximum flows
 
-If we are going to use statistical methods to estimate return period floods, it is important to consider the shape of the probability distribution, and what that implies about the dominant mechanisms driving peak runoff.  
+# ## Plot a histogram of annual maximum flows
+# 
+# If we are going to use statistical methods to estimate return period floods, it is important to consider the shape of the probability distribution, and what that implies about the dominant mechanisms driving peak runoff.  
+
+# In[8]:
+
 
 fig, ax = plt.subplots(1,1, figsize=(10,6))
 max_df.hist('Value', density=True, ax=ax)
@@ -123,12 +157,16 @@ ax.set_xlabel('Q [m^3/s]')
 ax.set_ylabel('P(X)')
 ax.set_title('Annual Maximum Flow Histogram for Stave River')
 
-In flood frequency analysis, the shape of the sample distribution has implications for the way the parameters of a probability distribution are estimated.  The *sample* in this case is the set of annual maximum flows.  The model parameters that we will use to estimate return period floods assume certain characteristics about the data.  Namely, that values are *independent* (the annual maximum in one year does not have an observable effect on the annual maximum of other years), and *identically distributed* (values are derived from the same distribution, and are stationary over time).  In some cases these are reasonable assumptions (short planning horizon, large sample), and in others not (long planning horizon, small sample).  
 
-Above it appears as though there are two distinct 'modes', or peaks.  Take a moment to consider what might cause multiple modes in the distribution.
+# In flood frequency analysis, the shape of the sample distribution has implications for the way the parameters of a probability distribution are estimated.  The *sample* in this case is the set of annual maximum flows.  The model parameters that we will use to estimate return period floods assume certain characteristics about the data.  Namely, that values are *independent* (the annual maximum in one year does not have an observable effect on the annual maximum of other years), and *identically distributed* (values are derived from the same distribution, and are stationary over time).  In some cases these are reasonable assumptions (short planning horizon, large sample), and in others not (long planning horizon, small sample).  
+# 
+# Above it appears as though there are two distinct 'modes', or peaks.  Take a moment to consider what might cause multiple modes in the distribution.
 
-### In what months does the annual maximum flow typically occur?
+# ### In what months does the annual maximum flow typically occur?
+# 
+# 
 
+# In[9]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(8, 6))
@@ -142,33 +180,41 @@ ax.set_ylabel('Count')
 ax.set_title('Monthly Count of Annual Maximum Flow Timing')
 ax.legend()
 
-In the plot above, we can see that the annual maximum flow typically occurs from October to January.  Also note that the orange series has been labelled 'complete years'.  Earlier in this notebook it was pointed out that we have to rely on data collected by others.  Below we'll derive a flood frequency curve for Stave River, and in the process we'll illustrate why **quality review of data is critical**.  
 
-## Check the record for completeness
+# In the plot above, we can see that the annual maximum flow typically occurs from October to January.  Also note that the orange series has been labelled 'complete years'.  Earlier in this notebook it was pointed out that we have to rely on data collected by others.  Below we'll derive a flood frequency curve for Stave River, and in the process we'll illustrate why **quality review of data is critical**.  
 
-It is often necessary to use data collected by others.  It is common for datasets to be missing documentation containing important information about quality or limitations of the data.  **Even given well documented data, it is important to do your own quality assurance**.  Below, we will use a daily average flow dataset from the Water Survey of Canada to demonstrate a few ways of validating a dataset.  This is not a manual of quality assurance, but it is used to demonstrate how to incorporate other data to do basic validation.  The general idea is that there are many other environmental signals that have mutual information with the signal of primary interest, in this case daily average streamflow at the Stave River.  For example, would you trust a large spike in runoff if nearby precipitation gauges measured zero rainfall?  Also, how do we deal with missing data?
+# ## Check the record for completeness
+# 
+# It is often necessary to use data collected by others.  It is common for datasets to be missing documentation containing important information about quality or limitations of the data.  **Even given well documented data, it is important to do your own quality assurance**.  Below, we will use a daily average flow dataset from the Water Survey of Canada to demonstrate a few ways of validating a dataset.  This is not a manual of quality assurance, but it is used to demonstrate how to incorporate other data to do basic validation.  The general idea is that there are many other environmental signals that have mutual information with the signal of primary interest, in this case daily average streamflow at the Stave River.  For example, would you trust a large spike in runoff if nearby precipitation gauges measured zero rainfall?  Also, how do we deal with missing data?
 
-### Completeness of Record
+# ### Completeness of Record
+# 
+# Find the incomplete years, and consider what we observed above regarding the times of the year the annual maximum flood is more likely to occur.  
 
-Find the incomplete years, and consider what we observed above regarding the times of the year the annual maximum flood is more likely to occur.  
+# In[10]:
+
 
 df['year'] = df.index.values
 max_df['count'] = flow_df.groupby('year').count()['Value'].values
 print(max_df[max_df['count'] < 365])
 
-It appears as though 1984 and 2001 are the years missing the most data.  Does this mean we should exclude these years from the AMS we use as input in the flood frequency analysis?  Are the years where only a few days of records are missing good enough?  
 
-Even though we obtained our Stave data from WSC, the organizational body governing hydrometric data collection and standards in Canada, we still must review the data for completeness and quality.  
+# It appears as though 1984 and 2001 are the years missing the most data.  Does this mean we should exclude these years from the AMS we use as input in the flood frequency analysis?  Are the years where only a few days of records are missing good enough?  
+# 
+# Even though we obtained our Stave data from WSC, the organizational body governing hydrometric data collection and standards in Canada, we still must review the data for completeness and quality.  
+# 
+# Looking at the printout above showing all of the years with missing days, it might be easy to justify removing 2001 from the dataset, as it is missing more than half of the year, and because we need as large a dataset as possible to buttress our statistical analysis, it is tempting to keep years with only a few missing days.  
 
-Looking at the printout above showing all of the years with missing days, it might be easy to justify removing 2001 from the dataset, as it is missing more than half of the year, and because we need as large a dataset as possible to buttress our statistical analysis, it is tempting to keep years with only a few missing days.  
+# ## Reviewing the Data
+# 
+# Consider the possibility that the annual maximum flood is itself the reason the data is missing.  How might we determine this?
+# 
+# To start, we can check precipitation records at the closest climate stations.  The monthly count plot shown above suggests the annual maximum typically occurs in October to January, and on the basis that synoptic-scale precipitation events typically occur in winter, perhaps we can determine if a major precipitation event occurred during a period when there is a gap in the data.
+# 
+# There are no climate stations from the Meteorological Survey of Canada (MSC) in the immediate vicinity, but there are two within 100 km on either side of the Stave River basin.  
 
-## Reviewing the Data
+# In[11]:
 
-Consider the possibility that the annual maximum flood is itself the reason the data is missing.  How might we determine this?
-
-To start, we can check precipitation records at the closest climate stations.  The monthly count plot shown above suggests the annual maximum typically occurs in October to January, and on the basis that synoptic-scale precipitation events typically occur in winter, perhaps we can determine if a major precipitation event occurred during a period when there is a gap in the data.
-
-There are no climate stations from the Meteorological Survey of Canada (MSC) in the immediate vicinity, but there are two within 100 km on either side of the Stave River basin.  
 
 # whistler is equidistant to the Stave catchment in the opposite direction from the climate station in Hope.
 whis_df = pd.read_csv('../../data/notebook_3_data/Whistler_348_climate.csv', header=0, index_col='Date/Time', parse_dates=True)
@@ -187,6 +233,10 @@ hope_df.columns = ['{}_total_precip'.format(name), '{}_total_rain'.format(name),
 
 # print(hope_df.head())
 
+
+# In[12]:
+
+
 def find_data_gaps(gap_df, code):
     """
     Input a timeseries, and return a dataframe summarizing
@@ -201,15 +251,27 @@ def find_data_gaps(gap_df, code):
     # Print results
     return gap_df, gaps   
 
-### Check flow records against precipitation records
 
-It is common for historical records to be missing data.  Comparing flow records against precipitation records is just one way of checking to see if the gaps in the record might correspond to peak events.  Code is provided to automatically identify gaps in the record to help you see where they occur.  Note that this doesn't guarantee anything about the conditions in Stave River where we have no data, but it does provide some information with which to build a case for treating the dataset.
+# ### Check flow records against precipitation records
+# 
+# It is common for historical records to be missing data.  Comparing flow records against precipitation records is just one way of checking to see if the gaps in the record might correspond to peak events.  Code is provided to automatically identify gaps in the record to help you see where they occur.  Note that this doesn't guarantee anything about the conditions in Stave River where we have no data, but it does provide some information with which to build a case for treating the dataset.
+
+# In[13]:
+
 
 # concatenate the precipitation records with the streamflow records
 conc_df = pd.concat([whis_df, hope_df, flow_df], axis=1, join='outer')
 conc_df = conc_df[['Value'] + [e for e in hope_df.columns if 'hope' in e] + [e for e in whis_df.columns if 'whis' in e]]
 
+
+# In[14]:
+
+
 print(conc_df.max())
+
+
+# In[15]:
+
 
 from bokeh.models import LinearAxis, Range1d
 
@@ -253,11 +315,19 @@ p.y_range = Range1d(0, 580)
 p.add_layout(LinearAxis(y_range_name='precip', axis_label='Total Precipitation [mm]'), 'right')
 show(p)
 
+
+# In[16]:
+
+
 print(max_df[max_df['count'] < 365])
 
-We can use the interactive plot tools to zoom in on each of the specific years above.  The visibility of series can be toggled by clicking on the corresponding legend item.  
 
-If we check each of the incomplete years above, we can see that some of the gaps in the Stave record correspond to large precipitation events at the precipitation stations on either side of the Stave River watershed, suggesting perhaps a gap of just a few days is related to a large event.  Consider how including a year that is missing its true largest event might affect the calculations that follow in developing the flood frequency curve.
+# We can use the interactive plot tools to zoom in on each of the specific years above.  The visibility of series can be toggled by clicking on the corresponding legend item.  
+# 
+# If we check each of the incomplete years above, we can see that some of the gaps in the Stave record correspond to large precipitation events at the precipitation stations on either side of the Stave River watershed, suggesting perhaps a gap of just a few days is related to a large event.  Consider how including a year that is missing its true largest event might affect the calculations that follow in developing the flood frequency curve.
+
+# In[17]:
+
 
 # create an array of years values of the years you want to exclude
 drop_years = [1984, 1989, 1991, 1993, 2001]
@@ -266,39 +336,43 @@ max_df_filtered = max_df[~max_df.index.year.isin(drop_years)]
 
 print('After reviewing the dataset, there are {} years of record in the AMS.'.format(len(max_df_filtered)))
 
-## Different Ways of Fitting a Probability Distribution to Measured Data
 
-### Method of Moments
+# ## Different Ways of Fitting a Probability Distribution to Measured Data
+# 
+# ### Method of Moments
+# 
+# The method of moments is used to estimate the parameters of a distribution.  The parameters dictate the shape of the PDF, or the curve that approximates the histogram of measured data.  
+# 
+# ![GEV Densities](img/GEV_densities.png)
+# 
+# Source: [Wikipedia](https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution)
 
-The method of moments is used to estimate the parameters of a distribution.  The parameters dictate the shape of the PDF, or the curve that approximates the histogram of measured data.  
+# The GEV is a family of distributions, of which the first type (Type 1) is also known as the [Gumbel Distribution](https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution).
+# 
+# The Type 1 GEV (GEV1) and Log-Pearson III are commonly used in flood frequency analysis, though we will not go further in the assumptions underlying the types of distributions here, except to say the tail behaviour (which we are interested in because it defines the flows associated with the highest return periods) is governed by the shape parameter ($\xi$), so it's important.  The GEV1 assumes $\xi = 0$
+# 
+# The probability of non-exceedence is given by the double exponential:
+# 
+# $$G(x) = 1 - e^{-e^{-y}}$$
+# 
+# The return period ($T$) is the inverse of $G(x)$.  The Gumbel reduced variate is given by:
+# 
+# $$y = -\ln{ \left( \ln{ \left(\frac{T}{T-1} \right) } \right) }$$
+# 
+# ![Gumbel table](img/gumbel_table.png)
+# 
+# From above, we know the length of record is $n=29$, so:
+# 
+# | $n$ | $\bar{y}_n$ | $\sigma_n$ |
+# |---|---|---|
+# | 29 | 0.5353 | 1.1086 |
+# 
+# 
+# 
+# A tutorial for fitting a Gumbel distribution using Excel is provided [here.](https://serc.carleton.edu/hydromodules/steps/166250.html)
 
-![GEV Densities](img/GEV_densities.png)
+# In[18]:
 
-Source: [Wikipedia](https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution)
-
-The GEV is a family of distributions, of which the first type (Type 1) is also known as the [Gumbel Distribution](https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution).
-
-The Type 1 GEV (GEV1) and Log-Pearson III are commonly used in flood frequency analysis, though we will not go further in the assumptions underlying the types of distributions here, except to say the tail behaviour (which we are interested in because it defines the flows associated with the highest return periods) is governed by the shape parameter ($\xi$), so it's important.  The GEV1 assumes $\xi = 0$
-
-The probability of non-exceedence is given by the double exponential:
-
-$$G(x) = 1 - e^{-e^{-y}}$$
-
-The return period ($T$) is the inverse of $G(x)$.  The Gumbel reduced variate is given by:
-
-$$y = -\ln{ \left( \ln{ \left(\frac{T}{T-1} \right) } \right) }$$
-
-![Gumbel table](img/gumbel_table.png)
-
-From above, we know the length of record is $n=29$, so:
-
-| $n$ | $\bar{y}_n$ | $\sigma_n$ |
-|---|---|---|
-| 29 | 0.5353 | 1.1086 |
-
-
-
-A tutorial for fitting a Gumbel distribution using Excel is provided [here.](https://serc.carleton.edu/hydromodules/steps/166250.html)
 
 def gumbel_formula(t, ybar_n, xbar, sigma_n, sigma):
     """
@@ -332,29 +406,32 @@ mean1_q, stdev1_q = max_df_filtered['Value'].mean(), max_df_filtered['Value'].st
 q_gumbel_filtered = [gumbel_formula(t, 0.5396, mean_q, 1.1255, stdev_q) for t in tr]
 
 
-### Plot the results against the measured data
+# ### Plot the results against the measured data
+# 
+# The appropriate method of fitting a probability distribution to measured data has been argued for decades.
+# 
+# In the case of Stave River, we have 34 years of record.  It's intuitive to think that the highest flow measured in that time has a probability of $\frac{1}{34}$, and a return period of 34 years, but this is incorrect.  Various adjustments to the way in which probabilities are assigned have been proposed over the decades (reference). These adjustments are referred to as *plotting positions*, and their aim is to apply a transformation to the measured data such that the data form a straight line.  If the data fall on the line exactly, the plotting position is said to be unbiased.  
+# 
+# A general plotting position formula is as follows:
+# 
+# $$\frac{1}{T} = P = \frac{m - a}{n + 1 - 2a}$$
+# 
+# Where $m$ is the rank (largest value = 1), $n$ is the sample size (number of years), and $a$ is some empirical value.  
+# 
+# The table below shows something of a history of plotting positions (from Cunnane, 1977):
+# 
+# | Source | Value of $a$ |
+# |---|---|
+# | Hazen (1914) | 0.5 |
+# | California dept. of Public Works (1923) | $\frac{(i-1)}{N}$, $\frac{i}{N}$ |
+# | Weibull (1939) | 0 |
+# | Beard (1943), Gumbel (1943), Kimball (1946) | 0.31 |
+# | Blom (1958) | $\frac{3}{8}$ |
+# | Tukey (1962) |  $\frac{1}{3}$ |
+# | Gringorten (1963) | 0.44 |
 
-The appropriate method of fitting a probability distribution to measured data has been argued for decades.
+# In[19]:
 
-In the case of Stave River, we have 34 years of record.  It's intuitive to think that the highest flow measured in that time has a probability of $\frac{1}{34}$, and a return period of 34 years, but this is incorrect.  Various adjustments to the way in which probabilities are assigned have been proposed over the decades (reference). These adjustments are referred to as *plotting positions*, and their aim is to apply a transformation to the measured data such that the data form a straight line.  If the data fall on the line exactly, the plotting position is said to be unbiased.  
-
-A general plotting position formula is as follows:
-
-$$\frac{1}{T} = P = \frac{m - a}{n + 1 - 2a}$$
-
-Where $m$ is the rank (largest value = 1), $n$ is the sample size (number of years), and $a$ is some empirical value.  
-
-The table below shows something of a history of plotting positions (from Cunnane, 1977):
-
-| Source | Value of $a$ |
-|---|---|
-| Hazen (1914) | 0.5 |
-| California dept. of Public Works (1923) | $\frac{(i-1)}{N}$, $\frac{i}{N}$ |
-| Weibull (1939) | 0 |
-| Beard (1943), Gumbel (1943), Kimball (1946) | 0.31 |
-| Blom (1958) | $\frac{3}{8}$ |
-| Tukey (1962) |  $\frac{1}{3}$ |
-| Gringorten (1963) | 0.44 |
 
 # first, we need to sort the measured data by rank
 # and calculate probabilities associated with the measured data.
@@ -365,12 +442,20 @@ max_df = max_df.sort_values('rank')
 max_df['P'] = max_df['rank'] / (len(max_df) + 1)
 max_df['Tr'] = [1/e for e in max_df['P']]
 
+
+# In[20]:
+
+
 def plotting_position(m, a, n):
     """
     Return an adjusted plotting position (probability)
     based on the rank m, the plotting position a, and the length of record n.
     """
     return (m - a) / (n + 1 - 2 * a)
+
+
+# In[21]:
+
 
 fig, ax = plt.subplots(1, 1, figsize=(10,6))
 plt.plot(tr, q_gumbel_alldata, label="Gumbel (All data)",
@@ -387,9 +472,13 @@ ax.set_ylabel('Q [m^3/s]')
 plt.xscale('log')
 ax.legend()
 
-## Log Pearson III Distribution
 
-A distribution commonly used for estimating return period floods in BC is the Log-Pearson III distribution.  Here we will plot it against the GEV1 previously developed, and we'll take a look at the effects of our data review, where we'll plot both the GEV and LP3 using the entire dataset (without excluding any years) as well as a filtered dataset where we remove years where there is some likelihood the annual peak was missing from the record.
+# ## Log Pearson III Distribution
+# 
+# A distribution commonly used for estimating return period floods in BC is the Log-Pearson III distribution.  Here we will plot it against the GEV1 previously developed, and we'll take a look at the effects of our data review, where we'll plot both the GEV and LP3 using the entire dataset (without excluding any years) as well as a filtered dataset where we remove years where there is some likelihood the annual peak was missing from the record.
+
+# In[22]:
+
 
 def calculate_LP3(values, Tr):
     """
@@ -405,12 +494,20 @@ def calculate_LP3(values, Tr):
     lp3_model = np.power(10, np.mean(np.log10(values)) + lp3 * np.std(np.log10(values)))
     return lp3_model
 
+
+# In[23]:
+
+
 # now set up the filtered AMS series to calculate the LP3 distribution
 max_df_filtered = max_df_filtered.sort_values('rank')
 
 # calculate the probabilty P and return period Tr
 max_df_filtered['P'] = max_df_filtered['rank'] / (len(max_df_filtered) + 1)
 max_df_filtered['Tr'] = [1/e for e in max_df_filtered['P']]
+
+
+# In[24]:
+
 
 lp3_model = calculate_LP3(max_df['Value'], tr).to_numpy()
 lp3_model_filtered = calculate_LP3(max_df_filtered['Value'], tr).to_numpy()
@@ -434,42 +531,43 @@ plt.xscale('log')
 ax.legend()
 plt.show()
 
-## Risk and Uncertainty in Design 
 
-It is often the case that engineers are asked to extrapolate well beyond the range of measured data. 
+# ## Risk and Uncertainty in Design 
+# 
+# It is often the case that engineers are asked to extrapolate well beyond the range of measured data. 
 
-## Additional Considerations regarding Distribution Selection
+# ## Additional Considerations regarding Distribution Selection
+# 
+# [Bulletin 17B](https://water.usgs.gov/osw/bulletin17b/dl_flow.pdf) of the USDOE Hydrology Subcommittee of the Water Resources Council recommends the Log-Pearson Type III as the distribution for defining annual flood series.  Consider what Bulletin 17B says about sample size and extrapolation.  
+# 
+# The annual maximum flood events are assumed to be **independent and identically distributed (IID).**
+# 
+# Parts D and E (pg 7 in Bulletin 17B) discuss **mixed populations** and **measurement error**, respectively. These will be addressed sequentially.
 
-[Bulletin 17B](https://water.usgs.gov/osw/bulletin17b/dl_flow.pdf) of the USDOE Hydrology Subcommittee of the Water Resources Council recommends the Log-Pearson Type III as the distribution for defining annual flood series.  Consider what Bulletin 17B says about sample size and extrapolation.  
+# ### Mixed Populations
+# 
+# Here, we'll briefly revisit the histogram of annual maximum flows we saw near the beginning of this notebook.  
+# 
+# The mechanisms driving flood events may not be homogeneous.  For instance, the annual maximum flow may be due to snowmelt, precipitation, or a combination of the two. Recall from above (and please forgive my bad sketch of a PDF):
+# 
+# ![Bimodal Distribution](img/bimodal_diagram.png)
+# 
+# How might we check if there is a clear distinction between annual floods derived from different types of event?  High flows generated by snowmelt and those generated by early winter ['pineapple express'](https://oceanservice.noaa.gov/facts/pineapple-express.html) precipitation events are unique, and are likely the reason the probability distribution of the AMS at Stave River shows a bimodal distribution, however **the sample size is small, so the shape of the distribution could also be due to sampling variability**.
 
-The annual maximum flood events are assumed to be **independent and identically distributed (IID).**
+# What can we check to understand the processes which drive the largest magnitude runoff (flow) events?
+# 
+# * Check time of year
+# * Compare precipitation and snow values to peak events
+# * Look at temperature records
+# 
+# There is a [large body of literature](https://scholar.google.ca/scholar?q=mixed+modes+in+flood+frequency+analysis%27&hl=en&as_sdt=0&as_vis=1&oi=scholart) investigating the treatment of mixed modes in flood frequency analysis.
 
-Parts D and E (pg 7 in Bulletin 17B) discuss **mixed populations** and **measurement error**, respectively. These will be addressed sequentially.
+# ### Measurement Error & Sensitivity
+# 
+# In the introduction, we laid out the extent to which we rely on extrapolation in estimating return period flows.  This question is analogous to the assumption that the error in measurement is a random variable following some distribution.  Considering this random error exists in our measurements, what happens to the LP3 fit if we change any of the peak values by some amount?  
 
-### Mixed Populations
-
-Here, we'll briefly revisit the histogram of annual maximum flows we saw near the beginning of this notebook.  
-
-The mechanisms driving flood events may not be homogeneous.  For instance, the annual maximum flow may be due to snowmelt, precipitation, or a combination of the two. Recall from above (and please forgive my bad sketch of a PDF):
-
-![Bimodal Distribution](img/bimodal_diagram.png)
-
-How might we check if there is a clear distinction between annual floods derived from different types of event?  High flows generated by snowmelt and those generated by early winter ['pineapple express'](https://oceanservice.noaa.gov/facts/pineapple-express.html) precipitation events are unique, and are likely the reason the probability distribution of the AMS at Stave River shows a bimodal distribution, however **the sample size is small, so the shape of the distribution could also be due to sampling variability**.
-
-What can we check to understand the processes which drive the largest magnitude runoff (flow) events?
-
-* Check time of year
-* Compare precipitation and snow values to peak events
-* Look at temperature records
-
-There is a [large body of literature](https://scholar.google.ca/scholar?q=mixed+modes+in+flood+frequency+analysis%27&hl=en&as_sdt=0&as_vis=1&oi=scholart) investigating the treatment of mixed modes in flood frequency analysis.
-
-### Measurement Error & Sensitivity
-
-In the introduction, we laid out the extent to which we rely on extrapolation in estimating return period flows.  This question is analogous to the assumption that the error in measurement is a random variable following some distribution.  Considering this random error exists in our measurements, what happens to the LP3 fit if we change any of the peak values by some amount?  
-
-## Question for Reflection
-
-Recall the discussion in the previous notebooks concerning extrapolation.  Return periods in the range of 100 and 200 years are commonly used for input design parameters in hydraulic structures, and ultimately the design values reflect a tradeoff between risk (environmental, financial, worker safety) and construction costs.  
-
-Provide a brief discussion (500 words maximum) about the uncertainty introduced at various levels in deriving the estimate of the 100 year return period for Stave River.  Consider the difference (in this case) in the estimated 100 year return period flow based on using all the data vs. removing some years from the record, and compare it to the difference between the estimates generated between the GEV and LP3 distributions.  Consider how measurement uncertainty might affect the 100 year return flood estimate.
+# ## Question for Reflection
+# 
+# Recall the discussion in the previous notebooks concerning extrapolation.  Return periods in the range of 100 and 200 years are commonly used for input design parameters in hydraulic structures, and ultimately the design values reflect a tradeoff between risk (environmental, financial, worker safety) and construction costs.  
+# 
+# Provide a brief discussion (500 words maximum) about the uncertainty introduced at various levels in deriving the estimate of the 100 year return period for Stave River.  Consider the difference (in this case) in the estimated 100 year return period flow based on using all the data vs. removing some years from the record, and compare it to the difference between the estimates generated between the GEV and LP3 distributions.  Consider how measurement uncertainty might affect the 100 year return flood estimate.

@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Notebook 1: Flow Measurement using the Salt Dilution Method &#8212; Engineering Hydrology</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,48 +20,64 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Notebook 2: Rating Curve Development" href="../Notebook_2/Notebook_2.html" />
-    <link rel="prev" title="Example: Data Import, Review, and Workflow" href="../Introduction/Data_Import_and_Review.html" />
+    <link rel="prev" title="Example: Clausius-Clapeyron Equation" href="../Introduction/Example_Notebook.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -68,10 +86,15 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
       
       <img src="../../_static/logo.png" class="logo" alt="logo">
       
@@ -82,33 +105,34 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Foreword
-  </a>
- </li>
-</ul>
-<p class="caption">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Foreword
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Introduction/Example_Notebook.html">
-   Example: Clausius-Clapeyron Equation
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../Introduction/Data_Import_and_Review.html">
    Example: Data Import, Review, and Workflow
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Example_Notebook.html">
+   Example: Clausius-Clapeyron Equation
+  </a>
+ </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Flow Measurement
  </span>
@@ -120,7 +144,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Rating Curve Development
  </span>
@@ -132,7 +156,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Extreme Values, Uncertainty, and Risk
  </span>
@@ -144,7 +168,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Regional Information Transfer
  </span>
@@ -156,7 +180,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Rainfall-Runoff Model
  </span>
@@ -170,107 +194,209 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/Notebook_1/Notebook_1.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Notebook_1/Notebook_1.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/dankovacek/Engineering_Hydrology_Notebooks/main?urlpath=tree/content/notebooks/Notebook_1/Notebook_1.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/dankovacek/Engineering_Hydrology_Notebooks/main?urlpath=tree/content/notebooks/Notebook_1/Notebook_1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Notebook_1/Notebook_1.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/Notebook_1/Notebook_1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#given-information">
    Given Information:
@@ -282,32 +408,34 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#temperature-correction-for-conductivity">
-   Temperature Correction for Conductivity
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plot-the-calibration-and-best-fit-line">
    Plot the calibration and best fit line
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#alternative-plotting-library-for-interactivity-bokeh">
-     Alternative Plotting Library for Interactivity: Bokeh
+    <a class="reference internal nav-link" href="#best-fit-slope-and-coefficient-of-determination-r-2-of-calibration-points">
+     Best Fit slope and coefficient of determination (
+     <span class="math notranslate nohighlight">
+      \(R^2\)
+     </span>
+     ) of calibration points
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#best-fit-slope-and-r-sup-2-sup-of-calibration-points">
-     Best Fit slope and R
-     <sup>
-      2
-     </sup>
-     of calibration points
-    </a>
-   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flow-measurement">
+   Flow measurement
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plot-the-salt-dilution-measurement">
      Plot the salt dilution measurement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specify-background-and-measurement-periods">
+     Specify background and measurement periods
     </a>
    </li>
   </ul>
@@ -318,8 +446,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#questions-to-consider">
-   Questions to Consider
+  <a class="reference internal nav-link" href="#notebook-reflection">
+   Notebook Reflection
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -334,15 +462,132 @@
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-info">
+   Additional Info
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#temperature-correction-for-conductivity">
+     Temperature Correction for Conductivity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Notebook 1: Flow Measurement using the Salt Dilution Method</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#given-information">
+   Given Information:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-the-salt-dilution-data">
+   Import the Salt Dilution Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-calibration-and-best-fit-line">
+   Plot the calibration and best fit line
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#best-fit-slope-and-coefficient-of-determination-r-2-of-calibration-points">
+     Best Fit slope and coefficient of determination (
+     <span class="math notranslate nohighlight">
+      \(R^2\)
+     </span>
+     ) of calibration points
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flow-measurement">
+   Flow measurement
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-salt-dilution-measurement">
+     Plot the salt dilution measurement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specify-background-and-measurement-periods">
+     Specify background and measurement periods
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-discharge">
+   Calculate Discharge
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-reflection">
+   Notebook Reflection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#question-1">
+     Question 1:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#question-2">
+     Question 2:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-info">
+   Additional Info
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#temperature-correction-for-conductivity">
+     Temperature Correction for Conductivity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="cell docutils container">
@@ -357,18 +602,30 @@
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="c1"># advanced statistics library</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import libraries</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">os</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">math</span>
 
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="notebook-1-flow-measurement-using-the-salt-dilution-method">
-<h1>Notebook 1: Flow Measurement using the Salt Dilution Method<a class="headerlink" href="#notebook-1-flow-measurement-using-the-salt-dilution-method" title="Permalink to this headline">¶</a></h1>
-<p>Follow along in this notebook to learn about the salt dilution method for measuring streamflow.  At the end, there is an open ended question that requires you to reflect on the content of the notebook.  Written responses are to be submitted via Canvas, where a response field will be set up.</p>
-<div class="section" id="given-information">
-<h2>Given Information:<a class="headerlink" href="#given-information" title="Permalink to this headline">¶</a></h2>
-<p><em>(an example of a nicely formatted table using the Markdown notation)</em></p>
+<section class="tex2jax_ignore mathjax_ignore" id="notebook-1-flow-measurement-using-the-salt-dilution-method">
+<h1>Notebook 1: Flow Measurement using the Salt Dilution Method<a class="headerlink" href="#notebook-1-flow-measurement-using-the-salt-dilution-method" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://doi.org/10.1002/hyp.3360070212">Flow measurement by salt dilution</a><span class="math notranslate nohighlight">\(^{[1]}\)</span> is a type of tracer method where the natural conductivity of stream water is temporarily raised by adding (dissolving) a known mass of tracer into the stream, and measuring a response downstream.  Tracer methods can be done by slug injection or steady-state.  A “slug” is a known mass of tracer that dissolves and mixes in the stream.  The steady-state method is a constant injection of a dissolved tracer of known concentration.  Both methods are suited to lower flows where a sufficient signal-to-noise ratio can be acheived with a relatively small amount of tracer, and to turbulent flows where adequate mixing of the tracer can be achieved.  Table salt is commonly used for measurement because it is cheap and practical for field measurement, and the concentration and durations are small compared to <a class="reference external" href="https://doi.org/10.1016/j.envpol.2017.01.040">observed levels of toxicity</a><span class="math notranslate nohighlight">\(^{[2]}\)</span>.</p>
+<p>This notebook introduces the instrument calibration and measurement data processing for a salt dilution streamflow measurement using the slug tracer method.  More information on the steady-state method can be found <a class="reference external" href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.454.1620&amp;rep=rep1&amp;type=pdf&amp;bcgovtm=new%20west%20record">here</a>.  At the end of this notebook, there is an open ended question that asks you to reflect on the content of the notebook.</p>
+<section id="given-information">
+<h2>Given Information:<a class="headerlink" href="#given-information" title="Permalink to this headline">#</a></h2>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -399,11 +656,14 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="import-the-salt-dilution-data">
-<h2>Import the Salt Dilution Data<a class="headerlink" href="#import-the-salt-dilution-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="import-the-salt-dilution-data">
+<h2>Import the Salt Dilution Data<a class="headerlink" href="#import-the-salt-dilution-data" title="Permalink to this headline">#</a></h2>
 <p>In a salt dilution measurement, we first calibrate the instrument using known concentrations of salt solution.</p>
-<p>The calibration data is provided in a file named <strong>SD_cal.csv</strong>, and it’s saved under <code class="docutils literal notranslate"><span class="pre">&lt;project</span> <span class="pre">root&gt;/content/notebook_data/notebook_1_data/</span></code>.</p>
+<p>The calibration data is provided in a file named <strong>SD_cal.csv</strong>, and it’s saved under:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">&lt;project</span> <span class="pre">root&gt;/content/notebook_data/notebook_1_data/</span></code>.</p>
+</div></blockquote>
 <p>If you haven’t done so, review the different ways we can specify file paths and navigate file structure in the <span class="xref myst">Data Import and Review</span> notebook.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -418,14 +678,28 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># instrument calibration data</span>
 <span class="c1"># see how two strings can be combined with the &#39;+&#39; operator</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_file_path</span> <span class="o">+</span> <span class="n">calibration_filename</span><span class="p">)</span>
 <span class="n">sd_cal</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_file_path</span> <span class="o">+</span> <span class="n">calibration_filename</span><span class="p">)</span>
+
 <span class="c1"># discharge measurement data</span>
 <span class="n">sd_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_file_path</span> <span class="o">+</span> <span class="n">salt_dilution_filename</span><span class="p">)</span>
-
-<span class="c1"># data given in the calibration file</span>
-<span class="n">cal_solution_concn</span> <span class="o">=</span> <span class="mf">10.1</span> <span class="c1"># g/L - this is the NaCl concentration in the calibration solution</span>
-<span class="n">cal_vol</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># total calibration volume mL </span>
-<span class="n">cal_vol_increment</span> <span class="o">=</span> <span class="mf">1.1</span> <span class="c1"># [mL] increments for calibration solution</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>../../notebook_data/notebook_1_data/SD_cal.csv
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we specify some known quantities concerning the calibration of our measurement device.  This information was recorded by the field staff and can be found in the SD_cal spreadsheet:</p>
+<p><img alt="Measurement calibration information found in the calibration spreadsheet file." src="../../_images/sd_cal_sheet.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data given in the calibration file</span>
+<span class="n">cal_solution_concn</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="c1"># g/L - this is the NaCl concentration in the calibration solution (column A, row 11)</span>
+<span class="n">cal_vol</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># total calibration volume mL  (row 2 of Calibration volume column)</span>
+<span class="n">cal_vol_increment</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># [mL] increments for calibration solution (Calibration solution added (ml) column)</span>
 </pre></div>
 </div>
 </div>
@@ -467,46 +741,46 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>500</td>
+      <td>500.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
       <td>303.0</td>
       <td>10.8</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>NaN</td>
+      <td>501.0</td>
       <td>1.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>10.0</td>
+      <td>19.960080</td>
       <td>343.0</td>
       <td>10.8</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>NaN</td>
+      <td>502.0</td>
       <td>2.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>20.0</td>
+      <td>39.840637</td>
       <td>380.0</td>
       <td>10.8</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>NaN</td>
+      <td>503.0</td>
       <td>3.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>30.0</td>
+      <td>59.642147</td>
       <td>426.0</td>
       <td>10.8</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>NaN</td>
+      <td>504.0</td>
       <td>4.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>40.0</td>
+      <td>79.365079</td>
       <td>464.0</td>
       <td>10.8</td>
     </tr>
@@ -514,9 +788,21 @@
 </table>
 </div></div></div>
 </div>
+<blockquote>
+<div><p><strong>Note</strong>: several columns contain <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.  We need to update these columns based on the calibration procedure.</p>
+</div></blockquote>
+<p>The calibration procedure is as follows:</p>
+<ol class="simple">
+<li><p>Collect a sample of river water with a known volume (500mL is the first entry in the <code class="docutils literal notranslate"><span class="pre">Calibration</span> <span class="pre">Volume</span> <span class="pre">(ml)</span></code> column.)  Let’s call this the <strong>control sample</strong>.</p></li>
+<li><p>Measure the baseline conductivity of the control sample.</p></li>
+<li><p>Add a known volume of calibration solution to the control sample (the <code class="docutils literal notranslate"><span class="pre">Calibration</span> <span class="pre">solution</span> <span class="pre">added</span> <span class="pre">(ml)</span></code> column indicates how much solution we add at each calibration step.  In this case, it’s 1.0 millilitres.</p></li>
+<li><p>Measure the conductivity of the control sample.</p></li>
+<li><p>Repeat steps 3-4 until five measurements are recorded.</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># update the calibration solution added column for the volume of calibration solution added during the calibration</span>
+<span class="c1"># note that the index column can be used as a multiplier to give the correct cumulative calibration volume added</span>
 <span class="n">sd_cal</span><span class="p">[</span><span class="s1">&#39;Calibration solution added (ml)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cal_vol_increment</span> <span class="o">*</span> <span class="n">sd_cal</span><span class="o">.</span><span class="n">index</span>
 
 <span class="c1">#  add the volume of solution to the calibration volume</span>
@@ -572,226 +858,62 @@
       <th>0</th>
       <td>500.0</td>
       <td>0.0</td>
-      <td>0.00</td>
-      <td>0.000000</td>
-      <td>303.0</td>
-      <td>10.8</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>501.1</td>
-      <td>1.1</td>
-      <td>11.11</td>
-      <td>22.171223</td>
-      <td>343.0</td>
-      <td>10.8</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>502.2</td>
-      <td>2.2</td>
-      <td>22.22</td>
-      <td>44.245321</td>
-      <td>380.0</td>
-      <td>10.8</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>503.3</td>
-      <td>3.3</td>
-      <td>33.33</td>
-      <td>66.222929</td>
-      <td>426.0</td>
-      <td>10.8</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>504.4</td>
-      <td>4.4</td>
-      <td>44.44</td>
-      <td>88.104679</td>
-      <td>464.0</td>
-      <td>10.8</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>505.5</td>
-      <td>5.5</td>
-      <td>55.55</td>
-      <td>109.891197</td>
-      <td>505.0</td>
-      <td>10.8</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>506.6</td>
-      <td>6.6</td>
-      <td>66.66</td>
-      <td>131.583103</td>
-      <td>546.0</td>
-      <td>10.8</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-</div>
-<div class="section" id="temperature-correction-for-conductivity">
-<h2>Temperature Correction for Conductivity<a class="headerlink" href="#temperature-correction-for-conductivity" title="Permalink to this headline">¶</a></h2>
-<p>The electrical conductivity (EC) of water is a function of temperature, so it is important that the water used for calibration is the same temperature as the water in the stream being measured.  Alternatively, a temperature correction can be applied.</p>
-<p>Presented below are two different methods of temperature compensation.</p>
-<p>The instrument used in both the calibration and the measurement already has temperature compensation within the instrument, so the values recorded are EC at 25 C.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eu_std_ect_adjust</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">ec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Takes in a temperature (Theta), and an EC value,</span>
-<span class="sd">    returns a temperature adjusted ECT value</span>
-<span class="sd">    based on EU standard 27888 conversion.</span>
-<span class="sd">        Input:  -temperature (Celsius)</span>
-<span class="sd">                -electrical conductivity</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">c1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.198058</span>
-    <span class="n">c2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.992186</span>
-    <span class="n">c3</span> <span class="o">=</span> <span class="mf">231.17628</span>
-    <span class="n">c4</span> <span class="o">=</span> <span class="mf">86.39123</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">c2</span> <span class="o">+</span> <span class="n">c3</span> <span class="o">/</span> <span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">c4</span><span class="p">))</span>
-    <span class="n">c5</span> <span class="o">=</span> <span class="mf">0.962144</span>
-    <span class="n">c6</span> <span class="o">=</span> <span class="mf">0.965078</span>
-    <span class="n">c7</span> <span class="o">=</span> <span class="mf">1.116</span>
-    <span class="n">f25</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c5</span><span class="p">)</span> <span class="o">+</span> <span class="n">c5</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="n">c6</span><span class="p">))</span> <span class="o">*</span> <span class="n">c7</span>
-    <span class="k">return</span> <span class="n">ec</span> <span class="o">*</span> <span class="n">f25</span>
-
-<span class="k">def</span> <span class="nf">linear2_ect_adjust</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">ec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Takes in a temperature (temp), and an EC value (ec),</span>
-<span class="sd">    returns a temperature adjusted ECT value</span>
-<span class="sd">    based on linear interpolation with 2% at 25 degrees.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">f25</span> <span class="o">=</span> <span class="mf">2.0</span>
-    <span class="k">return</span> <span class="n">ec</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">f25</span> <span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">25</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply temperature compensation to the measured conductivity</span>
-
-<span class="c1"># Note, in this case, the data is already temperature compensated </span>
-<span class="c1"># so this is not needed, but in many cases it is not, so it is left </span>
-<span class="c1"># here for reference</span>
-
-<span class="n">temp_compensated</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">sd_cal</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">conductivity</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Conductivity (microSiemens/cm)&#39;</span><span class="p">]</span>
-    <span class="n">temperature</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Temperature (C)&#39;</span><span class="p">]</span>
-
-    <span class="c1"># for each value in the conductivity time series,</span>
-    <span class="c1"># apply the function to correct for temperature,</span>
-    <span class="c1"># and add to the temp compensated array</span>
-    <span class="n">temp_ec</span> <span class="o">=</span> <span class="n">eu_std_ect_adjust</span><span class="p">(</span><span class="n">temp</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="n">conductivity</span><span class="p">)</span>
-    
-    <span class="n">temp_compensated</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_ec</span><span class="p">)</span>
-
-<span class="c1"># now add the temp_compensated array as a new column</span>
-<span class="c1"># as stated above, this is left commented out as</span>
-<span class="c1"># it is not needed in this case.</span>
-<span class="c1"># sd_cal[&#39;ECT (us/cm)&#39;] = temp_compensated</span>
-
-
-<span class="n">sd_cal</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Calibration volume (ml)</th>
-      <th>Calibration solution added (ml)</th>
-      <th>Salt added (mg)</th>
-      <th>Concentration (mg/l)</th>
-      <th>Conductivity (microSiemens/cm)</th>
-      <th>Temperature (C)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>500.0</td>
       <td>0.0</td>
-      <td>0.00</td>
       <td>0.000000</td>
       <td>303.0</td>
       <td>10.8</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>501.1</td>
-      <td>1.1</td>
-      <td>11.11</td>
-      <td>22.171223</td>
+      <td>501.0</td>
+      <td>1.0</td>
+      <td>10.0</td>
+      <td>19.960080</td>
       <td>343.0</td>
       <td>10.8</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>502.2</td>
-      <td>2.2</td>
-      <td>22.22</td>
-      <td>44.245321</td>
+      <td>502.0</td>
+      <td>2.0</td>
+      <td>20.0</td>
+      <td>39.840637</td>
       <td>380.0</td>
       <td>10.8</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>503.3</td>
-      <td>3.3</td>
-      <td>33.33</td>
-      <td>66.222929</td>
+      <td>503.0</td>
+      <td>3.0</td>
+      <td>30.0</td>
+      <td>59.642147</td>
       <td>426.0</td>
       <td>10.8</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>504.4</td>
-      <td>4.4</td>
-      <td>44.44</td>
-      <td>88.104679</td>
+      <td>504.0</td>
+      <td>4.0</td>
+      <td>40.0</td>
+      <td>79.365079</td>
       <td>464.0</td>
       <td>10.8</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>505.5</td>
-      <td>5.5</td>
-      <td>55.55</td>
-      <td>109.891197</td>
+      <td>505.0</td>
+      <td>5.0</td>
+      <td>50.0</td>
+      <td>99.009901</td>
       <td>505.0</td>
       <td>10.8</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>506.6</td>
-      <td>6.6</td>
-      <td>66.66</td>
-      <td>131.583103</td>
+      <td>506.0</td>
+      <td>6.0</td>
+      <td>60.0</td>
+      <td>118.577075</td>
       <td>546.0</td>
       <td>10.8</td>
     </tr>
@@ -799,10 +921,13 @@
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="plot-the-calibration-and-best-fit-line">
-<h2>Plot the calibration and best fit line<a class="headerlink" href="#plot-the-calibration-and-best-fit-line" title="Permalink to this headline">¶</a></h2>
-<p>The calibration points are plotted with as red circles, which is represented in the call to the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function by the two-character combination <code class="docutils literal notranslate"><span class="pre">ro</span></code>.  The best fit line through the calibration points is represented by a dashed blue line, specified by the three character code <code class="docutils literal notranslate"><span class="pre">b--</span></code>.  Changing the appearance of the plotted series is a matter of <a class="reference external" href="https://matplotlib.org/3.1.0/api/markers_api.html#module-matplotlib.markers">looking up the short form</a>.</p>
+</section>
+<section id="plot-the-calibration-and-best-fit-line">
+<h2>Plot the calibration and best fit line<a class="headerlink" href="#plot-the-calibration-and-best-fit-line" title="Permalink to this headline">#</a></h2>
+<p>The sevel calibration points are plotted below as a series of red circles.  The best fit line through the calibration points is represented by a dashed blue line.</p>
+<blockquote>
+<div><p><strong>Note</strong>:  More information on specifying the appearance of plots can be found in the <a class="reference external" href="https://matplotlib.org/3.1.0/api/markers_api.html#module-matplotlib.markers">matplotlib documentation</a>. In the plot below, the red circle is specified by the short-form string <code class="docutils literal notranslate"><span class="pre">'ro'</span></code> and the dashed blue line is specified by the three character code <code class="docutils literal notranslate"><span class="pre">'b--'</span></code>.</p>
+</div></blockquote>
 <p>The <code class="docutils literal notranslate"><span class="pre">stats.linregress</span></code> function takes in two arrays and returns the equation of the best fit line through the data, along with information about the fit.  Note that the r-value is the correlation coefficient.  The coefficient of determination (<span class="math notranslate nohighlight">\(R^2\)</span>) is the correlation coefficient squared.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -816,18 +941,14 @@
 <span class="c1"># add the calibration points to the plot</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cond_series</span><span class="p">,</span> <span class="n">conc_series</span><span class="p">,</span> <span class="s1">&#39;go&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Calibration Points&quot;</span><span class="p">)</span>
 
-<span class="c1"># plt.set_ylabel(&#39;Temp. Compenstated Conductivity [uS/cm]&#39;)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temp. Compenstated Conductivity [uS/cm]&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Concentration [mg/l]&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;This is a title&#39;</span><span class="p">)</span>
-
-<span class="c1"># the set_xlim and set_ylim attributes can be used to set the axis limits</span>
-<span class="c1"># ax.set_xlim(right=400)</span>
-<span class="c1"># ax.set_ylim(top=80)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature Compenstated Conductivity [uS/cm]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Control Volume Salt Concentration [mg/l]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Salt Dilution Measurement Calibration&#39;</span><span class="p">)</span>
 
 <span class="c1"># add best fit line</span>
-<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">cond_series</span><span class="p">,</span>
-                                                                    <span class="n">conc_series</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">cond_series</span><span class="p">,</span> <span class="n">conc_series</span><span class="p">)</span>
+<span class="c1"># the stats.linregress output is a 5-tuple, r_value is the correlation coefficient</span>
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">results</span>
 
 <span class="c1">#  create an array between the minimum and maximum calibration points</span>
 <span class="n">x_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">cond_series</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">cond_series</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>  <span class="mi">100</span><span class="p">)</span>
@@ -843,384 +964,38 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f0632f708e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8f4b8b460&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_1_14_1.png" src="../../_images/Notebook_1_14_1.png" />
+<img alt="../../_images/Notebook_1_13_1.png" src="../../_images/Notebook_1_13_1.png" />
 </div>
 </div>
-<div class="section" id="alternative-plotting-library-for-interactivity-bokeh">
-<h3>Alternative Plotting Library for Interactivity: Bokeh<a class="headerlink" href="#alternative-plotting-library-for-interactivity-bokeh" title="Permalink to this headline">¶</a></h3>
-<p>If you can imagine a function or feature you wish were already built, chances are it exists.  The Bokeh plotting library allows for a higher level of interactivity.  In the plot below, note the toolbar on the right hand side.  You can use the tools to take a closer look at your data in this simple case.  Plots can also be linked in Bokeh, with which powerful ‘dashboards’ can be built.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">show</span><span class="p">,</span> <span class="n">output_notebook</span>
-<span class="c1"># specify the plot to output within the notebook and not in a new window</span>
-<span class="n">output_notebook</span><span class="p">()</span>
-
-<span class="c1"># initialize the figure</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
-
-<span class="c1"># add a circle renderer with a size, color, and alpha</span>
-<span class="n">p</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">cond_series</span><span class="p">,</span> <span class="n">conc_series</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">best_fit</span><span class="p">)</span>
-
-<span class="c1"># show the results</span>
-<span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-<div class="bk-root">
-    <a href="https://bokeh.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"></a>
-    <span id="1002">Loading BokehJS ...</span>
-</div></div><script type="application/javascript">
-(function(root) {
-  function now() {
-    return new Date();
-  }
-
-  const force = true;
-
-  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
-    root._bokeh_onload_callbacks = [];
-    root._bokeh_is_loading = undefined;
-  }
-
-  const JS_MIME_TYPE = 'application/javascript';
-  const HTML_MIME_TYPE = 'text/html';
-  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
-  const CLASS_NAME = 'output_bokeh rendered_html';
-
-  /**
-   * Render data to the DOM node
-   */
-  function render(props, node) {
-    const script = document.createElement("script");
-    node.appendChild(script);
-  }
-
-  /**
-   * Handle when an output is cleared or removed
-   */
-  function handleClearOutput(event, handle) {
-    const cell = handle.cell;
-
-    const id = cell.output_area._bokeh_element_id;
-    const server_id = cell.output_area._bokeh_server_id;
-    // Clean up Bokeh references
-    if (id != null && id in Bokeh.index) {
-      Bokeh.index[id].model.document.clear();
-      delete Bokeh.index[id];
-    }
-
-    if (server_id !== undefined) {
-      // Clean up Bokeh references
-      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
-      cell.notebook.kernel.execute(cmd_clean, {
-        iopub: {
-          output: function(msg) {
-            const id = msg.content.text.trim();
-            if (id in Bokeh.index) {
-              Bokeh.index[id].model.document.clear();
-              delete Bokeh.index[id];
-            }
-          }
-        }
-      });
-      // Destroy server and session
-      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
-      cell.notebook.kernel.execute(cmd_destroy);
-    }
-  }
-
-  /**
-   * Handle when a new output is added
-   */
-  function handleAddOutput(event, handle) {
-    const output_area = handle.output_area;
-    const output = handle.output;
-
-    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
-    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
-      return
-    }
-
-    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
-
-    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
-      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
-      // store reference to embed id on output_area
-      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
-    }
-    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
-      const bk_div = document.createElement("div");
-      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
-      const script_attrs = bk_div.children[0].attributes;
-      for (let i = 0; i < script_attrs.length; i++) {
-        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
-        toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
-      }
-      // store reference to server id on output_area
-      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
-    }
-  }
-
-  function register_renderer(events, OutputArea) {
-
-    function append_mime(data, metadata, element) {
-      // create a DOM node to render to
-      const toinsert = this.create_output_subarea(
-        metadata,
-        CLASS_NAME,
-        EXEC_MIME_TYPE
-      );
-      this.keyboard_manager.register_events(toinsert);
-      // Render to node
-      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
-      render(props, toinsert[toinsert.length - 1]);
-      element.append(toinsert);
-      return toinsert
-    }
-
-    /* Handle when an output is cleared or removed */
-    events.on('clear_output.CodeCell', handleClearOutput);
-    events.on('delete.Cell', handleClearOutput);
-
-    /* Handle when a new output is added */
-    events.on('output_added.OutputArea', handleAddOutput);
-
-    /**
-     * Register the mime type and append_mime function with output_area
-     */
-    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
-      /* Is output safe? */
-      safe: true,
-      /* Index of renderer in `output_area.display_order` */
-      index: 0
-    });
-  }
-
-  // register the mime type if in Jupyter Notebook environment and previously unregistered
-  if (root.Jupyter !== undefined) {
-    const events = require('base/js/events');
-    const OutputArea = require('notebook/js/outputarea').OutputArea;
-
-    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
-      register_renderer(events, OutputArea);
-    }
-  }
-
-  
-  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
-    root._bokeh_timeout = Date.now() + 5000;
-    root._bokeh_failed_load = false;
-  }
-
-  const NB_LOAD_WARNING = {'data': {'text/html':
-     "<div style='background-color: #fdd'>\n"+
-     "<p>\n"+
-     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
-     "may be due to a slow or bad network connection. Possible fixes:\n"+
-     "</p>\n"+
-     "<ul>\n"+
-     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
-     "<li>use INLINE resources instead, as so:</li>\n"+
-     "</ul>\n"+
-     "<code>\n"+
-     "from bokeh.resources import INLINE\n"+
-     "output_notebook(resources=INLINE)\n"+
-     "</code>\n"+
-     "</div>"}};
-
-  function display_loaded() {
-    const el = document.getElementById("1002");
-    if (el != null) {
-      el.textContent = "BokehJS is loading...";
-    }
-    if (root.Bokeh !== undefined) {
-      if (el != null) {
-        el.textContent = "BokehJS " + root.Bokeh.version + " successfully loaded.";
-      }
-    } else if (Date.now() < root._bokeh_timeout) {
-      setTimeout(display_loaded, 100)
-    }
-  }
-
-
-  function run_callbacks() {
-    try {
-      root._bokeh_onload_callbacks.forEach(function(callback) {
-        if (callback != null)
-          callback();
-      });
-    } finally {
-      delete root._bokeh_onload_callbacks
-    }
-    console.debug("Bokeh: all callbacks have finished");
-  }
-
-  function load_libs(css_urls, js_urls, callback) {
-    if (css_urls == null) css_urls = [];
-    if (js_urls == null) js_urls = [];
-
-    root._bokeh_onload_callbacks.push(callback);
-    if (root._bokeh_is_loading > 0) {
-      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
-      return null;
-    }
-    if (js_urls == null || js_urls.length === 0) {
-      run_callbacks();
-      return null;
-    }
-    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
-    root._bokeh_is_loading = css_urls.length + js_urls.length;
-
-    function on_load() {
-      root._bokeh_is_loading--;
-      if (root._bokeh_is_loading === 0) {
-        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
-        run_callbacks()
-      }
-    }
-
-    function on_error(url) {
-      console.error("failed to load " + url);
-    }
-
-    for (let i = 0; i < css_urls.length; i++) {
-      const url = css_urls[i];
-      const element = document.createElement("link");
-      element.onload = on_load;
-      element.onerror = on_error.bind(null, url);
-      element.rel = "stylesheet";
-      element.type = "text/css";
-      element.href = url;
-      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
-      document.body.appendChild(element);
-    }
-
-    for (let i = 0; i < js_urls.length; i++) {
-      const url = js_urls[i];
-      const element = document.createElement('script');
-      element.onload = on_load;
-      element.onerror = on_error.bind(null, url);
-      element.async = false;
-      element.src = url;
-      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
-      document.head.appendChild(element);
-    }
-  };
-
-  function inject_raw_css(css) {
-    const element = document.createElement("style");
-    element.appendChild(document.createTextNode(css));
-    document.body.appendChild(element);
-  }
-
-  
-  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.1.min.js"];
-  const css_urls = [];
-  
-
-  const inline_js = [
-    function(Bokeh) {
-      Bokeh.set_log_level("info");
-    },
-    function(Bokeh) {
-    
-    
-    }
-  ];
-
-  function run_inline_js() {
-    
-    if (root.Bokeh !== undefined || force === true) {
-      
-    for (let i = 0; i < inline_js.length; i++) {
-      inline_js[i].call(root, root.Bokeh);
-    }
-    if (force === true) {
-        display_loaded();
-      }} else if (Date.now() < root._bokeh_timeout) {
-      setTimeout(run_inline_js, 100);
-    } else if (!root._bokeh_failed_load) {
-      console.log("Bokeh: BokehJS failed to load within specified timeout.");
-      root._bokeh_failed_load = true;
-    } else if (force !== true) {
-      const cell = $(document.getElementById("1002")).parents('.cell').data().cell;
-      cell.output_area.append_execute_result(NB_LOAD_WARNING)
-    }
-
-  }
-
-  if (root._bokeh_is_loading === 0) {
-    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
-    run_inline_js();
-  } else {
-    load_libs(css_urls, js_urls, function() {
-      console.debug("Bokeh: BokehJS plotting callback run at", now());
-      run_inline_js();
-    });
-  }
-}(window));</script><div class="output text_html">
-
-
-
-
-
-<div class="bk-root" id="8d996412-a937-4ebd-8119-16b6c964d171" data-root-id="1003"></div>
-</div><script type="application/javascript">(function(root) {
-  function embed_document(root) {
-    
-  const docs_json = {"79f901f3-d98b-4cf4-940c-5cdf0f7aced7":{"defs":[],"roots":{"references":[{"attributes":{"below":[{"id":"1012"}],"center":[{"id":"1015"},{"id":"1019"}],"height":400,"left":[{"id":"1016"}],"renderers":[{"id":"1038"},{"id":"1044"}],"title":{"id":"1046"},"toolbar":{"id":"1027"},"width":800,"x_range":{"id":"1004"},"x_scale":{"id":"1008"},"y_range":{"id":"1006"},"y_scale":{"id":"1010"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{"fill_alpha":{"value":0.2},"fill_color":{"value":"red"},"hatch_alpha":{"value":0.2},"hatch_color":{"value":"red"},"line_alpha":{"value":0.2},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1037","type":"Circle"},{"attributes":{},"id":"1021","type":"WheelZoomTool"},{"attributes":{},"id":"1013","type":"BasicTicker"},{"attributes":{},"id":"1025","type":"HelpTool"},{"attributes":{"tools":[{"id":"1020"},{"id":"1021"},{"id":"1022"},{"id":"1023"},{"id":"1024"},{"id":"1025"}]},"id":"1027","type":"Toolbar"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"red"},"hatch_alpha":{"value":0.1},"hatch_color":{"value":"red"},"line_alpha":{"value":0.1},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1036","type":"Circle"},{"attributes":{"coordinates":null,"data_source":{"id":"1034"},"glyph":{"id":"1035"},"group":null,"hover_glyph":null,"muted_glyph":{"id":"1037"},"nonselection_glyph":{"id":"1036"},"view":{"id":"1039"}},"id":"1038","type":"GlyphRenderer"},{"attributes":{"axis":{"id":"1012"},"coordinates":null,"group":null,"ticker":null},"id":"1015","type":"Grid"},{"attributes":{"source":{"id":"1034"}},"id":"1039","type":"CDSView"},{"attributes":{},"id":"1020","type":"PanTool"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAXXXTRRRdzQC+66KKLPnNARhdddNFlc0BddNFFF41zQHTRRRddtHNAjC666KLbc0Cjiy666AJ0QLrooosuKnRA0UUXXXRRdEDpoosuunh0QAAAAAAAoHRAF1100UXHdEAvuuiii+50QEYXXXTRFXVAXXTRRRc9dUB00UUXXWR1QIwuuuiii3VAo4suuuiydUC66KKLLtp1QNJFF110AXZA6aKLLroodkAAAAAAAFB2QBdddNFFd3ZALrrooouedkBGF1100cV2QF100UUX7XZAdNFFF10Ud0CMLrroojt3QKOLLrroYndAuuiiiy6Kd0DSRRdddLF3QOmiiy662HdAAAAAAAAAeEAXXXTRRSd4QC666KKLTnhARhdddNF1eEBddNFFF514QHTRRRddxHhAjC666KLreECjiy666BJ5QLrooosuOnlA0kUXXXRheUDpoosuuoh5QAAAAAAAsHlAF1100UXXeUAuuuiii/55QEYXXXTRJXpAXXTRRRdNekB00UUXXXR6QIwuuuiim3pAo4suuujCekC66KKLLup6QNJFF110EXtA6aKLLro4e0AAAAAAAGB7QBhddNFFh3tALrrooouue0BGF1100dV7QF100UUX/XtAdNFFF10kfECMLrrookt8QKOLLrrocnxAuuiiiy6afEDSRRdddMF8QOmiiy666HxAAAAAAAAQfUAYXXTRRTd9QC666KKLXn1ARhdddNGFfUBddNFFF619QHTRRRdd1H1AjC666KL7fUCjiy666CJ+QLrooosuSn5A0kUXXXRxfkDpoosuuph+QAAAAAAAwH5AGF100UXnfkAuuuiiiw5/QEYXXXTRNX9AXXTRRRddf0B00UUXXYR/QIwuuuiiq39Ao4suuujSf0C66KKLLvp/QOmiiy66EIBAdNFFF10kgEAAAAAAADiAQIwuuuiiS4BAF1100UVfgECjiy666HKAQC666KKLhoBAuuiiiy6agEBGF1100a2AQNJFF110wYBAXXTRRRfVgEDpoosuuuiAQHTRRRdd/IBAAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[100]},"y":[0.7855584341419899,2.1106634889706015,3.435768543799213,4.760873598627825,6.085978653456408,7.41108370828502,8.736188763113631,10.061293817942214,11.386398872770826,12.71150392759941,14.03660898242805,15.361714037256633,16.686819092085244,18.011924146913856,19.337029201742467,20.66213425657105,21.987239311399662,23.312344366228274,24.637449421056886,25.96255447588547,27.28765953071411,28.612764585542692,29.937869640371275,31.262974695199887,32.58807975002847,33.91318480485711,35.23828985968569,36.563394914514305,37.88849996934292,39.21360502417153,40.53871007900011,41.86381513382875,43.188920188657335,44.51402524348592,45.83913029831453,47.16423535314311,48.48934040797175,49.814445462800336,51.13955051762895,52.46465557245756,53.78976062728617,55.114865682114754,56.439970736943394,57.76507579177198,59.09018084660059,60.41528590142917,61.740390956257755,63.065496011086395,64.39060106591498,65.71570612074359,67.0408111755722,68.36591623040081,69.6910212852294,71.01612634005804,72.34123139488662,73.66633644971523,74.99144150454384,76.31654655937243,77.64165161420104,78.96675666902965,80.29186172385823,81.61696677868684,82.94207183351546,84.26717688834404,85.59228194317268,86.91738699800126,88.24249205282987,89.56759710765849,90.89270216248707,92.21780721731568,93.54291227214426,94.86801732697288,96.19312238180149,97.5182274366301,98.84333249145871,100.16843754628732,101.49354260111593,102.81864765594449,104.14375271077316,105.46885776560171,106.79396282043032,108.11906787525893,109.44417293008755,110.76927798491616,112.09438303974477,113.41948809457332,114.744593149402,116.06969820423055,117.39480325905916,118.71990831388777,120.04501336871633,121.370118423545,122.69522347837355,124.02032853320216,125.34543358803077,126.67053864285944,127.995643697688,129.3207487525166,130.64585380734516,131.97095886217377]},"selected":{"id":"1057"},"selection_policy":{"id":"1056"}},"id":"1040","type":"ColumnDataSource"},{"attributes":{"overlay":{"id":"1026"}},"id":"1022","type":"BoxZoomTool"},{"attributes":{},"id":"1023","type":"SaveTool"},{"attributes":{},"id":"1024","type":"ResetTool"},{"attributes":{"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1041","type":"Line"},{"attributes":{},"id":"1049","type":"BasicTickFormatter"},{"attributes":{"bottom_units":"screen","coordinates":null,"fill_alpha":0.5,"fill_color":"lightgrey","group":null,"left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","syncable":false,"top_units":"screen"},"id":"1026","type":"BoxAnnotation"},{"attributes":{"line_alpha":0.2,"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1043","type":"Line"},{"attributes":{},"id":"1056","type":"UnionRenderers"},{"attributes":{},"id":"1008","type":"LinearScale"},{"attributes":{"source":{"id":"1040"}},"id":"1045","type":"CDSView"},{"attributes":{},"id":"1050","type":"AllLabels"},{"attributes":{},"id":"1010","type":"LinearScale"},{"attributes":{},"id":"1057","type":"Selection"},{"attributes":{"coordinates":null,"formatter":{"id":"1049"},"group":null,"major_label_policy":{"id":"1050"},"ticker":{"id":"1017"}},"id":"1016","type":"LinearAxis"},{"attributes":{},"id":"1052","type":"BasicTickFormatter"},{"attributes":{"line_alpha":0.1,"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1042","type":"Line"},{"attributes":{"axis":{"id":"1016"},"coordinates":null,"dimension":1,"group":null,"ticker":null},"id":"1019","type":"Grid"},{"attributes":{"coordinates":null,"formatter":{"id":"1052"},"group":null,"major_label_policy":{"id":"1053"},"ticker":{"id":"1013"}},"id":"1012","type":"LinearAxis"},{"attributes":{},"id":"1053","type":"AllLabels"},{"attributes":{"coordinates":null,"group":null},"id":"1046","type":"Title"},{"attributes":{"coordinates":null,"data_source":{"id":"1040"},"glyph":{"id":"1041"},"group":null,"hover_glyph":null,"muted_glyph":{"id":"1043"},"nonselection_glyph":{"id":"1042"},"view":{"id":"1045"}},"id":"1044","type":"GlyphRenderer"},{"attributes":{},"id":"1006","type":"DataRange1d"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAAAAAAAHB1QAAAAAAAwHdAAAAAAACgekAAAAAAAAB9QAAAAAAAkH9AAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[7]},"y":{"__ndarray__":"AAAAAAAAAADRRG9K1Ss2QLhEQqpmH0ZA3ZOddkSOUEB86tEOswZWQJ/1cl4JeVtAk860x6hyYEA=","dtype":"float64","order":"little","shape":[7]}},"selected":{"id":"1055"},"selection_policy":{"id":"1054"}},"id":"1034","type":"ColumnDataSource"},{"attributes":{"fill_alpha":{"value":0.5},"fill_color":{"value":"red"},"hatch_alpha":{"value":0.5},"hatch_color":{"value":"red"},"line_alpha":{"value":0.5},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1035","type":"Circle"},{"attributes":{},"id":"1054","type":"UnionRenderers"},{"attributes":{},"id":"1055","type":"Selection"},{"attributes":{},"id":"1004","type":"DataRange1d"},{"attributes":{},"id":"1017","type":"BasicTicker"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"2.4.1"}};
-  const render_items = [{"docid":"79f901f3-d98b-4cf4-940c-5cdf0f7aced7","root_ids":["1003"],"roots":{"1003":"8d996412-a937-4ebd-8119-16b6c964d171"}}];
-  root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
-
-  }
-  if (root.Bokeh !== undefined) {
-    embed_document(root);
-  } else {
-    let attempts = 0;
-    const timer = setInterval(function(root) {
-      if (root.Bokeh !== undefined) {
-        clearInterval(timer);
-        embed_document(root);
-      } else {
-        attempts++;
-        if (attempts > 100) {
-          clearInterval(timer);
-          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
-        }
-      }
-    }, 10, root)
-  }
-})(window);</script></div>
-</div>
-</div>
-<div class="section" id="best-fit-slope-and-r-sup-2-sup-of-calibration-points">
-<h3>Best Fit slope and R<sup>2</sup> of calibration points<a class="headerlink" href="#best-fit-slope-and-r-sup-2-sup-of-calibration-points" title="Permalink to this headline">¶</a></h3>
-<p>Below, the print statement is comprised of a string.  In ths string, the <code class="docutils literal notranslate"><span class="pre">{}</span></code> symbols appear twice where I want to insert input from two different variables.  In this case, the values inside the curly brackets <code class="docutils literal notranslate"><span class="pre">{:.2f}</span></code> means I want a <strong>float</strong> of <strong>2</strong> decimal places.  There are a number of ways to insert variable values in strings for output.  More information on string formatting can be <a class="reference external" href="https://www.python.org/dev/peps/pep-3101/">found here</a>.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">\n</span></code> in the string breaks the line in the printed output.</p>
+<section id="best-fit-slope-and-coefficient-of-determination-r-2-of-calibration-points">
+<h3>Best Fit slope and coefficient of determination (<span class="math notranslate nohighlight">\(R^2\)</span>) of calibration points<a class="headerlink" href="#best-fit-slope-and-coefficient-of-determination-r-2-of-calibration-points" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#note: the number of decimals in the slope is too low. adjust the line below to print one more decimal.</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The calibration best fit slope is </span><span class="si">{:.2f}</span><span class="s2"> [[mg/L] / [uS/cm]] </span><span class="se">\n</span><span class="s2"> and the coefficient of determination of the calibration is </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> 
-                                                                                                                                         <span class="nb">round</span><span class="p">(</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The calibration best fit slope is </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> [[mg/L] / [uS/cm]]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The coefficient of determination of the calibration is </span><span class="si">{</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The calibration best fit slope is 0.54 [[mg/L] / [uS/cm]] 
- and the coefficient of determination of the calibration is 1.0.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The calibration best fit slope is 0.49 [[mg/L] / [uS/cm]]
+The coefficient of determination of the calibration is 1.000.
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plot-the-salt-dilution-measurement">
-<h3>Plot the salt dilution measurement<a class="headerlink" href="#plot-the-salt-dilution-measurement" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>Note</strong>: Above, the print statement string has an <code class="docutils literal notranslate"><span class="pre">f</span></code> before the opening quotation <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>, which enables the insertion of variables into the string.  This is done using the <code class="docutils literal notranslate"><span class="pre">{}</span></code> symbol and a ‘type’ specifier.  In this case, the values inside the curly brackets <code class="docutils literal notranslate"><span class="pre">{slope:.2f}</span></code> means I want a <strong>float</strong> of <strong>2</strong> decimal places.  There are a number of ways to insert variables into strings for output.  More information on string formatting can be <a class="reference external" href="https://www.python.org/dev/peps/pep-3101/">found here</a>.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="flow-measurement">
+<h2>Flow measurement<a class="headerlink" href="#flow-measurement" title="Permalink to this headline">#</a></h2>
+<section id="plot-the-salt-dilution-measurement">
+<h3>Plot the salt dilution measurement<a class="headerlink" href="#plot-the-salt-dilution-measurement" title="Permalink to this headline">#</a></h3>
 <p>Now we’ll use the second data file.  Recall that the first file was for calibration.  The EC sensor was placed in a measured volume of water, and calibration solution was added in measured amounts to record the change in conductivity.</p>
 <p>For the actual measurement of flow in the creek, the EC sensor is placed in the creek some distance downstream of the where a known mass of salt is deposited and mixed.</p>
 <p>Below we plot the conductivity over time, and we also determine what the ‘background’ conductivity was in order to calculate the area under the conductivity curve.  It turns out there is a lot of interesting information about runoff processes contained in the background EC signal.</p>
@@ -1252,6 +1027,9 @@
       <th>Time (s)</th>
       <th>ECT (uS/cm)</th>
       <th>Temperature (C)</th>
+      <th>t_elapsed</th>
+      <th>Concentration</th>
+      <th>time_step</th>
     </tr>
   </thead>
   <tbody>
@@ -1260,33 +1038,51 @@
       <td>1</td>
       <td>298</td>
       <td>10.8</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>298</td>
       <td>10.8</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>298</td>
       <td>10.8</td>
+      <td>3</td>
+      <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
       <td>298</td>
       <td>10.8</td>
+      <td>4</td>
+      <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
       <td>298</td>
       <td>10.8</td>
+      <td>5</td>
+      <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
       <td>...</td>
       <td>...</td>
       <td>...</td>
@@ -1296,34 +1092,49 @@
       <td>864</td>
       <td>298</td>
       <td>10.5</td>
+      <td>864</td>
+      <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>864</th>
       <td>865</td>
       <td>298</td>
       <td>10.5</td>
+      <td>865</td>
+      <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>865</th>
       <td>866</td>
       <td>298</td>
       <td>10.5</td>
+      <td>866</td>
+      <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>866</th>
       <td>867</td>
       <td>298</td>
       <td>10.5</td>
+      <td>867</td>
+      <td>0.0</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>867</th>
       <td>868</td>
       <td>298</td>
       <td>10.5</td>
+      <td>868</td>
+      <td>0.0</td>
+      <td>1.0</td>
     </tr>
   </tbody>
 </table>
-<p>868 rows × 3 columns</p>
+<p>868 rows × 6 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -1337,24 +1148,22 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Time (s)&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_1_21_1.png" src="../../_images/Notebook_1_21_1.png" />
+<img alt="../../_images/Notebook_1_19_1.png" src="../../_images/Notebook_1_19_1.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># start and end time of the measurement (seconds)</span>
-<span class="c1"># plot the data, and adjust measurement start and end times</span>
-<span class="n">msmt_start</span> <span class="o">=</span> <span class="mi">190</span>
-<span class="n">msmt_end</span> <span class="o">=</span> <span class="mi">700</span>
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="specify-background-and-measurement-periods">
+<h3>Specify background and measurement periods<a class="headerlink" href="#specify-background-and-measurement-periods" title="Permalink to this headline">#</a></h3>
+<p>We need to establish the background conductivity, or the natural conductivity of the stream prior to the measurement.  Use the plot above to establish a first guess at both the background period and the measurement period.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the background is the natural level of conductivity prior to the salt injection</span>
 <span class="n">start_bg</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># set the time (in seconds) for the start point of the background</span>
 <span class="n">end_bg</span> <span class="o">=</span> <span class="mi">150</span>  <span class="c1"># set the time (in seconds) for the end point of the background</span>
+
+<span class="c1"># start and end time of the measurement (seconds)</span>
+<span class="n">msmt_start</span> <span class="o">=</span> <span class="mi">190</span>
+<span class="n">msmt_end</span> <span class="o">=</span> <span class="mi">700</span>
 
 <span class="c1"># here, the mean of the background over a certain period is calculated as the representative background EC.T</span>
 <span class="n">background_ect</span> <span class="o">=</span> <span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;ECT (uS/cm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">start_bg</span><span class="p">:</span> <span class="n">end_bg</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -1390,16 +1199,16 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f062fff6d90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8f4af47c0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_1_24_1.png" src="../../_images/Notebook_1_24_1.png" />
+<img alt="../../_images/Notebook_1_22_1.png" src="../../_images/Notebook_1_22_1.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="calculate-discharge">
-<h2>Calculate Discharge<a class="headerlink" href="#calculate-discharge" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="calculate-discharge">
+<h2>Calculate Discharge<a class="headerlink" href="#calculate-discharge" title="Permalink to this headline">#</a></h2>
 <p>The volumetric flow (discharge) is equal to the area under the salt dilution curve, minus the background EC.</p>
 <p>Calculate the area under the curve:</p>
 <p>The area is: $<span class="math notranslate nohighlight">\(A_{curve} = \sum_{i=start}^{end} (ECT_i - ECT_{BG,i}) \cdot Slope_{calibration} \cdot t_{step,i} = \frac{\mu S}{cm} \cdot \frac {mg/L}{\mu S/cm} \cdot s = \frac {mg}{L} \cdot s\)</span><span class="math notranslate nohighlight">\(
@@ -1408,17 +1217,19 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
 <p><img alt="Area under conductivity curve" src="../../_images/a1.png" /></p>
 <p>And we are subtracting the rectangle representing the background.</p>
 <p><img alt="Background Area" src="../../_images/a2.png" /></p>
-<p>In the cell below, we are calculating the area under the conductivity curve (<code class="docutils literal notranslate"><span class="pre">ECT</span> <span class="pre">(uS/cm</span></code>) and subtracting our background average determined above.</p>
-<p>Change the calculation so it only takes into account the part of the wave between the start and stop markers, i.e. <code class="docutils literal notranslate"><span class="pre">msmt_start</span></code> and <code class="docutils literal notranslate"><span class="pre">msmt_stop</span></code>.</p>
-<p><em>Hint, how was the background average (<code class="docutils literal notranslate"><span class="pre">background_ect</span></code>) calculated previously?</em></p>
+<p>In the cell below, we calculate the area under the conductivity curve (<code class="docutils literal notranslate"><span class="pre">ECT</span> <span class="pre">(uS/cm</span></code>) and subtract the background average determined above.  We do this by finite-difference, which is simply adding up all the little rectangles that approximate the green region in the diagram above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;t_elapsed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">]</span>
-
-<span class="c1"># subtract the background and multiply by the calibration slope </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># subtract the background and multiply by the calibration slope </span>
 <span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;Concentration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;ECT (uS/cm)&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">background_ect</span><span class="p">)</span> <span class="o">*</span> <span class="n">slope</span>
-
-<span class="n">time_step</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># the time step of the EC measurement device is 1s</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check the time step duration.  We know from the column header the time units are in seconds (s), and we could look at the values and hard-code the time step, but it’s better to not assume or hard code values, so we will use the actual time step by calling the <code class="docutils literal notranslate"><span class="pre">.diff()</span></code> function on the <code class="docutils literal notranslate"><span class="pre">Time</span> <span class="pre">(s)</span></code> column to get a row-wise difference.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;time_step&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1428,51 +1239,135 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># trim the time series to the start and end time</span>
 <span class="n">msmt_slice</span> <span class="o">=</span> <span class="n">sd_data</span><span class="p">[(</span><span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">msmt_start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">sd_data</span><span class="p">[</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">msmt_end</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="c1"># approximating the area under the curve as the sum of small rectangles</span>
-<span class="c1"># of height &#39;concentration&#39; and widths of 1 time step (1 second in this case)</span>
-<span class="n">concentration_area</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">msmt_slice</span><span class="p">[</span><span class="s1">&#39;Concentration&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">time_step</span><span class="p">)</span>
+<span class="c1"># approximating the area under the curve as the sum of small </span>
+<span class="c1"># rectangles of height &#39;concentration&#39; and widths of 1 time step</span>
+<span class="n">concentration_area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">msmt_slice</span><span class="p">[</span><span class="s1">&#39;Concentration&#39;</span><span class="p">],</span> <span class="n">msmt_slice</span><span class="p">[</span><span class="s1">&#39;time_step&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Note</strong>: The <code class="docutils literal notranslate"><span class="pre">np.muliply()</span></code> function used above does element-wise multiplication.  i.e. if <span class="math notranslate nohighlight">\(a=[0, 1, 2]\)</span> and <span class="math notranslate nohighlight">\(b=[3, 4, 5]\)</span>, <code class="docutils literal notranslate"><span class="pre">np.multiply(a,</span> <span class="pre">b)</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">4,</span> <span class="pre">10]</span></code>.  Consider what would happen if our timestep was not uniform and we used a constant multiplier to calculate area under the curve.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0,  4, 10])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mass</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 1 kg salt was dumped in the river</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mass</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># 1 kg &quot;slug&quot; of salt (NaCl) was put in the river (as recorded in the SD_cal spreadsheet, shown previously)</span>
 
-<span class="c1"># see the section above to convince yourself the units work out.</span>
+<span class="c1"># see the &quot;Calculate Discharge&quot; section above to convince yourself that the units work out</span>
 <span class="n">Q_calculated</span> <span class="o">=</span> <span class="n">mass</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="n">concentration_area</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The calculated discharge for the measurement is </span><span class="si">{:.2f}</span><span class="s1"> m^3/s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Q_calculated</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The calculated discharge for the measurement is </span><span class="si">{</span><span class="n">Q_calculated</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> m^3/s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The calculated discharge for the measurement is 0.11 m^3/s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The calculated discharge for the measurement is 11.9 m^3/s
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="questions-to-consider">
-<h2>Questions to Consider<a class="headerlink" href="#questions-to-consider" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="notebook-reflection">
+<h2>Notebook Reflection<a class="headerlink" href="#notebook-reflection" title="Permalink to this headline">#</a></h2>
 <p>In this notebook, we demonstrated how a salt dilution measurement is processed, including calibration and calculation of volumetric flow.  There are a number of sources of uncertainty in this process.  Provide short written responses to the questions below.  It is recommended to use this notebook to get a sense of the sensitivity of the resulting volumetric flow calculation to various input parameters.</p>
+<p>Near the start of the notebook, we set variables associated with the calibration of the EC sensor:</p>
 <ul class="simple">
-<li><p>Near the start of the notebook, we set variables associated with the calibration of the EC sensor:</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cal_vol</span></code>: the volume of water from the stream used as the baseline for calibration,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cal_solution_concn</span></code>: the concentration of our calibration solution, and</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cal_vol_increment</span></code>: the incremental volume of calibration solution added to the calibration volume</p></li>
 </ul>
-<div class="section" id="question-1">
-<h3>Question 1:<a class="headerlink" href="#question-1" title="Permalink to this headline">¶</a></h3>
-<p>Comment on the effect of errors in the <em>accuracy</em> of the three calibration variables.  Which variable results in the greatest change to the calculated discharge if the variable is changed by +/- 10%?</p>
-<p>(i.e. what happens to the calculated discharge if our calibration solution is off by 1 mg/L?  What happens if we mislabel the container and instead of 10.1 mg/L we write 100.1 mg/L?)</p>
-</div>
-<div class="section" id="question-2">
-<h3>Question 2:<a class="headerlink" href="#question-2" title="Permalink to this headline">¶</a></h3>
+<section id="question-1">
+<h3>Question 1:<a class="headerlink" href="#question-1" title="Permalink to this headline">#</a></h3>
+<p>Comment on the effect of errors in the <em>accuracy</em> of the three calibration variables.  Which variable results in the greatest change to the calculated discharge if the variable is changed by +/- 10%?  In other words, what is the <em>sensitivity</em> of the result (measured flow) to each of the three calibration variables, in relative, qualitative terms?</p>
+</section>
+<section id="question-2">
+<h3>Question 2:<a class="headerlink" href="#question-2" title="Permalink to this headline">#</a></h3>
 <p>Above, we manually set the start and end of the salt injection measurement (marked in the plot by the green dots) using the <code class="docutils literal notranslate"><span class="pre">msmt_start</span></code> and <code class="docutils literal notranslate"><span class="pre">msmt_end</span></code> variables.  In some flow conditions, the EC reading will take a very long time to return to baseline.  The realities of field work (time constraints, battery power, etc) occassionally result in the ‘tail’ of the measurement curve being cut off.  What happens to the calculated discharge if the EC measurement stops unexpectedly before the EC returns to baseline?  Go back in the notebook and change the <code class="docutils literal notranslate"><span class="pre">msmt_end</span></code> time and comment on the effect on the calculated discharge.</p>
+</section>
+</section>
+<section id="additional-info">
+<h2>Additional Info<a class="headerlink" href="#additional-info" title="Permalink to this headline">#</a></h2>
+<section id="temperature-correction-for-conductivity">
+<h3>Temperature Correction for Conductivity<a class="headerlink" href="#temperature-correction-for-conductivity" title="Permalink to this headline">#</a></h3>
+<p>The electrical conductivity (EC) of water is a function of temperature, so it is important that the water used for calibration is the same temperature as the water in the stream being measured.  Alternatively, a temperature correction can be applied.  For the data in this notebook, the instrument used for flow measurement has a thermometer, so temperature compensation is built into the instrument.</p>
+<p>Two different methods of temperature compensation are provided below for reference, the first is an <a class="reference external" href="https://standards.iteh.ai/catalog/standards/cen/3978cdbc-b72f-459e-9275-99e7fc2b4b84/en-27888-1993">EU standard for the determination of electrical conductivity</a>, and the second is a <span class="xref myst">linear approximation of conductivity</span><span class="math notranslate nohighlight">\(^{[3]}\)</span> as a function of temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eu_std_ect_adjust</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">ec</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes in a temperature (Theta), and an EC value,</span>
+<span class="sd">    returns a temperature adjusted ECT value</span>
+<span class="sd">    based on EU standard 27888 conversion.</span>
+<span class="sd">        Input:  -temperature (Celsius)</span>
+<span class="sd">                -electrical conductivity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.198058</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.992186</span>
+    <span class="n">c3</span> <span class="o">=</span> <span class="mf">231.17628</span>
+    <span class="n">c4</span> <span class="o">=</span> <span class="mf">86.39123</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">c2</span> <span class="o">+</span> <span class="n">c3</span> <span class="o">/</span> <span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">c4</span><span class="p">))</span>
+    <span class="n">c5</span> <span class="o">=</span> <span class="mf">0.962144</span>
+    <span class="n">c6</span> <span class="o">=</span> <span class="mf">0.965078</span>
+    <span class="n">c7</span> <span class="o">=</span> <span class="mf">1.116</span>
+    <span class="n">f25</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c5</span><span class="p">)</span> <span class="o">+</span> <span class="n">c5</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="n">c6</span><span class="p">))</span> <span class="o">*</span> <span class="n">c7</span>
+    <span class="k">return</span> <span class="n">ec</span> <span class="o">*</span> <span class="n">f25</span>
+
+<span class="k">def</span> <span class="nf">linear2_ect_adjust</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">ec</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes in a temperature (temp), and an EC value (ec),</span>
+<span class="sd">    returns a temperature adjusted ECT value</span>
+<span class="sd">    based on linear interpolation assuming</span>
+<span class="sd">    2.5% per degree centigrade. (Smith, 1962)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f25</span> <span class="o">=</span> <span class="mf">2.5</span>
+    <span class="k">return</span> <span class="n">ec</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">f25</span> <span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">25</span><span class="p">))</span>
+</pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply temperature compensation to the measured conductivity</span>
+<span class="n">temp_compensated</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">sd_cal</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">conductivity</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Conductivity (microSiemens/cm)&#39;</span><span class="p">]</span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Temperature (C)&#39;</span><span class="p">]</span>
+
+    <span class="c1"># for each value in the conductivity time series,</span>
+    <span class="c1"># apply the function to correct for temperature,</span>
+    <span class="c1"># and add to the temp compensated array</span>
+    <span class="n">temp_ec</span> <span class="o">=</span> <span class="n">eu_std_ect_adjust</span><span class="p">(</span><span class="n">temp</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="n">conductivity</span><span class="p">)</span>
+    
+    <span class="n">temp_compensated</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_ec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>Kite, Geoff. “Computerized streamflow measurement using slug injection.” <em>Hydrological processes</em> 7.2 (1993): 227-233.</p></li>
+<li><p>Hintz, William D., and Rick A. Relyea. “Impacts of road deicing salts on the early-life growth and development of a stream salmonid: salt type matters.” <em>Environmental pollution</em> 223 (2017): 409-415.</p></li>
+<li><p>Smith, Stanford H. “TEMPERATURE CORRECTION IN CONDUCTIVITY MEASUREMENTS 1.” <em>Limnology and Oceanography</em> 7.3 (1962): 330-334.</p></li>
+</ol>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1496,34 +1391,48 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
-            
-    <a class='left-prev' id="prev-link" href="../Introduction/Data_Import_and_Review.html" title="previous page">Example: Data Import, Review, and Workflow</a>
-    <a class='right-next' id="next-link" href="../Notebook_2/Notebook_2.html" title="next page">Notebook 2: Rating Curve Development</a>
-
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../Introduction/Example_Notebook.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Example: Clausius-Clapeyron Equation</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="../Notebook_2/Notebook_2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Notebook 2: Rating Curve Development</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Dan Kovacek<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dan Kovacek<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
     </div>
-  </footer>
-</main>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  
+
   </body>
 </html>
