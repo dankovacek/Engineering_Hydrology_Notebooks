@@ -23,33 +23,20 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 
 # pandas is a library that manipulates "dataframes", table-like structures,
 # to efficiently run operations on large datasets
-
 import pandas as pd
+
 # numpy is a fundamental library for scientific computing
 # based on the representation of data as arrays
-import numpy as np
+import numpy as np.
+
 # matplotlib is a plotting library
 from matplotlib import pyplot as plt
-
-# this is a command to tell the notebook to display figures
-# within the notebook instead of creating new windows.
-%matplotlib inline
 ------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Input [0;32mIn [1][0m, in [0;36m<cell line: 8>[0;34m()[0m
-[1;32m      1[0m [38;5;66;03m# import libraries[39;00m
-[1;32m      2[0m [38;5;66;03m# --> libraries are collections of functions developed by communities of [39;00m
-[1;32m      3[0m [38;5;66;03m# open source software developers that typically focus on solving very specific problems[39;00m
-[1;32m      4[0m 
-[1;32m      5[0m [38;5;66;03m# pandas is a library that manipulates "dataframes", table-like structures,[39;00m
-[1;32m      6[0m [38;5;66;03m# to efficiently run operations on large datasets[39;00m
-[0;32m----> 8[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
-[1;32m      9[0m [38;5;66;03m# numpy is a fundamental library for scientific computing[39;00m
-[1;32m     10[0m [38;5;66;03m# based on the representation of data as arrays[39;00m
-[1;32m     11[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[0;36m  Input [0;32mIn [1][0;36m[0m
+[0;31m    import numpy as np.[0m
+[0m                      ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
 
-[0;31mModuleNotFoundError[0m: No module named 'pandas'
-ModuleNotFoundError: No module named 'pandas'
+SyntaxError: invalid syntax (168253362.py, line 11)
 
