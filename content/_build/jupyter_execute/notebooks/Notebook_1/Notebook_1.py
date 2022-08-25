@@ -18,6 +18,8 @@ from scipy import stats
 
 # # Notebook 1: Flow Measurement using the Salt Dilution Method
 # 
+# ## Introduction
+# 
 # [Flow measurement by salt dilution](https://doi.org/10.1002/hyp.3360070212)$^{[1]}$ is a type of tracer method where the natural conductivity of stream water is temporarily raised by adding (dissolving) a known mass of tracer into the stream, and measuring a response downstream.  Tracer methods can be done by slug injection or steady-state.  A "slug" is a known mass of tracer that dissolves and mixes in the stream.  The steady-state method is a constant injection of a dissolved tracer of known concentration.  Both methods are suited to lower flows where a sufficient signal-to-noise ratio can be acheived with a relatively small amount of tracer, and to turbulent flows where adequate mixing of the tracer can be achieved.  Table salt is commonly used for measurement because it is cheap and practical for field measurement, and the concentration and durations are small compared to [observed levels of toxicity](https://doi.org/10.1016/j.envpol.2017.01.040)$^{[2]}$.  
 # 
 # This notebook introduces the instrument calibration and measurement data processing for a salt dilution streamflow measurement using the slug tracer method.  More information on the steady-state method can be found [here](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.454.1620&rep=rep1&type=pdf&bcgovtm=new%20west%20record).  At the end of this notebook, there is an open ended question that asks you to reflect on the content of the notebook.
@@ -39,9 +41,9 @@ from scipy import stats
 # The calibration data is provided in a file named **SD_cal.csv**, and it's saved under:
 # >`<project root>/content/notebook_data/notebook_1_data/`.
 # 
-# If you haven't done so, review the different ways we can specify file paths and navigate file structure in the [Data Import and Review](Introduction/Data_Import_and_Review.ipynb) notebook.  
+# If you haven't done so, review the different ways we can specify file paths and navigate file structure in the [Data Import and Review](notebooks/Introduction/Data_Import_and_Review.ipynb) notebook.
 
-# In[2]:
+# In[75]:
 
 
 data_file_path = '../../notebook_data/notebook_1_data/'
@@ -49,7 +51,7 @@ calibration_filename = 'SD_cal.csv' # this is the calibration data file
 salt_dilution_filename = 'SD_data.csv' # this is the measurement data file
 
 
-# In[3]:
+# In[76]:
 
 
 # instrument calibration data
@@ -65,7 +67,7 @@ sd_data = pd.read_csv(data_file_path + salt_dilution_filename)
 # 
 # ![Measurement calibration information found in the calibration spreadsheet file.](img/sd_cal_sheet.png)
 
-# In[20]:
+# In[68]:
 
 
 # data given in the calibration file
@@ -74,7 +76,7 @@ cal_vol = 500 # total calibration volume mL  (row 2 of Calibration volume column
 cal_vol_increment = 1.0 # [mL] increments for calibration solution (Calibration solution added (ml) column)
 
 
-# In[21]:
+# In[69]:
 
 
 # display a preview of the calibration data
@@ -90,7 +92,7 @@ sd_cal.head()
 # 4.  Measure the conductivity of the control sample.
 # 5.  Repeat steps 3-4 until five measurements are recorded.
 
-# In[22]:
+# In[70]:
 
 
 # update the calibration solution added column for the volume of calibration solution added during the calibration
@@ -109,7 +111,7 @@ sd_cal['Concentration (mg/l)'] = sd_cal['Salt added (mg)'] / (sd_cal['Calibratio
 sd_cal.dropna(how='any', inplace=True)
 
 
-# In[23]:
+# In[71]:
 
 
 # see how the calibration data has been updated
@@ -124,7 +126,7 @@ sd_cal
 # 
 # The `stats.linregress` function takes in two arrays and returns the equation of the best fit line through the data, along with information about the fit.  Note that the r-value is the correlation coefficient.  The coefficient of determination ($R^2$) is the correlation coefficient squared.
 
-# In[48]:
+# In[72]:
 
 
 # initialize a single figure (the values 1, 1 can be changed to create a grid of plots)
@@ -160,7 +162,7 @@ plt.legend()
 
 # ### Best Fit slope and coefficient of determination ($R^2$) of calibration points
 
-# In[49]:
+# In[73]:
 
 
 #note: the number of decimals in the slope is too low. adjust the line below to print one more decimal.
@@ -325,13 +327,13 @@ print(f'The calculated discharge for the measurement is {Q_calculated:.1f} m^3/s
 
 # ## Additional Info
 # 
-# ### Temperature Correction for Conductivity
+# ### Temperature Compensation for Conductivity
 # 
 # The electrical conductivity (EC) of water is a function of temperature, so it is important that the water used for calibration is the same temperature as the water in the stream being measured.  Alternatively, a temperature correction can be applied.  For the data in this notebook, the instrument used for flow measurement has a thermometer, so temperature compensation is built into the instrument.
 # 
 # Two different methods of temperature compensation are provided below for reference, the first is an [EU standard for the determination of electrical conductivity](https://standards.iteh.ai/catalog/standards/cen/3978cdbc-b72f-459e-9275-99e7fc2b4b84/en-27888-1993), and the second is a [linear approximation of conductivity]()$^{[3]}$ as a function of temperature.
 
-# In[63]:
+# In[74]:
 
 
 def eu_std_ect_adjust(temp, ec):

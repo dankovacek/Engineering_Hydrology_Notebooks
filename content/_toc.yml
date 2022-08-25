@@ -5,6 +5,7 @@ parts:
   chapters:
   - file: notebooks/Introduction/Data_Import_and_Review
   - file: notebooks/Introduction/Example_Notebook
+  - file: markdown
 - caption: Flow Measurement
   chapters:
   - file: notebooks/Notebook_1/Notebook_1
