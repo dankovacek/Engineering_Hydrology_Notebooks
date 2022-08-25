@@ -357,6 +357,8 @@ plt.ylabel('Latitude')
 # plt.savefig('data/img/flow_accumulation.png', bbox_inches='tight')
 
 
+
+
 ### Calculate distances to upstream cells
 
 grid.flow_distance(data='catch', x=x, y=y, dirmap=dirmap, out_name='dist',
@@ -371,7 +373,7 @@ plt.colorbar(im, ax=ax, label='Distance to outlet (cells)')
 plt.xlabel('Longitude')
 plt.ylabel('Latitude')
 plt.title('Flow Distance')
-# plt.savefig('data/img/flow_distance.png', bbox_inches='tight')
+# plt.savefig('data/img/flow_distance.png', bbox_inches='tight'),
 
 area_threshold=20
 fig, ax = plt.subplots(figsize=(8,6))
@@ -541,3 +543,6 @@ Discuss the limitations of the approach.  Where do uncertainties exist?
 ## Question for Reflection
 
 For the first part where we estimated the water level at the parking lot outlet based on an assumption that there was zero infiltration, assuming all else is equal, how could we reduce the maximum water level to 5 cm?  
+
+
+

@@ -222,6 +222,17 @@ The first step is to import the regional data series and find all of the dates w
 
 Previewing the data shows line 1 has information about two distinct parameters.  Where the `PARAM` column value is 1, the `Value` column corresponds to daily discharge ($\frac{m^3}{s}$ and where the `PARAM` column value is 2, the `Value` column corresonds to daily water level ($m$).  We need to correctly set the header line to index 1 (the second row), so that the headings are read correctly.
 
+flow_de = pd.read_csv('Stave Daily Avg Flow.csv', header=1, parse_dates=True, index_col='Dates')
+flow_de['year'] = flow_de.index.year
+
+print(flow_de.head(10))
+
+flow_de = flow_de.dropna()
+
+max_de = flow_de.loc[flow_de.groupby('year')['flow'].idxmax()].copy()
+max_de.head(10)
+max_de.to_csv('max_de.csv')
+
 # set the header row to index 1, tell the function to set the `Date` column as the index.
 # If you look at the raw csv file, you'll see that there's an information line at the very top,
 # and the second line (index 1 in programming) is where the column headers are
@@ -245,14 +256,25 @@ print('SITE DATA: Start date = {}, End date = {}'.format(stage_df.index[0], stag
 
 In the previous step, we can see that the regional dataset encompasses the date range of our site data.  To perform a regression, we want to use concurrent data only.   The `concat`, or concatenate, function [documentation can be found here](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html). 
 
+regional_df
+
+stage_df
+
+stage_df
+
 # create a new dataframe of concurrent data and plot the data
 # join='inner' says to line up the indices and get the values that are common between the two dataframes
 # axis=1 says line up columns instead of rows
+# print(regional_df)
+stage_df.index = pd.to_datetime(stage_df['Date'])
+
+
+
 concurrent_df = pd.concat([stage_df, regional_df], join='inner', axis=1)
-stage_df.index = pd.to_datetime(stage_df.index)
+# stage_df.index = pd.to_datetime(stage_df.index)
+# 
 # filter just the columns we want
 concurrent_df = concurrent_df[['flow', 'RC Q (cms)']]
-
 # not rename the columns to something that is more indicative of the location of each data source
 concurrent_df.columns = ['Regional_Q', 'Project_Q']
 

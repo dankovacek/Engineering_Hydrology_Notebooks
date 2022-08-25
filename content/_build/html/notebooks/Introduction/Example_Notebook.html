@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Example: Clausius-Clapeyron Equation &#8212; Engineering Hydrology</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -34,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -44,7 +41,7 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -56,16 +53,16 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Example: Data Import and Review" href="Data_Import_and_Review.html" />
+    <link rel="next" title="Example: Data Import, Review, and Workflow" href="Data_Import_and_Review.html" />
     <link rel="prev" title="Foreword" href="../../intro.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -74,32 +71,32 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../../index.html">
-  
-  <img src="../../_static/logo.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Engineering Hydrology</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Engineering Hydrology</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../../intro.html">
    Foreword
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Example: Clausius-Clapeyron Equation
@@ -107,64 +104,64 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Data_Import_and_Review.html">
-   Example: Data Import and Review
+   Example: Data Import, Review, and Workflow
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Flow Measurement
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_1/Notebook_1.html">
    Notebook 1: Flow Measurement using the Salt Dilution Method
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Rating Curve Development
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_2/Notebook_2.html">
    Notebook 2: Rating Curve Development
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Extreme Values, Uncertainty, and Risk
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_3/Notebook_3.html">
    Notebook 3: Extreme Values, Uncertainty, and Risk
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
-  Regional Regression
+  Regional Information Transfer
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_4/Notebook_4.html">
    Notebook 4: Characterization of Long-Term Runoff
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Rainfall-Runoff Model
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_5/Notebook_5.html">
    Notebook 5: Rational Method and Travel Times
@@ -172,6 +169,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -237,12 +235,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -268,12 +266,11 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
@@ -290,11 +287,17 @@
   <a class="reference internal nav-link" href="#clausius-clapeyron-equation">
    Clausius-Clapeyron Equation
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-examples-of-functions-related-to-atmospheric-energy-balance">
+     Other examples of functions related to atmospheric energy balance
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -320,17 +323,16 @@
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This notebook is an interactive development environment (IDE) where you can run Python code to do calculations, numerical simuluation, and much more.</p>
-<p>For this example, we’ll plot the atmospheric water vapour pressure for a range of air temperatures.</p>
+<p>For this example, we’ll plot the atmospheric saturation water vapour pressure as a function of air temperature.</p>
+<p>The numpy library has a <code class="docutils literal notranslate"><span class="pre">linspace()</span></code> function that creates arrays of numbers with specific properties.</p>
+<p>Here we’re interested in looking at saturation vapour pressure for a range of temperatures we want to explore.  Say <strong>0 degrees to 30 degrees Celsius</strong> (the relationship does not hold below zero).  We can also specify how many points we want between the minimum and maximum we’ve set.  Let’s say 50 for now.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this cell is for code, you can change the cell type in the toolbar at the top of this window.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_temp</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">max_temp</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">temperature_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_temp</span><span class="p">,</span> <span class="n">max_temp</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 
-<span class="c1"># set the range of temperatures we&#39;re interested in </span>
-<span class="c1"># calculating the vapour pressure</span>
-
-<span class="c1"># the numpy (np) library has a &#39;linspace&#39; function that</span>
-<span class="c1"># creates an array starting at -5 and ending at 30 with 500 steps</span>
-<span class="n">temperature_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="c1"># alternatively we could specify the step size</span>
 </pre></div>
 </div>
 </div>
@@ -346,166 +348,238 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-5.00000000e+00, -4.92985972e+00, -4.85971944e+00, -4.78957916e+00,
-       -4.71943888e+00, -4.64929860e+00, -4.57915832e+00, -4.50901804e+00,
-       -4.43887776e+00, -4.36873747e+00, -4.29859719e+00, -4.22845691e+00,
-       -4.15831663e+00, -4.08817635e+00, -4.01803607e+00, -3.94789579e+00,
-       -3.87775551e+00, -3.80761523e+00, -3.73747495e+00, -3.66733467e+00,
-       -3.59719439e+00, -3.52705411e+00, -3.45691383e+00, -3.38677355e+00,
-       -3.31663327e+00, -3.24649299e+00, -3.17635271e+00, -3.10621242e+00,
-       -3.03607214e+00, -2.96593186e+00, -2.89579158e+00, -2.82565130e+00,
-       -2.75551102e+00, -2.68537074e+00, -2.61523046e+00, -2.54509018e+00,
-       -2.47494990e+00, -2.40480962e+00, -2.33466934e+00, -2.26452906e+00,
-       -2.19438878e+00, -2.12424850e+00, -2.05410822e+00, -1.98396794e+00,
-       -1.91382766e+00, -1.84368737e+00, -1.77354709e+00, -1.70340681e+00,
-       -1.63326653e+00, -1.56312625e+00, -1.49298597e+00, -1.42284569e+00,
-       -1.35270541e+00, -1.28256513e+00, -1.21242485e+00, -1.14228457e+00,
-       -1.07214429e+00, -1.00200401e+00, -9.31863727e-01, -8.61723447e-01,
-       -7.91583166e-01, -7.21442886e-01, -6.51302605e-01, -5.81162325e-01,
-       -5.11022044e-01, -4.40881764e-01, -3.70741483e-01, -3.00601202e-01,
-       -2.30460922e-01, -1.60320641e-01, -9.01803607e-02, -2.00400802e-02,
-        5.01002004e-02,  1.20240481e-01,  1.90380762e-01,  2.60521042e-01,
-        3.30661323e-01,  4.00801603e-01,  4.70941884e-01,  5.41082164e-01,
-        6.11222445e-01,  6.81362725e-01,  7.51503006e-01,  8.21643287e-01,
-        8.91783567e-01,  9.61923848e-01,  1.03206413e+00,  1.10220441e+00,
-        1.17234469e+00,  1.24248497e+00,  1.31262525e+00,  1.38276553e+00,
-        1.45290581e+00,  1.52304609e+00,  1.59318637e+00,  1.66332665e+00,
-        1.73346693e+00,  1.80360721e+00,  1.87374749e+00,  1.94388778e+00,
-        2.01402806e+00,  2.08416834e+00,  2.15430862e+00,  2.22444890e+00,
-        2.29458918e+00,  2.36472946e+00,  2.43486974e+00,  2.50501002e+00,
-        2.57515030e+00,  2.64529058e+00,  2.71543086e+00,  2.78557114e+00,
-        2.85571142e+00,  2.92585170e+00,  2.99599198e+00,  3.06613226e+00,
-        3.13627255e+00,  3.20641283e+00,  3.27655311e+00,  3.34669339e+00,
-        3.41683367e+00,  3.48697395e+00,  3.55711423e+00,  3.62725451e+00,
-        3.69739479e+00,  3.76753507e+00,  3.83767535e+00,  3.90781563e+00,
-        3.97795591e+00,  4.04809619e+00,  4.11823647e+00,  4.18837675e+00,
-        4.25851703e+00,  4.32865731e+00,  4.39879760e+00,  4.46893788e+00,
-        4.53907816e+00,  4.60921844e+00,  4.67935872e+00,  4.74949900e+00,
-        4.81963928e+00,  4.88977956e+00,  4.95991984e+00,  5.03006012e+00,
-        5.10020040e+00,  5.17034068e+00,  5.24048096e+00,  5.31062124e+00,
-        5.38076152e+00,  5.45090180e+00,  5.52104208e+00,  5.59118236e+00,
-        5.66132265e+00,  5.73146293e+00,  5.80160321e+00,  5.87174349e+00,
-        5.94188377e+00,  6.01202405e+00,  6.08216433e+00,  6.15230461e+00,
-        6.22244489e+00,  6.29258517e+00,  6.36272545e+00,  6.43286573e+00,
-        6.50300601e+00,  6.57314629e+00,  6.64328657e+00,  6.71342685e+00,
-        6.78356713e+00,  6.85370741e+00,  6.92384770e+00,  6.99398798e+00,
-        7.06412826e+00,  7.13426854e+00,  7.20440882e+00,  7.27454910e+00,
-        7.34468938e+00,  7.41482966e+00,  7.48496994e+00,  7.55511022e+00,
-        7.62525050e+00,  7.69539078e+00,  7.76553106e+00,  7.83567134e+00,
-        7.90581162e+00,  7.97595190e+00,  8.04609218e+00,  8.11623246e+00,
-        8.18637275e+00,  8.25651303e+00,  8.32665331e+00,  8.39679359e+00,
-        8.46693387e+00,  8.53707415e+00,  8.60721443e+00,  8.67735471e+00,
-        8.74749499e+00,  8.81763527e+00,  8.88777555e+00,  8.95791583e+00,
-        9.02805611e+00,  9.09819639e+00,  9.16833667e+00,  9.23847695e+00,
-        9.30861723e+00,  9.37875752e+00,  9.44889780e+00,  9.51903808e+00,
-        9.58917836e+00,  9.65931864e+00,  9.72945892e+00,  9.79959920e+00,
-        9.86973948e+00,  9.93987976e+00,  1.00100200e+01,  1.00801603e+01,
-        1.01503006e+01,  1.02204409e+01,  1.02905812e+01,  1.03607214e+01,
-        1.04308617e+01,  1.05010020e+01,  1.05711423e+01,  1.06412826e+01,
-        1.07114228e+01,  1.07815631e+01,  1.08517034e+01,  1.09218437e+01,
-        1.09919840e+01,  1.10621242e+01,  1.11322645e+01,  1.12024048e+01,
-        1.12725451e+01,  1.13426854e+01,  1.14128257e+01,  1.14829659e+01,
-        1.15531062e+01,  1.16232465e+01,  1.16933868e+01,  1.17635271e+01,
-        1.18336673e+01,  1.19038076e+01,  1.19739479e+01,  1.20440882e+01,
-        1.21142285e+01,  1.21843687e+01,  1.22545090e+01,  1.23246493e+01,
-        1.23947896e+01,  1.24649299e+01,  1.25350701e+01,  1.26052104e+01,
-        1.26753507e+01,  1.27454910e+01,  1.28156313e+01,  1.28857715e+01,
-        1.29559118e+01,  1.30260521e+01,  1.30961924e+01,  1.31663327e+01,
-        1.32364729e+01,  1.33066132e+01,  1.33767535e+01,  1.34468938e+01,
-        1.35170341e+01,  1.35871743e+01,  1.36573146e+01,  1.37274549e+01,
-        1.37975952e+01,  1.38677355e+01,  1.39378758e+01,  1.40080160e+01,
-        1.40781563e+01,  1.41482966e+01,  1.42184369e+01,  1.42885772e+01,
-        1.43587174e+01,  1.44288577e+01,  1.44989980e+01,  1.45691383e+01,
-        1.46392786e+01,  1.47094188e+01,  1.47795591e+01,  1.48496994e+01,
-        1.49198397e+01,  1.49899800e+01,  1.50601202e+01,  1.51302605e+01,
-        1.52004008e+01,  1.52705411e+01,  1.53406814e+01,  1.54108216e+01,
-        1.54809619e+01,  1.55511022e+01,  1.56212425e+01,  1.56913828e+01,
-        1.57615230e+01,  1.58316633e+01,  1.59018036e+01,  1.59719439e+01,
-        1.60420842e+01,  1.61122244e+01,  1.61823647e+01,  1.62525050e+01,
-        1.63226453e+01,  1.63927856e+01,  1.64629259e+01,  1.65330661e+01,
-        1.66032064e+01,  1.66733467e+01,  1.67434870e+01,  1.68136273e+01,
-        1.68837675e+01,  1.69539078e+01,  1.70240481e+01,  1.70941884e+01,
-        1.71643287e+01,  1.72344689e+01,  1.73046092e+01,  1.73747495e+01,
-        1.74448898e+01,  1.75150301e+01,  1.75851703e+01,  1.76553106e+01,
-        1.77254509e+01,  1.77955912e+01,  1.78657315e+01,  1.79358717e+01,
-        1.80060120e+01,  1.80761523e+01,  1.81462926e+01,  1.82164329e+01,
-        1.82865731e+01,  1.83567134e+01,  1.84268537e+01,  1.84969940e+01,
-        1.85671343e+01,  1.86372745e+01,  1.87074148e+01,  1.87775551e+01,
-        1.88476954e+01,  1.89178357e+01,  1.89879760e+01,  1.90581162e+01,
-        1.91282565e+01,  1.91983968e+01,  1.92685371e+01,  1.93386774e+01,
-        1.94088176e+01,  1.94789579e+01,  1.95490982e+01,  1.96192385e+01,
-        1.96893788e+01,  1.97595190e+01,  1.98296593e+01,  1.98997996e+01,
-        1.99699399e+01,  2.00400802e+01,  2.01102204e+01,  2.01803607e+01,
-        2.02505010e+01,  2.03206413e+01,  2.03907816e+01,  2.04609218e+01,
-        2.05310621e+01,  2.06012024e+01,  2.06713427e+01,  2.07414830e+01,
-        2.08116232e+01,  2.08817635e+01,  2.09519038e+01,  2.10220441e+01,
-        2.10921844e+01,  2.11623246e+01,  2.12324649e+01,  2.13026052e+01,
-        2.13727455e+01,  2.14428858e+01,  2.15130261e+01,  2.15831663e+01,
-        2.16533066e+01,  2.17234469e+01,  2.17935872e+01,  2.18637275e+01,
-        2.19338677e+01,  2.20040080e+01,  2.20741483e+01,  2.21442886e+01,
-        2.22144289e+01,  2.22845691e+01,  2.23547094e+01,  2.24248497e+01,
-        2.24949900e+01,  2.25651303e+01,  2.26352705e+01,  2.27054108e+01,
-        2.27755511e+01,  2.28456914e+01,  2.29158317e+01,  2.29859719e+01,
-        2.30561122e+01,  2.31262525e+01,  2.31963928e+01,  2.32665331e+01,
-        2.33366733e+01,  2.34068136e+01,  2.34769539e+01,  2.35470942e+01,
-        2.36172345e+01,  2.36873747e+01,  2.37575150e+01,  2.38276553e+01,
-        2.38977956e+01,  2.39679359e+01,  2.40380762e+01,  2.41082164e+01,
-        2.41783567e+01,  2.42484970e+01,  2.43186373e+01,  2.43887776e+01,
-        2.44589178e+01,  2.45290581e+01,  2.45991984e+01,  2.46693387e+01,
-        2.47394790e+01,  2.48096192e+01,  2.48797595e+01,  2.49498998e+01,
-        2.50200401e+01,  2.50901804e+01,  2.51603206e+01,  2.52304609e+01,
-        2.53006012e+01,  2.53707415e+01,  2.54408818e+01,  2.55110220e+01,
-        2.55811623e+01,  2.56513026e+01,  2.57214429e+01,  2.57915832e+01,
-        2.58617234e+01,  2.59318637e+01,  2.60020040e+01,  2.60721443e+01,
-        2.61422846e+01,  2.62124248e+01,  2.62825651e+01,  2.63527054e+01,
-        2.64228457e+01,  2.64929860e+01,  2.65631263e+01,  2.66332665e+01,
-        2.67034068e+01,  2.67735471e+01,  2.68436874e+01,  2.69138277e+01,
-        2.69839679e+01,  2.70541082e+01,  2.71242485e+01,  2.71943888e+01,
-        2.72645291e+01,  2.73346693e+01,  2.74048096e+01,  2.74749499e+01,
-        2.75450902e+01,  2.76152305e+01,  2.76853707e+01,  2.77555110e+01,
-        2.78256513e+01,  2.78957916e+01,  2.79659319e+01,  2.80360721e+01,
-        2.81062124e+01,  2.81763527e+01,  2.82464930e+01,  2.83166333e+01,
-        2.83867735e+01,  2.84569138e+01,  2.85270541e+01,  2.85971944e+01,
-        2.86673347e+01,  2.87374749e+01,  2.88076152e+01,  2.88777555e+01,
-        2.89478958e+01,  2.90180361e+01,  2.90881764e+01,  2.91583166e+01,
-        2.92284569e+01,  2.92985972e+01,  2.93687375e+01,  2.94388778e+01,
-        2.95090180e+01,  2.95791583e+01,  2.96492986e+01,  2.97194389e+01,
-        2.97895792e+01,  2.98597194e+01,  2.99298597e+01,  3.00000000e+01])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1.        ,  1.59183673,  2.18367347,  2.7755102 ,  3.36734694,
+        3.95918367,  4.55102041,  5.14285714,  5.73469388,  6.32653061,
+        6.91836735,  7.51020408,  8.10204082,  8.69387755,  9.28571429,
+        9.87755102, 10.46938776, 11.06122449, 11.65306122, 12.24489796,
+       12.83673469, 13.42857143, 14.02040816, 14.6122449 , 15.20408163,
+       15.79591837, 16.3877551 , 16.97959184, 17.57142857, 18.16326531,
+       18.75510204, 19.34693878, 19.93877551, 20.53061224, 21.12244898,
+       21.71428571, 22.30612245, 22.89795918, 23.48979592, 24.08163265,
+       24.67346939, 25.26530612, 25.85714286, 26.44897959, 27.04081633,
+       27.63265306, 28.2244898 , 28.81632653, 29.40816327, 30.        ])
 </pre></div>
 </div>
 </div>
 </div>
-<p>This cell is for “markdown” which is an easy way to format text nicely.  <a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Working%20With%20Markdown%20Cells.html">More information on markdown can be found here</a>.</p>
-<p>Let’s use markdown to write the Clausius-Clapeyron equation nicely:</p>
+<p>This cell is set to “Markdown” which is an easy way to format text nicely.</p>
+<p>More information on formatting text blocks using Markdown <a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Working%20With%20Markdown%20Cells.html">can be found here</a>.</p>
+<img src="img/block_type.png" alt="Block-type dropdown menu" style="width: 400px;"/>
+<p>Most academic writing is formatted using a system called <a class="reference external" href="https://www.latex-project.org/">LaTeX</a>.</p>
+<blockquote>
+<div><p><strong>Note:</strong> If you think you might want to apply to grad school, you will almost certainly have to learn LaTeX.  If you can work with Markdown (hint: you can!), it isn’t much further to preparing your work using LaTeX.  <a class="reference external" href="https://www.overleaf.com/">Overleaf</a> is a great web application for storing and collaborative editing of LaTeX documents.</p>
+</div></blockquote>
+<p>Let’s write the Clausius-Clapeyron equation in a print-worthy format:</p>
 </div>
 </div>
 <div class="section" id="clausius-clapeyron-equation">
 <h2>Clausius-Clapeyron Equation<a class="headerlink" href="#clausius-clapeyron-equation" title="Permalink to this headline">¶</a></h2>
+<p>The change in saturation vapour pressure of air as a function of temperature is given in differential form by:</p>
 <div class="math notranslate nohighlight">
-\[\frac{de_s}{dT} = \frac{L_v(T)e_s}{R_v T^2}\]</div>
-<p>Or, using an approximation:</p>
+\[\frac{de_s}{dT} = \frac{L_v(T)\cdot e_s}{R_v \cdot T^2}\]</div>
+<p>Assuming <span class="math notranslate nohighlight">\(L_v\)</span> is constant yields the approximation<span class="math notranslate nohighlight">\(^{[1]}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[e_s(T) = 0.611 \cdot exp\left( \frac{17.3 \cdot T_s}{T_s + 237.3} \right) \]</div>
-<p>Now, we can write this as a function in Python:</p>
+\[e_s(T) = e_{s0} \cdot exp \left(\frac{L_v}{R_v} \left[ \frac{1}{T_0} - \frac{1}{T} \right] \right) \]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L_v\)</span> is the latent heat of vaporization, (constant approximation 0-35 Celsius = <span class="math notranslate nohighlight">\(2.5\times10^6 \frac{J}{kg \cdot K}\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_v\)</span> is the vapor pressure gas constant (<span class="math notranslate nohighlight">\(461 \frac{J}{kg \cdot K}\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> is air temperature in Kelvin</p></li>
+<li><p><span class="math notranslate nohighlight">\(T_0\)</span> and <span class="math notranslate nohighlight">\(e_{s0}\)</span> are constants (<span class="math notranslate nohighlight">\(273 K\)</span> and <span class="math notranslate nohighlight">\(0.611 kPa\)</span>)</p></li>
+</ul>
+<ol class="simple">
+<li><p>Margulis, S. <em>Introduction to Hydrology</em>. 2014.</p></li>
+</ol>
+<p>We can write this as a function in Python:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_saturation_vapor_pressure</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_saturation_vapour_pressure</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Given T (temperature) as an input in Kelvin,</span>
+<span class="sd">    Given T (temperature) as an input in Celsius,</span>
 <span class="sd">    return the saturation vapour pressure of air.</span>
+<span class="sd">    Output units are in kiloPascals [kPa].</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="mf">0.611</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">17.3</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">T</span> <span class="o">+</span> <span class="mf">237.3</span><span class="p">))</span>
+    <span class="n">e_s0</span> <span class="o">=</span> <span class="mf">0.611</span>
+    <span class="n">L_v</span> <span class="o">=</span> <span class="mf">2.5E6</span>
+    <span class="n">R_v</span> <span class="o">=</span> <span class="mi">461</span>
+    <span class="n">T_0</span> <span class="o">=</span> <span class="mf">273.16</span>
+    <span class="n">T_k</span> <span class="o">=</span> <span class="n">T</span> <span class="o">+</span> <span class="n">T_0</span>
+    <span class="k">return</span> <span class="n">e_s0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="p">(</span><span class="n">L_v</span><span class="o">/</span><span class="n">R_v</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">T_0</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">T_k</span><span class="p">))</span>
     
 </pre></div>
 </div>
 </div>
 </div>
+<p>It’s good practice to write functions into simple components so they can be reused and combined.</p>
+<p>Calculate the saturation vapour pressure for the temperature range we defined above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an empty array to store the vapour pressures we will calculate</span>
+<span class="n">vapour_pressures</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># iterate through the temperature array we created above</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">temperature_range</span><span class="p">:</span>
+    <span class="n">sat_vapour_pressure</span> <span class="o">=</span> <span class="n">calculate_saturation_vapour_pressure</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">vapour_pressures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sat_vapour_pressure</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># now plot the result </span>
+<span class="c1"># note in the matplotlib plotting library the figsize is defined in inches by default</span>
+<span class="c1"># here we&#39;re saying 10&quot; wide by 6&quot; high</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temperature_range</span><span class="p">,</span> <span class="n">vapour_pressures</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Saturation Vapour Pressure vs. Temperature&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (Celsius)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Saturation Vapour Pressure (kPa)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Saturation Vapour Pressure (kPa)&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/Example_Notebook_13_1.png" src="../../_images/Example_Notebook_13_1.png" />
+</div>
+</div>
+<p>Below we’ll create a function to calculate dewpoint temperature that uses the vapour pressure function above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_dewpoint_temperature</span><span class="p">(</span><span class="n">rh</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given relative humidity and ambient temperature (in Celsius), </span>
+<span class="sd">    return the dewpoint temperature in Celsius.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># declare constants</span>
+    <span class="n">L_v</span> <span class="o">=</span> <span class="mf">2.5E6</span>
+    <span class="n">R_v</span> <span class="o">=</span> <span class="mi">461</span>
+    <span class="n">e_s0</span> <span class="o">=</span> <span class="mf">0.611</span>
+    <span class="n">T_0</span> <span class="o">=</span> <span class="mf">273.16</span>
+    
+    <span class="n">e_s</span> <span class="o">=</span> <span class="n">calculate_saturation_vapour_pressure</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="c1"># calculate the (actual) vapour pressure</span>
+    <span class="n">e_a</span> <span class="o">=</span> <span class="n">rh</span> <span class="o">*</span> <span class="n">e_s</span>
+    <span class="c1"># calculate the dewpoint temperature    </span>
+    <span class="n">T_dk</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">T_0</span> <span class="o">-</span> <span class="p">(</span><span class="n">R_v</span> <span class="o">/</span> <span class="n">L_v</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">e_a</span> <span class="o">/</span> <span class="n">e_s0</span><span class="p">))</span>
+    
+    <span class="n">T_d</span> <span class="o">=</span> <span class="n">T_dk</span> <span class="o">-</span> <span class="n">T_0</span>
+    
+    <span class="c1"># if the dewpoint temperature is below zero, return NaN</span>
+    <span class="k">if</span> <span class="n">T_d</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">T_d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s assume we want to explore the dewpoint temperature as a function of relative humidity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an array to represent the relative humidity from 10% to 100%</span>
+<span class="n">rh_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This time we’ll use a <em>list comprehension</em> instead of a “for” loop to calculate the dewpoint temperature where we assume temperature is constant but we want to evaluate a range of relative humidity.  When might we encounter such a situation?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_amb</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">dewpt_temps</span> <span class="o">=</span> <span class="p">[</span><span class="n">calculate_dewpoint_temperature</span><span class="p">(</span><span class="n">rh</span><span class="p">,</span> <span class="n">t_amb</span><span class="p">)</span> <span class="k">for</span> <span class="n">rh</span> <span class="ow">in</span> <span class="n">rh_range</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># now plot the result </span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rh_range</span><span class="p">,</span> <span class="n">dewpt_temps</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dewpoint Temperatures by Relative Humidity for Ambient Temperature = </span><span class="si">{</span><span class="n">t_amb</span><span class="si">}</span><span class="s1"> Celsius&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Relative Humidity [/100]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Dewpoint Temperature (Celsius)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Dewpoint Temperature (Celsius)&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/Example_Notebook_20_1.png" src="../../_images/Example_Notebook_20_1.png" />
+</div>
+</div>
+<p>Let’s get really fancy and create a heat map to express the relationship between ambient air temperature, relative humidity, and dewpoint temperature.</p>
+<p>See this <a class="reference external" href="https://gist.github.com/Kautenja/f9d6fd3d1dee631200bc11b8a46a76b7">gist example</a> used as a template.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ambient_temp_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">rh_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># create an empty dataframe to store results</span>
+<span class="n">dewpt_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">dewpt_df</span><span class="p">[</span><span class="s1">&#39;T_amb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ambient_temp_range</span> 
+<span class="n">dewpt_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;T_amb&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rh_range</span><span class="p">:</span>
+    <span class="n">dewpt_df</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">calculate_dewpoint_temperature</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">dewpt_df</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">dewpt_df</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="n">ambient_temp_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">rh_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">label_locs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Show all ticks and label them with the respective list entries</span>
+<span class="c1"># set x ticks to ambient temperature and y to relative humidity</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">label_locs</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">label_locs</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">ambient_temp_labels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">rh_labels</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Relative Humidity [/100]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ambient Temperature (Celsius)&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Dewpoint Temperature [degrees Celsius]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Dewpoint Temperature [degrees Celsius]&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/Example_Notebook_24_1.png" src="../../_images/Example_Notebook_24_1.png" />
+</div>
+</div>
+<div class="section" id="other-examples-of-functions-related-to-atmospheric-energy-balance">
+<h3>Other examples of functions related to atmospheric energy balance<a class="headerlink" href="#other-examples-of-functions-related-to-atmospheric-energy-balance" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_blackbody_radiation</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given T (temperature) as an input in Kelvin,</span>
-<span class="sd">    return the saturation vapour pressure of air.</span>
+<span class="sd">    return the unit area (area = 1m^2) </span>
+<span class="sd">    **black body** radiative power in W/m^2/K^4.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sigma</span><span class="o">=</span><span class="mf">5.670374419e-8</span>
     <span class="k">return</span> <span class="n">sigma</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">4</span><span class="p">)</span>
@@ -518,7 +592,8 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_greybody_radiation</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">emiss</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given T (temperature) as an input in Kelvin,</span>
-<span class="sd">    return the saturation vapour pressure of air.</span>
+<span class="sd">    return the unit area (area = 1m^2) </span>
+<span class="sd">    **grey body** radiative power in W/m^2/K^4..</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sigma</span><span class="o">=</span><span class="mf">5.670374419e-8</span>
     <span class="k">return</span> <span class="n">sigma</span><span class="o">*</span><span class="n">emiss</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="o">^</span><span class="mi">4</span><span class="p">)</span>
@@ -526,6 +601,8 @@
 </div>
 </div>
 </div>
+<p>Stefan-Bolzmann Constant (<span class="math notranslate nohighlight">\(\sigma\)</span>):
+<span class="math notranslate nohighlight">\(\sigma = 5.670374419×10^8\)</span> <span class="math notranslate nohighlight">\(W m^{−2}⋅K^{−4}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_blackbody_radiation</span><span class="p">(</span><span class="mi">5500</span><span class="p">)</span>
@@ -537,66 +614,6 @@
 </pre></div>
 </div>
 </div>
-</div>
-<p>Stefan-Bolzmann Constant:
-<span class="math notranslate nohighlight">\(\sigma = 5.670374419×10^8 Wm^{−2}⋅K^{−4}\)</span></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_saturation_vapor_pressure_C</span><span class="p">(</span><span class="n">Tc</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Given T (temperature) as an input in Kelvin,</span>
-<span class="sd">    return the saturation vapour pressure of air.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">T</span><span class="o">=</span><span class="n">Tc</span><span class="o">+</span><span class="mi">273</span><span class="p">;</span>
-    <span class="n">e</span> <span class="o">=</span> <span class="mf">0.611</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">17.3</span> <span class="o">*</span> <span class="n">T</span><span class="o">/</span><span class="p">(</span><span class="n">T</span> <span class="o">+</span> <span class="mf">237.3</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="n">e</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_dewpoint_temperature</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Given e (temperature) as an input in Kelvin,</span>
-<span class="sd">    return the saturation vapour pressure of air.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="mf">0.611</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">17.3</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">T</span> <span class="o">+</span> <span class="mf">237.3</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now, calculate the saturation vapour pressure for the range of temperature we defined above</span>
-<span class="n">temp</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="c1"># create an empty array to store the vapour pressures we will calculate</span>
-<span class="n">vapour_pressures</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="c1"># loop through the range of temperatures we defined above</span>
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">temperature_range</span><span class="p">:</span>
-    <span class="n">sat_vapour_pressure</span> <span class="o">=</span> <span class="n">calculate_saturation_vapor_pressure</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="n">vapour_pressures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sat_vapour_pressure</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># now plot the result</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temperature_range</span><span class="p">,</span> <span class="n">vapour_pressures</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Saturation Vapour Pressure&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (Celsius)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Saturation Vapour Pressure (kPa)&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Saturation Vapour Pressure (kPa)&#39;)
-</pre></div>
-</div>
-<img alt="../../_images/Example_Notebook_15_1.png" src="../../_images/Example_Notebook_15_1.png" />
 </div>
 </div>
 </div>
@@ -628,7 +645,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="../../intro.html" title="previous page">Foreword</a>
-    <a class='right-next' id="next-link" href="Data_Import_and_Review.html" title="next page">Example: Data Import and Review</a>
+    <a class='right-next' id="next-link" href="Data_Import_and_Review.html" title="next page">Example: Data Import, Review, and Workflow</a>
 
         </div>
         
@@ -640,7 +657,7 @@
         
           By Dan Kovacek<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -649,11 +666,9 @@
 
       </div>
     </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>

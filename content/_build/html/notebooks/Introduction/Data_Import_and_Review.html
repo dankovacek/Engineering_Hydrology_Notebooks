@@ -5,9 +5,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Example: Data Import and Review &#8212; Engineering Hydrology</title>
+    <title>Example: Data Import, Review, and Workflow &#8212; Engineering Hydrology</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -34,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -44,7 +41,7 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -52,18 +49,20 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Notebook 1: Flow Measurement using the Salt Dilution Method" href="../Notebook_1/Notebook_1.html" />
     <link rel="prev" title="Example: Clausius-Clapeyron Equation" href="Example_Notebook.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -72,32 +71,32 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../../index.html">
-  
-  <img src="../../_static/logo.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Engineering Hydrology</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Engineering Hydrology</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../../intro.html">
    Foreword
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Example_Notebook.html">
    Example: Clausius-Clapeyron Equation
@@ -105,64 +104,64 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Example: Data Import and Review
+   Example: Data Import, Review, and Workflow
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Flow Measurement
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_1/Notebook_1.html">
    Notebook 1: Flow Measurement using the Salt Dilution Method
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Rating Curve Development
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_2/Notebook_2.html">
    Notebook 2: Rating Curve Development
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Extreme Values, Uncertainty, and Risk
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_3/Notebook_3.html">
    Notebook 3: Extreme Values, Uncertainty, and Risk
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
-  Regional Regression
+  Regional Information Transfer
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_4/Notebook_4.html">
    Notebook 4: Characterization of Long-Term Runoff
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Rainfall-Runoff Model
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_5/Notebook_5.html">
    Notebook 5: Rational Method and Travel Times
@@ -170,6 +169,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -235,12 +235,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -266,21 +266,75 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-data">
-   Import Data
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-in-all-the-heck-does-this-have-to-do-with-hydrology">
+     What in all the heck does this have to do with hydrology??
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#file-path">
+   File Path
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-the-project-data-file">
+     Download the project data file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-structure">
+     File Structure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-a-csv-file">
+   Read a csv file
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#alternative-ways-to-specify-a-file-path">
+     Alternative ways to specify a file path
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#this-is-taking-forever-open-a-file-already">
+     This is taking forever, open a file already!!
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accessing-data-in-the-dataframe">
+     Accessing data in the dataframe
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#converting-data-types">
+     Converting data types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-the-data-and-some-first-steps-for-validation">
+     Visualizing the data and some first steps for validation
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -289,16 +343,28 @@
         
               <div>
                 
-  <div class="section" id="example-data-import-and-review">
-<h1>Example: Data Import and Review<a class="headerlink" href="#example-data-import-and-review" title="Permalink to this headline">¶</a></h1>
-<p>When starting out learning to code in Python, there may be a few simple tasks that seem unneccessarily complex.  Importing data is one such task, where in Excel we click on a file to open it and most of the time the program already knows whether a cell contains a number or text.  In Python we don’t have to declare the type of data explicitly, but the example below demonstrates the process of importing a file of time series data where the raw data format requires an extra step before we can work with the data.</p>
-<p>There is a limit to the size of dataset we can manually review for anomalies.  As data gets bigger, it becomes necessary to evaluate our dataset in ways that don’t require scanning tens or hundreds of thousands of rows.  In this example, we import a comma-separated-value (csv) file from a measurement device.  This notebook provides an introduction to opening and reviewing files programmatically.</p>
-<p>One final note, the ‘#’ symbol used extensively below is used for adding comments that the code interpreter ignores.  The interpreter ignores all lines starting with ‘#’, as well as anything after a ‘#’ symbol on a line that doesn’t start with ‘#’.</p>
+  <div class="section" id="example-data-import-review-and-workflow">
+<h1>Example: Data Import, Review, and Workflow<a class="headerlink" href="#example-data-import-review-and-workflow" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Data quality review is an unavoidable and critical step in any analysis.  It is more often the case that you will analyze data collected by someone else, or we will use data from many different sources.  In this course, we’ll work with water level and flow data collected by Water Survey of Canada (WSC) and other sources.  <strong>In engineering practice, it is the responsibility of the practitioner to review any data used as the basis for design or decision making.</strong>  Datasets from open repsitories are often accompanied by a disclaimer, see the <a class="reference external" href="https://wateroffice.ec.gc.ca/disclaimer_info_e.html">WSC disclaimer</a> for example.</p>
+<p>As datasets grow, it becomes necessary to use programmatic approaches to data review. This notebook provides an introduction to opening and reviewing the content of files programmatically. In this example, we import a <code class="docutils literal notranslate"><span class="pre">csv</span></code> (comma-separated-value) file from a measurement device commonly used in hydrologic practice.  There is a limit to the size of dataset we can manually review for anomalies.</p>
+<p>When starting out learning to code in Python, there are a few simple tasks that may seem unneccessarily complex.  Importing data is one such task, where in Excel we click on a file to open it and <em>most of the time</em> the program already knows whether a cell contains a number or text, for example.  In Python we don’t <em>have to</em> declare the type of data we’re working with, but  the example below demonstrates a common data import problem and how to work through it.</p>
+<blockquote>
+<div><p><strong>Note</strong>: the <code class="docutils literal notranslate"><span class="pre">#</span></code> symbol used extensively below is used for adding comments that are useful to convey information to someone else reviewing or using your code.  The Python interpreter ignores all lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code>.</p>
+</div></blockquote>
+<div class="section" id="what-in-all-the-heck-does-this-have-to-do-with-hydrology">
+<h3>What in all the heck does this have to do with hydrology??<a class="headerlink" href="#what-in-all-the-heck-does-this-have-to-do-with-hydrology" title="Permalink to this headline">¶</a></h3>
+<p>Time invested in learning basics of the tools will save many hours of frustration that can then be reinvested as time spent exploring and testing hydrologic concepts using observational data.  <strong>Automating file handling enables a powerful set of tools for investigation.</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
+<span class="c1"># --&gt; libraries are collections of functions developed by communities of </span>
+<span class="c1"># open source software developers that typically focus on solving very specific problems</span>
+
 <span class="c1"># pandas is a library that manipulates &quot;dataframes&quot;, table-like structures,</span>
 <span class="c1"># to efficiently run operations on large datasets</span>
+
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="c1"># numpy is a fundamental library for scientific computing</span>
 <span class="c1"># based on the representation of data as arrays</span>
@@ -313,32 +379,653 @@
 </div>
 </div>
 </div>
-<div class="section" id="import-data">
-<h2>Import Data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
-<p>Now we want to import data from a folder.  Another common difficulty is in recognizing how the program interprets file paths.  If we want to open a data file from within this notebook, it is important to know that Jupyter interprets file paths <strong>relative</strong> to the location of the Jupyter notebook file.</p>
-<p>In this case, the file we are working with is “Data_Import_and_Review.ipynb”, and it’s saved under “<em>(something)</em>/Engineering_Hydrology_Notebooks/Introduction/Data_Import_and_Review.ipynb”, where <em>(something)</em> is wherever you saved and unpacked the main repository file on your computer.</p>
-<p>If we had a datafile (let’s call it <em>CIVL418_Hidden_Creek_H_data.csv</em>) in the same folder as our notebook file, we can simply call the filename.  With pandas, it would be like so:</p>
-<p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.read_csv('CIVL418_Hidden_Creek_H_data.csv')</span></code></p>
-<p>Looking at our file structure, there is a folder called <em>data_review</em> that contains a number of csv files.  If we try and import one of these files using strictly the filename, we’ll see an error like:</p>
+</div>
+</div>
+<div class="section" id="file-path">
+<h2>File Path<a class="headerlink" href="#file-path" title="Permalink to this headline">¶</a></h2>
+<p><strong>A basic but fundamental concept is to understand how to read a file that’s saved anywhere on your computer’s file system</strong>, or on a completely different computer!.  In modern operating systems, most of the time we just click on a file, and the correct program starts and opens the file.  In Python, we need to be explicit about where a file resides on the system.  It is important to understand that this Jupyter notebook interprets file paths <strong>relative</strong> to where the notebook file is saved.</p>
+<p>The notebook file I’m using in this demonstration is labeled <code class="docutils literal notranslate"><span class="pre">Data_Import_and_Review.ipynb</span></code>, and it’s saved under <code class="docutils literal notranslate"><span class="pre">&lt;something&gt;/Engineering_Hydrology_Notebooks/content/notebooks/Introduction/Data_Import_and_Review.ipynb</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;something&gt;</span></code> is the file path where you saved and unpacked the archive (zip) file.</p>
+<div class="section" id="download-the-project-data-file">
+<h3>Download the project data file<a class="headerlink" href="#download-the-project-data-file" title="Permalink to this headline">¶</a></h3>
+<p>To begin, download the code repository from GitHub by following the link to <a class="reference external" href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks">https://github.com/dankovacek/Engineering_Hydrology_Notebooks</a>, clicking the green ‘code’ button and downloading a zip file of the code repository, as shown below:</p>
+<p><img alt="Github download page" src="../../_images/github_dl_page.png" /></p>
+<p>On most systems, the file will go to a <code class="docutils literal notranslate"><span class="pre">Downloads/</span></code> folder by default.  <strong>Save (or move) the file (and unzip) somewhere deliberate</strong> on your computer, like in your Documents folder.  Mine is saved to <code class="docutils literal notranslate"><span class="pre">/home/Documents/Engineering_Hydrology_Notebooks</span></code>.  This folder will be referred to as the <strong>project root</strong>.</p>
+</div>
+<div class="section" id="file-structure">
+<h3>File Structure<a class="headerlink" href="#file-structure" title="Permalink to this headline">¶</a></h3>
+<p>At the project root level, the structure is roughly as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/home/Documents/Engineering_Hydrology_Notebooks
+│   README.md
+│   requirements.txt    
+│
+└───content
+│   │   config.yml
+│   │   intro.md
+│   │   markdown.md
+│   │   _toc.yml
+│   │
+│   └───_build
+│       │   ...
+│       │   
+│   └───img
+│       │   ...
+│       │   
+│   └───notebook_data
+│       │   ...
+│       │   
+│   └───notebooks
+|   │   └───Introduction       &lt;--This is the location of Data_Import_and_Review.ipynb
+|   │   └───Notebook_1
+|   │   └───...
+│       │   
+│   └───project_data           &lt;--This is the location of the data that will be used for the term project
+│       │   ...
+│       │   
+</pre></div>
+</div>
+<p>At the bottom of the file structure, there is a folder called <code class="docutils literal notranslate"><span class="pre">project_data</span></code> that contains a number of csv files you will be using for your term project.  Let’s try opening <code class="docutils literal notranslate"><span class="pre">Hidden_Creek_stage_data.csv</span></code>.</p>
+</div>
+</div>
+<div class="section" id="read-a-csv-file">
+<h2>Read a csv file<a class="headerlink" href="#read-a-csv-file" title="Permalink to this headline">¶</a></h2>
+<p>If I want to open a data file (let’s call it <em>data.csv</em>) from within this notebook, I could simply save it to the same folder as this notebook file.  We could then read the csv file using pandas using simply the filename:</p>
+<p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.read_csv('data.csv')</span></code></p>
+<blockquote>
+<div><p><strong>Note</strong>: above we call the function <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> from the pandas library using the short form <code class="docutils literal notranslate"><span class="pre">pd</span></code>.  The file path is simply <code class="docutils literal notranslate"><span class="pre">data.csv</span></code> in this case, and note that it must be a string, i.e. surrounded by ‘single quotes’ or “double quotes”, either is fine.</p>
+</div></blockquote>
+<p>In many cases, we want to keep our data organized and avoid creating duplicates, so we will often keep data elsewhere.  If the file is saved elsewhere, there are a couple of ways we can specify its location.  Next, we’ll walk through an example of reading a csv data file from the project data, which is saved in a file called <code class="docutils literal notranslate"><span class="pre">Hidden_Creek_stage_data.csv</span></code>.</p>
+<p>If we try to open this file using just the filename, the Jupyter interface will look for a file with that name at the project root level, <strong>but it won’t find it</strong>.</p>
+<p>Instead, you’ll see an error like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">FileNotFoundError</span>                         <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="n">b872b6bb0ac8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
       <span class="mi">3</span> <span class="c1"># in this case  is located in the</span>
       <span class="mi">4</span> <span class="c1"># Open the folder and navigate to where</span>
-<span class="o">----&gt;</span> <span class="mi">5</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;CIVL418_Hidden_Creek_H_data.csv&#39;</span><span class="p">)</span>
+<span class="o">----&gt;</span> <span class="mi">5</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Hidden_Creek_stage_data.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This error occurs because Jupyter looks for the file in the same level directory as our file.  We can tell it to look up one level in the file directory by starting the path string with double ellipsis, <code class="docutils literal notranslate"><span class="pre">..</span></code>.</p>
-<p>If we try the script below, our notebook will look for <em>CIVL418_Hidden_Creek_H_data.csv</em> one level up from the <em>Introduction</em> folder, which puts us at the level of <code class="docutils literal notranslate"><span class="pre">Engineering_Hydrology_Notebooks/</span></code>.  Before moving on, ask yourself if this path will work?</p>
-<p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.read_csv('../CIVL418_Hidden_Creek_H_data.csv')</span></code></p>
-<p>The path won’t work because there is no file named <em>CIVL418_Hidden_Creek_H_data.csv</em> found in the folder <code class="docutils literal notranslate"><span class="pre">Engineering_Hydrology_Notebooks/</span></code>.  The file is saved in the <code class="docutils literal notranslate"><span class="pre">data_review</span></code> folder that is however in this folder, so we construct the path as follows:</p>
-<p><code class="docutils literal notranslate"><span class="pre">../data_review/CIVL418_Hidden_Creek_H_data.csv</span></code></p>
-<p>Let’s import our data now.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import data from the </span>
-<span class="c1"># note the file path is RELATIVE to the location of the notebook file we&#39;re working in</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../Project_Data/Hidden_Creek_stage_data.csv&#39;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Hidden_Creek_stage_data.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Hidden_Creek_stage_data.csv&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/util/_decorators.py:311,</span> in <span class="ni">deprecate_nonkeyword_arguments.&lt;locals&gt;.decorate.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">305</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">num_allow_args</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">307</span>         <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arguments</span><span class="o">=</span><span class="n">arguments</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">308</span>         <span class="ne">FutureWarning</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">311</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers/readers.py:680,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">665</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">666</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">667</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">676</span>     <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">},</span>
+<span class="g g-Whitespace">    </span><span class="mi">677</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">680</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers/readers.py:575,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">572</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">575</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">577</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">578</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers/readers.py:934,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">933</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">934</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/parsers/readers.py:1218,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1214</span>     <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;rb&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1215</span> <span class="c1"># error: No overload variant of &quot;get_handle&quot; matches argument types</span>
+<span class="g g-Whitespace">   </span><span class="mi">1216</span> <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1217</span> <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1218</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1219</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1220</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1221</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1222</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1223</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1224</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1225</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1226</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1227</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1228</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1229</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File ~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/io/common.py:786,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">781</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">782</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">783</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">784</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">785</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">786</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">787</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">793</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">794</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">795</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;Hidden_Creek_stage_data.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This error occurs because we told the interpreter that the file lives at the level of the project root.  Recall this notebook file is saved in the folder at <code class="docutils literal notranslate"><span class="pre">/home/Documents/Engineering_Hydrology_Notebooks/content/notebooks/Introduction/</span></code>.  Let’s check the file path of the working directory:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># first, import the &quot;operating system&quot; function library</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1">#store the curent working directory path as a string</span>
+<span class="n">working_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="c1"># show the current path</span>
+<span class="n">working_directory</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/danbot/Documents/UBC/Teaching_Assistant/Engineering_Hydrology_Notebooks/content/notebooks/Introduction&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Note</strong>: if the last line of a code block is just a variable, the interpreter will print the variable.  If you want to print something that isn’t the last line of code in a block, you need to use a <code class="docutils literal notranslate"><span class="pre">print(...)</span></code> function, i.e. <code class="docutils literal notranslate"><span class="pre">print(working_directory)</span></code>.</p>
+</div></blockquote>
+<p>Above, we have saved the current working directory to a variable called <code class="docutils literal notranslate"><span class="pre">working_directory</span></code>.  We can use this variable to list the contents of the directory with the <code class="docutils literal notranslate"><span class="pre">listdir()</span></code> function from the <code class="docutils literal notranslate"><span class="pre">os</span></code> library to list directory contents.  Let’s do this for the current working directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">working_directory</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;.ipynb_checkpoints&#39;,
+ &#39;Example_Notebook.ipynb&#39;,
+ &#39;img&#39;,
+ &#39;Data_Import_and_Review.ipynb&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we can see that there are no <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files in the current working directory.  That’s because the project data is saved at <code class="docutils literal notranslate"><span class="pre">/home/Documents/Engineering_Hydrology_Notebooks/content/project_data</span></code>.</p>
+<div class="section" id="alternative-ways-to-specify-a-file-path">
+<h3>Alternative ways to specify a file path<a class="headerlink" href="#alternative-ways-to-specify-a-file-path" title="Permalink to this headline">¶</a></h3>
+<p>Let’s open the stage (water level) data file (<code class="docutils literal notranslate"><span class="pre">Hidden_Creek_stage_data.csv</span></code>) from the <code class="docutils literal notranslate"><span class="pre">project_data/</span></code> directory.</p>
+<ol class="simple">
+<li><p>Simply use the full filepath to read the file.  Mine is:<br />
+<code class="docutils literal notranslate"><span class="pre">/home/Documents/Engineering_Hydrology_Notebooks/content/project_data/Hidden_Creek_stage_data.csv</span></code></p></li>
+</ol>
+<p>Let’s try this (update the string below to the correct path):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># note, here you need to replace &quot;somewhere&quot; with the rest of your filepath as described above</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;&lt;somewhere&gt;/Engineering_Hydrology_Notebooks/content/project_data/Hidden_Creek_stage_data.csv&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data = pd.read_csv(data_path)</span>
+<span class="c1"># data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p>Alternatively, we can navigate from the location of this notebook file (the “current working directory”) to the data file.  The Pandas <code class="docutils literal notranslate"><span class="pre">read_csv('&lt;filepath&gt;')</span></code> function reads  (<code class="docutils literal notranslate"><span class="pre">../</span></code>) in the filepath to mean “go up one level” from the working directory.  Looking at the file structure <a class="reference external" href="#File-Structure">outlined above</a>, or simply opening the project root folder (<code class="docutils literal notranslate"><span class="pre">Engineering_Hydrology_Notebooks/</span></code>), we can see that the <code class="docutils literal notranslate"><span class="pre">project_data/</span></code> folder is <strong>two levels up</strong> from the current working directory.  We can use this feature to create a relative path from the current working directory.</p></li>
+</ol>
+<p>Let’s look at how this works using the <code class="docutils literal notranslate"><span class="pre">listdir</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Notebook_2&#39;,
+ &#39;Notebook_5&#39;,
+ &#39;Notebook_4&#39;,
+ &#39;Introduction&#39;,
+ &#39;Notebook_1&#39;,
+ &#39;Notebook_3&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;../../&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;project_data&#39;,
+ &#39;markdown.md&#39;,
+ &#39;_toc.yml&#39;,
+ &#39;_build&#39;,
+ &#39;notebooks&#39;,
+ &#39;intro.md&#39;,
+ &#39;notebook_data&#39;,
+ &#39;img&#39;,
+ &#39;_config.yml&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Above, we can now see the <code class="docutils literal notranslate"><span class="pre">project_data/</span></code> folder.  Let’s list its contents:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;../../project_data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;measured_EC_data_C.csv&#39;,
+ &#39;measurement_calibration_B.csv&#39;,
+ &#39;regional_streamflow&#39;,
+ &#39;Metadata_C.txt&#39;,
+ &#39;measured_EC_data_A.csv&#39;,
+ &#39;measurement_calibration_C.csv&#39;,
+ &#39;measured_EC_data_B.csv&#39;,
+ &#39;Metadata_A.txt&#39;,
+ &#39;Hidden_Creek_stage_data.csv&#39;,
+ &#39;Metadata_B.txt&#39;,
+ &#39;Project_QH_table_2021.csv&#39;,
+ &#39;measurement_calibration_A.csv&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This folder contains <code class="docutils literal notranslate"><span class="pre">Hidden_Creek_stage_data.csv</span></code>, so we can construct the filepath for our data.  Here I’m going to store the path as a variable and call it <code class="docutils literal notranslate"><span class="pre">HC_data_path</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_folder</span> <span class="o">=</span> <span class="s1">&#39;../../project_data/&#39;</span>
+<span class="n">HC_data_path</span> <span class="o">=</span> <span class="n">data_folder</span> <span class="o">+</span> <span class="s1">&#39;Hidden_Creek_stage_data.csv&#39;</span>
+<span class="c1"># alternatively, I could use the os.path.join() function to create the path, i.e. </span>
+<span class="c1"># HC_data_path = os.path.join(data_folder, &#39;Hidden_Creek_stage_data.csv&#39;)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">HC_data_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>PARAM</th>
+      <th>Date</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010/08/25</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>25</td>
+      <td>0.83</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010/08/26</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>26</td>
+      <td>0.876</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010/08/27</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>27</td>
+      <td>1.16</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010/08/28</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>28</td>
+      <td>0.867</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010/08/29</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>29</td>
+      <td>0.711</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>672</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012/06/27</td>
+      <td>2012</td>
+      <td>6</td>
+      <td>27</td>
+      <td>1.95</td>
+    </tr>
+    <tr>
+      <th>673</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012/06/28</td>
+      <td>2012</td>
+      <td>6</td>
+      <td>28</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>674</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012/06/29</td>
+      <td>2012</td>
+      <td>6</td>
+      <td>29</td>
+      <td>2.38</td>
+    </tr>
+    <tr>
+      <th>675</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012/06/30</td>
+      <td>2012</td>
+      <td>6</td>
+      <td>30</td>
+      <td>2.71</td>
+    </tr>
+    <tr>
+      <th>676</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2012/07/01</td>
+      <td>2012</td>
+      <td>7</td>
+      <td>1</td>
+      <td>3.02</td>
+    </tr>
+  </tbody>
+</table>
+<p>677 rows × 7 columns</p>
+</div></div></div>
+</div>
+<ol class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">../</span></code> shortcut works in Jupyter and with Pandas, but it doesn’t work in all situations.  A more robust way to “look up one level” is to use the <code class="docutils literal notranslate"><span class="pre">os.dirname()</span></code> function to get the name of the parent directory of the current working directory.</p></li>
+</ol>
+<p>Recall <code class="docutils literal notranslate"><span class="pre">os.getcwd()</span></code> gets the current working directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+<span class="n">parent_dir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/danbot/Documents/UBC/Teaching_Assistant/Engineering_Hydrology_Notebooks/content/notebooks&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Notebook_2&#39;,
+ &#39;Notebook_5&#39;,
+ &#39;Notebook_4&#39;,
+ &#39;Introduction&#39;,
+ &#39;Notebook_1&#39;,
+ &#39;Notebook_3&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Listing the results shows the same folders as we saw above using <code class="docutils literal notranslate"><span class="pre">../</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gparent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
+<span class="n">gparent_dir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/danbot/Documents/UBC/Teaching_Assistant/Engineering_Hydrology_Notebooks/content&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">gparent_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;project_data&#39;,
+ &#39;markdown.md&#39;,
+ &#39;_toc.yml&#39;,
+ &#39;_build&#39;,
+ &#39;notebooks&#39;,
+ &#39;intro.md&#39;,
+ &#39;notebook_data&#39;,
+ &#39;img&#39;,
+ &#39;_config.yml&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ve found the <code class="docutils literal notranslate"><span class="pre">project_data</span></code> folder a different way.</p>
+<p>We can create intermediate variables as short forms for accessing different folders, or we can chain the <code class="docutils literal notranslate"><span class="pre">os.path.dirname()</span></code> function to move up an arbitrary number of levels. i.e.:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())),</span> <span class="s1">&#39;project_data&#39;</span><span class="p">)</span>
+<span class="n">data_dir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/danbot/Documents/UBC/Teaching_Assistant/Engineering_Hydrology_Notebooks/content/project_data&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;measured_EC_data_C.csv&#39;,
+ &#39;measurement_calibration_B.csv&#39;,
+ &#39;regional_streamflow&#39;,
+ &#39;Metadata_C.txt&#39;,
+ &#39;measured_EC_data_A.csv&#39;,
+ &#39;measurement_calibration_C.csv&#39;,
+ &#39;measured_EC_data_B.csv&#39;,
+ &#39;Metadata_A.txt&#39;,
+ &#39;Hidden_Creek_stage_data.csv&#39;,
+ &#39;Metadata_B.txt&#39;,
+ &#39;Project_QH_table_2021.csv&#39;,
+ &#39;measurement_calibration_A.csv&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>According to the <a class="reference external" href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself"><strong>Don’t Repeat Yourself</strong></a> principle, it’s a good idea to use variables to store file and folder paths to avoid writing or declaring things twice (more typing = more chance of introducing a typo).  I generally specify important paths the very beginning of a work file, and I use variable names that are easy to understand, i.e. <code class="docutils literal notranslate"><span class="pre">data_folder</span> <span class="pre">=</span> <span class="pre">&lt;some</span> <span class="pre">path</span> <span class="pre">to</span> <span class="pre">data&gt;</span></code></p>
+<blockquote>
+<div><p><strong>Note</strong>:  It is good practice to use variable names that are easy to understand.  For example, if you are storing a number you’ve calculated that represents average annual flow, consider the difference between <code class="docutils literal notranslate"><span class="pre">qa</span></code> and <code class="docutils literal notranslate"><span class="pre">avg_annual_flow_m3s</span></code>.  The former might make sense in one moment, but not to someone else or to yourself a year later.  The latter is much clearer, and it also contains a sort of encoding of the <strong>units</strong> (m3s is easy to interpret as <span class="math notranslate nohighlight">\(\frac{m^3}{s}\)</span>, or cms = “<strong>c</strong>ubic <strong>m</strong>etres per <strong>s</strong>econd”) — units are important!!</p>
+</div></blockquote>
+</div>
+<div class="section" id="this-is-taking-forever-open-a-file-already">
+<h3>This is taking forever, open a file already!!<a class="headerlink" href="#this-is-taking-forever-open-a-file-already" title="Permalink to this headline">¶</a></h3>
+<p>Taking what we learned above, lets create a variable to store the filepath for the Hidden Creek stage data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">HC_stage_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;Hidden_Creek_stage_data.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">HC_stage_data_path</span><span class="p">)</span>
+<span class="c1"># the &quot;head()&quot; function prints just the first five rows.  </span>
+<span class="c1"># You can specify how many rows to show by entering an integer in the function, i.e. df.head(10) up to 50 rows </span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>PARAM</th>
+      <th>Date</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010/08/25</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>25</td>
+      <td>0.83</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010/08/26</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>26</td>
+      <td>0.876</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010/08/27</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>27</td>
+      <td>1.16</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010/08/28</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>28</td>
+      <td>0.867</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>00XX000</td>
+      <td>2</td>
+      <td>2010/08/29</td>
+      <td>2010</td>
+      <td>8</td>
+      <td>29</td>
+      <td>0.711</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The dataframe object (we’ve saved it as <code class="docutils literal notranslate"><span class="pre">df</span></code>) also has a handy function <code class="docutils literal notranslate"><span class="pre">describe()</span></code> that displays some basic summary statistics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -395,7 +1082,7 @@
       <th>top</th>
       <td>00XX000</td>
       <td>NaN</td>
-      <td>2010/12/15</td>
+      <td>2012/06/14</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -485,7 +1172,7 @@
 </table>
 </div></div></div>
 </div>
-<p>Looking at the stats of the above dataframe, it appears as though the ‘Value’ column has non-numeric values.  We can tell this by trying to perform a calculation on the column.  If calculating the mean doesn’t work, there could be a few explanations.</p>
+<p>Looking at the stats of the above dataframe, it appears as though the ‘Value’ column has non-numeric values (<code class="docutils literal notranslate"><span class="pre">NaN</span></code> = Not a Number).  We can tell this by trying to perform a calculation on the column.  If calculating the mean doesn’t work, there could be a few explanations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -495,91 +1182,91 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1534</span>         <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1535</span>             <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1536</span>         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1536</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1537</span>             <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1538</span>         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
 
 <span class="ne">ValueError</span>: could not convert string to float: &#39; 0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02&#39;
 
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1538</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1539</span>                 <span class="n">x</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1540</span>             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1540</span>             <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1541</span>                 <span class="n">x</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1542</span>             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
 
 <span class="ne">ValueError</span>: complex() arg is a malformed string
 
 <span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
 
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">8</span><span class="n">bb43d6bee5e</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">20</span><span class="o">-</span><span class="mi">8</span><span class="n">bb43d6bee5e</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">mean</span><span class="nt">(self, axis, skipna, level, numeric_only, **kwargs)</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">mean</span><span class="nt">(self, axis, skipna, level, numeric_only, **kwargs)</span>
 <span class="g g-Whitespace">  </span><span class="mi">11116</span>         <span class="p">)</span>
 <span class="g g-Whitespace">  </span><span class="mi">11117</span>         <span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="ne">&gt; </span><span class="mi">11118</span>             <span class="k">return</span> <span class="n">NDFrame</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">numeric_only</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="g g-Whitespace">  </span><span class="mi">11119</span> 
 <span class="g g-Whitespace">  </span><span class="mi">11120</span>         <span class="c1"># pandas\core\generic.py:10924: error: Cannot assign to a method</span>
 
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">mean</span><span class="nt">(self, axis, skipna, level, numeric_only, **kwargs)</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">mean</span><span class="nt">(self, axis, skipna, level, numeric_only, **kwargs)</span>
 <span class="g g-Whitespace">  </span><span class="mi">10724</span> 
 <span class="g g-Whitespace">  </span><span class="mi">10725</span>     <span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="ne">&gt; </span><span class="mi">10726</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stat_function</span><span class="p">(</span>
 <span class="g g-Whitespace">  </span><span class="mi">10727</span>             <span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">nanops</span><span class="o">.</span><span class="n">nanmean</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">numeric_only</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
 <span class="g g-Whitespace">  </span><span class="mi">10728</span>         <span class="p">)</span>
 
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">_stat_function</span><span class="nt">(self, name, func, axis, skipna, level, numeric_only, **kwargs)</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">_stat_function</span><span class="nt">(self, name, func, axis, skipna, level, numeric_only, **kwargs)</span>
 <span class="g g-Whitespace">  </span><span class="mi">10709</span>         <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <span class="g g-Whitespace">  </span><span class="mi">10710</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agg_by_level</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">)</span>
 <span class="ne">&gt; </span><span class="mi">10711</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce</span><span class="p">(</span>
 <span class="g g-Whitespace">  </span><span class="mi">10712</span>             <span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="n">numeric_only</span>
 <span class="g g-Whitespace">  </span><span class="mi">10713</span>         <span class="p">)</span>
 
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/series.py</span> in <span class="ni">_reduce</span><span class="nt">(self, op, name, axis, skipna, numeric_only, filter_type, **kwds)</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/series.py</span> in <span class="ni">_reduce</span><span class="nt">(self, op, name, axis, skipna, numeric_only, filter_type, **kwds)</span>
 <span class="g g-Whitespace">   </span><span class="mi">4180</span>                 <span class="p">)</span>
 <span class="g g-Whitespace">   </span><span class="mi">4181</span>             <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
 <span class="ne">-&gt; </span><span class="mi">4182</span>                 <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">delegate</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
 <span class="g g-Whitespace">   </span><span class="mi">4183</span> 
 <span class="g g-Whitespace">   </span><span class="mi">4184</span>     <span class="k">def</span> <span class="nf">_reindex_indexer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_index</span><span class="p">,</span> <span class="n">indexer</span><span class="p">,</span> <span class="n">copy</span><span class="p">):</span>
 
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">_f</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span>             <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span>                 <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">71</span>                     <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span>             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">73</span>                 <span class="c1"># we want to transform an object array</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">_f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>             <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>                 <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">73</span>                     <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span>                 <span class="c1"># we want to transform an object array</span>
 
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">f</span><span class="nt">(values, axis, skipna, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">131</span>                     <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span>             <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">133</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span> 
-<span class="g g-Whitespace">    </span><span class="mi">135</span>             <span class="k">return</span> <span class="n">result</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">f</span><span class="nt">(values, axis, skipna, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>                     <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span>             <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">135</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span> 
+<span class="g g-Whitespace">    </span><span class="mi">137</span>             <span class="k">return</span> <span class="n">result</span>
 
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">new_func</span><span class="nt">(values, axis, skipna, mask, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">390</span>             <span class="n">mask</span> <span class="o">=</span> <span class="n">isna</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">391</span> 
-<span class="ne">--&gt; </span><span class="mi">392</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">new_func</span><span class="nt">(values, axis, skipna, mask, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">392</span>             <span class="n">mask</span> <span class="o">=</span> <span class="n">isna</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">393</span> 
-<span class="g g-Whitespace">    </span><span class="mi">394</span>         <span class="k">if</span> <span class="n">datetimelike</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">394</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">395</span> 
+<span class="g g-Whitespace">    </span><span class="mi">396</span>         <span class="k">if</span> <span class="n">datetimelike</span><span class="p">:</span>
 
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">nanmean</span><span class="nt">(values, axis, skipna, mask)</span>
-<span class="g g-Whitespace">    </span><span class="mi">629</span> 
-<span class="g g-Whitespace">    </span><span class="mi">630</span>     <span class="n">count</span> <span class="o">=</span> <span class="n">_get_counts</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_count</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">631</span>     <span class="n">the_sum</span> <span class="o">=</span> <span class="n">_ensure_numeric</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_sum</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">632</span> 
-<span class="g g-Whitespace">    </span><span class="mi">633</span>     <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">the_sum</span><span class="p">,</span> <span class="s2">&quot;ndim&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">nanmean</span><span class="nt">(values, axis, skipna, mask)</span>
+<span class="g g-Whitespace">    </span><span class="mi">631</span> 
+<span class="g g-Whitespace">    </span><span class="mi">632</span>     <span class="n">count</span> <span class="o">=</span> <span class="n">_get_counts</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_count</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">633</span>     <span class="n">the_sum</span> <span class="o">=</span> <span class="n">_ensure_numeric</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype_sum</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">634</span> 
+<span class="g g-Whitespace">    </span><span class="mi">635</span>     <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">the_sum</span><span class="p">,</span> <span class="s2">&quot;ndim&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
 
-<span class="nn">~/Documents/code/data_analysis/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1540</span>             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1541</span>                 <span class="c1"># e.g. &quot;foo&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1542</span>                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not convert </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> to numeric&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
-<span class="g g-Whitespace">   </span><span class="mi">1543</span>     <span class="k">return</span> <span class="n">x</span>
-<span class="g g-Whitespace">   </span><span class="mi">1544</span> 
+<span class="nn">~/.local/lib/python3.8/site-packages/pandas/core/nanops.py</span> in <span class="ni">_ensure_numeric</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1542</span>             <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1543</span>                 <span class="c1"># e.g. &quot;foo&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1544</span>                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not convert </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> to numeric&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">1545</span>     <span class="k">return</span> <span class="n">x</span>
+<span class="g g-Whitespace">   </span><span class="mi">1546</span> 
 
 <span class="ne">TypeError</span>: Could not convert  0.830.876 1.160.8670.7110.6320.6960.8070.7140.6850.6740.6520.6490.6210.6080.5790.6260.676 1.35 1.190.8830.7860.7980.7430.838 1.89 2.74  1.8 1.18 1.08 1.56 1.35 2.81 2.39 2.85 1.76 1.31 1.090.949 0.830.7420.6710.6210.5740.586 1.56  2.8 1.45 1.190.9930.8550.7630.6950.6420.5920.5620.5190.4850.882 0.83 2.26 1.73 1.59 1.25 1.09  1.1 1.01  1.5 2.79 2.49 1.68 1.47 1.56 1.46 2.26 1.51 1.25 1.080.9570.8690.8030.765 0.89 1.45 1.19 1.070.9160.538 0.370.735 1.44 1.150.6390.4920.5260.4850.4580.4910.5120.4780.4470.423 0.320.4070.482 1.37 1.43 1.05 0.82 2.01 2.09 1.67 1.29 1.050.876 0.770.6910.6280.5880.5690.594 1.13 1.96 1.54  1.20.9730.8170.7490.8060.6090.6310.4940.4210.4210.4580.6840.6890.4730.4330.1490.1870.508 1.37 1.97 2.31 2.62 1.85 1.39 1.140.9720.848 0.750.6950.6790.6890.7210.7170.7730.7070.4020.4030.4690.5140.5650.6610.6340.6840.6590.589 0.540.5150.6280.721 0.820.9610.6880.5930.5140.4410.4030.3710.3530.3240.2930.3850.3390.265 0.270.2530.2860.2890.2710.2710.2550.2410.2340.2790.5430.6110.6330.799 1.26  1.2  1.20.8580.6710.5780.5120.4950.5270.5070.4720.4870.5060.5030.5320.6040.741 1.31 1.26 1.040.8830.7810.7170.6750.6040.5430.5220.5460.8970.7620.6680.6550.6130.5830.5480.5080.4780.4440.4220.4120.4290.493 0.630.731 0.840.8820.7850.7360.7280.854 1.01 1.02 1.11 1.22 1.27 1.25 1.17  1.3    2 2.07 1.61 1.79 2.38 2.18 1.91 1.69 1.66 1.94 2.19 2.05 1.98 1.85 1.83 2.03 1.79 1.59  1.6 1.94 1.95 2.09 2.04 1.97 2.02  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 2.13 2.09    2 1.98 2.04 1.85 1.69 1.88  1.9 2.23 1.89 1.69 1.67 1.77 1.88 1.88 1.77 1.74 1.67 1.56 1.49 1.46 1.38 1.28  1.2 1.15 1.15 1.18 1.16 1.23 1.34  1.8 1.86 1.42  1.4 1.34 1.25 1.27 1.31 1.22 1.25 1.080.9560.8460.8340.8420.8610.8580.8870.9480.977 1.02 0.99 0.920.8370.8490.9970.908 1.190.9660.754 0.66 1.65 2.71 1.66 1.73 2.46 3.09 2.03 1.41 1.12 0.940.838 1.43 1.36 1.110.9590.9180.849 1.01 1.14 3.07 2.66  1.9 1.43 1.180.9820.8380.742  0.7 1.09  1.3 1.43  1.4 1.070.8780.7740.7120.7030.7690.923 1.070.8510.7550.7210.6680.6210.5730.536 0.520.5240.9040.9530.8660.7530.6870.6180.5930.6010.5570.4910.4630.4660.928 1.240.798 0.660.626 3.35  2.1 1.45 1.18 1.030.9060.8190.745 0.69 0.650.6150.5740.545 0.530.5090.469 0.46 0.450.4360.4260.4430.5790.5470.5210.4880.4530.4440.4740.5290.5860.573 1.19  1.6 1.180.9560.7920.7390.933 2.08 2.13  1.4 1.110.953 1.17 1.150.9740.8470.7590.7060.6530.6120.5730.4990.524 0.510.6890.6390.5810.5750.7040.6480.5590.5060.6620.8550.8550.8410.7270.6780.7030.688 0.650.6280.6110.6220.6860.8640.8470.7720.7070.6490.5980.5620.624 0.580.5210.5010.5550.5450.5160.504 0.470.4030.3830.3730.3420.3310.3410.452  0.70.6050.4920.4450.4650.5870.6740.6360.5680.4840.6640.7590.6210.5320.4750.4280.3970.3770.3640.3460.3540.4160.4610.6360.9930.9010.7710.6630.6090.6230.6680.6280.5850.553 0.550.6340.924 1.24 1.28 1.26 1.22 1.17 1.18 1.24 1.15  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN  NaN 1.94  1.8 1.89  2.5 2.61 2.17 1.89 1.86 1.82 1.75 1.87 1.67  1.6 1.76 2.07 2.24 2.13 1.87 2.24 2.95 2.63 2.16 2.01 2.24 2.43 2.56 2.39 2.06 2.04 1.95    2 2.38 2.71 3.02 to numeric
 </pre></div>
@@ -590,39 +1277,88 @@
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ValueError: could not convert ... to numeric:
 </pre></div>
 </div>
-<p>When you import a csv with pandas, it will try to figure out the type of each column.  If pandas can’t figure it out, it will leave the values as strings.  In this case, and this is very common when working with files coming from different places (other software, hardware systems, etc.), some values which are non-numeric are included somewhere in the file.  We don’t want to go through a big csv and manually change the files, because what if we have to deal with hundreds of files, or millions of rows?</p>
-<p>We can verify the type of values in the column by calling type, (and we need to check one row, so I’ve indexed row 0 below).</p>
+<p>When you import a csv with pandas, it will try to figure out the type of each column.  If pandas can’t figure it out, it will leave the values as strings.  In this case, and this is very common when working with files coming from different places (other software, hardware systems, etc.), some values which are non-numeric are included somewhere in the file.  We don’t want to go through a big csv and manually change the files, because what if we have to deal with hundreds of files, or millions of rows?  You may have come across similar issues in Excel.</p>
+</div>
+<div class="section" id="accessing-data-in-the-dataframe">
+<h3>Accessing data in the dataframe<a class="headerlink" href="#accessing-data-in-the-dataframe" title="Permalink to this headline">¶</a></h3>
+<p>We have the data stored in a variable called <code class="docutils literal notranslate"><span class="pre">df</span></code>, but it’s not immediately obvious how to work with it.  The Pandas library is incredibly powerful for filtering, slicing, and indexing data in many ways.  Our dataframe is a table with named columns.  We can list the column names as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;ID&#39;, &#39;PARAM&#39;, &#39;Date&#39;, &#39;year&#39;, &#39;month&#39;, &#39;day&#39;, &#39;Value&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can access any combination of columns, run operations on single rows or the entire table.  We can retrieve the <code class="docutils literal notranslate"><span class="pre">Value</span></code> column by indexing it like so <code class="docutils literal notranslate"><span class="pre">df['Value']</span></code> which returns an array of all the values (like a vector).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0       0.83
+1      0.876
+2       1.16
+3      0.867
+4      0.711
+       ...  
+672     1.95
+673        2
+674     2.38
+675     2.71
+676     3.02
+Name: Value, Length: 677, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calling the <code class="docutils literal notranslate"><span class="pre">Value</span></code> column returns an array of numbers, but above there was an error trying to calculate the mean.</p>
+<p>We can verify the type of values in the column by calling the built-in <code class="docutils literal notranslate"><span class="pre">type</span></code> function.  Below we look at the first value in the array using an integer index, in this case the first value in the array <code class="docutils literal notranslate"><span class="pre">df['Value']</span></code> is accessed using square brackets, i.e. <code class="docutils literal notranslate"><span class="pre">df['Value'][0]</span></code>.  If we wanted the 18th value, it would be <code class="docutils literal notranslate"><span class="pre">df['Value'][17]</span></code> because like many programming languages, <strong>Python starts counting at 0 instead of 1</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data type of the elements of the <code class="docutils literal notranslate"><span class="pre">Value</span></code> column are string (‘str’) because of some unfortunate but common characteristic of the infinite variety of data source formats.  A large part of data analysis is identifying and fixing these types of issues!</p>
+</div>
+<div class="section" id="converting-data-types">
+<h3>Converting data types<a class="headerlink" href="#converting-data-types" title="Permalink to this headline">¶</a></h3>
+<p>We are working with numeric data that we want to perform calculations on, so the data type needs to be some numeric type (other types are boolean, string, sequence, mappings, classes, etc).  In most cases, we use <code class="docutils literal notranslate"><span class="pre">float</span></code>, short for <em>floating point</em> numbers.  The other numeric type is <code class="docutils literal notranslate"><span class="pre">int</span></code> or <em>integer</em> (i.e. 1, 2, 3).</p>
+<p>We can change the type of values in a few ways.  Let’s try using the <code class="docutils literal notranslate"><span class="pre">.astype()</span></code> function from pandas, and then check the data type.  Let’s also create a more informative variable name (variable and unit information should be specified somewhere, here let’s assume it’s stage (water level), expressed in metres.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;stage_m&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;stage_m&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;str&#39;&gt;
+&lt;class &#39;numpy.float64&#39;&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>Indeed, the data type of the elements of the <code class="docutils literal notranslate"><span class="pre">Value</span></code> column are string.</p>
-<p>We can change the type of values in a few ways.  Let’s try using the <code class="docutils literal notranslate"><span class="pre">.astype()</span></code> function from pandas.</p>
+<p>We can see the type is now (64 bit) floating point.</p>
+<p>Floating point is the term used to describe the way computers represent fractions.  From the <a class="reference external" href="https://docs.python.org/3/tutorial/floatingpoint.html">Python documentation</a>, the number <code class="docutils literal notranslate"><span class="pre">0.125</span></code> is represented as <span class="math notranslate nohighlight">\(\frac{1}{10}+\frac{2}{100}+\frac{5}{1000}\)</span>.  Most numbers can’t be perfectly represented this way because we don’t have infinite memory (think of pi, or the fraction <code class="docutils literal notranslate"><span class="pre">1/3</span></code>, for example).</p>
+<p>Let’s try calculating a mean again.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;numpy.float64&#39;&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can see the type is now float.  Let’s try calculating a mean again.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;stage_m&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -632,24 +1368,27 @@
 </div>
 </div>
 </div>
-<p>Now if we plot the value, we can see there are a couple of breaks in the series.</p>
+</div>
+<div class="section" id="visualizing-the-data-and-some-first-steps-for-validation">
+<h3>Visualizing the data and some first steps for validation<a class="headerlink" href="#visualizing-the-data-and-some-first-steps-for-validation" title="Permalink to this headline">¶</a></h3>
+<p>Now if we plot the data as a time series, we can see <strong>there are a few gaps</strong> in the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;stage_m&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fbc34493100&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1fade61280&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Data_Import_and_Review_13_1.png" src="../../_images/Data_Import_and_Review_13_1.png" />
+<img alt="../../_images/Data_Import_and_Review_54_1.png" src="../../_images/Data_Import_and_Review_54_1.png" />
 </div>
 </div>
-<p>We can also see what periods correspond to gaps by filtering for all rows the <code class="docutils literal notranslate"><span class="pre">nan</span></code> values.</p>
+<p>We can isolate the missing periods by filtering for all rows where the value is <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, which stands for <strong>not a number</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gaps</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gaps</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;stage_m&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span>
 
 <span class="n">gaps</span>
 </pre></div>
@@ -681,6 +1420,7 @@
       <th>month</th>
       <th>day</th>
       <th>Value</th>
+      <th>stage_m</th>
     </tr>
   </thead>
   <tbody>
@@ -693,6 +1433,7 @@
       <td>6</td>
       <td>5</td>
       <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>285</th>
@@ -702,6 +1443,7 @@
       <td>2011</td>
       <td>6</td>
       <td>6</td>
+      <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -713,6 +1455,7 @@
       <td>6</td>
       <td>7</td>
       <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>287</th>
@@ -722,6 +1465,7 @@
       <td>2011</td>
       <td>6</td>
       <td>8</td>
+      <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -733,9 +1477,11 @@
       <td>6</td>
       <td>9</td>
       <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>...</th>
+      <td>...</td>
       <td>...</td>
       <td>...</td>
       <td>...</td>
@@ -753,6 +1499,7 @@
       <td>5</td>
       <td>24</td>
       <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>639</th>
@@ -762,6 +1509,7 @@
       <td>2012</td>
       <td>5</td>
       <td>25</td>
+      <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -773,6 +1521,7 @@
       <td>5</td>
       <td>26</td>
       <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>641</th>
@@ -782,6 +1531,7 @@
       <td>2012</td>
       <td>5</td>
       <td>27</td>
+      <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -793,10 +1543,11 @@
       <td>5</td>
       <td>28</td>
       <td>NaN</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
-<p>87 rows × 7 columns</p>
+<p>87 rows × 8 columns</p>
 </div></div></div>
 </div>
 <p>If we know we’ll be dealing with more files from this source in the future, we could begin by addressing it at the source (change how values are recorded and saved).</p>
@@ -812,7 +1563,8 @@
 </div>
 </div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">len</span></code> function tells us how many non-numeric values (<code class="docutils literal notranslate"><span class="pre">NaN</span></code>) there are in our dataset by checking the length of the filtered dataframe called <code class="docutils literal notranslate"><span class="pre">gaps</span></code> .</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">len</span></code> function tells us how many rows there are in a dataframe, in this case the dataframe we created by filtering for all non-numeric values (<code class="docutils literal notranslate"><span class="pre">NaN</span></code>) in the original dataset.</p>
+<p>We can also check the mean of all columns at once:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -820,18 +1572,19 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PARAM       2.000000
-year     2011.079764
-month       6.446086
-day        15.819793
-Value       1.037456
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PARAM         2.000000
+year       2011.079764
+month         6.446086
+day          15.819793
+stage_m       1.037456
 dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
 <p>The mean function will skip over the non-numeric values and not include them in the calculation of summary statistics.</p>
-<p>This may seem like a lot of work for not much value, but you quickly become proficient at basic data review using programmatic methods over manually (visually) walking through the entire dataset.  This skill is especially important as datasets grow in size.</p>
+<p>This may seem like a lot of work for not much value, the ability to quickly review data programmatically is especially important as datasets grow in size.  You can’t visually scroll through 1 million rows in a text file or spreadsheet!</p>
+</div>
 </div>
 </div>
 
@@ -873,7 +1626,7 @@ dtype: float64
         
           By Dan Kovacek<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -882,11 +1635,9 @@ dtype: float64
 
       </div>
     </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>

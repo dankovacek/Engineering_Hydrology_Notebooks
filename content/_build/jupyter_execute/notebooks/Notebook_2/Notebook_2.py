@@ -34,7 +34,7 @@ It isn't typically possible to accurately measure surface runoff directly on a *
 
 In the last exercise, we processed a single discharge measurement taken using the salt dilution method.  Typically we want to collect discharge measurements to describe as much of the expected range of natural flow conditions as possible, from very low flows in the dry season, to the highest flows we can (safely) measure.
 
-**Note**: A folder of references is provided containing governing standards for hydrometric data collection, as well as a discussion paper on uncertainty in hydrometric data collection.
+**Note**: [A folder of references is provided in the repository](https://github.com/dankovacek/Engineering_Hydrology_Notebooks/tree/main/content/notebooks/Notebook_2/References) containing governing standards for hydrometric data collection, as well as a discussion paper on uncertainty in hydrometric data collection.
 
 Go through this notebook and follow along with the development of the stage-discharge rating curve. At the end, there is an open ended question that requires you to reflect on the content of the notebook. Written responses are to be submitted via Canvas, where a response field will be set up.
 

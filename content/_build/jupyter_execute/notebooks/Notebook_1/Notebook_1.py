@@ -1,4 +1,5 @@
-# import required packages
+# import libraries
+import os
 import pandas as pd
 import numpy as np
 import math
@@ -28,11 +29,17 @@ Follow along in this notebook to learn about the salt dilution method for measur
 
 ## Import the Salt Dilution Data
 
-In a salt dilution measurement, we first calibrate the instrument.  The calibration data is provided in a file named *SD_cal.csv
+In a salt dilution measurement, we first calibrate the instrument using known concentrations of salt solution.  
 
-data_file_path = '../../data/notebook_1_data/'
+The calibration data is provided in a file named **SD_cal.csv**, and it's saved under `<project root>/content/notebook_data/notebook_1_data/`.
+
+If you haven't done so, review the different ways we can specify file paths and navigate file structure in the [Data Import and Review](Introduction/Data_Import_and_Review.ipynb) notebook.  
+
+data_file_path = '../../notebook_data/notebook_1_data/'
 calibration_filename = 'SD_cal.csv' # this is the calibration data file
 salt_dilution_filename = 'SD_data.csv' # this is the measurement data file
+
+
 
 # instrument calibration data
 # see how two strings can be combined with the '+' operator
@@ -46,7 +53,7 @@ cal_vol = 500 # total calibration volume mL
 cal_vol_increment = 1.1 # [mL] increments for calibration solution
 
 # display a preview of the calibration data
-sd_cal
+sd_cal.head()
 
 # update the calibration solution added column for the volume of calibration solution added during the calibration
 sd_cal['Calibration solution added (ml)'] = cal_vol_increment * sd_cal.index

@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notebook 1: Flow Measurement using the Salt Dilution Method &#8212; Engineering Hydrology</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -34,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -44,7 +41,7 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -57,15 +54,15 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Notebook 2: Rating Curve Development" href="../Notebook_2/Notebook_2.html" />
-    <link rel="prev" title="Example: Data Import and Review" href="../Introduction/Data_Import_and_Review.html" />
-
+    <link rel="prev" title="Example: Data Import, Review, and Workflow" href="../Introduction/Data_Import_and_Review.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -74,32 +71,32 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../../index.html">
-  
-  <img src="../../_static/logo.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Engineering Hydrology</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Engineering Hydrology</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../../intro.html">
    Foreword
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Introduction/Example_Notebook.html">
    Example: Clausius-Clapeyron Equation
@@ -107,64 +104,64 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Introduction/Data_Import_and_Review.html">
-   Example: Data Import and Review
+   Example: Data Import, Review, and Workflow
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Flow Measurement
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Notebook 1: Flow Measurement using the Salt Dilution Method
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Rating Curve Development
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_2/Notebook_2.html">
    Notebook 2: Rating Curve Development
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Extreme Values, Uncertainty, and Risk
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_3/Notebook_3.html">
    Notebook 3: Extreme Values, Uncertainty, and Risk
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
-  Regional Regression
+  Regional Information Transfer
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_4/Notebook_4.html">
    Notebook 4: Characterization of Long-Term Runoff
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Rainfall-Runoff Model
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_5/Notebook_5.html">
    Notebook 5: Rational Method and Travel Times
@@ -172,6 +169,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -237,12 +235,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -268,12 +266,11 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#given-information">
    Given Information:
@@ -339,8 +336,7 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -351,7 +347,8 @@
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import required packages</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import libraries</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">math</span>
@@ -405,10 +402,12 @@
 </div>
 <div class="section" id="import-the-salt-dilution-data">
 <h2>Import the Salt Dilution Data<a class="headerlink" href="#import-the-salt-dilution-data" title="Permalink to this headline">¶</a></h2>
-<p>In a salt dilution measurement, we first calibrate the instrument.  The calibration data is provided in a file named *SD_cal.csv</p>
+<p>In a salt dilution measurement, we first calibrate the instrument using known concentrations of salt solution.</p>
+<p>The calibration data is provided in a file named <strong>SD_cal.csv</strong>, and it’s saved under <code class="docutils literal notranslate"><span class="pre">&lt;project</span> <span class="pre">root&gt;/content/notebook_data/notebook_1_data/</span></code>.</p>
+<p>If you haven’t done so, review the different ways we can specify file paths and navigate file structure in the <span class="xref myst">Data Import and Review</span> notebook.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_file_path</span> <span class="o">=</span> <span class="s1">&#39;../../data/notebook_1_data/&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_file_path</span> <span class="o">=</span> <span class="s1">&#39;../../notebook_data/notebook_1_data/&#39;</span>
 <span class="n">calibration_filename</span> <span class="o">=</span> <span class="s1">&#39;SD_cal.csv&#39;</span> <span class="c1"># this is the calibration data file</span>
 <span class="n">salt_dilution_filename</span> <span class="o">=</span> <span class="s1">&#39;SD_data.csv&#39;</span> <span class="c1"># this is the measurement data file</span>
 </pre></div>
@@ -434,7 +433,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># display a preview of the calibration data</span>
-<span class="n">sd_cal</span>
+<span class="n">sd_cal</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -510,69 +509,6 @@
       <td>NaN</td>
       <td>464.0</td>
       <td>10.8</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>NaN</td>
-      <td>5.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>505.0</td>
-      <td>10.8</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>NaN</td>
-      <td>6.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>546.0</td>
-      <td>10.8</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Salt concentration of calibration solution is ...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>Date of measurement: Sept 26, 2010, 4:10 pm</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Injected salt mass: 100kg</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
     </tr>
   </tbody>
 </table>
@@ -907,10 +843,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb431a30fd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f0632f708e0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_1_13_1.png" src="../../_images/Notebook_1_13_1.png" />
+<img alt="../../_images/Notebook_1_14_1.png" src="../../_images/Notebook_1_14_1.png" />
 </div>
 </div>
 <div class="section" id="alternative-plotting-library-for-interactivity-bokeh">
@@ -945,23 +881,23 @@
     return new Date();
   }
 
-  var force = true;
+  const force = true;
 
   if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
     root._bokeh_onload_callbacks = [];
     root._bokeh_is_loading = undefined;
   }
 
-  var JS_MIME_TYPE = 'application/javascript';
-  var HTML_MIME_TYPE = 'text/html';
-  var EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
-  var CLASS_NAME = 'output_bokeh rendered_html';
+  const JS_MIME_TYPE = 'application/javascript';
+  const HTML_MIME_TYPE = 'text/html';
+  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
+  const CLASS_NAME = 'output_bokeh rendered_html';
 
   /**
    * Render data to the DOM node
    */
   function render(props, node) {
-    var script = document.createElement("script");
+    const script = document.createElement("script");
     node.appendChild(script);
   }
 
@@ -969,10 +905,10 @@
    * Handle when an output is cleared or removed
    */
   function handleClearOutput(event, handle) {
-    var cell = handle.cell;
+    const cell = handle.cell;
 
-    var id = cell.output_area._bokeh_element_id;
-    var server_id = cell.output_area._bokeh_server_id;
+    const id = cell.output_area._bokeh_element_id;
+    const server_id = cell.output_area._bokeh_server_id;
     // Clean up Bokeh references
     if (id != null && id in Bokeh.index) {
       Bokeh.index[id].model.document.clear();
@@ -981,11 +917,11 @@
 
     if (server_id !== undefined) {
       // Clean up Bokeh references
-      var cmd = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
-      cell.notebook.kernel.execute(cmd, {
+      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
+      cell.notebook.kernel.execute(cmd_clean, {
         iopub: {
           output: function(msg) {
-            var id = msg.content.text.trim();
+            const id = msg.content.text.trim();
             if (id in Bokeh.index) {
               Bokeh.index[id].model.document.clear();
               delete Bokeh.index[id];
@@ -994,8 +930,8 @@
         }
       });
       // Destroy server and session
-      var cmd = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
-      cell.notebook.kernel.execute(cmd);
+      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
+      cell.notebook.kernel.execute(cmd_destroy);
     }
   }
 
@@ -1003,15 +939,15 @@
    * Handle when a new output is added
    */
   function handleAddOutput(event, handle) {
-    var output_area = handle.output_area;
-    var output = handle.output;
+    const output_area = handle.output_area;
+    const output = handle.output;
 
     // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
     if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
       return
     }
 
-    var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
 
     if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
       toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
@@ -1019,10 +955,10 @@
       output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
     }
     if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
-      var bk_div = document.createElement("div");
+      const bk_div = document.createElement("div");
       bk_div.innerHTML = output.data[HTML_MIME_TYPE];
-      var script_attrs = bk_div.children[0].attributes;
-      for (var i = 0; i < script_attrs.length; i++) {
+      const script_attrs = bk_div.children[0].attributes;
+      for (let i = 0; i < script_attrs.length; i++) {
         toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
         toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
       }
@@ -1035,14 +971,14 @@
 
     function append_mime(data, metadata, element) {
       // create a DOM node to render to
-      var toinsert = this.create_output_subarea(
+      const toinsert = this.create_output_subarea(
         metadata,
         CLASS_NAME,
         EXEC_MIME_TYPE
       );
       this.keyboard_manager.register_events(toinsert);
       // Render to node
-      var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
       render(props, toinsert[toinsert.length - 1]);
       element.append(toinsert);
       return toinsert
@@ -1068,8 +1004,8 @@
 
   // register the mime type if in Jupyter Notebook environment and previously unregistered
   if (root.Jupyter !== undefined) {
-    var events = require('base/js/events');
-    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    const events = require('base/js/events');
+    const OutputArea = require('notebook/js/outputarea').OutputArea;
 
     if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
       register_renderer(events, OutputArea);
@@ -1082,7 +1018,7 @@
     root._bokeh_failed_load = false;
   }
 
-  var NB_LOAD_WARNING = {'data': {'text/html':
+  const NB_LOAD_WARNING = {'data': {'text/html':
      "<div style='background-color: #fdd'>\n"+
      "<p>\n"+
      "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
@@ -1099,7 +1035,7 @@
      "</div>"}};
 
   function display_loaded() {
-    var el = document.getElementById("1002");
+    const el = document.getElementById("1002");
     if (el != null) {
       el.textContent = "BokehJS is loading...";
     }
@@ -1165,8 +1101,6 @@
       document.body.appendChild(element);
     }
 
-    const hashes = {"https://cdn.bokeh.org/bokeh/release/bokeh-2.3.1.min.js": "YF85VygJKMVnHE+lLv2AM93Vbstr0yo2TbIu5v8se5Rq3UQAUmcuh4aaJwNlpKwa", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.1.min.js": "KKuas3gevv3PvrlkyCMzffFeaMq5we/a2QsP5AUoS3mJ0jmaCL7jirFJN3GoE/lM", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.1.min.js": "MK/uFc3YT18pkvvXRl66tTHjP0/dxoSH2e/eiNMFIguKlun2+WVqaPTWmUy/zvh4"};
-
     for (let i = 0; i < js_urls.length; i++) {
       const url = js_urls[i];
       const element = document.createElement('script');
@@ -1174,10 +1108,6 @@
       element.onerror = on_error.bind(null, url);
       element.async = false;
       element.src = url;
-      if (url in hashes) {
-        element.crossOrigin = "anonymous";
-        element.integrity = "sha384-" + hashes[url];
-      }
       console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
       document.head.appendChild(element);
     }
@@ -1190,11 +1120,11 @@
   }
 
   
-  var js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.3.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.1.min.js"];
-  var css_urls = [];
+  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.1.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.1.min.js"];
+  const css_urls = [];
   
 
-  var inline_js = [
+  const inline_js = [
     function(Bokeh) {
       Bokeh.set_log_level("info");
     },
@@ -1208,7 +1138,7 @@
     
     if (root.Bokeh !== undefined || force === true) {
       
-    for (var i = 0; i < inline_js.length; i++) {
+    for (let i = 0; i < inline_js.length; i++) {
       inline_js[i].call(root, root.Bokeh);
     }
     if (force === true) {
@@ -1219,7 +1149,7 @@
       console.log("Bokeh: BokehJS failed to load within specified timeout.");
       root._bokeh_failed_load = true;
     } else if (force !== true) {
-      var cell = $(document.getElementById("1002")).parents('.cell').data().cell;
+      const cell = $(document.getElementById("1002")).parents('.cell').data().cell;
       cell.output_area.append_execute_result(NB_LOAD_WARNING)
     }
 
@@ -1240,20 +1170,20 @@
 
 
 
-<div class="bk-root" id="e4d2458d-3ab6-4f27-96cb-ac5ae909dc1f" data-root-id="1003"></div>
+<div class="bk-root" id="8d996412-a937-4ebd-8119-16b6c964d171" data-root-id="1003"></div>
 </div><script type="application/javascript">(function(root) {
   function embed_document(root) {
     
-  var docs_json = {"35b5d851-d18a-4c23-8bbc-616a5a8908b9":{"defs":[],"roots":{"references":[{"attributes":{"below":[{"id":"1012"}],"center":[{"id":"1015"},{"id":"1019"}],"height":400,"left":[{"id":"1016"}],"renderers":[{"id":"1037"},{"id":"1042"}],"title":{"id":"1044"},"toolbar":{"id":"1027"},"width":800,"x_range":{"id":"1004"},"x_scale":{"id":"1008"},"y_range":{"id":"1006"},"y_scale":{"id":"1010"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"1013","type":"BasicTicker"},{"attributes":{"axis":{"id":"1012"},"ticker":null},"id":"1015","type":"Grid"},{"attributes":{"formatter":{"id":"1046"},"major_label_policy":{"id":"1048"},"ticker":{"id":"1017"}},"id":"1016","type":"LinearAxis"},{"attributes":{},"id":"1025","type":"HelpTool"},{"attributes":{"axis":{"id":"1016"},"dimension":1,"ticker":null},"id":"1019","type":"Grid"},{"attributes":{},"id":"1046","type":"BasicTickFormatter"},{"attributes":{},"id":"1017","type":"BasicTicker"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"red"},"line_alpha":{"value":0.1},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1036","type":"Circle"},{"attributes":{},"id":"1021","type":"WheelZoomTool"},{"attributes":{"active_multi":null,"tools":[{"id":"1020"},{"id":"1021"},{"id":"1022"},{"id":"1023"},{"id":"1024"},{"id":"1025"}]},"id":"1027","type":"Toolbar"},{"attributes":{},"id":"1054","type":"Selection"},{"attributes":{},"id":"1048","type":"AllLabels"},{"attributes":{},"id":"1020","type":"PanTool"},{"attributes":{},"id":"1055","type":"UnionRenderers"},{"attributes":{},"id":"1049","type":"BasicTickFormatter"},{"attributes":{"overlay":{"id":"1026"}},"id":"1022","type":"BoxZoomTool"},{"attributes":{},"id":"1023","type":"SaveTool"},{"attributes":{},"id":"1024","type":"ResetTool"},{"attributes":{},"id":"1051","type":"AllLabels"},{"attributes":{"source":{"id":"1034"}},"id":"1038","type":"CDSView"},{"attributes":{},"id":"1004","type":"DataRange1d"},{"attributes":{"data_source":{"id":"1039"},"glyph":{"id":"1040"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1041"},"view":{"id":"1043"}},"id":"1042","type":"GlyphRenderer"},{"attributes":{"data_source":{"id":"1034"},"glyph":{"id":"1035"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1036"},"view":{"id":"1038"}},"id":"1037","type":"GlyphRenderer"},{"attributes":{},"id":"1010","type":"LinearScale"},{"attributes":{"fill_alpha":{"value":0.5},"fill_color":{"value":"red"},"line_alpha":{"value":0.5},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1035","type":"Circle"},{"attributes":{"source":{"id":"1039"}},"id":"1043","type":"CDSView"},{"attributes":{},"id":"1006","type":"DataRange1d"},{"attributes":{"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1040","type":"Line"},{"attributes":{"formatter":{"id":"1049"},"major_label_policy":{"id":"1051"},"ticker":{"id":"1013"}},"id":"1012","type":"LinearAxis"},{"attributes":{"line_alpha":0.1,"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1041","type":"Line"},{"attributes":{"bottom_units":"screen","fill_alpha":0.5,"fill_color":"lightgrey","left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","syncable":false,"top_units":"screen"},"id":"1026","type":"BoxAnnotation"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAAAAAAAHB1QAAAAAAAwHdAAAAAAACgekAAAAAAAAB9QAAAAAAAkH9AAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[7]},"y":{"__ndarray__":"AAAAAAAAAADRRG9K1Ss2QLhEQqpmH0ZA3ZOddkSOUEB86tEOswZWQJ/1cl4JeVtAk860x6hyYEA=","dtype":"float64","order":"little","shape":[7]}},"selected":{"id":"1052"},"selection_policy":{"id":"1053"}},"id":"1034","type":"ColumnDataSource"},{"attributes":{},"id":"1044","type":"Title"},{"attributes":{},"id":"1008","type":"LinearScale"},{"attributes":{},"id":"1052","type":"Selection"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAXXXTRRRdzQC+66KKLPnNARhdddNFlc0BddNFFF41zQHTRRRddtHNAjC666KLbc0Cjiy666AJ0QLrooosuKnRA0UUXXXRRdEDpoosuunh0QAAAAAAAoHRAF1100UXHdEAvuuiii+50QEYXXXTRFXVAXXTRRRc9dUB00UUXXWR1QIwuuuiii3VAo4suuuiydUC66KKLLtp1QNJFF110AXZA6aKLLroodkAAAAAAAFB2QBdddNFFd3ZALrrooouedkBGF1100cV2QF100UUX7XZAdNFFF10Ud0CMLrroojt3QKOLLrroYndAuuiiiy6Kd0DSRRdddLF3QOmiiy662HdAAAAAAAAAeEAXXXTRRSd4QC666KKLTnhARhdddNF1eEBddNFFF514QHTRRRddxHhAjC666KLreECjiy666BJ5QLrooosuOnlA0kUXXXRheUDpoosuuoh5QAAAAAAAsHlAF1100UXXeUAuuuiii/55QEYXXXTRJXpAXXTRRRdNekB00UUXXXR6QIwuuuiim3pAo4suuujCekC66KKLLup6QNJFF110EXtA6aKLLro4e0AAAAAAAGB7QBhddNFFh3tALrrooouue0BGF1100dV7QF100UUX/XtAdNFFF10kfECMLrrookt8QKOLLrrocnxAuuiiiy6afEDSRRdddMF8QOmiiy666HxAAAAAAAAQfUAYXXTRRTd9QC666KKLXn1ARhdddNGFfUBddNFFF619QHTRRRdd1H1AjC666KL7fUCjiy666CJ+QLrooosuSn5A0kUXXXRxfkDpoosuuph+QAAAAAAAwH5AGF100UXnfkAuuuiiiw5/QEYXXXTRNX9AXXTRRRddf0B00UUXXYR/QIwuuuiiq39Ao4suuujSf0C66KKLLvp/QOmiiy66EIBAdNFFF10kgEAAAAAAADiAQIwuuuiiS4BAF1100UVfgECjiy666HKAQC666KKLhoBAuuiiiy6agEBGF1100a2AQNJFF110wYBAXXTRRRfVgEDpoosuuuiAQHTRRRdd/IBAAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[100]},"y":[0.7855584341419899,2.1106634889706015,3.435768543799213,4.760873598627825,6.085978653456408,7.41108370828502,8.736188763113631,10.061293817942214,11.386398872770826,12.71150392759941,14.03660898242805,15.361714037256633,16.686819092085244,18.011924146913856,19.337029201742467,20.66213425657105,21.987239311399662,23.312344366228274,24.637449421056886,25.96255447588547,27.28765953071411,28.612764585542692,29.937869640371275,31.262974695199887,32.58807975002847,33.91318480485711,35.23828985968569,36.563394914514305,37.88849996934292,39.21360502417153,40.53871007900011,41.86381513382875,43.188920188657335,44.51402524348592,45.83913029831453,47.16423535314311,48.48934040797175,49.814445462800336,51.13955051762895,52.46465557245756,53.78976062728617,55.114865682114754,56.439970736943394,57.76507579177198,59.09018084660059,60.41528590142917,61.740390956257755,63.065496011086395,64.39060106591498,65.71570612074359,67.0408111755722,68.36591623040081,69.6910212852294,71.01612634005804,72.34123139488662,73.66633644971523,74.99144150454384,76.31654655937243,77.64165161420104,78.96675666902965,80.29186172385823,81.61696677868684,82.94207183351546,84.26717688834404,85.59228194317268,86.91738699800126,88.24249205282987,89.56759710765849,90.89270216248707,92.21780721731568,93.54291227214426,94.86801732697288,96.19312238180149,97.5182274366301,98.84333249145871,100.16843754628732,101.49354260111593,102.81864765594449,104.14375271077316,105.46885776560171,106.79396282043032,108.11906787525893,109.44417293008755,110.76927798491616,112.09438303974477,113.41948809457332,114.744593149402,116.06969820423055,117.39480325905916,118.71990831388777,120.04501336871633,121.370118423545,122.69522347837355,124.02032853320216,125.34543358803077,126.67053864285944,127.995643697688,129.3207487525166,130.64585380734516,131.97095886217377]},"selected":{"id":"1054"},"selection_policy":{"id":"1055"}},"id":"1039","type":"ColumnDataSource"},{"attributes":{},"id":"1053","type":"UnionRenderers"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"2.3.1"}};
-  var render_items = [{"docid":"35b5d851-d18a-4c23-8bbc-616a5a8908b9","root_ids":["1003"],"roots":{"1003":"e4d2458d-3ab6-4f27-96cb-ac5ae909dc1f"}}];
+  const docs_json = {"79f901f3-d98b-4cf4-940c-5cdf0f7aced7":{"defs":[],"roots":{"references":[{"attributes":{"below":[{"id":"1012"}],"center":[{"id":"1015"},{"id":"1019"}],"height":400,"left":[{"id":"1016"}],"renderers":[{"id":"1038"},{"id":"1044"}],"title":{"id":"1046"},"toolbar":{"id":"1027"},"width":800,"x_range":{"id":"1004"},"x_scale":{"id":"1008"},"y_range":{"id":"1006"},"y_scale":{"id":"1010"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{"fill_alpha":{"value":0.2},"fill_color":{"value":"red"},"hatch_alpha":{"value":0.2},"hatch_color":{"value":"red"},"line_alpha":{"value":0.2},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1037","type":"Circle"},{"attributes":{},"id":"1021","type":"WheelZoomTool"},{"attributes":{},"id":"1013","type":"BasicTicker"},{"attributes":{},"id":"1025","type":"HelpTool"},{"attributes":{"tools":[{"id":"1020"},{"id":"1021"},{"id":"1022"},{"id":"1023"},{"id":"1024"},{"id":"1025"}]},"id":"1027","type":"Toolbar"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"red"},"hatch_alpha":{"value":0.1},"hatch_color":{"value":"red"},"line_alpha":{"value":0.1},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1036","type":"Circle"},{"attributes":{"coordinates":null,"data_source":{"id":"1034"},"glyph":{"id":"1035"},"group":null,"hover_glyph":null,"muted_glyph":{"id":"1037"},"nonselection_glyph":{"id":"1036"},"view":{"id":"1039"}},"id":"1038","type":"GlyphRenderer"},{"attributes":{"axis":{"id":"1012"},"coordinates":null,"group":null,"ticker":null},"id":"1015","type":"Grid"},{"attributes":{"source":{"id":"1034"}},"id":"1039","type":"CDSView"},{"attributes":{},"id":"1020","type":"PanTool"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAXXXTRRRdzQC+66KKLPnNARhdddNFlc0BddNFFF41zQHTRRRddtHNAjC666KLbc0Cjiy666AJ0QLrooosuKnRA0UUXXXRRdEDpoosuunh0QAAAAAAAoHRAF1100UXHdEAvuuiii+50QEYXXXTRFXVAXXTRRRc9dUB00UUXXWR1QIwuuuiii3VAo4suuuiydUC66KKLLtp1QNJFF110AXZA6aKLLroodkAAAAAAAFB2QBdddNFFd3ZALrrooouedkBGF1100cV2QF100UUX7XZAdNFFF10Ud0CMLrroojt3QKOLLrroYndAuuiiiy6Kd0DSRRdddLF3QOmiiy662HdAAAAAAAAAeEAXXXTRRSd4QC666KKLTnhARhdddNF1eEBddNFFF514QHTRRRddxHhAjC666KLreECjiy666BJ5QLrooosuOnlA0kUXXXRheUDpoosuuoh5QAAAAAAAsHlAF1100UXXeUAuuuiii/55QEYXXXTRJXpAXXTRRRdNekB00UUXXXR6QIwuuuiim3pAo4suuujCekC66KKLLup6QNJFF110EXtA6aKLLro4e0AAAAAAAGB7QBhddNFFh3tALrrooouue0BGF1100dV7QF100UUX/XtAdNFFF10kfECMLrrookt8QKOLLrrocnxAuuiiiy6afEDSRRdddMF8QOmiiy666HxAAAAAAAAQfUAYXXTRRTd9QC666KKLXn1ARhdddNGFfUBddNFFF619QHTRRRdd1H1AjC666KL7fUCjiy666CJ+QLrooosuSn5A0kUXXXRxfkDpoosuuph+QAAAAAAAwH5AGF100UXnfkAuuuiiiw5/QEYXXXTRNX9AXXTRRRddf0B00UUXXYR/QIwuuuiiq39Ao4suuujSf0C66KKLLvp/QOmiiy66EIBAdNFFF10kgEAAAAAAADiAQIwuuuiiS4BAF1100UVfgECjiy666HKAQC666KKLhoBAuuiiiy6agEBGF1100a2AQNJFF110wYBAXXTRRRfVgEDpoosuuuiAQHTRRRdd/IBAAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[100]},"y":[0.7855584341419899,2.1106634889706015,3.435768543799213,4.760873598627825,6.085978653456408,7.41108370828502,8.736188763113631,10.061293817942214,11.386398872770826,12.71150392759941,14.03660898242805,15.361714037256633,16.686819092085244,18.011924146913856,19.337029201742467,20.66213425657105,21.987239311399662,23.312344366228274,24.637449421056886,25.96255447588547,27.28765953071411,28.612764585542692,29.937869640371275,31.262974695199887,32.58807975002847,33.91318480485711,35.23828985968569,36.563394914514305,37.88849996934292,39.21360502417153,40.53871007900011,41.86381513382875,43.188920188657335,44.51402524348592,45.83913029831453,47.16423535314311,48.48934040797175,49.814445462800336,51.13955051762895,52.46465557245756,53.78976062728617,55.114865682114754,56.439970736943394,57.76507579177198,59.09018084660059,60.41528590142917,61.740390956257755,63.065496011086395,64.39060106591498,65.71570612074359,67.0408111755722,68.36591623040081,69.6910212852294,71.01612634005804,72.34123139488662,73.66633644971523,74.99144150454384,76.31654655937243,77.64165161420104,78.96675666902965,80.29186172385823,81.61696677868684,82.94207183351546,84.26717688834404,85.59228194317268,86.91738699800126,88.24249205282987,89.56759710765849,90.89270216248707,92.21780721731568,93.54291227214426,94.86801732697288,96.19312238180149,97.5182274366301,98.84333249145871,100.16843754628732,101.49354260111593,102.81864765594449,104.14375271077316,105.46885776560171,106.79396282043032,108.11906787525893,109.44417293008755,110.76927798491616,112.09438303974477,113.41948809457332,114.744593149402,116.06969820423055,117.39480325905916,118.71990831388777,120.04501336871633,121.370118423545,122.69522347837355,124.02032853320216,125.34543358803077,126.67053864285944,127.995643697688,129.3207487525166,130.64585380734516,131.97095886217377]},"selected":{"id":"1057"},"selection_policy":{"id":"1056"}},"id":"1040","type":"ColumnDataSource"},{"attributes":{"overlay":{"id":"1026"}},"id":"1022","type":"BoxZoomTool"},{"attributes":{},"id":"1023","type":"SaveTool"},{"attributes":{},"id":"1024","type":"ResetTool"},{"attributes":{"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1041","type":"Line"},{"attributes":{},"id":"1049","type":"BasicTickFormatter"},{"attributes":{"bottom_units":"screen","coordinates":null,"fill_alpha":0.5,"fill_color":"lightgrey","group":null,"left_units":"screen","level":"overlay","line_alpha":1.0,"line_color":"black","line_dash":[4,4],"line_width":2,"right_units":"screen","syncable":false,"top_units":"screen"},"id":"1026","type":"BoxAnnotation"},{"attributes":{"line_alpha":0.2,"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1043","type":"Line"},{"attributes":{},"id":"1056","type":"UnionRenderers"},{"attributes":{},"id":"1008","type":"LinearScale"},{"attributes":{"source":{"id":"1040"}},"id":"1045","type":"CDSView"},{"attributes":{},"id":"1050","type":"AllLabels"},{"attributes":{},"id":"1010","type":"LinearScale"},{"attributes":{},"id":"1057","type":"Selection"},{"attributes":{"coordinates":null,"formatter":{"id":"1049"},"group":null,"major_label_policy":{"id":"1050"},"ticker":{"id":"1017"}},"id":"1016","type":"LinearAxis"},{"attributes":{},"id":"1052","type":"BasicTickFormatter"},{"attributes":{"line_alpha":0.1,"line_color":"#1f77b4","x":{"field":"x"},"y":{"field":"y"}},"id":"1042","type":"Line"},{"attributes":{"axis":{"id":"1016"},"coordinates":null,"dimension":1,"group":null,"ticker":null},"id":"1019","type":"Grid"},{"attributes":{"coordinates":null,"formatter":{"id":"1052"},"group":null,"major_label_policy":{"id":"1053"},"ticker":{"id":"1013"}},"id":"1012","type":"LinearAxis"},{"attributes":{},"id":"1053","type":"AllLabels"},{"attributes":{"coordinates":null,"group":null},"id":"1046","type":"Title"},{"attributes":{"coordinates":null,"data_source":{"id":"1040"},"glyph":{"id":"1041"},"group":null,"hover_glyph":null,"muted_glyph":{"id":"1043"},"nonselection_glyph":{"id":"1042"},"view":{"id":"1045"}},"id":"1044","type":"GlyphRenderer"},{"attributes":{},"id":"1006","type":"DataRange1d"},{"attributes":{"data":{"x":{"__ndarray__":"AAAAAADwckAAAAAAAHB1QAAAAAAAwHdAAAAAAACgekAAAAAAAAB9QAAAAAAAkH9AAAAAAAAQgUA=","dtype":"float64","order":"little","shape":[7]},"y":{"__ndarray__":"AAAAAAAAAADRRG9K1Ss2QLhEQqpmH0ZA3ZOddkSOUEB86tEOswZWQJ/1cl4JeVtAk860x6hyYEA=","dtype":"float64","order":"little","shape":[7]}},"selected":{"id":"1055"},"selection_policy":{"id":"1054"}},"id":"1034","type":"ColumnDataSource"},{"attributes":{"fill_alpha":{"value":0.5},"fill_color":{"value":"red"},"hatch_alpha":{"value":0.5},"hatch_color":{"value":"red"},"line_alpha":{"value":0.5},"line_color":{"value":"red"},"size":{"value":5},"x":{"field":"x"},"y":{"field":"y"}},"id":"1035","type":"Circle"},{"attributes":{},"id":"1054","type":"UnionRenderers"},{"attributes":{},"id":"1055","type":"Selection"},{"attributes":{},"id":"1004","type":"DataRange1d"},{"attributes":{},"id":"1017","type":"BasicTicker"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"2.4.1"}};
+  const render_items = [{"docid":"79f901f3-d98b-4cf4-940c-5cdf0f7aced7","root_ids":["1003"],"roots":{"1003":"8d996412-a937-4ebd-8119-16b6c964d171"}}];
   root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
 
   }
   if (root.Bokeh !== undefined) {
     embed_document(root);
   } else {
-    var attempts = 0;
-    var timer = setInterval(function(root) {
+    let attempts = 0;
+    const timer = setInterval(function(root) {
       if (root.Bokeh !== undefined) {
         clearInterval(timer);
         embed_document(root);
@@ -1407,7 +1337,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Time (s)&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_1_20_1.png" src="../../_images/Notebook_1_20_1.png" />
+<img alt="../../_images/Notebook_1_21_1.png" src="../../_images/Notebook_1_21_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1460,10 +1390,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb430c86b80&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f062fff6d90&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_1_23_1.png" src="../../_images/Notebook_1_23_1.png" />
+<img alt="../../_images/Notebook_1_24_1.png" src="../../_images/Notebook_1_24_1.png" />
 </div>
 </div>
 </div>
@@ -1569,7 +1499,7 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../Introduction/Data_Import_and_Review.html" title="previous page">Example: Data Import and Review</a>
+    <a class='left-prev' id="prev-link" href="../Introduction/Data_Import_and_Review.html" title="previous page">Example: Data Import, Review, and Workflow</a>
     <a class='right-next' id="next-link" href="../Notebook_2/Notebook_2.html" title="next page">Notebook 2: Rating Curve Development</a>
 
         </div>
@@ -1582,7 +1512,7 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
         
           By Dan Kovacek<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>
@@ -1591,11 +1521,9 @@ Then discharge (Q) is calculated by: \)</span>\frac{m_{salt}}{A_{curve}} = \frac
 
       </div>
     </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>
