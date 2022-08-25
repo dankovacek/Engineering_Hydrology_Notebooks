@@ -38,7 +38,7 @@ output_notebook()
 # 
 # Daily average flow data provided by the Water Survey of Canada (WSC) for the [Stave River](https://wateroffice.ec.gc.ca/report/historical_e.html?y1Max=1&y1Min=1&scale=normal&mode=Graph&stn=08MH147&dataType=Daily&parameterType=Flow&year=2016) (WSC 08MH147) is saved in `data/notebook_3_data/Stave.csv`
 
-# In[2]:
+# In[ ]:
 
 
 df = pd.read_csv('../../data/notebook_3_data/Stave.csv', header=1, parse_dates=['Date'], index_col='Date')
@@ -59,7 +59,7 @@ df.head()
 # 
 # (from [Water Survey of Canada](https://wateroffice.ec.gc.ca/contactus/faq_e.html#Q12))
 
-# In[3]:
+# In[ ]:
 
 
 # select just the flow data (PARAM == 1)
@@ -74,7 +74,7 @@ print("There are {} values in the Stave River daily flow series.".format(len(flo
 # 
 # ### Plot the Daily Average Flow Series
 
-# In[4]:
+# In[ ]:
 
 
 # customize the tools for interacting with the bokeh plot
@@ -95,7 +95,7 @@ show(daily_flow_plot)
 # 
 # Let's plot a flow duration curve for Stave River.
 
-# In[5]:
+# In[ ]:
 
 
 fdc_plot = figure(width=700, height=400, title='Stave River Flow Duration Curve')
@@ -120,7 +120,7 @@ show(fdc_plot)
 # 
 # Derive the AMS.  Also calculate the mean and standard deviation of the series.
 
-# In[6]:
+# In[ ]:
 
 
 # create a series representing the annual maximum daily flow
@@ -132,7 +132,7 @@ max_df['month'] = max_df.index.month
 max_df['count'] = flow_df.groupby('year').count()['Value'].values
 
 
-# In[7]:
+# In[ ]:
 
 
 # calculate the mean and standard deviation of the sample
@@ -148,7 +148,7 @@ max_df.head()
 # 
 # If we are going to use statistical methods to estimate return period floods, it is important to consider the shape of the probability distribution, and what that implies about the dominant mechanisms driving peak runoff.  
 
-# In[8]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(1,1, figsize=(10,6))
@@ -166,7 +166,7 @@ ax.set_title('Annual Maximum Flow Histogram for Stave River')
 # 
 # 
 
-# In[9]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(8, 6))
@@ -191,7 +191,7 @@ ax.legend()
 # 
 # Find the incomplete years, and consider what we observed above regarding the times of the year the annual maximum flood is more likely to occur.  
 
-# In[10]:
+# In[ ]:
 
 
 df['year'] = df.index.values
@@ -213,7 +213,7 @@ print(max_df[max_df['count'] < 365])
 # 
 # There are no climate stations from the Meteorological Survey of Canada (MSC) in the immediate vicinity, but there are two within 100 km on either side of the Stave River basin.  
 
-# In[11]:
+# In[ ]:
 
 
 # whistler is equidistant to the Stave catchment in the opposite direction from the climate station in Hope.
@@ -234,7 +234,7 @@ hope_df.columns = ['{}_total_precip'.format(name), '{}_total_rain'.format(name),
 # print(hope_df.head())
 
 
-# In[12]:
+# In[ ]:
 
 
 def find_data_gaps(gap_df, code):
@@ -256,7 +256,7 @@ def find_data_gaps(gap_df, code):
 # 
 # It is common for historical records to be missing data.  Comparing flow records against precipitation records is just one way of checking to see if the gaps in the record might correspond to peak events.  Code is provided to automatically identify gaps in the record to help you see where they occur.  Note that this doesn't guarantee anything about the conditions in Stave River where we have no data, but it does provide some information with which to build a case for treating the dataset.
 
-# In[13]:
+# In[ ]:
 
 
 # concatenate the precipitation records with the streamflow records
@@ -264,13 +264,13 @@ conc_df = pd.concat([whis_df, hope_df, flow_df], axis=1, join='outer')
 conc_df = conc_df[['Value'] + [e for e in hope_df.columns if 'hope' in e] + [e for e in whis_df.columns if 'whis' in e]]
 
 
-# In[14]:
+# In[ ]:
 
 
 print(conc_df.max())
 
 
-# In[15]:
+# In[ ]:
 
 
 from bokeh.models import LinearAxis, Range1d
@@ -316,7 +316,7 @@ p.add_layout(LinearAxis(y_range_name='precip', axis_label='Total Precipitation [
 show(p)
 
 
-# In[16]:
+# In[ ]:
 
 
 print(max_df[max_df['count'] < 365])
@@ -326,7 +326,7 @@ print(max_df[max_df['count'] < 365])
 # 
 # If we check each of the incomplete years above, we can see that some of the gaps in the Stave record correspond to large precipitation events at the precipitation stations on either side of the Stave River watershed, suggesting perhaps a gap of just a few days is related to a large event.  Consider how including a year that is missing its true largest event might affect the calculations that follow in developing the flood frequency curve.
 
-# In[17]:
+# In[ ]:
 
 
 # create an array of years values of the years you want to exclude
@@ -371,7 +371,7 @@ print('After reviewing the dataset, there are {} years of record in the AMS.'.fo
 # 
 # A tutorial for fitting a Gumbel distribution using Excel is provided [here.](https://serc.carleton.edu/hydromodules/steps/166250.html)
 
-# In[18]:
+# In[ ]:
 
 
 def gumbel_formula(t, ybar_n, xbar, sigma_n, sigma):
@@ -430,7 +430,7 @@ q_gumbel_filtered = [gumbel_formula(t, 0.5396, mean_q, 1.1255, stdev_q) for t in
 # | Tukey (1962) |  $\frac{1}{3}$ |
 # | Gringorten (1963) | 0.44 |
 
-# In[19]:
+# In[ ]:
 
 
 # first, we need to sort the measured data by rank
@@ -443,7 +443,7 @@ max_df['P'] = max_df['rank'] / (len(max_df) + 1)
 max_df['Tr'] = [1/e for e in max_df['P']]
 
 
-# In[20]:
+# In[ ]:
 
 
 def plotting_position(m, a, n):
@@ -454,7 +454,7 @@ def plotting_position(m, a, n):
     return (m - a) / (n + 1 - 2 * a)
 
 
-# In[21]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(10,6))
@@ -477,7 +477,7 @@ ax.legend()
 # 
 # A distribution commonly used for estimating return period floods in BC is the Log-Pearson III distribution.  Here we will plot it against the GEV1 previously developed, and we'll take a look at the effects of our data review, where we'll plot both the GEV and LP3 using the entire dataset (without excluding any years) as well as a filtered dataset where we remove years where there is some likelihood the annual peak was missing from the record.
 
-# In[22]:
+# In[ ]:
 
 
 def calculate_LP3(values, Tr):
@@ -495,7 +495,7 @@ def calculate_LP3(values, Tr):
     return lp3_model
 
 
-# In[23]:
+# In[ ]:
 
 
 # now set up the filtered AMS series to calculate the LP3 distribution
@@ -506,7 +506,7 @@ max_df_filtered['P'] = max_df_filtered['rank'] / (len(max_df_filtered) + 1)
 max_df_filtered['Tr'] = [1/e for e in max_df_filtered['P']]
 
 
-# In[24]:
+# In[ ]:
 
 
 lp3_model = calculate_LP3(max_df['Value'], tr).to_numpy()

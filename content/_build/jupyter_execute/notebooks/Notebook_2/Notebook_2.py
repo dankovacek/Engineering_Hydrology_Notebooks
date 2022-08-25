@@ -56,7 +56,7 @@ warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
 
 # ## Import the Data
 
-# In[2]:
+# In[ ]:
 
 
 # import the stage data
@@ -65,14 +65,14 @@ stage_df = pd.read_csv('../../Project_Data/Hidden_Creek_stage_data.csv', parse_d
 stage_df.loc[:, 'Value'] = pd.to_numeric(stage_df.loc[:, 'Value'], errors='coerce')
 
 
-# In[3]:
+# In[ ]:
 
 
 # take a quick look at what we're dealing with
 stage_df
 
 
-# In[4]:
+# In[ ]:
 
 
 # looking at the data preview above, the water level (stage) label is quite long
@@ -87,14 +87,14 @@ stage_df = stage_df[['Date', 'Value']].copy()
 stage_df.columns = ['Date', 'WL_m']
 
 
-# In[5]:
+# In[ ]:
 
 
 # import the table of discrete discharge measurements
 rc_df = pd.read_csv('../../Project_Data/Project_QH_table_2021.csv', parse_dates=['Date'])
 
 
-# In[6]:
+# In[ ]:
 
 
 # take a look at the discharge measurements
@@ -108,7 +108,7 @@ rc_df.head(15)
 # From previous site visits, we have collected a total of 9 discharge measurements as can be seen in the `rc_df` dataframe above.  During each measurement, we manually measure the water level to validate the data being recorded continuously by our pressure transducer and datalogger (hydrometric station).  We validate the pressure transducer reading because instrument calibration is not perfect, and can change over time for a number of reasons.  It is important to measure stage by some independent means before and after a discharge measurement in order to to assess the quality of the stage-discharge relationship and any analysis derived from it.  Validating the hydrometric station stage concurrent to a discharge measurement is typically done manually, such as with a benchmark survey.
 # 
 
-# In[7]:
+# In[ ]:
 
 
 # plot the discharge measurements on the x-axis, and the corresponding stage on the y axis
@@ -128,7 +128,7 @@ rc_df.plot(q_measured, wl_measured,
 # 
 # Instead of manually looking up what the water level was on a particular date, we can use an indexing method to directly return the value at the time of interest./
 
-# In[8]:
+# In[ ]:
 
 
 # measurement_date
@@ -154,7 +154,7 @@ msmt_stage = msmt_stage.values[0]
 print('The stage on {} was {} m.'.format(msmt_date, msmt_stage))
 
 
-# In[9]:
+# In[ ]:
 
 
 test = stage_df.set_index('Date')
@@ -165,7 +165,7 @@ test[test.index == '2010-09-10']
 # 
 # In Notebook 1, we calculated discharge using the salt dilution method.  Include this new measurement and see how it compares to the rest of the measurements.
 
-# In[10]:
+# In[ ]:
 
 
 # add a new point - get the discharge value 
@@ -208,7 +208,7 @@ rc_df
 # | Triangular | 2.5 to 3 |
 # 
 
-# In[11]:
+# In[ ]:
 
 
 # definition of rating curve: calculate Q from h, given the parameters.
@@ -228,7 +228,7 @@ def calc_q(C, h, h0, b):
 # 
 # Try changing the values to see the effect on how the curve fits the measured discharge data.
 
-# In[12]:
+# In[ ]:
 
 
 h0 = -0.1   # offset parameter
@@ -244,7 +244,7 @@ stage_range = np.linspace(0.001, 1.5, 100)
 manual_fit_q = [calc_q(C, h, h0, b) for h in stage_range]
 
 
-# In[13]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(10,6))
@@ -280,13 +280,13 @@ plt.show()
 # 
 # Note that $h_0$ cannot be fitted this way, and has to be set manually. In this case we start by assuming $h_0=0$.
 
-# In[14]:
+# In[ ]:
 
 
 print(rc_df)
 
 
-# In[15]:
+# In[ ]:
 
 
 # Find the best-fit line in log-log space
@@ -308,7 +308,7 @@ log_slope, log_intercept, log_rval, log_pval, log_stderr = st.linregress(q_log, 
 # 
 # The last step is to rearrange the log form of the equation we derived previously ($log(h-h_0) = slope \cdot log(Q) + intercept$) in order to solve for flow (`Q`).  
 
-# In[16]:
+# In[ ]:
 
 
 # calculate the discharge based on the best fit
@@ -330,7 +330,7 @@ def ols_rc_q(slope, intercept, h, h0):
         return None
 
 
-# In[17]:
+# In[ ]:
 
 
 # put best fit results into a dataframe for plotting
@@ -350,7 +350,7 @@ bf_df['manual_fit_q'] = manual_fit_q
 # ### Plot the best fit curve
 # 
 
-# In[18]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(10,6))
@@ -370,7 +370,7 @@ ax.legend()
 plt.show()
 
 
-# In[19]:
+# In[ ]:
 
 
 # if you want to export this data to continue working in excel (or another program)
@@ -386,7 +386,7 @@ plt.show()
 # 
 # Apply the rating curve equation we developed above to the long-term water level (stage) time series from our hydrometric station.  Add the result as a new column in the `stage_df` dataframe.  Note the distinction between the stage measured during the discrete measurements, and the "continuous" stage (water level) recorded by our pressure transducer.  It is the pressure-transducer series we want to apply the rating curve equation to, not the water level from the discharge measurements!
 
-# In[20]:
+# In[ ]:
 
 
 # calculate a dicharge based on the best fit or manually fit rating curve
@@ -398,13 +398,13 @@ stage_df.loc[:, 'RC Q (cms)'] = stage_df['WL_m'].apply(lambda h: ols_rc_q(log_sl
 stage_df.loc[:, 'Manual Q (cms)'] = stage_df['WL_m'].apply(lambda h: calc_q(C, h, h0, b))
 
 
-# In[21]:
+# In[ ]:
 
 
 stage_df
 
 
-# In[22]:
+# In[ ]:
 
 
 # again, if you want to export this dataframe to csv for use in Excel
@@ -416,14 +416,14 @@ stage_df
 # 
 # The two plots below are linked.  Check the selection tools, and select points on one plot.  When validating data, it is helpful to be able to link the measurements on the rating curve plot and the daily flow series plot.  Consider how you would you check if the low flows were subject to a shift in the hydraulic control over time?    
 
-# In[23]:
+# In[ ]:
 
 
 print(stage_df.columns)
 print(rc_df.columns)
 
 
-# In[24]:
+# In[ ]:
 
 
 # output to static HTML file

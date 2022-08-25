@@ -43,7 +43,7 @@ from scipy import stats
 # 
 # If you haven't done so, review the different ways we can specify file paths and navigate file structure in the [Data Import and Review](notebooks/Introduction/Data_Import_and_Review.ipynb) notebook.
 
-# In[75]:
+# In[ ]:
 
 
 data_file_path = '../../notebook_data/notebook_1_data/'
@@ -51,7 +51,7 @@ calibration_filename = 'SD_cal.csv' # this is the calibration data file
 salt_dilution_filename = 'SD_data.csv' # this is the measurement data file
 
 
-# In[76]:
+# In[ ]:
 
 
 # instrument calibration data
@@ -67,7 +67,7 @@ sd_data = pd.read_csv(data_file_path + salt_dilution_filename)
 # 
 # ![Measurement calibration information found in the calibration spreadsheet file.](img/sd_cal_sheet.png)
 
-# In[68]:
+# In[ ]:
 
 
 # data given in the calibration file
@@ -76,7 +76,7 @@ cal_vol = 500 # total calibration volume mL  (row 2 of Calibration volume column
 cal_vol_increment = 1.0 # [mL] increments for calibration solution (Calibration solution added (ml) column)
 
 
-# In[69]:
+# In[ ]:
 
 
 # display a preview of the calibration data
@@ -92,7 +92,7 @@ sd_cal.head()
 # 4.  Measure the conductivity of the control sample.
 # 5.  Repeat steps 3-4 until five measurements are recorded.
 
-# In[70]:
+# In[ ]:
 
 
 # update the calibration solution added column for the volume of calibration solution added during the calibration
@@ -111,7 +111,7 @@ sd_cal['Concentration (mg/l)'] = sd_cal['Salt added (mg)'] / (sd_cal['Calibratio
 sd_cal.dropna(how='any', inplace=True)
 
 
-# In[71]:
+# In[ ]:
 
 
 # see how the calibration data has been updated
@@ -126,7 +126,7 @@ sd_cal
 # 
 # The `stats.linregress` function takes in two arrays and returns the equation of the best fit line through the data, along with information about the fit.  Note that the r-value is the correlation coefficient.  The coefficient of determination ($R^2$) is the correlation coefficient squared.
 
-# In[72]:
+# In[ ]:
 
 
 # initialize a single figure (the values 1, 1 can be changed to create a grid of plots)
@@ -162,7 +162,7 @@ plt.legend()
 
 # ### Best Fit slope and coefficient of determination ($R^2$) of calibration points
 
-# In[73]:
+# In[ ]:
 
 
 #note: the number of decimals in the slope is too low. adjust the line below to print one more decimal.
@@ -182,13 +182,13 @@ print(f"The coefficient of determination of the calibration is {r_value**2:.3f}.
 # 
 # Below we plot the conductivity over time, and we also determine what the 'background' conductivity was in order to calculate the area under the conductivity curve.  It turns out there is a lot of interesting information about runoff processes contained in the background EC signal.
 
-# In[50]:
+# In[ ]:
 
 
 sd_data
 
 
-# In[51]:
+# In[ ]:
 
 
 # we can also plot directly from a dataframe
@@ -199,7 +199,7 @@ sd_data.plot('Time (s)', 'ECT (uS/cm)')
 # 
 # We need to establish the background conductivity, or the natural conductivity of the stream prior to the measurement.  Use the plot above to establish a first guess at both the background period and the measurement period.
 
-# In[52]:
+# In[ ]:
 
 
 # the background is the natural level of conductivity prior to the salt injection
@@ -214,7 +214,7 @@ msmt_end = 700
 background_ect = sd_data['ECT (uS/cm)'].iloc[start_bg: end_bg].mean()
 
 
-# In[53]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(10,6))
@@ -261,7 +261,7 @@ plt.legend()
 
 # In the cell below, we calculate the area under the conductivity curve (`ECT (uS/cm`) and subtract the background average determined above.  We do this by finite-difference, which is simply adding up all the little rectangles that approximate the green region in the diagram above.
 
-# In[54]:
+# In[ ]:
 
 
 # subtract the background and multiply by the calibration slope 
@@ -270,13 +270,13 @@ sd_data['Concentration'] = (sd_data['ECT (uS/cm)'] - background_ect) * slope
 
 # Check the time step duration.  We know from the column header the time units are in seconds (s), and we could look at the values and hard-code the time step, but it's better to not assume or hard code values, so we will use the actual time step by calling the `.diff()` function on the `Time (s)` column to get a row-wise difference.
 
-# In[55]:
+# In[ ]:
 
 
 sd_data['time_step'] = sd_data['Time (s)'].diff()
 
 
-# In[56]:
+# In[ ]:
 
 
 # trim the time series to the start and end time
@@ -289,7 +289,7 @@ concentration_area = np.sum(np.multiply(msmt_slice['Concentration'], msmt_slice[
 
 # >**Note**: The `np.muliply()` function used above does element-wise multiplication.  i.e. if $a=[0, 1, 2]$ and $b=[3, 4, 5]$, `np.multiply(a, b) = [0, 4, 10]`.  Consider what would happen if our timestep was not uniform and we used a constant multiplier to calculate area under the curve.
 
-# In[57]:
+# In[ ]:
 
 
 a = [0, 1, 2]
@@ -297,7 +297,7 @@ b = [3, 4, 5]
 np.multiply(a, b)
 
 
-# In[62]:
+# In[ ]:
 
 
 mass = 100 # 1 kg "slug" of salt (NaCl) was put in the river (as recorded in the SD_cal spreadsheet, shown previously)
@@ -333,7 +333,7 @@ print(f'The calculated discharge for the measurement is {Q_calculated:.1f} m^3/s
 # 
 # Two different methods of temperature compensation are provided below for reference, the first is an [EU standard for the determination of electrical conductivity](https://standards.iteh.ai/catalog/standards/cen/3978cdbc-b72f-459e-9275-99e7fc2b4b84/en-27888-1993), and the second is a [linear approximation of conductivity]()$^{[3]}$ as a function of temperature.
 
-# In[74]:
+# In[ ]:
 
 
 def eu_std_ect_adjust(temp, ec):
@@ -366,7 +366,7 @@ def linear2_ect_adjust(temp, ec):
     return ec / (1 + (f25 /100) * (temp - 25))
 
 
-# In[65]:
+# In[ ]:
 
 
 # Apply temperature compensation to the measured conductivity

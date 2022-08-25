@@ -32,7 +32,7 @@ output_notebook()
 
 # ## Import the Data
 
-# In[2]:
+# In[ ]:
 
 
 # import the stage data
@@ -43,21 +43,21 @@ stage_df.sort_index(inplace=True)
 stage_df['Value'] = stage_df['Value'].astype(float)
 
 
-# In[3]:
+# In[ ]:
 
 
 # take a quick look at what we're dealing with
 stage_df.head()
 
 
-# In[4]:
+# In[ ]:
 
 
 plt.plot(stage_df.index, stage_df['Value'])
 plt.show()
 
 
-# In[5]:
+# In[ ]:
 
 
 # the water level (stage) label is long, 
@@ -66,14 +66,14 @@ stage_label = 'water level (m above 0 flow ref)'
 flow_label = 'Flow (m^3/s)'
 
 
-# In[6]:
+# In[ ]:
 
 
 # import the discharge measurements
 rc_df = pd.read_csv('../../Project_Data/Project_QH_table_2021.csv', parse_dates=['Date'])
 
 
-# In[7]:
+# In[ ]:
 
 
 # take a look at the discharge measurements
@@ -96,7 +96,7 @@ rc_df
 # The above relationship is linear, so we can use ordinary least squares to find the best fit line (in log-log space), and then transform back to linear space.
 # Note that $h_0$ cannot be fitted this way, and has to be set manually. In this case we can assume $h_0=0$.
 
-# In[8]:
+# In[ ]:
 
 
 # calculate the discharge based on the best fit
@@ -118,7 +118,7 @@ def ols_rc_q(slope, intercept, h, h0):
         return None
 
 
-# In[9]:
+# In[ ]:
 
 
 # Find the best-fit line in log-log space
@@ -131,7 +131,7 @@ stage_log = np.log(rc_df[stage_label])
 log_slope, log_intercept, log_rval, log_pval, log_stderr = st.linregress(q_log, stage_log)
 
 
-# In[10]:
+# In[ ]:
 
 
 stage_range = np.linspace(0.001, 1.5, 100)
@@ -151,7 +151,7 @@ bf_df.sort_values(by='stage', inplace=True)
 # From the equation describing the ordinary least squares (OLS) best fit of the measured discharge,
 # calculate daily average flow from daily average water level.
 
-# In[11]:
+# In[ ]:
 
 
 stage_df['RC Q (cms)'] = stage_df['Value'].apply(lambda h: ols_rc_q(log_slope, log_intercept, h, 0))
@@ -160,7 +160,7 @@ stage_df['Date'] = stage_df.apply(lambda row: pd.to_datetime('{}-{}-{}'.format(r
                                                                               row['day'])), axis=1)
 
 
-# In[12]:
+# In[ ]:
 
 
 stage_df
@@ -170,7 +170,7 @@ stage_df
 
 # The two plots below are linked.  Check the selection tools, and select points on one plot.  When validating data, it is helpful to be able to link the measurements on the rating curve plot and the daily flow series plot.  Consider how you would you check if the low flows were subject to a shift in the hydraulic control over time?    
 
-# In[13]:
+# In[ ]:
 
 
 # output to static HTML file
@@ -227,7 +227,7 @@ rc_plot.legend.location = "bottom_right"
 layout = gridplot([[rc_plot, daily_flow_plot]])
 
 
-# In[14]:
+# In[ ]:
 
 
 # show the results
@@ -280,7 +280,7 @@ show(layout)
 # 
 # Previewing the data shows line 1 has information about two distinct parameters.  Where the `PARAM` column value is 1, the `Value` column corresponds to daily discharge ($\frac{m^3}{s}$ and where the `PARAM` column value is 2, the `Value` column corresonds to daily water level ($m$).  We need to correctly set the header line to index 1 (the second row), so that the headings are read correctly.
 
-# In[27]:
+# In[ ]:
 
 
 flow_de = pd.read_csv('Stave Daily Avg Flow.csv', header=1, parse_dates=True, index_col='Dates')
@@ -295,7 +295,7 @@ max_de.head(10)
 max_de.to_csv('max_de.csv')
 
 
-# In[15]:
+# In[ ]:
 
 
 # set the header row to index 1, tell the function to set the `Date` column as the index.
@@ -312,7 +312,7 @@ regional_df = regional_df[regional_df['PARAM'] == 1]
 regional_df.head()
 
 
-# In[16]:
+# In[ ]:
 
 
 # check the date range covered by the regional data
@@ -326,25 +326,25 @@ print('SITE DATA: Start date = {}, End date = {}'.format(stage_df.index[0], stag
 # 
 # In the previous step, we can see that the regional dataset encompasses the date range of our site data.  To perform a regression, we want to use concurrent data only.   The `concat`, or concatenate, function [documentation can be found here](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html). 
 
-# In[17]:
+# In[ ]:
 
 
 regional_df
 
 
-# In[20]:
+# In[ ]:
 
 
 stage_df
 
 
-# In[42]:
+# In[ ]:
 
 
 stage_df
 
 
-# In[38]:
+# In[ ]:
 
 
 # create a new dataframe of concurrent data and plot the data
@@ -370,14 +370,14 @@ concurrent_df.head()
 concurrent_df.dropna(inplace=True)
 
 
-# In[39]:
+# In[ ]:
 
 
 # find the best fit equation
 slope, intercept, rval, pval, stderr = st.linregress(concurrent_df['Regional_Q'], concurrent_df['Project_Q'])
 
 
-# In[40]:
+# In[ ]:
 
 
 print(slope)
@@ -385,7 +385,7 @@ print(slope)
 
 # ## Regression Plot
 
-# In[41]:
+# In[ ]:
 
 
 #### Regression Plot

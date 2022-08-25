@@ -24,11 +24,11 @@ from matplotlib import pyplot as plt
 # 
 # Here we're interested in looking at saturation vapour pressure for a range of temperatures we want to explore.  Say **0 degrees to 30 degrees Celsius** (the relationship does not hold below zero).  We can also specify how many points we want between the minimum and maximum we've set.  Let's say 50 for now.
 
-# In[2]:
+# In[ ]:
 
 
 min_temp = 1
-max_temp = 30
+max_temp = 35
 temperature_range = np.linspace(min_temp, max_temp, 50)
 
 # alternatively we could specify the step size
@@ -38,7 +38,7 @@ temperature_range = np.linspace(min_temp, max_temp, 50)
 # 
 # Recall that code cells must be executed in order to load the requisite libraries, variables, etc. into memory.  The error above suggests the very first cell in this notebook wasn't executed, so the numpy library is not yet accessible in the variable `np`.  Note the line `import numpy as np` loads the numpy library and makes its many functions available from the variable `np`. 
 
-# In[3]:
+# In[ ]:
 
 
 temperature_range
@@ -80,7 +80,7 @@ temperature_range
 
 # We can write this as a function in Python:
 
-# In[4]:
+# In[ ]:
 
 
 def calculate_saturation_vapour_pressure(T):
@@ -102,7 +102,7 @@ def calculate_saturation_vapour_pressure(T):
 # 
 # Calculate the saturation vapour pressure for the temperature range we defined above:
 
-# In[5]:
+# In[ ]:
 
 
 # create an empty array to store the vapour pressures we will calculate
@@ -113,7 +113,7 @@ for t in temperature_range:
     vapour_pressures.append(sat_vapour_pressure)
 
 
-# In[6]:
+# In[ ]:
 
 
 # now plot the result 
@@ -130,7 +130,7 @@ ax.set_ylabel('Saturation Vapour Pressure (kPa)')
 
 # Below we'll create a function to calculate dewpoint temperature that uses the vapour pressure function above.
 
-# In[7]:
+# In[ ]:
 
 
 def calculate_dewpoint_temperature(rh, T):
@@ -161,7 +161,7 @@ def calculate_dewpoint_temperature(rh, T):
 
 # Let's assume we want to explore the dewpoint temperature as a function of relative humidity.
 
-# In[8]:
+# In[ ]:
 
 
 # create an array to represent the relative humidity from 10% to 100%
@@ -170,14 +170,14 @@ rh_range = np.linspace(0.1, 1, 10)
 
 # This time we'll use a *list comprehension* instead of a "for" loop to calculate the dewpoint temperature where we assume temperature is constant but we want to evaluate a range of relative humidity.  When might we encounter such a situation?
 
-# In[9]:
+# In[ ]:
 
 
 t_amb = 25
 dewpt_temps = [calculate_dewpoint_temperature(rh, t_amb) for rh in rh_range]
 
 
-# In[10]:
+# In[ ]:
 
 
 # now plot the result 
@@ -193,7 +193,7 @@ ax.set_ylabel('Dewpoint Temperature (Celsius)')
 # 
 # See this [gist example](https://gist.github.com/Kautenja/f9d6fd3d1dee631200bc11b8a46a76b7) used as a template.
 
-# In[17]:
+# In[ ]:
 
 
 ambient_temp_range = np.linspace(0, 50, 100)
@@ -208,13 +208,13 @@ for r in rh_range:
     dewpt_df[r] = [calculate_dewpoint_temperature(r, t) for t in dewpt_df.index]
 
 
-# In[19]:
+# In[ ]:
 
 
 data = dewpt_df.T
 
 
-# In[22]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(figsize=(20, 6))
@@ -241,7 +241,7 @@ ax.set_title("Dewpoint Temperature [degrees Celsius]")
 
 # ### Other examples of functions related to atmospheric energy balance
 
-# In[13]:
+# In[ ]:
 
 
 def calculate_blackbody_radiation(T):
@@ -254,7 +254,7 @@ def calculate_blackbody_radiation(T):
     return sigma*(T^4)
 
 
-# In[14]:
+# In[ ]:
 
 
 def calculate_greybody_radiation(T,emiss):
@@ -270,7 +270,7 @@ def calculate_greybody_radiation(T,emiss):
 # Stefan-Bolzmann Constant ($\sigma$):
 # $\sigma = 5.670374419×10^8$ $W m^{−2}⋅K^{−4}$
 
-# In[15]:
+# In[ ]:
 
 
 calculate_blackbody_radiation(5500)

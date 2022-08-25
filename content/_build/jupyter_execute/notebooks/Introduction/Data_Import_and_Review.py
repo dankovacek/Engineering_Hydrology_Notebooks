@@ -26,17 +26,14 @@
 
 # pandas is a library that manipulates "dataframes", table-like structures,
 # to efficiently run operations on large datasets
-
 import pandas as pd
+
 # numpy is a fundamental library for scientific computing
 # based on the representation of data as arrays
-import numpy as np
+import numpy as np.
+
 # matplotlib is a plotting library
 from matplotlib import pyplot as plt
-
-# this is a command to tell the notebook to display figures
-# within the notebook instead of creating new windows.
-get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 # ## File Path
@@ -110,7 +107,7 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 # ----> 5 df = pd.read_csv('Hidden_Creek_stage_data.csv')
 # ```
 
-# In[5]:
+# In[ ]:
 
 
 data = pd.read_csv('Hidden_Creek_stage_data.csv')
@@ -118,7 +115,7 @@ data = pd.read_csv('Hidden_Creek_stage_data.csv')
 
 # This error occurs because we told the interpreter that the file lives at the level of the project root.  Recall this notebook file is saved in the folder at `/home/Documents/Engineering_Hydrology_Notebooks/content/notebooks/Introduction/`.  Let's check the file path of the working directory:
 
-# In[6]:
+# In[ ]:
 
 
 # first, import the "operating system" function library
@@ -135,7 +132,7 @@ working_directory
 # Above, we have saved the current working directory to a variable called `working_directory`.  We can use this variable to list the contents of the directory with the `listdir()` function from the `os` library to list directory contents.  Let's do this for the current working directory.  
 # 
 
-# In[7]:
+# In[ ]:
 
 
 os.listdir(working_directory)
@@ -154,14 +151,14 @@ os.listdir(working_directory)
 # 
 # Let's try this (update the string below to the correct path):
 
-# In[8]:
+# In[ ]:
 
 
 # note, here you need to replace "somewhere" with the rest of your filepath as described above
 data_path = '<somewhere>/Engineering_Hydrology_Notebooks/content/project_data/Hidden_Creek_stage_data.csv'
 
 
-# In[9]:
+# In[ ]:
 
 
 # data = pd.read_csv(data_path)
@@ -172,13 +169,13 @@ data_path = '<somewhere>/Engineering_Hydrology_Notebooks/content/project_data/Hi
 # 
 # Let's look at how this works using the `listdir` function.  
 
-# In[10]:
+# In[ ]:
 
 
 os.listdir('../')
 
 
-# In[11]:
+# In[ ]:
 
 
 os.listdir('../../')
@@ -186,7 +183,7 @@ os.listdir('../../')
 
 # Above, we can now see the `project_data/` folder.  Let's list its contents:
 
-# In[12]:
+# In[ ]:
 
 
 os.listdir('../../project_data')
@@ -194,7 +191,7 @@ os.listdir('../../project_data')
 
 # This folder contains `Hidden_Creek_stage_data.csv`, so we can construct the filepath for our data.  Here I'm going to store the path as a variable and call it `HC_data_path`:
 
-# In[13]:
+# In[ ]:
 
 
 data_folder = '../../project_data/'
@@ -208,14 +205,14 @@ pd.read_csv(HC_data_path)
 # 
 # Recall `os.getcwd()` gets the current working directory. 
 
-# In[14]:
+# In[ ]:
 
 
 parent_dir = os.path.dirname(os.getcwd())
 parent_dir
 
 
-# In[15]:
+# In[ ]:
 
 
 os.listdir(parent_dir)
@@ -223,14 +220,14 @@ os.listdir(parent_dir)
 
 # Listing the results shows the same folders as we saw above using `../`.
 
-# In[16]:
+# In[ ]:
 
 
 gparent_dir = os.path.dirname(parent_dir)
 gparent_dir
 
 
-# In[17]:
+# In[ ]:
 
 
 os.listdir(gparent_dir)
@@ -240,14 +237,14 @@ os.listdir(gparent_dir)
 # 
 # We can create intermediate variables as short forms for accessing different folders, or we can chain the `os.path.dirname()` function to move up an arbitrary number of levels. i.e.:
 
-# In[18]:
+# In[ ]:
 
 
 data_dir = os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), 'project_data')
 data_dir
 
 
-# In[19]:
+# In[ ]:
 
 
 os.listdir(data_dir)
@@ -261,13 +258,13 @@ os.listdir(data_dir)
 # 
 # Taking what we learned above, lets create a variable to store the filepath for the Hidden Creek stage data.
 
-# In[20]:
+# In[ ]:
 
 
 HC_stage_data_path = os.path.join(data_dir, 'Hidden_Creek_stage_data.csv')
 
 
-# In[21]:
+# In[ ]:
 
 
 df = pd.read_csv(HC_stage_data_path)
@@ -278,7 +275,7 @@ df.head()
 
 # The dataframe object (we've saved it as `df`) also has a handy function `describe()` that displays some basic summary statistics.
 
-# In[22]:
+# In[ ]:
 
 
 df.describe(include='all')
@@ -286,7 +283,7 @@ df.describe(include='all')
 
 # Looking at the stats of the above dataframe, it appears as though the 'Value' column has non-numeric values (`NaN` = Not a Number).  We can tell this by trying to perform a calculation on the column.  If calculating the mean doesn't work, there could be a few explanations.
 
-# In[23]:
+# In[ ]:
 
 
 df['Value'].mean()
@@ -303,7 +300,7 @@ df['Value'].mean()
 # 
 # We have the data stored in a variable called `df`, but it's not immediately obvious how to work with it.  The Pandas library is incredibly powerful for filtering, slicing, and indexing data in many ways.  Our dataframe is a table with named columns.  We can list the column header names by calling the `.columns` attribute of the dataframe:
 
-# In[24]:
+# In[ ]:
 
 
 df.columns
@@ -313,7 +310,7 @@ df.columns
 # 
 # >**Note**: When you reference a dataframe column, it **must match the string exactly**.  Try to use short, intuitive names and avoid using spaces.  Sometimes when importing data from a device or from an open data source, spaces may be introduced into the header names which can raise confusing errors.  i.e. `' Value'` does not equal `'Value'`
 
-# In[25]:
+# In[ ]:
 
 
 'Value' == ' Value'
@@ -321,7 +318,7 @@ df.columns
 
 # Let's look at the `Value` column that threw an error above:
 
-# In[26]:
+# In[ ]:
 
 
 df['Value']
@@ -331,7 +328,7 @@ df['Value']
 # 
 # We can verify the type of values in the column by calling the built-in `type` function.  Below we look at the first value in the array using an integer index, in this case the first value in the array `df['Value']` is accessed using square brackets, i.e. `df['Value'][0]`.  If we wanted the 18th value, it would be `df['Value'][17]` because like many programming languages, **In Python, indexing starts at 0 instead of 1**.  More than you ever wanted to know about the history of 0 vs. 1 indexing in computer science can be found [here](https://buttondown.email/hillelwayne/archive/why-do-arrays-start-at-0/).  
 
-# In[27]:
+# In[ ]:
 
 
 type(df['Value'][0])
@@ -347,7 +344,7 @@ type(df['Value'][0])
 # 
 # We can change the type of values in a few ways.  Let's try using the `.astype()` function from pandas, and then check the data type.  Let's also create a more informative variable name (variable and unit information should be specified somewhere, here let's assume it's stage (water level), expressed in metres.)
 
-# In[28]:
+# In[ ]:
 
 
 print(type(df['Value'][0]))
@@ -361,7 +358,7 @@ print(type(df['stage_m'][0]))
 # 
 # Let's try calculating a mean again.  
 
-# In[29]:
+# In[ ]:
 
 
 df['stage_m'].mean()
@@ -371,7 +368,7 @@ df['stage_m'].mean()
 # 
 # Now if we plot the data as a time series, we can see **there are a few gaps** in the data.
 
-# In[30]:
+# In[ ]:
 
 
 df.plot('Date', 'stage_m')
@@ -379,7 +376,7 @@ df.plot('Date', 'stage_m')
 
 # We can isolate the missing periods by filtering for all rows where the value is `NaN`, which stands for **not a number**.
 
-# In[31]:
+# In[ ]:
 
 
 gaps = df[df['stage_m'].isnull()]
@@ -389,7 +386,7 @@ gaps
 
 # If we know we'll be dealing with more files from this source in the future, we could begin by addressing it at the source (change how values are recorded and saved).  
 
-# In[32]:
+# In[ ]:
 
 
 print(len(gaps))
@@ -400,7 +397,7 @@ print(len(gaps))
 
 # We can also check the mean of all columns at once:
 
-# In[33]:
+# In[ ]:
 
 
 df.mean()

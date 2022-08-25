@@ -40,7 +40,7 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 # 
 # For this exercise, we will use historical climate data from the Meteorological Service of Canada (MSC) station at Whistler, BC.
 
-# In[2]:
+# In[ ]:
 
 
 # calibration data
@@ -63,7 +63,7 @@ stn_name = df['Station Name'].values[0]
 # 
 # It's always a good idea to begin by visualizing the data we're working with.
 
-# In[3]:
+# In[ ]:
 
 
 # plot flow at Stave vs. precip at the closest climate stations
@@ -89,7 +89,7 @@ show(p)
 # 
 # First, isolate a single precipitation event to use for estimating a runoff hydrograph.  Let's find a nice week for skiing:  
 
-# In[4]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(16,4))
@@ -117,7 +117,7 @@ plt.legend()
 # 
 # Under these assumptions, lets reconstruct a runoff hydrograph at the outlet.  First, look at the precipitation data over the twelve days of the big storm. 
 
-# In[5]:
+# In[ ]:
 
 
 print(sample_df)
@@ -129,7 +129,7 @@ print(sample_df)
 # 
 # $$1 \frac{mm}{day} \times \frac{1 m}{1000 mm} \times \frac{1 day}{24 h} \times \frac{1 h}{ 3600 s} \times 1 km^2 \times \frac{1000 m \times 1000 m}{1 km^2}= \frac{1}{86.4} \frac{m^3}{s}$$
 
-# In[6]:
+# In[ ]:
 
 
 # convert to runoff volume
@@ -153,7 +153,7 @@ print(sample_df)
 # * **R** hydraulic radius (area / wetted perimeter)
 # * **S** is the channel slope
 
-# In[7]:
+# In[ ]:
 
 
 w_channel = 1.5 # m
@@ -188,14 +188,14 @@ def solve_depth(w, n_factor, Q, S):
     
 
 
-# In[8]:
+# In[ ]:
 
 
 # For each timestep, we want to solve for the depth of water at our outlet
 sample_df['flow_depth_m'] = sample_df['runoff_cms'].apply(lambda x: solve_depth(w_channel, n_factor, x, S))
 
 
-# In[9]:
+# In[ ]:
 
 
 plt.plot(sample_df.index, sample_df['flow_depth_m'])
@@ -213,7 +213,7 @@ plt.ylabel('Flow depth [m]')
 # ### Step 1: Instantiate a grid from a DEM raster
 # Some sample data is already included, but for extra data, see the [USGS hydrosheds project](https://www.hydrosheds.org/).
 
-# In[10]:
+# In[ ]:
 
 
 # grid = Grid.from_raster('data/n45w125_con_grid/n45w125_con/n45w125_con', data_name='dem')
@@ -221,7 +221,7 @@ grid = Grid.from_ascii(path='../../data/notebook_5_data/n49w1235_con_grid.asc',
                        data_name='dem')
 
 
-# In[11]:
+# In[ ]:
 
 
 # reset the nodata from -32768 so it doesn't throw off the 
@@ -229,7 +229,7 @@ grid = Grid.from_ascii(path='../../data/notebook_5_data/n49w1235_con_grid.asc',
 grid.nodata = 0
 
 
-# In[12]:
+# In[ ]:
 
 
 # store the extents of the map
@@ -259,7 +259,7 @@ min_x, max_x, min_y, max_y = map_extents
 # * **refresh**: reset the map
 # * **hover**: see the coordinates when hovering over the map with a mouse or pointer
 
-# In[13]:
+# In[ ]:
 
 
 # set bokeh plot tools
@@ -305,7 +305,7 @@ show(p1)
 
 # ### Resolve flats in DEM
 
-# In[14]:
+# In[ ]:
 
 
 grid.resolve_flats('dem', out_name='inflated_dem')
@@ -313,20 +313,20 @@ grid.resolve_flats('dem', out_name='inflated_dem')
 
 # ### Specify flow direction values
 
-# In[15]:
+# In[ ]:
 
 
 #         N    NE    E    SE    S    SW    W    NW
 dirmap = (64,  128,  1,   2,    4,   8,    16,  32)
 
 
-# In[16]:
+# In[ ]:
 
 
 grid.flowdir(data='inflated_dem', out_name='dir', dirmap=dirmap)
 
 
-# In[17]:
+# In[ ]:
 
 
 fig = plt.figure(figsize=(8,6))
@@ -344,14 +344,14 @@ plt.tight_layout()
 # plt.savefig('data/img/flow_direction.png', bbox_inches='tight')
 
 
-# In[18]:
+# In[ ]:
 
 
 # view the values of the raster as an array
 grid.dir
 
 
-# In[19]:
+# In[ ]:
 
 
 # check the size of the raster
@@ -373,7 +373,7 @@ grid.dir.size
 # 
 # 
 
-# In[20]:
+# In[ ]:
 
 
 # Specify the Point of Concentration (POC) / Catchment Outlet (a.k.a. pour point) 
@@ -393,21 +393,21 @@ grid.catchment(data='dir', x=x, y=y, dirmap=dirmap, out_name='catch',
                recursionlimit=15000, xytype='label', nodata_out=0)
 
 
-# In[21]:
+# In[ ]:
 
 
 # Clip the bounding box to the catchment we've chosen
 grid.clip_to('catch', pad=(1,1,1,1))
 
 
-# In[22]:
+# In[ ]:
 
 
 # Create a view of the catchment
 catch = grid.view('catch', nodata=np.nan)
 
 
-# In[23]:
+# In[ ]:
 
 
 # check the shape to see if we've estimated close enough to the 
@@ -417,14 +417,14 @@ print(catch.shape)
 # little hillslope
 
 
-# In[24]:
+# In[ ]:
 
 
 print(grid.extent)
 ext_1 = grid.extent
 
 
-# In[25]:
+# In[ ]:
 
 
 # Plot the catchment
@@ -442,13 +442,13 @@ plt.title('Delineated Catchment')
 
 # ### Get flow accumulation
 
-# In[26]:
+# In[ ]:
 
 
 grid.accumulation(data='catch', dirmap=dirmap, out_name='acc')
 
 
-# In[27]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
@@ -465,7 +465,7 @@ plt.ylabel('Latitude')
 # plt.savefig('data/img/flow_accumulation.png', bbox_inches='tight')
 
 
-# In[36]:
+# In[ ]:
 
 
 
@@ -473,14 +473,14 @@ plt.ylabel('Latitude')
 
 # ### Calculate distances to upstream cells
 
-# In[28]:
+# In[ ]:
 
 
 grid.flow_distance(data='catch', x=x, y=y, dirmap=dirmap, out_name='dist',
                    xytype='label', nodata_out=np.nan)
 
 
-# In[29]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
@@ -495,7 +495,7 @@ plt.title('Flow Distance')
 # plt.savefig('data/img/flow_distance.png', bbox_inches='tight'),
 
 
-# In[33]:
+# In[ ]:
 
 
 area_threshold=20
@@ -530,7 +530,7 @@ plt.ylabel('Latitude')
 # 
 # Assign a travel time to each cell based on the assumption that water travels at one speed (slower) until it reaches a stream network, at which point its speed increases dramatically.
 
-# In[34]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
@@ -564,7 +564,7 @@ plt.ylabel('Latitude')
 # 
 # First, we must figure out the cell dimensions.  From the [USGS Hydrosheds information](https://hydrosheds.cr.usgs.gov/datadownload.php), we know the resolution is 15 (degree) seconds.  Because of the odd shape of the earth, and the projection of coordinate systems onto the earth, there is a little bit of work involved in converting the DEM resolution to equivalent distances.  For the purpose of this exercise, we will assume cells are 300x300m.  You can check the approximation [here](https://opendem.info/arc2meters.html) for a latitude of 49 degrees.
 
-# In[37]:
+# In[ ]:
 
 
 # cells can be grouped by their weighted distance to the outlet to simplify 
@@ -577,7 +577,7 @@ dist_df['weighted_dist'] = weighted_dist.flatten()
 dist_df = dist_df[dist_df['weighted_dist'] > 0].round(0)
 
 
-# In[38]:
+# In[ ]:
 
 
 start_date = sample_df.index.values[0]
@@ -592,7 +592,7 @@ resampled_df = sample_df.resample('1H').pad() / 24
 # 
 # For this exercise, we will assume the average velocity of water is 1 m/s value for the flow accumulation cells, and 0.1 m/s for the other cells.  Therefore precipitation will take on average 300s (0.0833 h) and 3000s (0.833 h) to travel to the outlet for flow-accumulation and non-flow-accumulation cells, respectively.
 
-# In[39]:
+# In[ ]:
 
 
 # get the number of cells of each distance
@@ -600,7 +600,7 @@ grouped_dists = pd.DataFrame(dist_df.groupby('weighted_dist').size())
 grouped_dists.columns = ['num_cells']
 
 
-# In[40]:
+# In[ ]:
 
 
 # create unit hydrographs for each timestep
@@ -621,7 +621,7 @@ runoff_df['Runoff (cms)'] = 0
 
 # **NOTE**: if you re-run the cell below, you need to run the cell above as well, or the runoff dataframe will not reset and the values will keep increasing.
 
-# In[41]:
+# In[ ]:
 
 
 cell_size = 300 # assume each pixel represents 300m x 300m 
@@ -644,7 +644,7 @@ for ind, row in resampled_df.iterrows():
 #             print(ind, row)
 
 
-# In[42]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(16,4))
@@ -681,7 +681,7 @@ ax1.legend(loc='upper right')
 # 
 # First, estimate the drainage area.  Then, find the peak hourly flow.
 
-# In[44]:
+# In[ ]:
 
 
 DA = round(grouped_dists.sum().values[0] * 0.3 * 0.3, 0)
