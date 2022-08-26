@@ -1,6 +1,6 @@
 # Foreword
 
-This book consists of a set of interactive notebooks on the topic of applied hydrology for CIVL 418/551 and IWME 502 at the University of British Columbia.  The aim of these notebooks is to introduce students to programmatic data analysis using the open-source *Jupyter Notebook* software, which is a powerful interactive computing environment.
+This book consists of a set of interactive notebooks on the topic of applied hydrology, created by Dan Kovacek and Steven Weijs at the University of British Columbia.  The notebooks were originally developed as a set of tutorials for courses engineering hydrology (CIVL 418/551 and IWME 502).  The aim of these notebooks is to introduce students to programmatic data analysis using the open-source *Jupyter Notebook* software, which is a powerful interactive computing environment.
 
 **Students are not expected to have prior experience with programming.**  The emphasis of these notebooks is on hydrological concepts rather than computer science, so all necessary code is provided.  Each notebook will focus on a particular hydrologic concept, and students will be asked to answer questions about the hydrological concept that may require changing variables and re-running code blocks to update results.  The instructions provided with the code in the notebooks will facilitate the exploration of each concept.
 
