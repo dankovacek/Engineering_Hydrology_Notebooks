@@ -25,6 +25,7 @@ A discussion thread dedicated to installation and setup will be created on Canva
 Programming is a different paradigm compared to spreadsheet-based software.  At the start, the number of new concepts can be overwhelming and it is easy (and normal) to feel like this:
 
 ![It's easy to feel overwhelmed, but the effort is well worth your time!](img/wave_smash.gif)
+(source: [Gfycat.com](https://gfycat.com/))
 
 The web is full of excellent learning resources!  An investment in learning some fundamental concepts is well worth your time.  A few resources to get you started are provided below:
 
