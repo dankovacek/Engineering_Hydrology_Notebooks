@@ -26,13 +26,13 @@ Programming is a different paradigm compared to spreadsheet-based software.  At 
 
 ![It's easy to feel overwhelmed, but the effort is well worth your time!](img/wave_smash.gif)
 
-However, the web is full of excellent learning resources.  An investment in learning some fundamental concepts is well worth your time.  A few resources to get you started are provided below:
+The web is full of excellent learning resources!  An investment in learning some fundamental concepts is well worth your time.  A few resources to get you started are provided below:
 
 * [How to run code in the notebook](https://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Running%20Code.ipynb).  Basics of Python syntax and programming in the Jupyter notebook.
 * [Matplotlib](http://nbviewer.ipython.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-4-Matplotlib.ipynb) is a popular library for creating a wide variety of plots.  
 * [Introduction to Python](https://nbviewer.jupyter.org/github/ehmatthes/intro_programming/blob/master/notebooks/index.ipynb).  An introductory course taught through an interactive Python notebook in Jupyter.
 
-### A comprehensive list of interesting, useful, and powerful Jupyter notebook examples can be found [here](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks).
+### A comprehensive list of interesting, useful, and powerful Jupyter notebook examples can be found [here](https://github.com/jupyter/jupyter/wiki).
 
 ## Other Information
 
@@ -44,10 +44,10 @@ If when running a code cell in Jupyter you encounter the following type of error
 
 This generally means a package has not been installed.  In this case, the package is `Pandas`, which can be installed by creating a new cell:
 
-![new cell](img/new_cell.png)
+![Create a new cell](img/new_cell.png)
 
 Typing the following (you can replace `pandas` with the name of the package you need to install)
 
-![](img/package_install.png)
+![Command to install a Python package.](img/package_install.png)
 
 And executing the cell (shift + enter), or the 'run' button.
