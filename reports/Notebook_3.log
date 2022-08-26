@@ -26,8 +26,10 @@ import matplotlib.pyplot as plt
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
-from bokeh.plotting import figure, output_notebook, show
-from datetime import timedelta
+from bokeh.plotting import figure, show, output_file
+from bokeh.models import ColumnDataSource, Band
+from bokeh.io import output_notebook
+from bokeh.layouts import gridplot
 output_notebook()
 ------------------
 
