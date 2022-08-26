@@ -22,7 +22,7 @@ A discussion thread dedicated to installation and setup will be created on Canva
 
 ### Learning Resources
 
-Programming is a different paradigm compared to spreadsheet-based software.  At the start, the number of new concepts can be overwhelming and it is easy (and normal) to feel like this guy:
+Programming is a different paradigm compared to spreadsheet-based software.  At the start, the number of new concepts can be overwhelming and it is easy (and normal) to feel like this:
 
 ![It's easy to feel overwhelmed, but the effort is well worth your time!](img/wave_smash.gif)
 
