@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Notebook 4: Characterization of Long-Term Runoff" href="../Notebook_3/Notebook_3.html" />
+    <link rel="next" title="Notebook 3: Regional Information Transfer" href="../Notebook_3/Notebook_3.html" />
     <link rel="prev" title="Notebook 1: Flow Measurement using the Salt Dilution Method" href="../Notebook_1/Notebook_1.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -163,25 +163,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Extreme Values, Uncertainty, and Risk
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_3/Notebook_3.html">
-   Notebook 4: Characterization of Long-Term Runoff
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
   Regional Information Transfer
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_4/Notebook_4.html">
-   Notebook 5: Rational Method and Travel Times
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html">
+   Notebook 3: Regional Information Transfer
   </a>
  </li>
 </ul>
@@ -192,8 +180,20 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_4/Notebook_4.html">
+   Notebook 4: Rational Method and Travel Times
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Extreme Values, Uncertainty, and Risk
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_5/Notebook_5.html">
-   Notebook 3: Extreme Values, Uncertainty, and Risk
+   Notebook 5: Extreme Values, Uncertainty, and Risk
   </a>
  </li>
 </ul>
@@ -1424,120 +1424,6 @@ The stage on 2010-09-26 00:00:00 was 1.313 m.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stage_df</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Date</th>
-      <th>Water level (daily av.) (m)</th>
-      <th>RC Q (cms)</th>
-      <th>Manual Q (cms)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2009-01-01</td>
-      <td>0.240</td>
-      <td>1.235033</td>
-      <td>0.613014</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2009-01-02</td>
-      <td>0.236</td>
-      <td>1.206657</td>
-      <td>0.594746</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2009-01-03</td>
-      <td>0.234</td>
-      <td>1.192538</td>
-      <td>0.585704</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2009-01-04</td>
-      <td>0.233</td>
-      <td>1.185495</td>
-      <td>0.581207</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2009-01-05</td>
-      <td>0.231</td>
-      <td>1.171445</td>
-      <td>0.572258</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>725</th>
-      <td>2010-12-27</td>
-      <td>0.288</td>
-      <td>1.589221</td>
-      <td>0.851131</td>
-    </tr>
-    <tr>
-      <th>726</th>
-      <td>2010-12-28</td>
-      <td>0.287</td>
-      <td>1.581594</td>
-      <td>0.845819</td>
-    </tr>
-    <tr>
-      <th>727</th>
-      <td>2010-12-29</td>
-      <td>0.265</td>
-      <td>1.416427</td>
-      <td>0.732711</td>
-    </tr>
-    <tr>
-      <th>728</th>
-      <td>2010-12-30</td>
-      <td>0.248</td>
-      <td>1.292328</td>
-      <td>0.650284</td>
-    </tr>
-    <tr>
-      <th>729</th>
-      <td>2010-12-31</td>
-      <td>0.242</td>
-      <td>1.249289</td>
-      <td>0.622240</td>
-    </tr>
-  </tbody>
-</table>
-<p>730 rows × 4 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># again, if you want to export this dataframe to csv for use in Excel</span>
 <span class="c1"># or other program, use the command below</span>
 <span class="c1"># stage_df.to_csv(&#39;derived_flow_series.csv&#39;)</span>
@@ -1587,7 +1473,7 @@ The stage on 2010-09-26 00:00:00 was 1.313 m.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Notebook_2_40_0.png" src="../../_images/Notebook_2_40_0.png" />
+<img alt="../../_images/Notebook_2_39_0.png" src="../../_images/Notebook_2_39_0.png" />
 </div>
 </div>
 </section>
@@ -2056,7 +1942,7 @@ The stage on 2010-09-26 00:00:00 was 1.313 m.
     <a class='right-next' id="next-link" href="../Notebook_3/Notebook_3.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Notebook 4: Characterization of Long-Term Runoff</p>
+        <p class="prev-next-title">Notebook 3: Regional Information Transfer</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

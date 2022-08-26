@@ -168,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_3/Notebook_3.html">
-   Notebook 3: Characterization of Long-Term Runoff
+   Notebook 3: Regional Information Transfer
   </a>
  </li>
 </ul>
@@ -438,11 +438,6 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cumulative-frequency-the-flow-duration-curve">
-   Cumulative Frequency: The Flow Duration Curve
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#annual-maximum-flow-series">
    Annual Maximum Flow Series
   </a>
@@ -593,11 +588,6 @@ title="Print to PDF"
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cumulative-frequency-the-flow-duration-curve">
-   Cumulative Frequency: The Flow Duration Curve
-  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#annual-maximum-flow-series">
@@ -753,14 +743,85 @@ title="Print to PDF"
 <h2>Data Imports<a class="headerlink" href="#data-imports" title="Permalink to this headline">#</a></h2>
 <section id="import-the-daily-average-flow-data">
 <h3>Import the Daily Average Flow Data<a class="headerlink" href="#import-the-daily-average-flow-data" title="Permalink to this headline">#</a></h3>
-<p>Daily average flow data provided by the Water Survey of Canada (WSC) for the <a class="reference external" href="https://wateroffice.ec.gc.ca/report/historical_e.html?y1Max=1&amp;y1Min=1&amp;scale=normal&amp;mode=Graph&amp;stn=08MH147&amp;dataType=Daily%C2%B6meterType=Flow&amp;year=2016">Stave River</a> (WSC 08MH147) is saved in <code class="docutils literal notranslate"><span class="pre">data/notebook_3_data/Stave.csv</span></code></p>
+<p>Daily average flow data provided by the Water Survey of Canada (WSC) for the <a class="reference external" href="https://wateroffice.ec.gc.ca/report/historical_e.html?y1Max=1&amp;y1Min=1&amp;scale=normal&amp;mode=Graph&amp;stn=08MH147&amp;dataType=Daily%C2%B6meterType=Flow&amp;year=2016">Stave River</a> (WSC 08MH147) is saved in <code class="docutils literal notranslate"><span class="pre">data/notebook_5_data/Stave.csv</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../data/notebook_3_data/Stave.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../notebook_data/notebook_5_data/Stave.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>PARAM</th>
+      <th>Value</th>
+      <th>SYM</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1983-02-03</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>6.59</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>1983-02-04</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>6.40</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1983-02-05</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>5.93</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1983-02-06</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>6.21</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1983-02-07</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>7.04</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Note in the csv file the first line tells us that there are two parameters being reported: stage (water level) and flow.  When the <code class="docutils literal notranslate"><span class="pre">PARAM</span></code> column equals 1, the value corresponds to discharge, and where it equals 2 the value corresponds to stage.</p>
 <p>The SYM column refers to data quality information.</p>
@@ -824,27 +885,6 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-</section>
-<section id="cumulative-frequency-the-flow-duration-curve">
-<h2>Cumulative Frequency: The Flow Duration Curve<a class="headerlink" href="#cumulative-frequency-the-flow-duration-curve" title="Permalink to this headline">#</a></h2>
-<p>In order to illustrate the variability of flow in a river, it is common to map flow magnitude to cumulative frequency.  A flow duration curve presents flow magnitude from 0% to 100% exceedance, where 0 is exceeded least often, 100% is “always” exceeded (based on the sample), and 50% represents the median flow.</p>
-<p>Let’s plot a flow duration curve for Stave River.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fdc_plot</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Stave River Flow Duration Curve&#39;</span><span class="p">)</span>
-
-<span class="n">pct_exceeded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">flow_quantiles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">flow_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">pct_exceeded</span><span class="p">)</span>
-
-<span class="n">fdc_plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">pct_exceeded</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">flow_quantiles</span><span class="p">)</span>
-<span class="n">fdc_plot</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Flow [m^3/s]&#39;</span>
-<span class="n">fdc_plot</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Percent of Time Exceeded [%]&#39;</span>
-<span class="n">show</span><span class="p">(</span><span class="n">fdc_plot</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The shape of the FDC gives some insight into the nature of the watershed.  A flatter curvature suggests less dramatic ‘flashes’ of rainfall-runoff response, while a steeper curve suggests more synchronization – larger peak runoff on a unit area basis.</p>
 </section>
 <section id="annual-maximum-flow-series">
 <h2>Annual Maximum Flow Series<a class="headerlink" href="#annual-maximum-flow-series" title="Permalink to this headline">#</a></h2>
