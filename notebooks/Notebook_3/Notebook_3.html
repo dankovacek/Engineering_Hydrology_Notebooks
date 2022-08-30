@@ -433,16 +433,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cumulative-frequency-the-flow-duration-curve">
-     Cumulative Frequency: The Flow Duration Curve
+    <a class="reference internal nav-link" href="#cumulative-frequency-the-flow-duration-curve-fdc">
+     Cumulative Frequency: The Flow Duration Curve (FDC)
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#characterizing-water-resources-using-regional-information">
-   Characterizing Water Resources using Regional Information
-  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linear-regression-of-daily-streamflow">
@@ -489,6 +484,11 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#in-the-above-plot-note-general-patterns-specific-exceptions-and-any-trends">
      In the above plot, note general patterns, specific exceptions, and any trends
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#best-fit">
+     Best-fit
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -563,16 +563,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cumulative-frequency-the-flow-duration-curve">
-     Cumulative Frequency: The Flow Duration Curve
+    <a class="reference internal nav-link" href="#cumulative-frequency-the-flow-duration-curve-fdc">
+     Cumulative Frequency: The Flow Duration Curve (FDC)
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#characterizing-water-resources-using-regional-information">
-   Characterizing Water Resources using Regional Information
-  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linear-regression-of-daily-streamflow">
@@ -619,6 +614,11 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#in-the-above-plot-note-general-patterns-specific-exceptions-and-any-trends">
      In the above plot, note general patterns, specific exceptions, and any trends
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#best-fit">
+     Best-fit
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -689,7 +689,7 @@ title="Print to PDF"
 <p>Recall that our hydrometric station has only been running for a couple of years – this isn’t nearly enough data to estimate the <strong>long term</strong> flow characteristics (daily, seasonal, floods, droughts, etc.).  In this notebook, we look in the vicinity of our project location for other stations where records have been kept for much longer—ideally with complete historical records of 25+ years.  <strong>It’s also critical that we find records that are concurrent with the period we measured at our project location.</strong>  We can use concurrent data from nearby stations to develop a model to estimate flow for periods we didn’t actually measure at our project location.  This type of model is called a <em>regional information transfer</em> model.</p>
 <p>First, we’ll set up our rating curve as we did in Notebook 2 and recalculate the daily average flow series.</p>
 <blockquote>
-<div><p><strong>Note</strong>: throughout these notebooks, the short form cms (cubic metres per second) is used interchangeably with <code class="docutils literal notranslate"><span class="pre">m3/s</span></code>, <code class="docutils literal notranslate"><span class="pre">m^3/s</span></code> and  <span class="math notranslate nohighlight">\(m^3/s\)</span>.</p>
+<div><p><strong>Note</strong>: throughout these notebooks, the short form cms (cubic metres per second) is used interchangeably, and denoted as <code class="docutils literal notranslate"><span class="pre">m3/s</span></code>, <code class="docutils literal notranslate"><span class="pre">m^3/s</span></code> and  <span class="math notranslate nohighlight">\(m^3/s\)</span>.</p>
 </div></blockquote>
 </section>
 <section id="import-the-data">
@@ -778,7 +778,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fb10a600e80&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9161f1af70&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_3_7_1.png" src="../../_images/Notebook_3_7_1.png" />
@@ -991,15 +991,15 @@ title="Print to PDF"
 </section>
 <section id="plot-the-stage-discharge-rating-curve-and-the-best-fit-curve">
 <h2>Plot the Stage-Discharge Rating Curve and the Best Fit Curve<a class="headerlink" href="#plot-the-stage-discharge-rating-curve-and-the-best-fit-curve" title="Permalink to this headline">#</a></h2>
-<p>Recall from Notebook 2: <span class="math notranslate nohighlight">\(Q = C(H-h_0)^b\)</span>.  If we transform the data to log space, we get a linear relationship:</p>
+<p>Recall the form of the rating curve equation from Notebook 2: <span class="math notranslate nohighlight">\(Q = C(H-h_0)^b\)</span>.  If we transform the data to log space, we get a linear relationship:</p>
 <div class="math notranslate nohighlight">
 \[log(Q) = log(C) + b\cdot log(h-h_0)\]</div>
-<p>If we rearrange to the form <span class="math notranslate nohighlight">\(y = intercept + slope \cdot x\)</span>, we can use the scipy function for linear regression (<code class="docutils literal notranslate"> <span class="pre">()</span></code> from the previous tutorial).</p>
+<p>If we rearrange to the form <span class="math notranslate nohighlight">\(y = intercept + slope \cdot x\)</span>, we can use the scipy function for linear regression (<code class="docutils literal notranslate"><span class="pre">scipy.stats.linregress()</span></code> shortened at import to <code class="docutils literal notranslate"><span class="pre">st.linregress()</span></code> from the previous tutorial).</p>
 <p>Recall the x and y axis parameters are Q and h, respectively, so the linear form of the equation is then:</p>
 <div class="math notranslate nohighlight">
 \[log(h-h_0) = slope \cdot log(Q) + intercept\]</div>
 <p>The above relationship is linear, so we can use ordinary least squares to find the best fit line (in log-log space), and then transform back to linear space.
-Note that <span class="math notranslate nohighlight">\(h_0\)</span> cannot be fitted this way, and has to be set manually. In this case we can assume <span class="math notranslate nohighlight">\(h_0=0\)</span>.</p>
+Note that <span class="math notranslate nohighlight">\(h_0\)</span> cannot be fitted this way, and has to be set manually. In this case we will use <span class="math notranslate nohighlight">\(h_0=0\)</span> as a first approximation and check the fit to see if an adjustment is warranted.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the discharge based on the best fit</span>
@@ -1084,9 +1084,11 @@ calculate daily average flow from daily average water level.</p>
     <tr style="text-align: right;">
       <th></th>
       <th>Water level (daily av.) (m)</th>
+      <th>RC Q (cms)</th>
     </tr>
     <tr>
       <th>Date</th>
+      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -1094,22 +1096,27 @@ calculate daily average flow from daily average water level.</p>
     <tr>
       <th>2009-01-01</th>
       <td>0.240</td>
+      <td>1.235033</td>
     </tr>
     <tr>
       <th>2009-01-02</th>
       <td>0.236</td>
+      <td>1.206657</td>
     </tr>
     <tr>
       <th>2009-01-03</th>
       <td>0.234</td>
+      <td>1.192538</td>
     </tr>
     <tr>
       <th>2009-01-04</th>
       <td>0.233</td>
+      <td>1.185495</td>
     </tr>
     <tr>
       <th>2009-01-05</th>
       <td>0.231</td>
+      <td>1.171445</td>
     </tr>
   </tbody>
 </table>
@@ -1244,10 +1251,10 @@ calculate daily average flow from daily average water level.</p>
 </div>
 </div>
 </section>
-<section id="cumulative-frequency-the-flow-duration-curve">
-<h3>Cumulative Frequency: The Flow Duration Curve<a class="headerlink" href="#cumulative-frequency-the-flow-duration-curve" title="Permalink to this headline">#</a></h3>
-<p>In order to illustrate the variability of flow in a river, it is common to map flow magnitude to cumulative frequency.  A flow duration curve presents flow magnitude from 0% to 100% exceedance, where 0 is exceeded least often, 100% is “always” exceeded (based on the sample), and <strong>50% represents the median flow</strong>.  A <em>flow duration</em> curve is also referred to as a <em>flow exceedance</em> curve.</p>
-<p>Let’s plot a flow duration curve for the measured flow series we just developed.</p>
+<section id="cumulative-frequency-the-flow-duration-curve-fdc">
+<h3>Cumulative Frequency: The Flow Duration Curve (FDC)<a class="headerlink" href="#cumulative-frequency-the-flow-duration-curve-fdc" title="Permalink to this headline">#</a></h3>
+<p>In order to illustrate the variability of flow in a river, it is common to map flow magnitude to cumulative frequency, or the proportion of time the flow in the river equals or exceeds some amount.  A flow duration curve presents flow magnitude from 0% to 100% exceedance, where values approaching zero are high flows that are very rarely exceeded.  Conversely, values approaching 100% exceedance are low flows that are almost always exceeded.  <strong>50% exceedance represents the median flow</strong>  Note that these values are based on the sample, and the flow duration curve is generally used to describe the overall distribution of flow and not for estimating extremes.  A <em>flow duration</em> curve is also referred to as a <em>flow exceedance</em> curve.</p>
+<p>Let’s plot a flow duration curve for the measured flow series we created above by applying the rating curve equation to the stage series.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -1271,36 +1278,28 @@ calculate daily average flow from daily average water level.</p>
 <img alt="../../_images/Notebook_3_24_1.png" src="../../_images/Notebook_3_24_1.png" />
 </div>
 </div>
-<p>The shape of the FDC gives some insight into the nature of the watershed.  A flatter curvature suggests less dramatic ‘flashes’ of rainfall-runoff response, while a steeper curve suggests more synchronization – larger peak runoff on a unit area basis.</p>
-<p>An FDC is even more informative when comparing different series.  Next we’ll develop a regional regression model and then use the FDC to evaluate the quality of our model <em>over specific flow quantiles</em> – this is important for the different end-uses of the data.</p>
+<p>The shape of the FDC gives some insight into the fluctuation of flows in the watershed.  A steeper peak flow end suggests more dramatic ‘flashes’ of rainfall-runoff response.  The shape of the low-flow tail describes base flows during low flow seasons.  Below is a comparison of two basins of nearly identical size but in very different climates:</p>
+<p><img alt="Comparison of flow exceedance curves for two basins in BC and Alberta." src="../../_images/FDC_comparison.png" /></p>
+<p>An FDC is also informative to compare <strong>different estimates at the same location</strong>, such as a short term measured flow series versus a long-term modeled flow series.</p>
+<p>Next we’ll develop a regional regression model and then use the FDC to evaluate the quality of our model <em>over specific flow quantiles</em> – this is important for the different end-uses of the data.</p>
 </section>
-</section>
-<section id="characterizing-water-resources-using-regional-information">
-<h2>Characterizing Water Resources using Regional Information<a class="headerlink" href="#characterizing-water-resources-using-regional-information" title="Permalink to this headline">#</a></h2>
-<p>Below are a few points to consider regarding the characterization of the water resource over the <strong>long term</strong>.</p>
-<ol class="simple">
-<li><p>How long has the hydrometric station been operating?</p></li>
-<li><p>If we’re collecting data to support civil engineering design, to assess financial viability of a project, to inform operations, and to quantify the impact of our use of water resources or our modification of natural flow regimes, have we collected enough data?</p></li>
-<li><p>How much data is enough?</p></li>
-<li><p>What else can be done to better evaluate the water resource?</p></li>
-</ol>
 </section>
 <section id="linear-regression-of-daily-streamflow">
 <h2>Linear Regression of Daily Streamflow<a class="headerlink" href="#linear-regression-of-daily-streamflow" title="Permalink to this headline">#</a></h2>
 <p><img alt="Active WSC Stations in Western Canada" src="../../_images/wsc_map_view1.png" /></p>
-<p>Water Survey of Canada (WSC) has operated and maintained hydrometric stations across Canada for over 100 years.  If we can find a regional proxy WSC station in <strong>close proximity to our location of interest, with similar basin characteristics</strong> to those of our project, we can correlate daily streamflow between the two locations, ultimately to generate an estimated (or synthetic) long-term flow series for our project location.</p>
-<p>Typically regressions are done by chronological pairing, which effectively says “if the flow at the regional (proxy) station was <span class="math notranslate nohighlight">\(Q_p\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, the flow at our project location at time <span class="math notranslate nohighlight">\(t\)</span> will be approximately <span class="math notranslate nohighlight">\(C\cdot Q_p + D\)</span> where <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(D\)</span> are constants.</p>
+<p>Water Survey of Canada (WSC) has operated and maintained hydrometric stations across Canada for over 100 years.  If we can find a regional proxy WSC station in <strong>close proximity to our location of interest, with similar basin characteristics</strong> to those of our project, we can correlate daily streamflow between the two locations, ultimately to generate an estimated (also called synthetic or modeled) long-term flow series for our project location.</p>
+<p>Typically regressions are done by chronological pairing, which effectively says “if the flow at the regional (proxy) station was <span class="math notranslate nohighlight">\(Q_p\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, the flow at our project location at time <span class="math notranslate nohighlight">\(t\)</span> will be approximately linearly proportional.</p>
 <section id="chronological-pairing-cp">
 <h3>Chronological Pairing (CP)<a class="headerlink" href="#chronological-pairing-cp" title="Permalink to this headline">#</a></h3>
 <p>A lot of work goes into finding an appropriate long-term record comparable to our location of interest, but we will assume we have been given a long-term daily flow series to use.</p>
 <ol class="simple">
-<li><p>Find just the concurrent days of record (days where we have flow recorded for both creeks/rivers).</p></li>
-<li><p>Create a scatter plot where the coordinates of each data point are (flow1, flow2).  It is customary to put the long-term regional station on the x-axis.</p></li>
+<li><p>Find just the concurrent days of record (days where we have flow recorded at <strong>both creeks/rivers</strong>).</p></li>
+<li><p>Create a scatter plot where the x, y coordinates of each data point are (flow1, flow2).  It is customary to put the long-term regional station on the x-axis.</p></li>
 <li><p>Determine the equation describing the line of best fit through the data.</p></li>
 <li><p>Apply the best fit line equation to the long-term surrogate record to yield an estimated long-term series for the project location.</p></li>
 </ol>
 <p>To further refine this estimate, we can recognize that the mechanisms driving flow across seasons and months can change quite dramatically, and the relationship between the two catchments can also change month-by-month, and/or season by season.  If there is enough data to create seasonal or monthly regressions, we can develop a best-fit equation for each month or season.  The process of steps 2 through 4 then are the same, except we treat each season or month independently.</p>
-<p>The above method is referred to as <strong>chronological pairing (CP)</strong>, as it pairs flow that occurs on the same day.  But what if there are timing differences between stations, or what if the spatial variability of precipitation results in flow events that don’t coincide in the short term?</p>
+<p>The above method is referred to as <strong>chronological pairing (CP)</strong>, as it pairs flows occurring at the same time.  But what if there are timing differences between stations, or what if the spatial variability of precipitation results in flow events that don’t coincide in the short term?</p>
 </section>
 <section id="empirical-frequency-pairing">
 <h3>Empirical Frequency Pairing<a class="headerlink" href="#empirical-frequency-pairing" title="Permalink to this headline">#</a></h3>
@@ -1591,7 +1590,7 @@ calculate daily average flow from daily average water level.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fb10a3fe970&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9161caacd0&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_3_42_1.png" src="../../_images/Notebook_3_42_1.png" />
@@ -1670,10 +1669,14 @@ calculate daily average flow from daily average water level.</p>
       <th>PARAM</th>
       <th>Value</th>
       <th>SYM</th>
+      <th>Model_Q</th>
+      <th>residuals</th>
       <th>Model_q_cms</th>
     </tr>
     <tr>
       <th>Date</th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -1691,6 +1694,8 @@ calculate daily average flow from daily average water level.</p>
       <td>0.240</td>
       <td>B</td>
       <td>1.384534</td>
+      <td>0.149501</td>
+      <td>1.384534</td>
     </tr>
     <tr>
       <th>2009-01-02</th>
@@ -1699,6 +1704,8 @@ calculate daily average flow from daily average water level.</p>
       <td>1</td>
       <td>0.230</td>
       <td>B</td>
+      <td>1.365869</td>
+      <td>0.159212</td>
       <td>1.365869</td>
     </tr>
     <tr>
@@ -1709,6 +1716,8 @@ calculate daily average flow from daily average water level.</p>
       <td>0.225</td>
       <td>B</td>
       <td>1.356537</td>
+      <td>0.163999</td>
+      <td>1.356537</td>
     </tr>
     <tr>
       <th>2009-01-04</th>
@@ -1718,6 +1727,8 @@ calculate daily average flow from daily average water level.</p>
       <td>0.208</td>
       <td>B</td>
       <td>1.324807</td>
+      <td>0.139312</td>
+      <td>1.324807</td>
     </tr>
     <tr>
       <th>2009-01-05</th>
@@ -1726,6 +1737,8 @@ calculate daily average flow from daily average water level.</p>
       <td>1</td>
       <td>0.200</td>
       <td>B</td>
+      <td>1.309875</td>
+      <td>0.138430</td>
       <td>1.309875</td>
     </tr>
   </tbody>
@@ -1747,7 +1760,7 @@ calculate daily average flow from daily average water level.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb109e0abb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9160bae610&gt;
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_3_49_1.png" src="../../_images/Notebook_3_49_1.png" />
@@ -1760,10 +1773,56 @@ calculate daily average flow from daily average water level.</p>
 <div><p><strong>Note</strong>: in the figure above, we label one series as “Measured Q” but in reality recall it is not <em>directly</em> measured.  It is itself a model of the relationship between stage and discharge.  <strong>The rating curve equation is the model!</strong></p>
 </div></blockquote>
 </section>
+<section id="best-fit">
+<h3>Best-fit<a class="headerlink" href="#best-fit" title="Permalink to this headline">#</a></h3>
+<p>The least-squares best fit is a common way to define the linear relationship between two variables.  It is a minimization of the sum of squared differences between the line (the model) and the observation.  Because it uses the square difference, it is sensitive to outliers.  It is good practice to check the residuals of the model to see if our model contains bias, and make an adjustment if warranted.  We can exclude outliers from the best fit (but still show them in the plot!), or we could use the L1-norm, which is the sum of absolute differences which is more robust to outliers.</p>
+<p>Below, we’ll apply the best fit model to the regional data for the period of measured record, we’ll calculate the difference (residuals) between modeled and measured flows, and then we’ll plot these residuals to look for bias in our model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a series to represent the modeled flow </span>
+<span class="n">concurrent_df</span><span class="p">[</span><span class="s1">&#39;Model_Q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">concurrent_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">slope</span> <span class="o">+</span> <span class="n">intercept</span>
+
+<span class="c1"># find the residuals</span>
+<span class="n">concurrent_df</span><span class="p">[</span><span class="s1">&#39;residuals&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">concurrent_df</span><span class="p">[</span><span class="s1">&#39;Model_Q&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">concurrent_df</span><span class="p">[</span><span class="s1">&#39;RC Q (cms)&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">sorted_df</span> <span class="o">=</span> <span class="n">concurrent_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Model_Q&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sorted_df</span><span class="p">[</span><span class="s1">&#39;Model_Q&#39;</span><span class="p">],</span> <span class="n">sorted_df</span><span class="p">[</span><span class="s1">&#39;residuals&#39;</span><span class="p">],</span> <span class="s1">&#39;bo&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">sorted_df</span><span class="p">[</span><span class="s1">&#39;Model_Q&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">sorted_df</span><span class="p">[</span><span class="s1">&#39;Model_Q&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Regression Model Residuals&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Measured - Modeled Flow [cms]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Measured Flow&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot a histogram of the residuals to assess the distribution of error</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sorted_df</span><span class="p">[</span><span class="s1">&#39;residuals&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> 
+<span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Histogram of Residuals&#39;</span><span class="p">)</span>
+
+<span class="c1"># toggle the line below to see a closeup around 0</span>
+<span class="c1"># ax[1].set_ylim(-1.5, 1.5)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Histogram of Residuals&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/Notebook_3_53_1.png" src="../../_images/Notebook_3_53_1.png" />
+</div>
+</div>
+</section>
 <section id="compare-measured-vs-modeled-flow-duration-curves">
 <h3>Compare measured vs. modeled flow duration curves<a class="headerlink" href="#compare-measured-vs-modeled-flow-duration-curves" title="Permalink to this headline">#</a></h3>
 <p>How else can we evaluate how the model is fitting the measured data, noting in particular that we are interested in certain ranges of flows, perhaps for generating energy year-round, or supplying a community with drinking water in a dry season?</p>
 <p>Recall how we plotted the flow duration curve in Notebook 3.  The flow duration curve is particularly useful for focusing on how well the model matches measured data across the range of flows (though extremes are de-emphasized).</p>
+<p>What do the differences between flow duration curves shown below suggest about how well our model represents the project area?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -1787,10 +1846,10 @@ calculate daily average flow from daily average water level.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb108431550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f915ae14af0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_3_52_1.png" src="../../_images/Notebook_3_52_1.png" />
+<img alt="../../_images/Notebook_3_55_1.png" src="../../_images/Notebook_3_55_1.png" />
 </div>
 </div>
 </section>
@@ -1923,10 +1982,10 @@ The median flow over the measured period was 2.7 m^3/s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb108136b20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f915adbdee0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_3_56_1.png" src="../../_images/Notebook_3_56_1.png" />
+<img alt="../../_images/Notebook_3_59_1.png" src="../../_images/Notebook_3_59_1.png" />
 </div>
 </div>
 <p>The two series above highlight the difference a long-term estimate can make.  If we were to base a model on the short term measured series (blue), we might underestimate the flow available in the winter months (when energy is especially valuable), or overestimate the snowmelt in spring <strong>over the long term</strong>.</p>
@@ -1935,10 +1994,10 @@ The median flow over the measured period was 2.7 m^3/s
 <h2>Questions for Reflection<a class="headerlink" href="#questions-for-reflection" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>From our regression plot and from the comparison of measured and estimated daily flow series, what do you think about the quality of our model, i.e. how well does the best fit line approximate the concurrent daily flows (blue dots)?</p></li>
-<li><p>What range of flow is exceeded 67% OR MORE of the time, how well is this range modelled and what might this flow range be pertinent to?</p></li>
+<li><p>What flow is exceeded 50% OR MORE of the time, how well is this range modelled and what might this flow range be pertinent to for a hydropower project?</p></li>
 <li><p>What could differences in concurrent flows at the two locations be attributable to?</p></li>
 <li><p>How might we modify our model to capture one of the differences you noted in 3?</p></li>
-<li><p>In the last plot, we see that the ~two years we measured flow at our project location were very close to the long-term mean annual.  What if the two years we happened to measure were 2000 and 2001 and we took these as representative without doing a regression analysis with a long-term regional record?</p></li>
+<li><p>In the last plot, we see that the ~two years we measured had a dramatically higher spring runoff compared to the long-term, and lower winter base flows.  What we took these years as representative without modeling the long-term flow distribution?</p></li>
 </ol>
 </section>
 <section id="references">
