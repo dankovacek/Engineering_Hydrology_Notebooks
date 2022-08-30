@@ -17,29 +17,39 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import math
+# import required packages
 import pandas as pd
 import numpy as np
-from scipy import stats as st
+import math
+
+# advanced statistics library
+from scipy import stats
 
 import matplotlib.pyplot as plt
-from pandas.plotting import register_matplotlib_converters
-register_matplotlib_converters()
+import matplotlib.patches as mp
+import matplotlib.colors as colors
 
-from bokeh.plotting import figure, show, output_file
-from bokeh.models import ColumnDataSource, Band
+# SEE COMMENTS ABOUT PYSHEDS LIBRARY IN NEXT CELL
+from pysheds.grid import Grid
+import warnings
+warnings.filterwarnings('ignore')
+
+from bokeh.plotting import figure, show
 from bokeh.io import output_notebook
-from bokeh.layouts import gridplot
+from bokeh.models import LinearColorMapper, LogTicker, ColorBar, BasicTickFormatter
+from bokeh.io import output_notebook
 output_notebook()
+
+%matplotlib inline
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
 Input [0;32mIn [1][0m, in [0;36m<cell line: 2>[0;34m()[0m
-[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mmath[39;00m
+[1;32m      1[0m [38;5;66;03m# import required packages[39;00m
 [0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
 [1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[1;32m      4[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m [38;5;28;01mimport[39;00m stats [38;5;28;01mas[39;00m st
+[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mmath[39;00m
 
 [0;31mModuleNotFoundError[0m: No module named 'pandas'
 ModuleNotFoundError: No module named 'pandas'

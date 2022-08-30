@@ -1,19 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Notebook 3: Extreme Values, Uncertainty, and Risk
+# # Notebook 3: Regional Information Transfer
 # 
-# ## Introduction
-# 
-# In Notebook 2, we developed a rating curve from a set of discrete discharge measurements and a continuous record of water level.  At the end of the notebook, you were asked to reflect on how your confidence in the flow predicted by the rating curve changes as a function of water level.  In the near term, our confidence in the rating curve is greatest where we have the most measurements.  Recall that the shape of the rating curve is related to the geometry of the hydraulic control, and that the geometry of the river is constantly evolving.  Without continous validation of the rating curve, we should then be less confident in the rating curve over time, due to this *stream-channel geomorphic response*.  
-# 
-# Estimating the volume of water passing a given location during a major flood is necessary for designing infrastructure such as bridge abutments, hydraulic control structures like weirs and dams, and for designing erosion control measures.  In this notebook, we'll take a closer look at the upper end of the rating curve that governs high-magnitude flow events, where by definition we have fewer opportunities to record discrete flow measurements to robustly define a rating curve, and where measurements can be difficult to obtain accurately.  
-# 
-# It is often very difficult or impossible to get measurements at high flows due to safety, but also due to timing.  Hydrometric stations are often situated in remote locations, and high flow measurement requires additional planning and consideration for safe work procedures, and unique measurement approaches.  With this understanding of uncertainty in the largest *measured* flows, and recognizing that the highest stage recorded by the hydrometric station is generally substantially greater than the stage corresponding to the largest measured flows, extrapolation is unavoidable.  
-# 
-# Beyond extrapolation of the measured flow series at our sites of interest where *in situ* data collection may cover as little as one or two years, the estimation of peak flows for structural design extrapolates event further from measured values.  How can a 1 in 500 year flow be estimated from just two years of data measured on site? The aim of this notebook is to demonstrate the process of flood estimation, building upon the concepts developed in the previous tutorials.
-
-# ### Import libraries
+# ## Characterization of Long-Term Runoff
 
 # In[1]:
 
@@ -24,550 +14,566 @@ import numpy as np
 from scipy import stats as st
 
 import matplotlib.pyplot as plt
-from pandas.plotting import register_matplotlib_converters
-register_matplotlib_converters()
-
-from bokeh.plotting import figure, output_notebook, show
-from datetime import timedelta
-output_notebook()
 
 
-# ## Data Imports
+# ## Introduction
 # 
-# ### Import the Daily Average Flow Data
+# In Notebook 2, we developed a rating curve for our location of interest based on discrete discharge measurements made during a series of visits, and we applied this stage-discharge relationship (rating curve) to the continous stage recorded at our hydrometric station to generate a discharge (flow) time series.  
 # 
-# Daily average flow data provided by the Water Survey of Canada (WSC) for the [Stave River](https://wateroffice.ec.gc.ca/report/historical_e.html?y1Max=1&y1Min=1&scale=normal&mode=Graph&stn=08MH147&dataType=Daily&parameterType=Flow&year=2016) (WSC 08MH147) is saved in `data/notebook_3_data/Stave.csv`
-
-# In[ ]:
-
-
-df = pd.read_csv('../../data/notebook_3_data/Stave.csv', header=1, parse_dates=['Date'], index_col='Date')
-df.head()
-
-
-# Note in the csv file the first line tells us that there are two parameters being reported: stage (water level) and flow.  When the `PARAM` column equals 1, the value corresponds to discharge, and where it equals 2 the value corresponds to stage. 
+# Recall that our hydrometric station has only been running for a couple of years -- this isn't nearly enough data to estimate the **long term** flow characteristics (daily, seasonal, floods, droughts, etc.).  In this notebook, we look in the vicinity of our project location for other stations where records have been kept for much longer&mdash;ideally with complete historical records of 25+ years.  **It's also critical that we find records that are concurrent with the period we measured at our project location.**  We can use concurrent data from nearby stations to develop a model to estimate flow for periods we didn't actually measure at our project location.  This type of model is called a *regional information transfer* model.
 # 
-# The SYM column refers to data quality information.  
+# First, we'll set up our rating curve as we did in Notebook 2 and recalculate the daily average flow series.
 # 
-# | SYM | Description |
-# |---|---|
-# | A | **Partial Day**: The symbol A indicates that the daily mean value of water level or streamflow was estimated despite gaps of more than 120 minutes in the data string or missing data not significant enough to warrant the use of the E symbol. |
-# | B | **Ice Conditions**: The symbol B indicates that the streamflow value was estimated with consideration for the presence of ice in the stream. Ice conditions alter the open water relationship between water levels and streamflow. |
-# | D | **Dry:** The symbol D indicates that the stream or lake is "dry" or that there is no water at the gauge. This symbol is used for water level data only. |
-# | E | **Estimate:** The symbol E indicates that there was no measured data available for the day or missing period, and the water level or streamflow value was estimated by an indirect method such as interpolation, extrapolation, comparison with other streams or by correlation with meteorological data. |
-# | R | **Revised**: The symbol R indicates that a revision, correction or addition has been made to the historical discharge database after January 1, 1989. |
+# >**Note**: throughout these notebooks, the short form cms (cubic metres per second) is used interchangeably, and denoted as `m3/s`, `m^3/s` and  $m^3/s$.
+
+# ## Import the Data
+
+# In[2]:
+
+
+# import the stage data (from the Notebook 2 data folder)
+site_df = pd.read_csv('../../notebook_data/notebook_2_data/WL_data.csv', parse_dates=['Date'])
+site_df.set_index('Date', inplace=True)
+
+
+# In[3]:
+
+
+# take a quick look at what we're dealing with
+site_df.head()
+
+
+# In[4]:
+
+
+# let's store the stage label as a variable for convenience
+stage_label = 'Water level (daily av.) (m)'
+
+
+# In[5]:
+
+
+# plot the data for a quick visual check
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(site_df.index, site_df[stage_label])
+
+
+# In[6]:
+
+
+# import the discharge measurements
+rc_df = pd.read_csv('../../notebook_data/notebook_2_data/RC_Data.csv', parse_dates=['Date'])
+
+
+# In[7]:
+
+
+# take a look at the discharge measurements
+rc_df.head(15)
+
+
+# In[8]:
+
+
+# remember to add in the newest discharge measurement(s)!
+msmt_date = pd.to_datetime('2010-09-26')
+msmt_q = 12
+# note that in stage_df, the index has been set to the Date column
+msmt_stage = site_df[site_df.index == msmt_date].values[0]
+
+rc_df.loc[len(rc_df), :] = [msmt_date, msmt_q, msmt_stage]
+rc_df
+
+
+# ## Plot the Stage-Discharge Rating Curve and the Best Fit Curve
 # 
-# (from [Water Survey of Canada](https://wateroffice.ec.gc.ca/contactus/faq_e.html#Q12))
-
-# In[ ]:
-
-
-# select just the flow data (PARAM == 1)
-flow_df = df[df['PARAM'] == 1].copy()
-flow_df.loc[:, 'year'] = flow_df.index.year
-print(flow_df.head())
-print('')
-print("There are {} values in the Stave River daily flow series.".format(len(flow_df)))
-
-
-# ## Plot the Data
+# Recall the form of the rating curve equation from Notebook 2: $Q = C(H-h_0)^b$.  If we transform the data to log space, we get a linear relationship:
 # 
-# ### Plot the Daily Average Flow Series
-
-# In[ ]:
-
-
-# customize the tools for interacting with the bokeh plot
-TOOLS="pan,wheel_zoom,reset,hover,poly_select,box_select"
-
-#### Daily Flow Plot
-daily_flow_plot = figure(plot_width=700, plot_height=400,
-                title='Daily Average Flow at Stave River (WSC 08MH147)',
-                tools=TOOLS, x_axis_type='datetime')
-
-daily_flow_plot.line(flow_df.index, flow_df['Value'].to_numpy())
-show(daily_flow_plot)
-
-
-# ## Cumulative Frequency: The Flow Duration Curve
+# $$log(Q) = log(C) + b\cdot log(h-h_0)$$
 # 
-# In order to illustrate the variability of flow in a river, it is common to map flow magnitude to cumulative frequency.  A flow duration curve presents flow magnitude from 0% to 100% exceedance, where 0 is exceeded least often, 100% is "always" exceeded (based on the sample), and 50% represents the median flow.  
+# If we rearrange to the form $y = intercept + slope \cdot x$, we can use the scipy function for linear regression (`scipy.stats.linregress()` shortened at import to `st.linregress()` from the previous tutorial).
 # 
-# Let's plot a flow duration curve for Stave River.
-
-# In[ ]:
-
-
-fdc_plot = figure(width=700, height=400, title='Stave River Flow Duration Curve')
-
-pct_exceeded = np.linspace(0, 100, 200)
-flow_quantiles = np.percentile(flow_df['Value'].dropna(), pct_exceeded)
-
-fdc_plot.line(pct_exceeded[::-1], flow_quantiles)
-fdc_plot.yaxis.axis_label = 'Flow [m^3/s]'
-fdc_plot.xaxis.axis_label = 'Percent of Time Exceeded [%]'
-show(fdc_plot)
-
-
-# The shape of the FDC gives some insight into the nature of the watershed.  A flatter curvature suggests less dramatic 'flashes' of rainfall-runoff response, while a steeper curve suggests more synchronization -- larger peak runoff on a unit area basis.  
+# Recall the x and y axis parameters are Q and h, respectively, so the linear form of the equation is then: 
 # 
-
-# ## Annual Maximum Flow Series
+# $$log(h-h_0) = slope \cdot log(Q) + intercept$$
 # 
-# Estimating return period floods is typically done by deriving a series corresponding to the highest flow recorded in each year.  This series is commonly referred to as the **Annual Maximum Series** (AMS).  It is necessary to use the data collected and managed by others to derive the AMS, and we will consider what this implies as we progress through the notebook.
+# The above relationship is linear, so we can use ordinary least squares to find the best fit line (in log-log space), and then transform back to linear space.
+# Note that $h_0$ cannot be fitted this way, and has to be set manually. In this case we will use $h_0=0$ as a first approximation and check the fit to see if an adjustment is warranted.
 
-# ### Create a series representing the maximum flow in each year 
-# 
-# Derive the AMS.  Also calculate the mean and standard deviation of the series.
-
-# In[ ]:
+# In[17]:
 
 
-# create a series representing the annual maximum daily flow
-# use the 'groupby' function and get the maximum value from each year
-max_df = flow_df.loc[flow_df.groupby('year')['Value'].idxmax()].copy()
-
-max_df['rank'] = max_df['Value'].rank(ascending=False)
-max_df['month'] = max_df.index.month
-max_df['count'] = flow_df.groupby('year').count()['Value'].values
-
-
-# In[ ]:
-
-
-# calculate the mean and standard deviation of the sample
-mean_q, stdev_q = max_df['Value'].mean(), max_df['Value'].std()
-start, end = pd.to_datetime(max_df.index.to_numpy()[0]).strftime('%Y-%m-%d'), pd.to_datetime(max_df.index.to_numpy()[-1]).strftime('%Y-%m-%d')
-print('The daily average flow record goes from {} to {} (n={} years).'.format(start, end, len(max_df)))
-print('Mean = {:.2f} m^3/s; Standard deviation = {:.2f} m^3/s'.format(mean_q, stdev_q))
-print('Preview of the Annual Maximum Flow Series:')
-max_df.head()
-
-
-# ## Plot a histogram of annual maximum flows
-# 
-# If we are going to use statistical methods to estimate return period floods, it is important to consider the shape of the probability distribution, and what that implies about the dominant mechanisms driving peak runoff.  
-
-# In[ ]:
-
-
-fig, ax = plt.subplots(1,1, figsize=(10,6))
-max_df.hist('Value', density=True, ax=ax)
-ax.set_xlabel('Q [m^3/s]')
-ax.set_ylabel('P(X)')
-ax.set_title('Annual Maximum Flow Histogram for Stave River')
-
-
-# In flood frequency analysis, the shape of the sample distribution has implications for the way the parameters of a probability distribution are estimated.  The *sample* in this case is the set of annual maximum flows.  The model parameters that we will use to estimate return period floods assume certain characteristics about the data.  Namely, that values are *independent* (the annual maximum in one year does not have an observable effect on the annual maximum of other years), and *identically distributed* (values are derived from the same distribution, and are stationary over time).  In some cases these are reasonable assumptions (short planning horizon, large sample), and in others not (long planning horizon, small sample).  
-# 
-# Above it appears as though there are two distinct 'modes', or peaks.  Take a moment to consider what might cause multiple modes in the distribution.
-
-# ### In what months does the annual maximum flow typically occur?
-# 
-# 
-
-# In[ ]:
-
-
-fig, ax = plt.subplots(1, 1, figsize=(8, 6))
-max_df.hist('month', ax=ax, label='All years')
-
-complete_max_df = max_df[max_df['count'] > 360]
-complete_max_df.hist('month', ax=ax, 
-                     label='Complete years',)
-ax.set_xlabel('Month')
-ax.set_ylabel('Count')
-ax.set_title('Monthly Count of Annual Maximum Flow Timing')
-ax.legend()
-
-
-# In the plot above, we can see that the annual maximum flow typically occurs from October to January.  Also note that the orange series has been labelled 'complete years'.  Earlier in this notebook it was pointed out that we have to rely on data collected by others.  Below we'll derive a flood frequency curve for Stave River, and in the process we'll illustrate why **quality review of data is critical**.  
-
-# ## Check the record for completeness
-# 
-# It is often necessary to use data collected by others.  It is common for datasets to be missing documentation containing important information about quality or limitations of the data.  **Even given well documented data, it is important to do your own quality assurance**.  Below, we will use a daily average flow dataset from the Water Survey of Canada to demonstrate a few ways of validating a dataset.  This is not a manual of quality assurance, but it is used to demonstrate how to incorporate other data to do basic validation.  The general idea is that there are many other environmental signals that have mutual information with the signal of primary interest, in this case daily average streamflow at the Stave River.  For example, would you trust a large spike in runoff if nearby precipitation gauges measured zero rainfall?  Also, how do we deal with missing data?
-
-# ### Completeness of Record
-# 
-# Find the incomplete years, and consider what we observed above regarding the times of the year the annual maximum flood is more likely to occur.  
-
-# In[ ]:
-
-
-df['year'] = df.index.values
-max_df['count'] = flow_df.groupby('year').count()['Value'].values
-print(max_df[max_df['count'] < 365])
-
-
-# It appears as though 1984 and 2001 are the years missing the most data.  Does this mean we should exclude these years from the AMS we use as input in the flood frequency analysis?  Are the years where only a few days of records are missing good enough?  
-# 
-# Even though we obtained our Stave data from WSC, the organizational body governing hydrometric data collection and standards in Canada, we still must review the data for completeness and quality.  
-# 
-# Looking at the printout above showing all of the years with missing days, it might be easy to justify removing 2001 from the dataset, as it is missing more than half of the year, and because we need as large a dataset as possible to buttress our statistical analysis, it is tempting to keep years with only a few missing days.  
-
-# ## Reviewing the Data
-# 
-# Consider the possibility that the annual maximum flood is itself the reason the data is missing.  How might we determine this?
-# 
-# To start, we can check precipitation records at the closest climate stations.  The monthly count plot shown above suggests the annual maximum typically occurs in October to January, and on the basis that synoptic-scale precipitation events typically occur in winter, perhaps we can determine if a major precipitation event occurred during a period when there is a gap in the data.
-# 
-# There are no climate stations from the Meteorological Survey of Canada (MSC) in the immediate vicinity, but there are two within 100 km on either side of the Stave River basin.  
-
-# In[ ]:
-
-
-# whistler is equidistant to the Stave catchment in the opposite direction from the climate station in Hope.
-whis_df = pd.read_csv('../../data/notebook_3_data/Whistler_348_climate.csv', header=0, index_col='Date/Time', parse_dates=True)
-whis_df = whis_df[['Total Precip (mm)', 'Total Rain (mm)', 'Snow on Grnd (cm)']]
-name = 'whis'
-whis_df.columns = ['{}_total_precip'.format(name), '{}_total_rain'.format(name), 
-                   '{}_snow_on_grnd'.format(name)]
-
-# the Laidlaw station is near Hope, BC
-hope_df = pd.read_csv('../../data/notebook_3_data/Laidlaw_794_climate.csv', header=0, index_col='Date/Time', parse_dates=True)
-
-hope_df = hope_df[['Total Precip (mm)', 'Total Rain (mm)', 'Snow on Grnd (cm)']]
-name = 'hope'
-hope_df.columns = ['{}_total_precip'.format(name), '{}_total_rain'.format(name), 
-                   '{}_snow_on_grnd'.format(name)]
-
-# print(hope_df.head())
-
-
-# In[ ]:
-
-
-def find_data_gaps(gap_df, code):
+# calculate the discharge based on the best fit
+# parameters found by ordinary least squares above
+def ols_rc_q(slope, intercept, h, h0):
     """
-    Input a timeseries, and return a dataframe summarizing
-    the start and end times of any gaps in the record.
-    Note that the code assumes frequency is daily.
+    Calculate flow (Q) from the linear best fit parameters.
+        -slope: the `log_slope` calculated above (constant)
+        -intercept: `log_intercept` calculated above (constant)
+        -h0 is the same PZF offset used above (constant)
+        -h is the independent variable
+    Returns Q, the discharge in m^3/s.
     """
-    gap_df['Date'] = pd.to_datetime(gap_df.index.values)
-    gap_df.dropna(subset=['Value'], inplace=True)
-    deltas = gap_df['Date'].diff()[1:]
-    # Filter diffs (here days > 1, but could be seconds, hours, etc)
-    gaps = deltas[deltas > timedelta(days=1)]
-    # Print results
-    return gap_df, gaps   
+    if slope == 0:
+        return 0
+    try:
+        return np.exp((np.log(h - h0) - intercept) / slope)
+    except ValueError: 
+        return None
 
 
-# ### Check flow records against precipitation records
+# In[18]:
+
+
+# Find the best-fit line in log-log space
+# take the logarithm of the measured streamflows and stage
+h0=0
+q_log = np.log(rc_df['Flow (m3/s)'] - h0)
+stage_log = np.log(rc_df['Water level (m)'])
+
+# find the parameters describing the linear best fit using ordinary least squares (OLS)
+log_slope, log_intercept, log_rval, log_pval, log_stderr = st.linregress(q_log, stage_log)
+
+
+# In[19]:
+
+
+stage_range = np.linspace(0.001, 1.5, 100)
+# put best fit results into a dataframe for plotting
+# use 0 as the PZF (point of zero flow) (the h0 parameter)
+bf_df = pd.DataFrame()
+bf_df['stage'] = stage_range
+
+# now as before, apply the `ols_rc_q` function to create the stage-discharge
+# curve based on the best-fit equation
+bf_df['best_fit_q'] = [ols_rc_q(log_slope, log_intercept, h, 0.0) for h in stage_range]
+bf_df.sort_values(by='stage', inplace=True)
+
+
+# ## Calculate Daily Average Discharge
 # 
-# It is common for historical records to be missing data.  Comparing flow records against precipitation records is just one way of checking to see if the gaps in the record might correspond to peak events.  Code is provided to automatically identify gaps in the record to help you see where they occur.  Note that this doesn't guarantee anything about the conditions in Stave River where we have no data, but it does provide some information with which to build a case for treating the dataset.
+# From the equation describing the ordinary least squares (OLS) best fit of the measured discharge,
+# calculate daily average flow from daily average water level.
 
-# In[ ]:
+# In[20]:
 
 
-# concatenate the precipitation records with the streamflow records
-conc_df = pd.concat([whis_df, hope_df, flow_df], axis=1, join='outer')
-conc_df = conc_df[['Value'] + [e for e in hope_df.columns if 'hope' in e] + [e for e in whis_df.columns if 'whis' in e]]
+site_df.head()
 
 
-# In[ ]:
+# In[21]:
 
 
-print(conc_df.max())
+# here we apply the rating curve equation function to the entire 
+# water level time series
+site_df['RC Q (cms)'] = site_df[stage_label].apply(lambda h: ols_rc_q(log_slope, log_intercept, h, 0))
 
 
-# In[ ]:
+# In[22]:
 
 
-from bokeh.models import LinearAxis, Range1d
+site_df.head()
 
-# plot flow at Stave vs. precip at the closest climate stations
-p = figure(width=900, height=400, x_axis_type='datetime')
-p.line(conc_df.index, conc_df['Value'], alpha=0.8,
-         legend_label='Stave Flow [m^3/s]', line_color='dodgerblue')
 
-# plot on second y axis
-p.extra_y_ranges = {'precip': Range1d(start=0, end=200)}
+# In[23]:
 
-p.line(conc_df.index, conc_df['hope_total_rain'], alpha=0.3,
-         legend_label='Hope precipitation [mm]', color='orange', y_range_name='precip')
-# # p.line(conc_df_trimmed.index, conc_df_trimmed['hope_total_rain'], alpha=0.3,
-# #          label='Hope precipitation [mm]', color='orange', y_range_name='precip')
-p.line(conc_df.index, conc_df['whis_total_rain'], alpha=0.3,
-         legend_label='Whistler precipitation [mm]', color='red', y_range_name='precip')
 
-gap_df, gaps = find_data_gaps(conc_df, 'Stave')
+rc_df.columns
 
-# plot red bands to illustrate where there are gaps in the record
-# ind = 0
-xs, ys = [], []
-ymin, ymax = 0, conc_df['Value'].max()
 
-for i, g in gaps.iteritems():    
-    gap_start = gap_df.iloc[gap_df.index.get_loc(i) - 1]['Date']
-    gap_end = gap_start + g
-    xs.append([gap_start, gap_end, gap_end, gap_start])
-    ys.append([ymax, ymax, ymin, ymin])
+# ### Plot the Rating Curve and Resultant Flow Series
 
-p.patches(xs, ys, fill_alpha=0.5,
-        color='red',legend_label='Gap',
-         line_alpha=0)
+# The two plots below are linked.  Check the selection tools, and select points on one plot.  When validating data, it is helpful to be able to link the measurements on the rating curve plot and the daily flow series plot.  Consider how you would you check if the low flows were subject to a shift in the hydraulic control over time?    
 
-p.legend.location = 'top_left'
-p.legend.click_policy = 'hide'
-p.xaxis.axis_label = 'Date'#
-p.yaxis.axis_label = 'Daily Average Flow [m^3/s]'
-p.y_range = Range1d(0, 580)
-p.add_layout(LinearAxis(y_range_name='precip', axis_label='Total Precipitation [mm]'), 'right')
-show(p)
+# In[24]:
 
-
-# In[ ]:
-
-
-print(max_df[max_df['count'] < 365])
-
-
-# We can use the interactive plot tools to zoom in on each of the specific years above.  The visibility of series can be toggled by clicking on the corresponding legend item.  
-# 
-# If we check each of the incomplete years above, we can see that some of the gaps in the Stave record correspond to large precipitation events at the precipitation stations on either side of the Stave River watershed, suggesting perhaps a gap of just a few days is related to a large event.  Consider how including a year that is missing its true largest event might affect the calculations that follow in developing the flood frequency curve.
-
-# In[ ]:
-
-
-# create an array of years values of the years you want to exclude
-drop_years = [1984, 1989, 1991, 1993, 2001]
-# here, we filter the years we don't want to include in our annual maximum series 
-max_df_filtered = max_df[~max_df.index.year.isin(drop_years)]
-
-print('After reviewing the dataset, there are {} years of record in the AMS.'.format(len(max_df_filtered)))
-
-
-# ## Different Ways of Fitting a Probability Distribution to Measured Data
-# 
-# ### Method of Moments
-# 
-# The method of moments is used to estimate the parameters of a distribution.  The parameters dictate the shape of the PDF, or the curve that approximates the histogram of measured data.  
-# 
-# ![GEV Densities](img/GEV_densities.png)
-# 
-# Source: [Wikipedia](https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution)
 
-# The GEV is a family of distributions, of which the first type (Type 1) is also known as the [Gumbel Distribution](https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution).
-# 
-# The Type 1 GEV (GEV1) and Log-Pearson III are commonly used in flood frequency analysis, though we will not go further in the assumptions underlying the types of distributions here, except to say the tail behaviour (which we are interested in because it defines the flows associated with the highest return periods) is governed by the shape parameter ($\xi$), so it's important.  The GEV1 assumes $\xi = 0$
-# 
-# The probability of non-exceedence is given by the double exponential:
-# 
-# $$G(x) = 1 - e^{-e^{-y}}$$
-# 
-# The return period ($T$) is the inverse of $G(x)$.  The Gumbel reduced variate is given by:
-# 
-# $$y = -\ln{ \left( \ln{ \left(\frac{T}{T-1} \right) } \right) }$$
-# 
-# ![Gumbel table](img/gumbel_table.png)
-# 
-# From above, we know the length of record is $n=29$, so:
-# 
-# | $n$ | $\bar{y}_n$ | $\sigma_n$ |
-# |---|---|---|
-# | 29 | 0.5353 | 1.1086 |
-# 
-# 
-# 
-# A tutorial for fitting a Gumbel distribution using Excel is provided [here.](https://serc.carleton.edu/hydromodules/steps/166250.html)
-
-# In[ ]:
-
-
-def gumbel_formula(t, ybar_n, xbar, sigma_n, sigma):
-    """
-    Return an estimated flood quantile based on the Gumbel formula.
-    The parameters are
-    described above in Table A-8.
-    Inputs are:
-        t: return period (years)
-        ybar_n: gumbel variate (from Table provided),
-        xbar: sample mean,
-        sigma_n: Gumbel standard deviation (from Table provided),
-        sigma: sample standard deviation
-    Returns: flow corresponding to return period t
-    """
-    y = -np.log(np.log(t / (t - 1)))
-    return  xbar + ((y - ybar_n)/sigma_n) * sigma
-
-# define the return periods you want to calculate flows for and their associated probabilities
-tr = [2.3, 5, 10, 20, 50, 100, 200, 500]
-pr = [1/t for t in tr]
-
-# Apply the gumbel formula to the selected return periods to estimate return period flood.
-# Look at the format of the inputs to figure out what to replace #value1 and #value2 
-# below with
-
-# q_gumbel = [gumbel_formula(t, #value1, mean_q, #value2, stdev_q) for t in tr]
-mean_q, stdev_q = max_df['Value'].mean(), max_df['Value'].std()
-q_gumbel_alldata = [gumbel_formula(t, 0.5353, mean_q, 1.1086, stdev_q) for t in tr]
-# repeat for the filtered dataset
-mean1_q, stdev1_q = max_df_filtered['Value'].mean(), max_df_filtered['Value'].std()
-q_gumbel_filtered = [gumbel_formula(t, 0.5396, mean_q, 1.1255, stdev_q) for t in tr]
-
-
-# ### Plot the results against the measured data
-# 
-# The appropriate method of fitting a probability distribution to measured data has been argued for decades.
-# 
-# In the case of Stave River, we have 34 years of record.  It's intuitive to think that the highest flow measured in that time has a probability of $\frac{1}{34}$, and a return period of 34 years, but this is incorrect.  Various adjustments to the way in which probabilities are assigned have been proposed over the decades (reference). These adjustments are referred to as *plotting positions*, and their aim is to apply a transformation to the measured data such that the data form a straight line.  If the data fall on the line exactly, the plotting position is said to be unbiased.  
-# 
-# A general plotting position formula is as follows:
-# 
-# $$\frac{1}{T} = P = \frac{m - a}{n + 1 - 2a}$$
-# 
-# Where $m$ is the rank (largest value = 1), $n$ is the sample size (number of years), and $a$ is some empirical value.  
-# 
-# The table below shows something of a history of plotting positions (from Cunnane, 1977):
-# 
-# | Source | Value of $a$ |
-# |---|---|
-# | Hazen (1914) | 0.5 |
-# | California dept. of Public Works (1923) | $\frac{(i-1)}{N}$, $\frac{i}{N}$ |
-# | Weibull (1939) | 0 |
-# | Beard (1943), Gumbel (1943), Kimball (1946) | 0.31 |
-# | Blom (1958) | $\frac{3}{8}$ |
-# | Tukey (1962) |  $\frac{1}{3}$ |
-# | Gringorten (1963) | 0.44 |
-
-# In[ ]:
-
-
-# first, we need to sort the measured data by rank
-# and calculate probabilities associated with the measured data.
-# The largest flood value should have rank 1
-max_df = max_df.sort_values('rank')
-
-# calculate the probabilty P and return period Tr
-max_df['P'] = max_df['rank'] / (len(max_df) + 1)
-max_df['Tr'] = [1/e for e in max_df['P']]
-
-
-# In[ ]:
-
-
-def plotting_position(m, a, n):
-    """
-    Return an adjusted plotting position (probability)
-    based on the rank m, the plotting position a, and the length of record n.
-    """
-    return (m - a) / (n + 1 - 2 * a)
-
-
-# In[ ]:
-
-
-fig, ax = plt.subplots(1, 1, figsize=(10,6))
-plt.plot(tr, q_gumbel_alldata, label="Gumbel (All data)",
-        color='dodgerblue')
-plt.plot(tr, q_gumbel_filtered, label="Gumbel (filtered)",
-        color='dodgerblue', linestyle='--')
-plt.scatter(max_df['Tr'], max_df['Value'], 
-            label='Measured Annual Maxima (all data)', c='red')
-
-ax.set_title('Stave River Annual Maximum Daily Average Flow')
-ax.set_xlabel('Return Period (years)')
-ax.set_ylabel('Q [m^3/s]')
-# ax.set_xlim(0,200)
-plt.xscale('log')
-ax.legend()
-
-
-# ## Log Pearson III Distribution
-# 
-# A distribution commonly used for estimating return period floods in BC is the Log-Pearson III distribution.  Here we will plot it against the GEV1 previously developed, and we'll take a look at the effects of our data review, where we'll plot both the GEV and LP3 using the entire dataset (without excluding any years) as well as a filtered dataset where we remove years where there is some likelihood the annual peak was missing from the record.
-
-# In[ ]:
-
-
-def calculate_LP3(values, Tr):
-    """
-    Fit a log-Pearson III distribution to a sample of extreme values
-    given a desired set of return periods (Tr).
-    """    
-    q_skew = st.skew(values)
-    log_skew = st.skew(np.log10(values))
-    
-    # calculate the CDF
-    z = pd.Series([st.norm.ppf(1-(1/return_p)) if return_p != 1 else st.norm.ppf(1-(1/return_p + 0.1)) for return_p in tr])
-    lp3 = 2 / log_skew * (np.power((z - log_skew/6)*log_skew/6 + 1, 3)-1)
-    lp3_model = np.power(10, np.mean(np.log10(values)) + lp3 * np.std(np.log10(values)))
-    return lp3_model
-
-
-# In[ ]:
-
-
-# now set up the filtered AMS series to calculate the LP3 distribution
-max_df_filtered = max_df_filtered.sort_values('rank')
-
-# calculate the probabilty P and return period Tr
-max_df_filtered['P'] = max_df_filtered['rank'] / (len(max_df_filtered) + 1)
-max_df_filtered['Tr'] = [1/e for e in max_df_filtered['P']]
-
-
-# In[ ]:
-
-
-lp3_model = calculate_LP3(max_df['Value'], tr).to_numpy()
-lp3_model_filtered = calculate_LP3(max_df_filtered['Value'], tr).to_numpy()
-
-fig, ax = plt.subplots(1, 1, figsize=(12,8))
-
-plt.plot(tr, q_gumbel_alldata, label="Gumbel (34 years)", color='dodgerblue')
-plt.plot(tr, q_gumbel_filtered, label="Gumbel (29 years)",
-        color='dodgerblue', linestyle='--')
-plt.plot(tr, lp3_model, label="LP3 (34 years)", color='green')
-plt.plot(tr, lp3_model_filtered, label="LP3 (29 years)", color='green', 
-         linestyle='--')
-
-plt.scatter(max_df['Tr'].to_numpy(), max_df['Value'].to_numpy(), 
-            label='Measured Annual Maxima', c='red')
-
-ax.set_title('Stave River Annual Maximum Daily Average Flow')
-ax.set_xlabel('Return Period (years)')
-ax.set_ylabel('Flow [m^3/s]')
-plt.xscale('log')
-ax.legend()
+# here we specify 1, 2 for subplots meaning 1 row and 2 columns
+fig, ax = plt.subplots(1, 2, figsize=(16,6))
+
+# left side plot - rating curve
+ax[0].plot(bf_df['best_fit_q'], bf_df['stage'],
+        color='green', label="OLS Best Fit")
+
+ax[0].plot(rc_df['Flow (m3/s)'], rc_df['Water level (m)'], 
+           marker='o', color='r',
+           linestyle='',
+           label='Discharge measurements')
+
+# right side plot -- hydrograph
+ax[1].plot(site_df.index, site_df['RC Q (cms)'],
+        color='dodgerblue', label="OLS Best Fit")
+
+ax[1].plot(rc_df['Date'], rc_df['Flow (m3/s)'], 
+           marker='o', color='r',
+           linestyle='',
+           label='Discharge measurements')
+
+ax[0].set_title('Stage - Discharge Rating Curve')
+ax[0].set_xlabel('Discharge [m^3/s]')
+ax[0].set_ylabel('Stage [m]')
+ax[0].legend()
+# right side plot labels
+ax[1].set_title('Measured Discharge Hydrograph')
+ax[1].set_xlabel('Date')
+ax[1].set_ylabel('Discharge [m^3/s]')
+ax[1].legend()
 plt.show()
 
 
-# ## Risk and Uncertainty in Design 
+# ### Cumulative Frequency: The Flow Duration Curve (FDC)
 # 
-# It is often the case that engineers are asked to extrapolate well beyond the range of measured data. 
+# In order to illustrate the variability of flow in a river, it is common to map flow magnitude to cumulative frequency, or the proportion of time the flow in the river equals or exceeds some amount.  A flow duration curve presents flow magnitude from 0% to 100% exceedance, where values approaching zero are high flows that are very rarely exceeded.  Conversely, values approaching 100% exceedance are low flows that are almost always exceeded.  **50% exceedance represents the median flow**  Note that these values are based on the sample, and the flow duration curve is generally used to describe the overall distribution of flow and not for estimating extremes.  A *flow duration* curve is also referred to as a *flow exceedance* curve. 
+# 
+# Let's plot a flow duration curve for the measured flow series we created above by applying the rating curve equation to the stage series.
 
-# ## Additional Considerations regarding Distribution Selection
-# 
-# [Bulletin 17B](https://water.usgs.gov/osw/bulletin17b/dl_flow.pdf) of the USDOE Hydrology Subcommittee of the Water Resources Council recommends the Log-Pearson Type III as the distribution for defining annual flood series.  Consider what Bulletin 17B says about sample size and extrapolation.  
-# 
-# The annual maximum flood events are assumed to be **independent and identically distributed (IID).**
-# 
-# Parts D and E (pg 7 in Bulletin 17B) discuss **mixed populations** and **measurement error**, respectively. These will be addressed sequentially.
+# In[25]:
 
-# ### Mixed Populations
-# 
-# Here, we'll briefly revisit the histogram of annual maximum flows we saw near the beginning of this notebook.  
-# 
-# The mechanisms driving flood events may not be homogeneous.  For instance, the annual maximum flow may be due to snowmelt, precipitation, or a combination of the two. Recall from above (and please forgive my bad sketch of a PDF):
-# 
-# ![Bimodal Distribution](img/bimodal_diagram.png)
-# 
-# How might we check if there is a clear distinction between annual floods derived from different types of event?  High flows generated by snowmelt and those generated by early winter ['pineapple express'](https://oceanservice.noaa.gov/facts/pineapple-express.html) precipitation events are unique, and are likely the reason the probability distribution of the AMS at Stave River shows a bimodal distribution, however **the sample size is small, so the shape of the distribution could also be due to sampling variability**.
 
-# What can we check to understand the processes which drive the largest magnitude runoff (flow) events?
-# 
-# * Check time of year
-# * Compare precipitation and snow values to peak events
-# * Look at temperature records
-# 
-# There is a [large body of literature](https://scholar.google.ca/scholar?q=mixed+modes+in+flood+frequency+analysis%27&hl=en&as_sdt=0&as_vis=1&oi=scholart) investigating the treatment of mixed modes in flood frequency analysis.
+fig, ax = plt.subplots(figsize=(10,6))
 
-# ### Measurement Error & Sensitivity
-# 
-# In the introduction, we laid out the extent to which we rely on extrapolation in estimating return period flows.  This question is analogous to the assumption that the error in measurement is a random variable following some distribution.  Considering this random error exists in our measurements, what happens to the LP3 fit if we change any of the peak values by some amount?  
+pct_exceeded = np.linspace(0, 100, 200)
+flow_quantiles = np.percentile(site_df['RC Q (cms)'].dropna(), pct_exceeded)
 
-# ## Question for Reflection
+start_date, end_date = site_df.index[0], site_df.index[-1]
+
+ax.plot(pct_exceeded[::-1], flow_quantiles, 'b-')
+ax.set_title(f'Flow Exceedance Curve (Measured Data: {start_date:%Y-%m-%d} to {end_date:%Y-%m-%d})')
+ax.set_ylabel('Flow [m^3/s]')
+ax.set_xlabel('Percent of Time Exceeded [%]')
+
+
+# The shape of the FDC gives some insight into the fluctuation of flows in the watershed.  A steeper peak flow end suggests more dramatic 'flashes' of rainfall-runoff response.  The shape of the low-flow tail describes base flows during low flow seasons.  Below is a comparison of two basins of nearly identical size but in very different climates:
 # 
-# Recall the discussion in the previous notebooks concerning extrapolation.  Return periods in the range of 100 and 200 years are commonly used for input design parameters in hydraulic structures, and ultimately the design values reflect a tradeoff between risk (environmental, financial, worker safety) and construction costs.  
+# ![Comparison of flow exceedance curves for two basins in BC and Alberta.](img/FDC_comparison.png)
 # 
-# Provide a brief discussion (500 words maximum) about the uncertainty introduced at various levels in deriving the estimate of the 100 year return period for Stave River.  Consider the difference (in this case) in the estimated 100 year return period flow based on using all the data vs. removing some years from the record, and compare it to the difference between the estimates generated between the GEV and LP3 distributions.  Consider how measurement uncertainty might affect the 100 year return flood estimate.
+# From the plot above, the Alberta basin looks to be a bit bit drier, but a dramatic difference in low-flows can be seen by looking closer at the low-flow range:
+# 
+# ![Comparison of flow exceedance curves for two basins in BC and Alberta, with a focus on low-flow range.](img/FDC_comparison_low_flow.png)
+# 
+
+# An FDC is also informative to compare **different estimates at the same location**, such as a measured vs. modeled flow series.
+# 
+# Next we'll develop a regional regression model and then use the FDC to evaluate the quality of our model *over specific flow quantiles* -- this is important for the different end-uses of the data.
+
+# ## Linear Regression of Daily Streamflow
+# 
+# ![Active WSC Stations in Western Canada](img/wsc_map_view1.png)
+# 
+# Water Survey of Canada (WSC) has operated and maintained hydrometric stations across Canada for over 100 years.  If we can find a regional proxy WSC station in **close proximity to our location of interest, with similar basin characteristics** to those of our project, we can correlate daily streamflow between the two locations, ultimately to generate an estimated (also called synthetic or modeled) long-term flow series for our project location.
+# 
+# Typically regressions are done by chronological pairing, which effectively says "if the flow at the regional (proxy) station was $Q_p$ at time $t$, the flow at our project location at time $t$ will be approximately linearly proportional.
+
+# ### Chronological Pairing (CP)
+# 
+# A lot of work goes into finding an appropriate long-term record comparable to our location of interest, but we will assume we have been given a long-term daily flow series to use.
+# 
+# 1.  Find just the concurrent days of record (days where we have flow recorded at **both creeks/rivers**).
+# 2.  Create a scatter plot where the x, y coordinates of each data point are (flow1, flow2).  It is customary to put the long-term regional station on the x-axis.
+# 3.  Determine the equation describing the line of best fit through the data.
+# 4.  Apply the best fit line equation to the long-term surrogate record to yield an estimated long-term series for the project location.
+# 
+# To further refine this estimate, we can recognize that the mechanisms driving flow across seasons and months can change quite dramatically, and the relationship between the two catchments can also change month-by-month, and/or season by season.  If there is enough data to create seasonal or monthly regressions, we can develop a best-fit equation for each month or season.  The process of steps 2 through 4 then are the same, except we treat each season or month independently.  
+# 
+# The above method is referred to as **chronological pairing (CP)**, as it pairs flows occurring at the same time.  But what if there are timing differences between stations, or what if the spatial variability of precipitation results in flow events that don't coincide in the short term?  
+
+# ### Empirical Frequency Pairing
+# 
+# To eliminate the temporal constraint on timing of events at the daily level, instead of comparing concurrent days, we can compare magnitudes of flows. This method is referred to as Empirical Frequency Pairing (EFP) and is commonly used in British Columbia.  Empirical frequency pairing still uses concurrent records, however it is the ranked flows in each series that are compared, i.e. the data points on an EFP plot are:  
+# 
+# $$[(R1_{siteA}, R1_{site_B}), (R2_{siteA}, R2_{siteB}), ..., (Rn_{siteA}, Rn_{siteB})]$$  
+# 
+# The steps to derive an estimated long-term flow series for our location of interest are the same (i.e. steps 2-4 above).
+
+# ### Set up a Chronological Pairing Regression
+# 
+# The first step is to import the regional data series and find all of the dates with values for both locations.
+# 
+# Previewing the data shows line 1 has information about two distinct parameters.  Where the `PARAM` column value is 1, the `Value` column corresponds to daily discharge ($\frac{m^3}{s}$ and where the `PARAM` column value is 2, the `Value` column corresonds to daily water level ($m$).  
+# 
+# >**Note**: At the point of data import, we also need to correctly set the header line to index 1 (the second row), because the file has a row of information describing the PARAM values above the actual column header row.  See for yourself by opening up the csv file.
+
+# In[26]:
+
+
+# set the header row to index 1, tell the function to set the 
+# `Date` column as the index.
+regional_df = pd.read_csv('../../notebook_data/notebook_3_data/Regional_data.csv', header=1, parse_dates=True, index_col='Date')
+
+# filter for only the discharge data (PARAM == 1)
+regional_df = regional_df[regional_df['PARAM'] == 1]
+ 
+# preview the data
+regional_df.head()
+
+
+# In[27]:
+
+
+# check the date range covered by the regional data
+print('Period of Record:')
+print(f'    Regional data: {regional_df.index[0]:%Y-%m-%d} to {regional_df.index[-1]:%Y-%m-%d}')
+
+# check the date range covered by our data measured at site
+print(f'        Site data: {site_df.index[0]:%Y-%m-%d} to {site_df.index[-1]:%Y-%m-%d}')
+
+
+# ### Obtain Concurrent Data
+# 
+# From the previous step, we can see that the regional dataset encompasses the date range of our site data.  To perform a linear regression, we want to use **concurrent data only**.   The `concat`, or concatenate, function [documentation can be found here](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html). 
+# 
+# >**Note**: the `concat` function is used to combine dataframes.  We want to combine two dataframes based on concurrent days.  The `concat` function requires the dataframes to have `datetime`/`timestamp` type indices.
+
+# In[28]:
+
+
+print(type(site_df.index[0]))
+print(type(regional_df.index[0]))
+
+
+# Above we can see that both dataframe indices are `timestamp` types.
+
+# In[29]:
+
+
+# create a new dataframe of concurrent data and plot the data
+# join='inner' says to line up the indices and get the 
+# values that are common between the two dataframes
+# axis=1 says line up columns instead of rows
+concurrent_df = pd.concat([site_df, regional_df], join='inner', axis=1)
+concurrent_df.head()
+
+
+# ## Regression Plot
+# 
+# Plot the concurrent daily flows between the project location and the regional station to see if there is a correlation between the two that could be used to develop a model for our project location.
+
+# In[30]:
+
+
+#### Regression Plot
+fig, ax = plt.subplots(figsize=(8,4))
+ax.plot(concurrent_df['Value'], concurrent_df['RC Q (cms)'], 'bo')
+ax.set_title('Regression Plot (All Concurrent Data)')
+ax.set_ylabel('Site Q [m^3/s]')
+ax.set_xlabel('Regional Q [m^3/s]')
+
+
+# In[31]:
+
+
+# find the best fit equation
+slope, intercept, rval, pval, stderr = st.linregress(concurrent_df['Value'], concurrent_df['RC Q (cms)'])
+
+
+# In[32]:
+
+
+sign = '+'
+if intercept < 0:
+    sign = '-'
+
+print('Regression Equation:')
+print(f'    Q_site = {slope:.1f}xQ_regional {sign} {intercept:.1f}')
+
+
+# Add the best fit line (regression model) to the plot.
+
+# In[33]:
+
+
+x_range = 0, concurrent_df['Value'].max()
+model_q = [slope * x + intercept for x in x_range]
+
+fig, ax = plt.subplots(figsize=(8,4))
+ax.plot(concurrent_df['Value'], concurrent_df['RC Q (cms)'], 'bo')
+ax.set_title(f'Regression Model: Q_site = {slope:.1f}*Q_regional {sign} {intercept:.1f}')
+ax.set_ylabel('Site Q [m^3/s]')
+ax.set_xlabel('Regional Q [m^3/s]')
+ax.plot(x_range, model_q, 'r--')
+
+
+# ## Create long-term daily flow series for the project location
+# 
+# The last step in the process of a long-term flow estimate for our project location is to use the equation of the best fit line (the model) to calculate estimated daily flows over periods where flow was not measured at our project location.
+
+# In[64]:
+
+
+regional_df.columns
+
+
+# In[65]:
+
+
+# map the equation of the best fit line to the regional flow series
+# to get the long-term modeled flow series for the project location
+regional_df['Model_q_cms'] = regional_df['Value'].apply(lambda q: slope * q + intercept)
+
+
+# In[66]:
+
+
+regional_df.columns
+
+
+# ## Compare the model flow series to the measured series
+
+# In[67]:
+
+
+# compare the modeled vs. measured flow series 
+# 
+concurrent_df['Model_q_cms'] = concurrent_df['Value'].apply(lambda q: slope * q + intercept)
+concurrent_df.head()
+
+
+# In[68]:
+
+
+fig, ax = plt.subplots(figsize=(12, 6))
+
+ax.plot(concurrent_df.index, concurrent_df['RC Q (cms)'], 'g-', label='Measured Q')
+ax.plot(concurrent_df.index, concurrent_df['Model_q_cms'], 'b-', label='Model Q')
+
+ax.set_title('Measured vs. Modeled Daily Avg. Flow')
+ax.set_xlabel('Date')
+ax.set_ylabel('Flow [cms]')
+ax.legend()
+
+
+# ### In the above plot, note general patterns, specific exceptions, and any trends
+# 
+# Note the big deviation between the two series in the summer of 2010.  This looks like our model is doing a particularly bad job in the late summer.  How about in other seasons?   How is the model doing at predicting peaks?  
+# 
+# >**Note**: in the figure above, we label one series as "Measured Q" but in reality recall it is not *directly* measured.  It is itself a model of the relationship between stage and discharge.  **The rating curve equation is the model!**
+
+# ### Best-fit
+# 
+# The least-squares best fit is a common way to define the linear relationship between two variables.  It is a minimization of the sum of squared differences between the line (the model) and the observation.  Because it uses the square difference, it is sensitive to outliers.  It is good practice to check the residuals of the model to see if our model contains bias, and make an adjustment if warranted.  We can exclude outliers from the best fit (but still show them in the plot!), or we could use the L1-norm, which is the sum of absolute differences which is more robust to outliers.
+# 
+# Below, we'll apply the best fit model to the regional data for the period of measured record, we'll calculate the difference (residuals) between modeled and measured flows, and then we'll plot these residuals to look for bias in our model.
+
+# In[ ]:
+
+
+# create a series to represent the modeled flow 
+concurrent_df['Model_Q'] = concurrent_df['Value'] * slope + intercept
+
+# find the residuals
+concurrent_df['residuals'] =  concurrent_df['Model_Q'] - concurrent_df['RC Q (cms)']
+
+
+# In[69]:
+
+
+fig, ax = plt.subplots(1, 2, figsize=(10,4))
+
+sorted_df = concurrent_df.sort_values('Model_Q').copy()
+
+ax[0].plot(sorted_df['Model_Q'], sorted_df['residuals'], 'bo')
+ax[0].plot([sorted_df['Model_Q'].min(), sorted_df['Model_Q'].max()], [0, 0], 'r--')
+ax[0].set_title(f'Regression Model Residuals')
+ax[0].set_xlabel('Measured - Modeled Flow [cms]')
+ax[0].set_ylabel('Measured Flow')
+
+# plot a histogram of the residuals to assess the distribution of error
+a = plt.hist(sorted_df['residuals'], bins='auto', 
+orientation='horizontal', density=True)
+ax[1].set_title('Histogram of Residuals')
+
+# toggle the line below to see a closeup around 0
+# ax[1].set_ylim(-1.5, 1.5)
+
+
+# ### Compare measured vs. modeled flow duration curves
+# 
+# How else can we evaluate how the model is fitting the measured data, noting in particular that we are interested in certain ranges of flows, perhaps for generating energy year-round, or supplying a community with drinking water in a dry season?
+# 
+# Recall how we plotted the flow duration curve in Notebook 3.  The flow duration curve is particularly useful for focusing on how well the model matches measured data across the range of flows (though extremes are de-emphasized). 
+# 
+# What do the differences between flow duration curves shown below suggest about how well our model represents the project area?  
+
+# In[71]:
+
+
+fig, ax = plt.subplots(figsize=(10,6))
+
+pct_exceeded = np.linspace(0, 100, 200)
+msd_flow_quantiles = np.percentile(concurrent_df['RC Q (cms)'].dropna(), pct_exceeded)
+model_flow_quantiles = np.percentile(concurrent_df['Model_q_cms'].dropna(), pct_exceeded)
+
+start_date, end_date = concurrent_df.index[0], concurrent_df.index[-1]
+
+#plot the measured series FDC
+ax.plot(pct_exceeded[::-1], msd_flow_quantiles, 'b-', label='Measured')
+#plot the measured series FDC
+ax.plot(pct_exceeded[::-1], model_flow_quantiles, 'r-', label='Modeled')
+
+ax.set_title(f'Flow Exceedance Curve ({start_date:%Y-%m-%d} to {end_date:%Y-%m-%d})')
+ax.set_ylabel('Flow [m^3/s]')
+ax.set_xlabel('Percent of Time Exceeded [%]')
+ax.legend()
+
+
+# ## Estimate the Long-Term Mean Annual Flow for our Project Location
+# 
+# Compare the long term mean annual against the short term, then compare the long-term monthly and annual series.
+
+# In[72]:
+
+
+regional_df.head()
+
+
+# In[73]:
+
+
+# first drop any NaN values so we can calculate mean and percentile values
+regional_df.dropna(subset=['Model_q_cms'], inplace=True)
+
+lt_mad = regional_df[['Model_q_cms']].mean().values[0]
+msd_mean = site_df[['RC Q (cms)']].mean().values[0]
+
+lt_median = np.percentile(regional_df['Model_q_cms'], 50)
+msd_median = site_df[['RC Q (cms)']].median().to_numpy()[0]
+
+print(f'The estimated long-term mean annual flow (MAD) at our project location is {lt_mad:.1f} m^3/s')
+print(f'The average flow over the measured period was {msd_mean:.1f} m^3/s')
+print(f'The estimated long-term median flow is {lt_median:.1f} m^3/s')
+print(f'The median flow over the measured period was {msd_median:.1f} m^3/s')
+
+
+# In[74]:
+
+
+regional_df['month'] = regional_df.index.month
+annual_series = regional_df[['Model_q_cms', 'month']].groupby('month').mean()
+
+site_df['month'] = site_df.index.month
+msd_ann = site_df[['month', 'RC Q (cms)']].groupby('month').mean()
+
+fig, ax = plt.subplots(figsize=(10, 6))
+
+ax.plot(annual_series['Model_q_cms'], 'r-', label='LT Modelled')
+ax.plot(msd_ann['RC Q (cms)'], 'b-', label='Measured')
+ax.set_title('Annual Hydrograph')
+ax.set_xlabel('Month')
+ax.set_ylabel('Flow [cms]')
+ax.legend()
+
+
+# The two series above highlight the difference a long-term estimate can make.  If we were to base a model on the short term measured series (blue), we might underestimate the flow available in the winter months (when energy is especially valuable), or overestimate the snowmelt in spring **over the long term**.
+
+# ## Questions for Reflection
+# 
+# 1.  From our regression plot and from the comparison of measured and estimated daily flow series, what do you think about the quality of our model, i.e. how well does the best fit line approximate the concurrent daily flows (blue dots)?  
+# 2.  What flow is exceeded 50% OR MORE of the time, how well is this range modelled and what might this flow range be pertinent to for a hydropower project?  
+# 3.  What could differences in concurrent flows at the two locations be attributable to?  
+# 4.  How might we modify our model to capture one of the differences you noted in 3?
+# 5.  In the last plot, we see that the ~two years we measured had a dramatically higher spring runoff compared to the long-term, and lower winter base flows.  What we took these years as representative without modeling the long-term flow distribution?
+
+# ## References
+# 
+# 1. A.S. Hamilton & R.D. Moore (2012). Quantifying Uncertainty in Streamflow Records , Canadian Water Resources Journal / Revue canadienne des ressources hydriques, 37:1, 3-21, DOI: 10.4296/cwrj3701865
+# 2. Environment Canada (2012).  Hydrometric Manual - Data Computations.  Water Survey of Canada, Weather and Environmental Monitoring Directorate.

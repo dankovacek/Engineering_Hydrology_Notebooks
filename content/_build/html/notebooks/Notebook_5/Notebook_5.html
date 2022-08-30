@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Notebook 5: Rational Method and Travel Times &#8212; Engineering Hydrology</title>
+    <title>Notebook 5: Extreme Values, Uncertainty, and Risk &#8212; Engineering Hydrology</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Notebook 4: Characterization of Long-Term Runoff" href="../Notebook_4/Notebook_4.html" />
+    <link rel="prev" title="Notebook 4: Rational Method and Travel Times" href="../Notebook_4/Notebook_4.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -162,25 +162,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Extreme Values, Uncertainty, and Risk
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_3/Notebook_3.html">
-   Notebook 3: Extreme Values, Uncertainty, and Risk
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
   Regional Information Transfer
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_4/Notebook_4.html">
-   Notebook 4: Characterization of Long-Term Runoff
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html">
+   Notebook 3: Regional Information Transfer
   </a>
  </li>
 </ul>
@@ -189,10 +177,22 @@ const thebe_selector_output = ".output, .cell_output"
   Rainfall-Runoff Model
  </span>
 </p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_4/Notebook_4.html">
+   Notebook 4: Rational Method and Travel Times
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Extreme Values, Uncertainty, and Risk
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Notebook 5: Rational Method and Travel Times
+   Notebook 5: Extreme Values, Uncertainty, and Risk
   </a>
  </li>
 </ul>
@@ -402,80 +402,129 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-precipitation-data">
-   Import Precipitation Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-data">
-   Plot the Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#simplified-version-of-rainfall-runoff">
-   Simplified Version of Rainfall-Runoff
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convert-volume-to-volmeteric-flow-units">
-   Convert Volume to volmeteric flow units
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-complex-implementation-spatial-data">
-   More Complex Implementation: Spatial Data
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-1-instantiate-a-grid-from-a-dem-raster">
-     Step 1: Instantiate a grid from a DEM raster
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-dem">
-     Plot the DEM
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#resolve-flats-in-dem">
-     Resolve flats in DEM
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#specify-flow-direction-values">
-     Specify flow direction values
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#delineate-a-catchment">
-     Delineate a Catchment
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#get-flow-accumulation">
-     Get flow accumulation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calculate-distances-to-upstream-cells">
-     Calculate distances to upstream cells
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calculate-weighted-travel-distance">
-     Calculate weighted travel distance
+    <a class="reference internal nav-link" href="#import-libraries">
+     Import libraries
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#develop-rainfall-runoff-model">
-   Develop Rainfall-Runoff Model
+  <a class="reference internal nav-link" href="#data-imports">
+   Data Imports
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#determine-the-peak-unit-runoff">
-     Determine the Peak Unit Runoff
+    <a class="reference internal nav-link" href="#import-the-daily-average-flow-data">
+     Import the Daily Average Flow Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-data">
+   Plot the Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-daily-average-flow-series">
+     Plot the Daily Average Flow Series
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#annual-maximum-flow-series">
+   Annual Maximum Flow Series
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-series-representing-the-maximum-flow-in-each-year">
+     Create a series representing the maximum flow in each year
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-a-histogram-of-annual-maximum-flows">
+   Plot a histogram of annual maximum flows
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#in-what-months-does-the-annual-maximum-flow-typically-occur">
+     In what months does the annual maximum flow typically occur?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#check-the-record-for-completeness">
+   Check the record for completeness
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#completeness-of-record">
+     Completeness of Record
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reviewing-the-data">
+   Reviewing the Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-flow-records-against-precipitation-records">
+     Check flow records against precipitation records
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#different-ways-of-fitting-a-probability-distribution-to-measured-data">
+   Different Ways of Fitting a Probability Distribution to Measured Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#method-of-moments">
+     Method of Moments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-results-against-the-measured-data">
+     Plot the results against the measured data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#log-pearson-iii-distribution">
+   Log Pearson III Distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#risk-and-uncertainty-in-design">
+   Risk and Uncertainty in Design
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-considerations-regarding-distribution-selection">
+   Additional Considerations regarding Distribution Selection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mixed-populations">
+     Mixed Populations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#measurement-error-sensitivity">
+     Measurement Error &amp; Sensitivity
     </a>
    </li>
   </ul>
@@ -494,7 +543,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Notebook 5: Rational Method and Travel Times</h1>
+                <h1>Notebook 5: Extreme Values, Uncertainty, and Risk</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -505,80 +554,129 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-precipitation-data">
-   Import Precipitation Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-data">
-   Plot the Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#simplified-version-of-rainfall-runoff">
-   Simplified Version of Rainfall-Runoff
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convert-volume-to-volmeteric-flow-units">
-   Convert Volume to volmeteric flow units
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-complex-implementation-spatial-data">
-   More Complex Implementation: Spatial Data
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-1-instantiate-a-grid-from-a-dem-raster">
-     Step 1: Instantiate a grid from a DEM raster
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-dem">
-     Plot the DEM
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#resolve-flats-in-dem">
-     Resolve flats in DEM
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#specify-flow-direction-values">
-     Specify flow direction values
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#delineate-a-catchment">
-     Delineate a Catchment
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#get-flow-accumulation">
-     Get flow accumulation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calculate-distances-to-upstream-cells">
-     Calculate distances to upstream cells
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calculate-weighted-travel-distance">
-     Calculate weighted travel distance
+    <a class="reference internal nav-link" href="#import-libraries">
+     Import libraries
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#develop-rainfall-runoff-model">
-   Develop Rainfall-Runoff Model
+  <a class="reference internal nav-link" href="#data-imports">
+   Data Imports
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#determine-the-peak-unit-runoff">
-     Determine the Peak Unit Runoff
+    <a class="reference internal nav-link" href="#import-the-daily-average-flow-data">
+     Import the Daily Average Flow Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-data">
+   Plot the Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-daily-average-flow-series">
+     Plot the Daily Average Flow Series
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#annual-maximum-flow-series">
+   Annual Maximum Flow Series
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-series-representing-the-maximum-flow-in-each-year">
+     Create a series representing the maximum flow in each year
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-a-histogram-of-annual-maximum-flows">
+   Plot a histogram of annual maximum flows
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#in-what-months-does-the-annual-maximum-flow-typically-occur">
+     In what months does the annual maximum flow typically occur?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#check-the-record-for-completeness">
+   Check the record for completeness
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#completeness-of-record">
+     Completeness of Record
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reviewing-the-data">
+   Reviewing the Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-flow-records-against-precipitation-records">
+     Check flow records against precipitation records
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#different-ways-of-fitting-a-probability-distribution-to-measured-data">
+   Different Ways of Fitting a Probability Distribution to Measured Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#method-of-moments">
+     Method of Moments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-results-against-the-measured-data">
+     Plot the results against the measured data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#log-pearson-iii-distribution">
+   Log Pearson III Distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#risk-and-uncertainty-in-design">
+   Risk and Uncertainty in Design
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-considerations-regarding-distribution-selection">
+   Additional Considerations regarding Distribution Selection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mixed-populations">
+     Mixed Populations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#measurement-error-sensitivity">
+     Measurement Error &amp; Sensitivity
     </a>
    </li>
   </ul>
@@ -598,36 +696,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="notebook-5-rational-method-and-travel-times">
-<h1>Notebook 5: Rational Method and Travel Times<a class="headerlink" href="#notebook-5-rational-method-and-travel-times" title="Permalink to this headline">#</a></h1>
-<p>In this notebook, we look at two ways of estimating a runoff hydrograph from precipitation data.</p>
-<p>First, we’ll use the rational method to approximate peak flow and the maximum water level at the basin outlet, and then we’ll use an open-source library to make a higher resolution estimate of flow accumulation paths and stream networks using a digital elevation model.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="notebook-5-extreme-values-uncertainty-and-risk">
+<h1>Notebook 5: Extreme Values, Uncertainty, and Risk<a class="headerlink" href="#notebook-5-extreme-values-uncertainty-and-risk" title="Permalink to this headline">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>In Notebook 2, we developed a rating curve from a set of discrete discharge measurements and a continuous record of water level.  At the end of the notebook, you were asked to reflect on how your confidence in the flow predicted by the rating curve changes as a function of water level.  In the near term, our confidence in the rating curve is greatest where we have the most measurements.  Recall that the shape of the rating curve is related to the geometry of the hydraulic control, and that the geometry of the river is constantly evolving.  Without continous validation of the rating curve, we should then be less confident in the rating curve over time, due to this <em>stream-channel geomorphic response</em>.</p>
+<p>Estimating the volume of water passing a given location during a major flood is necessary for designing infrastructure such as bridge abutments, hydraulic control structures like weirs and dams, and for designing erosion control measures.  In this notebook, we’ll take a closer look at the upper end of the rating curve that governs high-magnitude flow events, where by definition we have fewer opportunities to record discrete flow measurements to robustly define a rating curve, and where measurements can be difficult to obtain accurately.</p>
+<p>It is often very difficult or impossible to get measurements at high flows due to safety, but also due to timing.  Hydrometric stations are often situated in remote locations, and high flow measurement requires additional planning and consideration for safe work procedures, and unique measurement approaches.  With this understanding of uncertainty in the largest <em>measured</em> flows, and recognizing that the highest stage recorded by the hydrometric station is generally substantially greater than the stage corresponding to the largest measured flows, extrapolation is unavoidable.</p>
+<p>Beyond extrapolation of the measured flow series at our sites of interest where <em>in situ</em> data collection may cover as little as one or two years, the estimation of peak flows for structural design extrapolates event further from measured values.  How can a 1 in 500 year flow be estimated from just two years of data measured on site? The aim of this notebook is to demonstrate the process of flood estimation, building upon the concepts developed in the previous tutorials.</p>
+<section id="import-libraries">
+<h3>Import libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import required packages</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">math</span>
-
-<span class="c1"># advanced statistics library</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">st</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mp</span>
-<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">colors</span>
+<span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">register_matplotlib_converters</span>
+<span class="n">register_matplotlib_converters</span><span class="p">()</span>
 
-<span class="c1"># SEE COMMENTS ABOUT PYSHEDS LIBRARY IN NEXT CELL</span>
-<span class="kn">from</span> <span class="nn">pysheds.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">show</span>
-<span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="kn">import</span> <span class="n">output_notebook</span>
-<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">LinearColorMapper</span><span class="p">,</span> <span class="n">LogTicker</span><span class="p">,</span> <span class="n">ColorBar</span><span class="p">,</span> <span class="n">BasicTickFormatter</span>
-<span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="kn">import</span> <span class="n">output_notebook</span>
+<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">output_notebook</span><span class="p">,</span> <span class="n">show</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
 <span class="n">output_notebook</span><span class="p">()</span>
-
-<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -635,702 +727,641 @@ title="Print to PDF"
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
 <span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import required packages</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">math</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">math</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">st</span>
 
 <span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
 </pre></div>
 </div>
 </div>
 </div>
-<section id="import-precipitation-data">
-<h2>Import Precipitation Data<a class="headerlink" href="#import-precipitation-data" title="Permalink to this headline">#</a></h2>
-<p>For this exercise, we will use historical climate data from the Meteorological Service of Canada (MSC) station at Whistler, BC.</p>
+</section>
+</section>
+<section id="data-imports">
+<h2>Data Imports<a class="headerlink" href="#data-imports" title="Permalink to this headline">#</a></h2>
+<section id="import-the-daily-average-flow-data">
+<h3>Import the Daily Average Flow Data<a class="headerlink" href="#import-the-daily-average-flow-data" title="Permalink to this headline">#</a></h3>
+<p>Daily average flow data provided by the Water Survey of Canada (WSC) for the <a class="reference external" href="https://wateroffice.ec.gc.ca/report/historical_e.html?y1Max=1&amp;y1Min=1&amp;scale=normal&amp;mode=Graph&amp;stn=08MH147&amp;dataType=Daily%C2%B6meterType=Flow&amp;year=2016">Stave River</a> (WSC 08MH147) is saved in <code class="docutils literal notranslate"><span class="pre">data/notebook_5_data/Stave.csv</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calibration data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../data/Whistler_348_climate.csv&#39;</span><span class="p">,</span> 
-                 <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Date/Time&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># note that the &#39;head&#39; command shows the first five rows of data, </span>
-<span class="c1"># but in this case the columns are abbreviated. </span>
-<span class="c1"># print(df.head())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../notebook_data/notebook_5_data/Stave.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="c1"># list all the columns</span>
-<span class="c1"># print(&#39;&#39;)</span>
-<span class="c1"># print(&#39;__________&#39;)</span>
-<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    
-<span class="n">stn_name</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Station Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>PARAM</th>
+      <th>Value</th>
+      <th>SYM</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1983-02-03</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>6.59</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>1983-02-04</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>6.40</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1983-02-05</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>5.93</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1983-02-06</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>6.21</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1983-02-07</th>
+      <td>08MH147</td>
+      <td>1</td>
+      <td>7.04</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Note in the csv file the first line tells us that there are two parameters being reported: stage (water level) and flow.  When the <code class="docutils literal notranslate"><span class="pre">PARAM</span></code> column equals 1, the value corresponds to discharge, and where it equals 2 the value corresponds to stage.</p>
+<p>The SYM column refers to data quality information.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>SYM</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p><strong>Partial Day</strong>: The symbol A indicates that the daily mean value of water level or streamflow was estimated despite gaps of more than 120 minutes in the data string or missing data not significant enough to warrant the use of the E symbol.</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p><strong>Ice Conditions</strong>: The symbol B indicates that the streamflow value was estimated with consideration for the presence of ice in the stream. Ice conditions alter the open water relationship between water levels and streamflow.</p></td>
+</tr>
+<tr class="row-even"><td><p>D</p></td>
+<td><p><strong>Dry:</strong> The symbol D indicates that the stream or lake is “dry” or that there is no water at the gauge. This symbol is used for water level data only.</p></td>
+</tr>
+<tr class="row-odd"><td><p>E</p></td>
+<td><p><strong>Estimate:</strong> The symbol E indicates that there was no measured data available for the day or missing period, and the water level or streamflow value was estimated by an indirect method such as interpolation, extrapolation, comparison with other streams or by correlation with meteorological data.</p></td>
+</tr>
+<tr class="row-even"><td><p>R</p></td>
+<td><p><strong>Revised</strong>: The symbol R indicates that a revision, correction or addition has been made to the historical discharge database after January 1, 1989.</p></td>
+</tr>
+</tbody>
+</table>
+<p>(from <a class="reference external" href="https://wateroffice.ec.gc.ca/contactus/faq_e.html#Q12">Water Survey of Canada</a>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># select just the flow data (PARAM == 1)</span>
+<span class="n">flow_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;PARAM&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">flow_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">flow_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">flow_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are </span><span class="si">{}</span><span class="s2"> values in the Stave River daily flow series.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flow_df</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+</section>
 <section id="plot-the-data">
 <h2>Plot the Data<a class="headerlink" href="#plot-the-data" title="Permalink to this headline">#</a></h2>
-<p>It’s always a good idea to begin by visualizing the data we’re working with.</p>
+<section id="plot-the-daily-average-flow-series">
+<h3>Plot the Daily Average Flow Series<a class="headerlink" href="#plot-the-daily-average-flow-series" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot flow at Stave vs. precip at the closest climate stations</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># customize the tools for interacting with the bokeh plot</span>
+<span class="n">TOOLS</span><span class="o">=</span><span class="s2">&quot;pan,wheel_zoom,reset,hover,poly_select,box_select&quot;</span>
+
+<span class="c1">#### Daily Flow Plot</span>
+<span class="n">daily_flow_plot</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">plot_width</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Daily Average Flow at Stave River (WSC 08MH147)&#39;</span><span class="p">,</span>
+                <span class="n">tools</span><span class="o">=</span><span class="n">TOOLS</span><span class="p">,</span> <span class="n">x_axis_type</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">)</span>
+
+<span class="n">daily_flow_plot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">flow_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">flow_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+<span class="n">show</span><span class="p">(</span><span class="n">daily_flow_plot</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="annual-maximum-flow-series">
+<h2>Annual Maximum Flow Series<a class="headerlink" href="#annual-maximum-flow-series" title="Permalink to this headline">#</a></h2>
+<p>Estimating return period floods is typically done by deriving a series corresponding to the highest flow recorded in each year.  This series is commonly referred to as the <strong>Annual Maximum Series</strong> (AMS).  It is necessary to use the data collected and managed by others to derive the AMS, and we will consider what this implies as we progress through the notebook.</p>
+<section id="create-a-series-representing-the-maximum-flow-in-each-year">
+<h3>Create a series representing the maximum flow in each year<a class="headerlink" href="#create-a-series-representing-the-maximum-flow-in-each-year" title="Permalink to this headline">#</a></h3>
+<p>Derive the AMS.  Also calculate the mean and standard deviation of the series.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a series representing the annual maximum daily flow</span>
+<span class="c1"># use the &#39;groupby&#39; function and get the maximum value from each year</span>
+<span class="n">max_df</span> <span class="o">=</span> <span class="n">flow_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">flow_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span>
+<span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">flow_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the mean and standard deviation of the sample</span>
+<span class="n">mean_q</span><span class="p">,</span> <span class="n">stdev_q</span> <span class="o">=</span> <span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">max_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">max_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The daily average flow record goes from </span><span class="si">{}</span><span class="s1"> to </span><span class="si">{}</span><span class="s1"> (n=</span><span class="si">{}</span><span class="s1"> years).&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">max_df</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean = </span><span class="si">{:.2f}</span><span class="s1"> m^3/s; Standard deviation = </span><span class="si">{:.2f}</span><span class="s1"> m^3/s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean_q</span><span class="p">,</span> <span class="n">stdev_q</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Preview of the Annual Maximum Flow Series:&#39;</span><span class="p">)</span>
+<span class="n">max_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="plot-a-histogram-of-annual-maximum-flows">
+<h2>Plot a histogram of annual maximum flows<a class="headerlink" href="#plot-a-histogram-of-annual-maximum-flows" title="Permalink to this headline">#</a></h2>
+<p>If we are going to use statistical methods to estimate return period floods, it is important to consider the shape of the probability distribution, and what that implies about the dominant mechanisms driving peak runoff.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">max_df</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Q [m^3/s]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;P(X)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Annual Maximum Flow Histogram for Stave River&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In flood frequency analysis, the shape of the sample distribution has implications for the way the parameters of a probability distribution are estimated.  The <em>sample</em> in this case is the set of annual maximum flows.  The model parameters that we will use to estimate return period floods assume certain characteristics about the data.  Namely, that values are <em>independent</em> (the annual maximum in one year does not have an observable effect on the annual maximum of other years), and <em>identically distributed</em> (values are derived from the same distribution, and are stationary over time).  In some cases these are reasonable assumptions (short planning horizon, large sample), and in others not (long planning horizon, small sample).</p>
+<p>Above it appears as though there are two distinct ‘modes’, or peaks.  Take a moment to consider what might cause multiple modes in the distribution.</p>
+<section id="in-what-months-does-the-annual-maximum-flow-typically-occur">
+<h3>In what months does the annual maximum flow typically occur?<a class="headerlink" href="#in-what-months-does-the-annual-maximum-flow-typically-occur" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">max_df</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;All years&#39;</span><span class="p">)</span>
+
+<span class="n">complete_max_df</span> <span class="o">=</span> <span class="n">max_df</span><span class="p">[</span><span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">360</span><span class="p">]</span>
+<span class="n">complete_max_df</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> 
+                     <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Complete years&#39;</span><span class="p">,)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Month&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Monthly Count of Annual Maximum Flow Timing&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the plot above, we can see that the annual maximum flow typically occurs from October to January.  Also note that the orange series has been labelled ‘complete years’.  Earlier in this notebook it was pointed out that we have to rely on data collected by others.  Below we’ll derive a flood frequency curve for Stave River, and in the process we’ll illustrate why <strong>quality review of data is critical</strong>.</p>
+</section>
+</section>
+<section id="check-the-record-for-completeness">
+<h2>Check the record for completeness<a class="headerlink" href="#check-the-record-for-completeness" title="Permalink to this headline">#</a></h2>
+<p>It is often necessary to use data collected by others.  It is common for datasets to be missing documentation containing important information about quality or limitations of the data.  <strong>Even given well documented data, it is necessary to do your own quality assurance</strong>.  Below, we will use a daily average flow dataset from the Water Survey of Canada to demonstrate a few ways of validating a dataset.  This is not a manual of quality assurance, but it is used to demonstrate how to incorporate other data to do basic validation.  The general idea is that there are many other environmental signals that have mutual information with the signal of primary interest, in this case daily average streamflow at the Stave River.  For example, would you trust a large spike in runoff if nearby precipitation gauges measured zero rainfall?  Also, how do we deal with missing data?</p>
+<section id="completeness-of-record">
+<h3>Completeness of Record<a class="headerlink" href="#completeness-of-record" title="Permalink to this headline">#</a></h3>
+<p>Find the incomplete years, and consider what we observed above regarding the times of the year the annual maximum flood is more likely to occur.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+<span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">flow_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">max_df</span><span class="p">[</span><span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">365</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It appears as though 1984 and 2001 are the years missing the most data.  Does this mean we should exclude these years from the AMS we use as input in the flood frequency analysis?  Are the years where only a few days of records are missing good enough?</p>
+<p>Even though we obtained our Stave data from WSC, the organizational body governing hydrometric data collection and standards in Canada, we still must review the data for completeness and quality.</p>
+<p>Looking at the printout above showing all of the years with missing days, it might be easy to justify removing 2001 from the dataset, as it is missing more than half of the year, and because we need as large a dataset as possible to buttress our statistical analysis, it is tempting to keep years with only a few missing days.</p>
+</section>
+</section>
+<section id="reviewing-the-data">
+<h2>Reviewing the Data<a class="headerlink" href="#reviewing-the-data" title="Permalink to this headline">#</a></h2>
+<p>Consider the possibility that the annual maximum flood is itself the reason the data is missing.  How might we determine this?</p>
+<p>To start, we can check precipitation records at the closest climate stations.  The monthly count plot shown above suggests the annual maximum typically occurs in October to January, and on the basis that synoptic-scale precipitation events typically occur in winter, perhaps we can determine if a major precipitation event occurred during a period when there is a gap in the data.</p>
+<p>There are no climate stations from the Meteorological Survey of Canada (MSC) in the immediate vicinity, but there are two within 100 km on either side of the Stave River basin.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># whistler is equidistant to the Stave catchment in the opposite direction from the climate station in Hope.</span>
+<span class="n">whis_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../data/notebook_3_data/Whistler_348_climate.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Date/Time&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">whis_df</span> <span class="o">=</span> <span class="n">whis_df</span><span class="p">[[</span><span class="s1">&#39;Total Precip (mm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Rain (mm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Snow on Grnd (cm)&#39;</span><span class="p">]]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;whis&#39;</span>
+<span class="n">whis_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_total_precip&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_total_rain&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> 
+                   <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_snow_on_grnd&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)]</span>
+
+<span class="c1"># the Laidlaw station is near Hope, BC</span>
+<span class="n">hope_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../data/notebook_3_data/Laidlaw_794_climate.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Date/Time&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">hope_df</span> <span class="o">=</span> <span class="n">hope_df</span><span class="p">[[</span><span class="s1">&#39;Total Precip (mm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Rain (mm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Snow on Grnd (cm)&#39;</span><span class="p">]]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;hope&#39;</span>
+<span class="n">hope_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_total_precip&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_total_rain&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> 
+                   <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_snow_on_grnd&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)]</span>
+
+<span class="c1"># print(hope_df.head())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_data_gaps</span><span class="p">(</span><span class="n">gap_df</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Input a timeseries, and return a dataframe summarizing</span>
+<span class="sd">    the start and end times of any gaps in the record.</span>
+<span class="sd">    Note that the code assumes frequency is daily.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gap_df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">gap_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">gap_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">deltas</span> <span class="o">=</span> <span class="n">gap_df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="c1"># Filter diffs (here days &gt; 1, but could be seconds, hours, etc)</span>
+    <span class="n">gaps</span> <span class="o">=</span> <span class="n">deltas</span><span class="p">[</span><span class="n">deltas</span> <span class="o">&gt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="c1"># Print results</span>
+    <span class="k">return</span> <span class="n">gap_df</span><span class="p">,</span> <span class="n">gaps</span>   
+</pre></div>
+</div>
+</div>
+</div>
+<section id="check-flow-records-against-precipitation-records">
+<h3>Check flow records against precipitation records<a class="headerlink" href="#check-flow-records-against-precipitation-records" title="Permalink to this headline">#</a></h3>
+<p>It is common for historical records to be missing data.  Comparing flow records against precipitation records is just one way of checking to see if the gaps in the record might correspond to peak events.  Code is provided to automatically identify gaps in the record to help you see where they occur.  Note that this doesn’t guarantee anything about the conditions in Stave River where we have no data, but it does provide some information with which to build a case for treating the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># concatenate the precipitation records with the streamflow records</span>
+<span class="n">conc_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">whis_df</span><span class="p">,</span> <span class="n">hope_df</span><span class="p">,</span> <span class="n">flow_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+<span class="n">conc_df</span> <span class="o">=</span> <span class="n">conc_df</span><span class="p">[[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">hope_df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;hope&#39;</span> <span class="ow">in</span> <span class="n">e</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">whis_df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;whis&#39;</span> <span class="ow">in</span> <span class="n">e</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">conc_df</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">LinearAxis</span><span class="p">,</span> <span class="n">Range1d</span>
+
+<span class="c1"># plot flow at Stave vs. precip at the closest climate stations</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">x_axis_type</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Total Precip (mm)&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-         <span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;Total Precip [mm]&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">conc_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">conc_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+         <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;Stave Flow [m^3/s]&#39;</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">)</span>
 
-<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Total Snow (cm)&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-         <span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;Total Snow [cm]&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;firebrick&quot;</span><span class="p">)</span>
+<span class="c1"># plot on second y axis</span>
+<span class="n">p</span><span class="o">.</span><span class="n">extra_y_ranges</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;precip&#39;</span><span class="p">:</span> <span class="n">Range1d</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">200</span><span class="p">)}</span>
 
-<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Total Rain (mm)&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
-         <span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;Total Rain [mm]&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">conc_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">conc_df</span><span class="p">[</span><span class="s1">&#39;hope_total_rain&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+         <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;Hope precipitation [mm]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">y_range_name</span><span class="o">=</span><span class="s1">&#39;precip&#39;</span><span class="p">)</span>
+<span class="c1"># # p.line(conc_df_trimmed.index, conc_df_trimmed[&#39;hope_total_rain&#39;], alpha=0.3,</span>
+<span class="c1"># #          label=&#39;Hope precipitation [mm]&#39;, color=&#39;orange&#39;, y_range_name=&#39;precip&#39;)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">conc_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">conc_df</span><span class="p">[</span><span class="s1">&#39;whis_total_rain&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+         <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;Whistler precipitation [mm]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">y_range_name</span><span class="o">=</span><span class="s1">&#39;precip&#39;</span><span class="p">)</span>
+
+<span class="n">gap_df</span><span class="p">,</span> <span class="n">gaps</span> <span class="o">=</span> <span class="n">find_data_gaps</span><span class="p">(</span><span class="n">conc_df</span><span class="p">,</span> <span class="s1">&#39;Stave&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot red bands to illustrate where there are gaps in the record</span>
+<span class="c1"># ind = 0</span>
+<span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">conc_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gaps</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>    
+    <span class="n">gap_start</span> <span class="o">=</span> <span class="n">gap_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">gap_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span>
+    <span class="n">gap_end</span> <span class="o">=</span> <span class="n">gap_start</span> <span class="o">+</span> <span class="n">g</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">gap_start</span><span class="p">,</span> <span class="n">gap_end</span><span class="p">,</span> <span class="n">gap_end</span><span class="p">,</span> <span class="n">gap_start</span><span class="p">])</span>
+    <span class="n">ys</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">ymax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">])</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">patches</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">fill_alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;Gap&#39;</span><span class="p">,</span>
+         <span class="n">line_alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s1">&#39;top_left&#39;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">click_policy</span> <span class="o">=</span> <span class="s1">&#39;hide&#39;</span>
 <span class="n">p</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Date&#39;</span><span class="c1">#</span>
-<span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Daily Rain [mm] / Snow[cm] Volume&#39;</span>
-
+<span class="n">p</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">axis_label</span> <span class="o">=</span> <span class="s1">&#39;Daily Average Flow [m^3/s]&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">y_range</span> <span class="o">=</span> <span class="n">Range1d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">580</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_layout</span><span class="p">(</span><span class="n">LinearAxis</span><span class="p">(</span><span class="n">y_range_name</span><span class="o">=</span><span class="s1">&#39;precip&#39;</span><span class="p">,</span> <span class="n">axis_label</span><span class="o">=</span><span class="s1">&#39;Total Precipitation [mm]&#39;</span><span class="p">),</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span>
 <span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="simplified-version-of-rainfall-runoff">
-<h2>Simplified Version of Rainfall-Runoff<a class="headerlink" href="#simplified-version-of-rainfall-runoff" title="Permalink to this headline">#</a></h2>
-<p>First, isolate a single precipitation event to use for estimating a runoff hydrograph.  Let’s find a nice week for skiing:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-
-<span class="n">sample_start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2014-12-01&#39;</span><span class="p">)</span>
-<span class="n">sample_end</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2014-12-15&#39;</span><span class="p">)</span>
-
-<span class="n">sample_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">sample_start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">sample_end</span><span class="p">)][[</span><span class="s1">&#39;Total Precip (mm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Snow (cm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Rain (mm)&#39;</span><span class="p">]]</span>
-
-<span class="c1"># print(sample_df.head())</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sample_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">sample_df</span><span class="p">[</span><span class="s1">&#39;Total Precip (mm)&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Total Precip [mm]&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sample_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">sample_df</span><span class="p">[</span><span class="s1">&#39;Total Snow (cm)&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Total Snow [cm]&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sample_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">sample_df</span><span class="p">[</span><span class="s1">&#39;Total Rain (mm)&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Total Rain [mm]&quot;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Precipitation&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stn_name</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">max_df</span><span class="p">[</span><span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">365</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>First, imagine we are some unfortunate parking lot attendant working a shift in Whistler Village at Parking Lot 5, and we are told by our cruel supervisor we have stand at the lowest point of the parking lot: a catchment basin with an area of <span class="math notranslate nohighlight">\(1 km^2\)</span> where water runs off into FitzSimmons Creek.  The sky looks angry, but we’re running late for work and put on our running shoes instead of our sturdy waterproof boots.</p>
-<p>Next, assume the travel time is effectively zero across our entire basin (precipitation takes no time to travel to the outlet once it falls on the parking lot surface).  Is this a reasonable assumption in general?</p>
-<p>Under these assumptions, lets reconstruct a runoff hydrograph at the outlet.  First, look at the precipitation data over the twelve days of the big storm.</p>
+<p>We can use the interactive plot tools to zoom in on each of the specific years above.  The visibility of series can be toggled by clicking on the corresponding legend item.</p>
+<p>If we check each of the incomplete years above, we can see that some of the gaps in the Stave record correspond to large precipitation events at the precipitation stations on either side of the Stave River watershed, suggesting perhaps a gap of just a few days is related to a large event.  Consider how including a year that is missing its true largest event might affect the calculations that follow in developing the flood frequency curve.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sample_df</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an array of years values of the years you want to exclude</span>
+<span class="n">drop_years</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1984</span><span class="p">,</span> <span class="mi">1989</span><span class="p">,</span> <span class="mi">1991</span><span class="p">,</span> <span class="mi">1993</span><span class="p">,</span> <span class="mi">2001</span><span class="p">]</span>
+<span class="c1"># here, we filter the years we don&#39;t want to include in our annual maximum series </span>
+<span class="n">max_df_filtered</span> <span class="o">=</span> <span class="n">max_df</span><span class="p">[</span><span class="o">~</span><span class="n">max_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">drop_years</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After reviewing the dataset, there are </span><span class="si">{}</span><span class="s1"> years of record in the AMS.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">max_df_filtered</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="convert-volume-to-volmeteric-flow-units">
-<h2>Convert Volume to volmeteric flow units<a class="headerlink" href="#convert-volume-to-volmeteric-flow-units" title="Permalink to this headline">#</a></h2>
-<p>Runoff is typically measured in <span class="math notranslate nohighlight">\(\frac{m^3}{s}\)</span>, so convert <span class="math notranslate nohighlight">\(\frac{mm}{day}\)</span> precipitation to <span class="math notranslate nohighlight">\(\frac{m^3}{s}\)</span> runoff.</p>
+</section>
+<section id="different-ways-of-fitting-a-probability-distribution-to-measured-data">
+<h2>Different Ways of Fitting a Probability Distribution to Measured Data<a class="headerlink" href="#different-ways-of-fitting-a-probability-distribution-to-measured-data" title="Permalink to this headline">#</a></h2>
+<section id="method-of-moments">
+<h3>Method of Moments<a class="headerlink" href="#method-of-moments" title="Permalink to this headline">#</a></h3>
+<p>The method of moments is used to estimate the parameters of a distribution.  The parameters dictate the shape of the PDF, or the curve that approximates the histogram of measured data.</p>
+<p><img alt="GEV Densities" src="../../_images/GEV_densities.png" /></p>
+<p>Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution">Wikipedia</a></p>
+<p>The GEV is a family of distributions, of which the first type (Type 1) is also known as the <a class="reference external" href="https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution">Gumbel Distribution</a>.</p>
+<p>The Type 1 GEV (GEV1) and Log-Pearson III are commonly used in flood frequency analysis, though we will not go further in the assumptions underlying the types of distributions here, except to say the tail behaviour (which we are interested in because it defines the flows associated with the highest return periods) is governed by the shape parameter (<span class="math notranslate nohighlight">\(\xi\)</span>), so it’s important.  The GEV1 assumes <span class="math notranslate nohighlight">\(\xi = 0\)</span></p>
+<p>The probability of non-exceedence is given by the double exponential:</p>
 <div class="math notranslate nohighlight">
-\[1 \frac{mm}{day} \times \frac{1 m}{1000 mm} \times \frac{1 day}{24 h} \times \frac{1 h}{ 3600 s} \times 1 km^2 \times \frac{1000 m \times 1000 m}{1 km^2}= \frac{1}{86.4} \frac{m^3}{s}\]</div>
+\[G(x) = 1 - e^{-e^{-y}}\]</div>
+<p>The return period (<span class="math notranslate nohighlight">\(T\)</span>) is the inverse of <span class="math notranslate nohighlight">\(G(x)\)</span>.  The Gumbel reduced variate is given by:</p>
+<div class="math notranslate nohighlight">
+\[y = -\ln{ \left( \ln{ \left(\frac{T}{T-1} \right) } \right) }\]</div>
+<p><img alt="Gumbel table" src="../../_images/gumbel_table.png" /></p>
+<p>From above, we know the length of record is <span class="math notranslate nohighlight">\(n=29\)</span>, so:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(n\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\bar{y}_n\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\sigma_n\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>0.5353</p></td>
+<td><p>1.1086</p></td>
+</tr>
+</tbody>
+</table>
+<p>A tutorial for fitting a Gumbel distribution using Excel is provided <a class="reference external" href="https://serc.carleton.edu/hydromodules/steps/166250.html">here.</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert to runoff volume</span>
-<span class="n">drainage_area</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># km^2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gumbel_formula</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ybar_n</span><span class="p">,</span> <span class="n">xbar</span><span class="p">,</span> <span class="n">sigma_n</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return an estimated flood quantile based on the Gumbel formula.</span>
+<span class="sd">    The parameters are</span>
+<span class="sd">    described above in Table A-8.</span>
+<span class="sd">    Inputs are:</span>
+<span class="sd">        t: return period (years)</span>
+<span class="sd">        ybar_n: gumbel variate (from Table provided),</span>
+<span class="sd">        xbar: sample mean,</span>
+<span class="sd">        sigma_n: Gumbel standard deviation (from Table provided),</span>
+<span class="sd">        sigma: sample standard deviation</span>
+<span class="sd">    Returns: flow corresponding to return period t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="k">return</span>  <span class="n">xbar</span> <span class="o">+</span> <span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">ybar_n</span><span class="p">)</span><span class="o">/</span><span class="n">sigma_n</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigma</span>
 
-<span class="c1"># runoff is typically measured in m^3/s (cms for short -- cubic metres per second), </span>
-<span class="c1"># so express the runoff in cms</span>
-<span class="n">sample_df</span><span class="p">[</span><span class="s1">&#39;runoff_cms&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_df</span><span class="p">[</span><span class="s1">&#39;Total Rain (mm)&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">86.4</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sample_df</span><span class="p">)</span>
+<span class="c1"># define the return periods you want to calculate flows for and their associated probabilities</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+<span class="n">pr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tr</span><span class="p">]</span>
+
+<span class="c1"># Apply the gumbel formula to the selected return periods to estimate return period flood.</span>
+<span class="c1"># Look at the format of the inputs to figure out what to replace #value1 and #value2 </span>
+<span class="c1"># below with</span>
+
+<span class="c1"># q_gumbel = [gumbel_formula(t, #value1, mean_q, #value2, stdev_q) for t in tr]</span>
+<span class="n">mean_q</span><span class="p">,</span> <span class="n">stdev_q</span> <span class="o">=</span> <span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">q_gumbel_alldata</span> <span class="o">=</span> <span class="p">[</span><span class="n">gumbel_formula</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.5353</span><span class="p">,</span> <span class="n">mean_q</span><span class="p">,</span> <span class="mf">1.1086</span><span class="p">,</span> <span class="n">stdev_q</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tr</span><span class="p">]</span>
+<span class="c1"># repeat for the filtered dataset</span>
+<span class="n">mean1_q</span><span class="p">,</span> <span class="n">stdev1_q</span> <span class="o">=</span> <span class="n">max_df_filtered</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">max_df_filtered</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">q_gumbel_filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">gumbel_formula</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mf">0.5396</span><span class="p">,</span> <span class="n">mean_q</span><span class="p">,</span> <span class="mf">1.1255</span><span class="p">,</span> <span class="n">stdev_q</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tr</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>If the channel outlet has a rectangular shape of width 2m, how tall should our boots be?  Assume a 2% slope, and find a reasonable assumption for the roughness of asphalt.</p>
-<p>Recall the Manning equation:</p>
+</section>
+<section id="plot-the-results-against-the-measured-data">
+<h3>Plot the results against the measured data<a class="headerlink" href="#plot-the-results-against-the-measured-data" title="Permalink to this headline">#</a></h3>
+<p>The appropriate method of fitting a probability distribution to measured data has been argued for decades.</p>
+<p>In the case of Stave River, we have 34 years of record.  It’s intuitive to think that the highest flow measured in that time has a probability of <span class="math notranslate nohighlight">\(\frac{1}{34}\)</span>, and a return period of 34 years, but this is incorrect.  Various adjustments to the way in which probabilities are assigned have been proposed over the decades (reference). These adjustments are referred to as <em>plotting positions</em>, and their aim is to apply a transformation to the measured data such that the data form a straight line.  If the data fall on the line exactly, the plotting position is said to be unbiased.</p>
+<p>A general plotting position formula is as follows:</p>
 <div class="math notranslate nohighlight">
-\[Q = \frac{1}{n} A R^{2/3} S^{1/2}\]</div>
-<p>Where:</p>
-<ul class="simple">
-<li><p><strong>n</strong> is the manning roughness</p></li>
-<li><p><strong>A</strong> is cross sectional area of the flow</p></li>
-<li><p><strong>R</strong> hydraulic radius (area / wetted perimeter)</p></li>
-<li><p><strong>S</strong> is the channel slope</p></li>
-</ul>
+\[\frac{1}{T} = P = \frac{m - a}{n + 1 - 2a}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(m\)</span> is the rank (largest value = 1), <span class="math notranslate nohighlight">\(n\)</span> is the sample size (number of years), and <span class="math notranslate nohighlight">\(a\)</span> is some empirical value.</p>
+<p>The table below shows something of a history of plotting positions (from Cunnane, 1977):</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Source</p></th>
+<th class="head"><p>Value of <span class="math notranslate nohighlight">\(a\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Hazen (1914)</p></td>
+<td><p>0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>California dept. of Public Works (1923)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{(i-1)}{N}\)</span>, <span class="math notranslate nohighlight">\(\frac{i}{N}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Weibull (1939)</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Beard (1943), Gumbel (1943), Kimball (1946)</p></td>
+<td><p>0.31</p></td>
+</tr>
+<tr class="row-even"><td><p>Blom (1958)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{3}{8}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Tukey (1962)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{3}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Gringorten (1963)</p></td>
+<td><p>0.44</p></td>
+</tr>
+</tbody>
+</table>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w_channel</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="c1"># m</span>
-<span class="n">S</span> <span class="o">=</span> <span class="mf">0.005</span> <span class="c1"># channel slope</span>
-<span class="n">n_factor</span> <span class="o">=</span> <span class="mf">0.017</span>  <span class="c1"># rough asphalt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># first, we need to sort the measured data by rank</span>
+<span class="c1"># and calculate probabilities associated with the measured data.</span>
+<span class="c1"># The largest flood value should have rank 1</span>
+<span class="n">max_df</span> <span class="o">=</span> <span class="n">max_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank&#39;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">calc_Q</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="c1"># calculate the probabilty P and return period Tr</span>
+<span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">max_df</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Tr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plotting_position</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate flow from the Manning equation.</span>
+<span class="sd">    Return an adjusted plotting position (probability)</span>
+<span class="sd">    based on the rank m, the plotting position a, and the length of record n.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">d</span> <span class="o">*</span> <span class="n">w</span>
-    <span class="n">wp</span> <span class="o">=</span> <span class="n">w</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d</span>  <span class="c1"># wetted perimeter</span>
-    <span class="n">R</span> <span class="o">=</span> <span class="n">A</span> <span class="o">/</span> <span class="n">wp</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">R</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">q_gumbel_alldata</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gumbel (All data)&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">q_gumbel_filtered</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gumbel (filtered)&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Tr&#39;</span><span class="p">],</span> <span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">],</span> 
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Measured Annual Maxima (all data)&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">solve_depth</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">n_factor</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Stave River Annual Maximum Daily Average Flow&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Return Period (years)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Q [m^3/s]&#39;</span><span class="p">)</span>
+<span class="c1"># ax.set_xlim(0,200)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="log-pearson-iii-distribution">
+<h2>Log Pearson III Distribution<a class="headerlink" href="#log-pearson-iii-distribution" title="Permalink to this headline">#</a></h2>
+<p>A distribution commonly used for estimating return period floods in BC is the Log-Pearson III distribution.  Here we will plot it against the GEV1 previously developed, and we’ll take a look at the effects of our data review, where we’ll plot both the GEV and LP3 using the entire dataset (without excluding any years) as well as a filtered dataset where we remove years where there is some likelihood the annual peak was missing from the record.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_LP3</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">Tr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Given a flow, a roughness factor, a channel slope, and a channel width, </span>
-<span class="sd">    calculate flow depth. </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">e</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">100</span>  <span class="c1"># solve within 1%</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">Q_est</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">Q_est</span> <span class="o">-</span> <span class="n">Q</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">e</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">):</span>
-        <span class="n">Q_est</span> <span class="o">=</span> <span class="n">calc_Q</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">n_factor</span><span class="p">)</span>
-<span class="c1">#         print(Q, Q_est, abs(Q_est - Q))</span>
-        <span class="n">d</span> <span class="o">+=</span> <span class="mf">0.001</span>
-        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="c1">#     print(&#39;solved in {} iterations&#39;.format(n))</span>
-    <span class="k">return</span> <span class="n">d</span> 
+<span class="sd">    Fit a log-Pearson III distribution to a sample of extreme values</span>
+<span class="sd">    given a desired set of return periods (Tr).</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">q_skew</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">log_skew</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
     
+    <span class="c1"># calculate the CDF</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">return_p</span><span class="p">))</span> <span class="k">if</span> <span class="n">return_p</span> <span class="o">!=</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">return_p</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">))</span> <span class="k">for</span> <span class="n">return_p</span> <span class="ow">in</span> <span class="n">tr</span><span class="p">])</span>
+    <span class="n">lp3</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">log_skew</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="n">z</span> <span class="o">-</span> <span class="n">log_skew</span><span class="o">/</span><span class="mi">6</span><span class="p">)</span><span class="o">*</span><span class="n">log_skew</span><span class="o">/</span><span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">lp3_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">values</span><span class="p">))</span> <span class="o">+</span> <span class="n">lp3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">values</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">lp3_model</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For each timestep, we want to solve for the depth of water at our outlet</span>
-<span class="n">sample_df</span><span class="p">[</span><span class="s1">&#39;flow_depth_m&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_df</span><span class="p">[</span><span class="s1">&#39;runoff_cms&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">solve_depth</span><span class="p">(</span><span class="n">w_channel</span><span class="p">,</span> <span class="n">n_factor</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">S</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># now set up the filtered AMS series to calculate the LP3 distribution</span>
+<span class="n">max_df_filtered</span> <span class="o">=</span> <span class="n">max_df_filtered</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;rank&#39;</span><span class="p">)</span>
+
+<span class="c1"># calculate the probabilty P and return period Tr</span>
+<span class="n">max_df_filtered</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_df_filtered</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">max_df_filtered</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">max_df_filtered</span><span class="p">[</span><span class="s1">&#39;Tr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">max_df_filtered</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sample_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">sample_df</span><span class="p">[</span><span class="s1">&#39;flow_depth_m&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flow depth [m]&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<blockquote>
-<div><p><strong>Not only are our feet wet, but if we happen to be there the peak it’s potentially dangerous.  As little as 10-15cm of water moving fast enough can sweep you off your feet.</strong></p>
-</div></blockquote>
-<p><img alt="Recalculating Life" src="../../_images/recalculating.png" /></p>
-</section>
-<section id="more-complex-implementation-spatial-data">
-<h2>More Complex Implementation: Spatial Data<a class="headerlink" href="#more-complex-implementation-spatial-data" title="Permalink to this headline">#</a></h2>
-<p>As discussed in class, precipitation takes time to travel from where it fell to the basin outlet.  Next we will estimate the runoff response in a real catchment, just upstream from the parking lot example in the FitzSimmons Creek basin.</p>
-<section id="step-1-instantiate-a-grid-from-a-dem-raster">
-<h3>Step 1: Instantiate a grid from a DEM raster<a class="headerlink" href="#step-1-instantiate-a-grid-from-a-dem-raster" title="Permalink to this headline">#</a></h3>
-<p>Some sample data is already included, but for extra data, see the <a class="reference external" href="https://www.hydrosheds.org/">USGS hydrosheds project</a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># grid = Grid.from_raster(&#39;data/n45w125_con_grid/n45w125_con/n45w125_con&#39;, data_name=&#39;dem&#39;)</span>
-<span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="o">.</span><span class="n">from_ascii</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;../../data/notebook_5_data/n49w1235_con_grid.asc&#39;</span><span class="p">,</span> 
-                       <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;dem&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reset the nodata from -32768 so it doesn&#39;t throw off the </span>
-<span class="c1"># DEM plot</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">nodata</span> <span class="o">=</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># store the extents of the map</span>
-<span class="n">map_extents</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">extent</span>
-<span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="n">map_extents</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lp3_model</span> <span class="o">=</span> <span class="n">calculate_LP3</span><span class="p">(</span><span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">],</span> <span class="n">tr</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">lp3_model_filtered</span> <span class="o">=</span> <span class="n">calculate_LP3</span><span class="p">(</span><span class="n">max_df_filtered</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">],</span> <span class="n">tr</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">q_gumbel_alldata</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gumbel (34 years)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">q_gumbel_filtered</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gumbel (29 years)&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">lp3_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;LP3 (34 years)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">lp3_model_filtered</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;LP3 (29 years)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> 
+         <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Tr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">max_df</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> 
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Measured Annual Maxima&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Stave River Annual Maximum Daily Average Flow&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Return Period (years)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Flow [m^3/s]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="plot-the-dem">
-<h3>Plot the DEM<a class="headerlink" href="#plot-the-dem" title="Permalink to this headline">#</a></h3>
-<p><strong>NOTE:</strong> The cell below may take up to 30 seconds to load.  Please be patient, it is thinking really hard.</p>
-<p>The code below will plot the Digital Elevation Model (DEM).</p>
-<p>Do you recognize any features of the terrain?  Can you locate where it is?</p>
-<p>Hover over the map (or touch if using a touchscreen) to see the coordinates in decimal degree units.</p>
-<p>What does the <a class="reference external" href="http://wiki-1-1930356585.us-east-1.elb.amazonaws.com/wiki/index.php/Decimal_degrees">precision of the coordinates represent</a>?</p>
+<section id="risk-and-uncertainty-in-design">
+<h2>Risk and Uncertainty in Design<a class="headerlink" href="#risk-and-uncertainty-in-design" title="Permalink to this headline">#</a></h2>
+<p>It is often the case that engineers are asked to extrapolate well beyond the range of measured data.</p>
+</section>
+<section id="additional-considerations-regarding-distribution-selection">
+<h2>Additional Considerations regarding Distribution Selection<a class="headerlink" href="#additional-considerations-regarding-distribution-selection" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://water.usgs.gov/osw/bulletin17b/dl_flow.pdf">Bulletin 17B</a> of the USDOE Hydrology Subcommittee of the Water Resources Council recommends the Log-Pearson Type III as the distribution for defining annual flood series.  Consider what Bulletin 17B says about sample size and extrapolation.</p>
+<p>The annual maximum flood events are assumed to be <strong>independent and identically distributed (IID).</strong></p>
+<p>Parts D and E (pg 7 in Bulletin 17B) discuss <strong>mixed populations</strong> and <strong>measurement error</strong>, respectively. These will be addressed sequentially.</p>
+<section id="mixed-populations">
+<h3>Mixed Populations<a class="headerlink" href="#mixed-populations" title="Permalink to this headline">#</a></h3>
+<p>Here, we’ll briefly revisit the histogram of annual maximum flows we saw near the beginning of this notebook.</p>
+<p>The mechanisms driving flood events may not be homogeneous.  For instance, the annual maximum flow may be due to snowmelt, precipitation, or a combination of the two. Recall from above (and please forgive my bad sketch of a PDF):</p>
+<p><img alt="Bimodal Distribution" src="../../_images/bimodal_diagram.png" /></p>
+<p>How might we check if there is a clear distinction between annual floods derived from different types of event?  High flows generated by snowmelt and those generated by early winter <a class="reference external" href="https://oceanservice.noaa.gov/facts/pineapple-express.html">‘pineapple express’</a> precipitation events are unique, and are likely the reason the probability distribution of the AMS at Stave River shows a bimodal distribution, however <strong>the sample size is small, so the shape of the distribution could also be due to sampling variability</strong>.</p>
+<p>What can we check to understand the processes which drive the largest magnitude runoff (flow) events?</p>
 <ul class="simple">
-<li><p>i.e. what does 5 decimal places in decimal degrees equate to in kilometers?</p></li>
+<li><p>Check time of year</p></li>
+<li><p>Compare precipitation and snow values to peak events</p></li>
+<li><p>Look at temperature records</p></li>
 </ul>
-<p>You can interact with the plot by using the tools on the left (in vertical order from top to bottom):</p>
-<ul class="simple">
-<li><p><strong>pan:</strong> move around the map</p></li>
-<li><p><strong>box zoom:</strong> draw a square to zoom in on</p></li>
-<li><p><strong>wheel zoom:</strong> use the mousewheel (or pinch gesture on a touchscreen) to zoom in</p></li>
-<li><p><strong>box zoom:</strong> draw a square to zoom in on</p></li>
-<li><p><strong>tap</strong>: not yet implemented (but you can see the coordinates)</p></li>
-<li><p><strong>refresh</strong>: reset the map</p></li>
-<li><p><strong>hover</strong>: see the coordinates when hovering over the map with a mouse or pointer</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set bokeh plot tools</span>
-<span class="n">tools</span> <span class="o">=</span> <span class="s2">&quot;pan,wheel_zoom,box_zoom,reset,tap&quot;</span>
-
-<span class="c1"># show the precision of the decimal coordinates</span>
-<span class="c1"># in the plot to 5 decimal places</span>
-<span class="n">TOOLTIPS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">&quot;(x,y)&quot;</span><span class="p">,</span> <span class="s2">&quot;($x</span><span class="si">{1.11111}</span><span class="s2">, $y</span><span class="si">{1.11111}</span><span class="s2">)&quot;</span><span class="p">),</span>
-<span class="p">]</span>
-
-<span class="c1"># create a figure, setting the x and y ranges to the appropriate data bounds</span>
-<span class="n">p1</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;DEM of the Lower Mainland of BC.  Hover to get coordintes.&quot;</span><span class="p">,</span> <span class="n">plot_width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">400</span><span class="p">),</span>
-            <span class="n">x_range</span> <span class="o">=</span> <span class="n">map_extents</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">y_range</span> <span class="o">=</span> <span class="n">map_extents</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> 
-            <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span> <span class="n">tooltips</span><span class="o">=</span><span class="n">TOOLTIPS</span><span class="p">)</span>
-
-<span class="c1"># map elevation to a colour spectrum</span>
-<span class="n">color_mapper</span> <span class="o">=</span> <span class="n">LinearColorMapper</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Magma256&quot;</span><span class="p">,</span> <span class="n">low</span><span class="o">=-</span><span class="mi">200</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">2400</span><span class="p">)</span>
-
-<span class="c1"># np.flipud flips the image data on a vertical axis</span>
-<span class="n">adjusted_img</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">dem</span><span class="p">)]</span>  
-
-<span class="n">p1</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">adjusted_img</span><span class="p">,</span>   
-         <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">min_x</span><span class="p">],</span>               <span class="c1"># lower left x coord</span>
-         <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">min_y</span><span class="p">],</span>               <span class="c1"># lower left y coord</span>
-         <span class="n">dw</span><span class="o">=</span><span class="p">[</span><span class="n">max_x</span><span class="o">-</span><span class="n">min_x</span><span class="p">],</span>        <span class="c1"># *data space* width of image</span>
-         <span class="n">dh</span><span class="o">=</span><span class="p">[</span><span class="n">max_y</span><span class="o">-</span><span class="n">min_y</span><span class="p">],</span>        <span class="c1"># *data space* height of image</span>
-         <span class="n">color_mapper</span><span class="o">=</span><span class="n">color_mapper</span>
-<span class="p">)</span>
-
-<span class="n">color_bar</span> <span class="o">=</span> <span class="n">ColorBar</span><span class="p">(</span><span class="n">color_mapper</span><span class="o">=</span><span class="n">color_mapper</span><span class="p">,</span> <span class="c1">#ticker=Ticker(),</span>
-                     <span class="n">label_standoff</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">border_line_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-
-<span class="n">p1</span><span class="o">.</span><span class="n">add_layout</span><span class="p">(</span><span class="n">color_bar</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span>
-
-
-<span class="n">show</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
-
-<span class="c1"># -123.15512, 49.41293</span>
-<span class="c1">#-123.14657, 49.41080</span>
-<span class="o">-</span><span class="mf">123.14350</span><span class="p">,</span> <span class="mf">49.40251</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>There is a <a class="reference external" href="https://scholar.google.ca/scholar?q=mixed+modes+in+flood+frequency+analysis%27&amp;hl=en&amp;as_sdt=0&amp;as_vis=1&amp;oi=scholart">large body of literature</a> investigating the treatment of mixed modes in flood frequency analysis.</p>
 </section>
-<section id="resolve-flats-in-dem">
-<h3>Resolve flats in DEM<a class="headerlink" href="#resolve-flats-in-dem" title="Permalink to this headline">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">resolve_flats</span><span class="p">(</span><span class="s1">&#39;dem&#39;</span><span class="p">,</span> <span class="n">out_name</span><span class="o">=</span><span class="s1">&#39;inflated_dem&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="specify-flow-direction-values">
-<h3>Specify flow direction values<a class="headerlink" href="#specify-flow-direction-values" title="Permalink to this headline">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#         N    NE    E    SE    S    SW    W    NW</span>
-<span class="n">dirmap</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span>  <span class="mi">128</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>    <span class="mi">4</span><span class="p">,</span>   <span class="mi">8</span><span class="p">,</span>    <span class="mi">16</span><span class="p">,</span>  <span class="mi">32</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">flowdir</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;inflated_dem&#39;</span><span class="p">,</span> <span class="n">out_name</span><span class="o">=</span><span class="s1">&#39;dir&#39;</span><span class="p">,</span> <span class="n">dirmap</span><span class="o">=</span><span class="n">dirmap</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">extent</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">boundaries</span> <span class="o">=</span> <span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dirmap</span><span class="p">)))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">boundaries</span><span class="o">=</span> <span class="n">boundaries</span><span class="p">,</span>
-             <span class="n">values</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dirmap</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Flow direction grid&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">zorder</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="c1"># plt.savefig(&#39;data/img/flow_direction.png&#39;, bbox_inches=&#39;tight&#39;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># view the values of the raster as an array</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">dir</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check the size of the raster</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">size</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="delineate-a-catchment">
-<h3>Delineate a Catchment<a class="headerlink" href="#delineate-a-catchment" title="Permalink to this headline">#</a></h3>
-<p>Note that once you’ve executed the code in the cells below,
-if you change the Point of Concentration (POC), you’ll
-need to go back to Step 1 and execute the code from there again.</p>
-<p>This needs to be done to re-initialize the extents of the data
-that are loaded into memory.  The intermediary steps trim the extent
-of the DEM and you will get an error message saying:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">Pour</span> <span class="pre">point</span> <span class="pre">(-123.94307,</span> <span class="pre">49.40783)</span> <span class="pre">is</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">bounds</span> <span class="pre">for</span> <span class="pre">dataset</span> <span class="pre">with</span> <span class="pre">bbox</span> <span class="pre">(-123.195000000122,</span> <span class="pre">49.39999999984,</span> <span class="pre">-123.15333333347199,</span> <span class="pre">49.421666666498).</span></code></p>
-</div></blockquote>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the Point of Concentration (POC) / Catchment Outlet (a.k.a. pour point) </span>
-<span class="c1"># This location is a tributary of the Capilano River, just above the reservoir above</span>
-<span class="c1"># Cleveland Dam.</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">123.14657</span><span class="p">,</span> <span class="mf">49.41080</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">123.14350</span><span class="p">,</span> <span class="mf">49.40251</span>
-
-<span class="c1"># And just for good measure, here&#39;s the little tributary in the south-west corner.</span>
-<span class="c1"># Note the instructions above about reloading the original data to re-initialize</span>
-<span class="c1"># the DEM</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">123.15512</span><span class="p">,</span> <span class="mf">49.41293</span>
-
-<span class="c1"># Delineate the catchment</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">clip_to</span><span class="p">(</span><span class="s1">&#39;dem&#39;</span><span class="p">)</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">catchment</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;dir&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">dirmap</span><span class="o">=</span><span class="n">dirmap</span><span class="p">,</span> <span class="n">out_name</span><span class="o">=</span><span class="s1">&#39;catch&#39;</span><span class="p">,</span>
-               <span class="n">recursionlimit</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span> <span class="n">xytype</span><span class="o">=</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="n">nodata_out</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clip the bounding box to the catchment we&#39;ve chosen</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">clip_to</span><span class="p">(</span><span class="s1">&#39;catch&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a view of the catchment</span>
-<span class="n">catch</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="s1">&#39;catch&#39;</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check the shape to see if we&#39;ve estimated close enough to the </span>
-<span class="c1"># actual river to delineate the catchment successfully</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">catch</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="c1"># if we get dimensions of &lt; 10, we&#39;ve missed and instead pointed at some </span>
-<span class="c1"># little hillslope</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">extent</span><span class="p">)</span>
-<span class="n">ext_1</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">extent</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the catchment</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">catch</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">extent</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">boundaries</span><span class="o">=</span><span class="n">boundaries</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dirmap</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Flow Direction&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Delineated Catchment&#39;</span><span class="p">)</span>
-<span class="c1"># plt.savefig(&#39;data/img/catchment.png&#39;, bbox_inches=&#39;tight&#39;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="get-flow-accumulation">
-<h3>Get flow accumulation<a class="headerlink" href="#get-flow-accumulation" title="Permalink to this headline">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">accumulation</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;catch&#39;</span><span class="p">,</span> <span class="n">dirmap</span><span class="o">=</span><span class="n">dirmap</span><span class="p">,</span> <span class="n">out_name</span><span class="o">=</span><span class="s1">&#39;acc&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">acc_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">acc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">acc_img</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">extent</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-               <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;cubehelix&#39;</span><span class="p">,</span>
-               <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">acc</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Upstream Cells&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Flow Accumulation&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
-<span class="c1"># plt.savefig(&#39;data/img/flow_accumulation.png&#39;, bbox_inches=&#39;tight&#39;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="calculate-distances-to-upstream-cells">
-<h3>Calculate distances to upstream cells<a class="headerlink" href="#calculate-distances-to-upstream-cells" title="Permalink to this headline">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span><span class="o">.</span><span class="n">flow_distance</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;catch&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">dirmap</span><span class="o">=</span><span class="n">dirmap</span><span class="p">,</span> <span class="n">out_name</span><span class="o">=</span><span class="s1">&#39;dist&#39;</span><span class="p">,</span>
-                   <span class="n">xytype</span><span class="o">=</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="n">nodata_out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">dist</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">extent</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-               <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Distance to outlet (cells)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Flow Distance&#39;</span><span class="p">)</span>
-<span class="c1"># plt.savefig(&#39;data/img/flow_distance.png&#39;, bbox_inches=&#39;tight&#39;),</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area_threshold</span><span class="o">=</span><span class="mi">20</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">streamnetwork_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">acc_img</span><span class="o">&gt;</span><span class="n">area_threshold</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">acc_img</span><span class="o">*</span><span class="mi">0</span><span class="p">)</span>
-<span class="c1"># print([[&#39;nan&#39; if np.isnan(i) else cmap[i] for i in j] for j in streamnetwork_img])</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;Catchment&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;Outside Catchment&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">:</span> <span class="s1">&#39;Stream Network&#39;</span><span class="p">}</span>
-<span class="n">cmap</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.247</span><span class="p">,</span> <span class="mf">0.552</span><span class="p">,</span> <span class="mf">0.266</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> 
-        <span class="mi">100</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.074</span><span class="p">,</span> <span class="mf">0.231</span><span class="p">,</span> <span class="mf">0.764</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
-       <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.760</span><span class="p">,</span> <span class="mf">0.760</span><span class="p">,</span> <span class="mf">0.760</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]}</span>
-
-<span class="n">arrayShow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">cmap</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">else</span> <span class="n">cmap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">streamnetwork_img</span><span class="p">])</span>    
-<span class="c1">## create patches as legend</span>
-
-<span class="n">patches</span> <span class="o">=</span><span class="p">[</span><span class="n">mp</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cmap</span><span class="p">]</span>
-
-<span class="c1">#streamnetwork_img = np.where(grid.mask, &gt; 100, 10 , 1)</span>
-<span class="c1"># im = ax.imshow(streamnetwork_img, extent=grid.extent, zorder=2,</span>
-<span class="c1">#                 cmap=&#39;cubehelix&#39;)</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arrayShow</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">patches</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
-<span class="c1"># plt.colorbar(im, ax=ax, label=&#39;Upstream Cells&#39;)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Stream network&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
-<span class="c1"># plt.savefig(&#39;data/img/stream_network.png&#39;, bbox_inches=&#39;tight&#39;)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="calculate-weighted-travel-distance">
-<h3>Calculate weighted travel distance<a class="headerlink" href="#calculate-weighted-travel-distance" title="Permalink to this headline">#</a></h3>
-<p>Assign a travel time to each cell based on the assumption that water travels at one speed (slower) until it reaches a stream network, at which point its speed increases dramatically.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">grid</span><span class="o">.</span><span class="n">clip_to</span><span class="p">(</span><span class="s1">&#39;catch&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">acc</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="s1">&#39;acc&#39;</span><span class="p">)</span>
-
-<span class="c1"># calculate weights.</span>
-<span class="c1"># assume the threshold is 100 accumulation cells </span>
-<span class="c1"># (of roughly 500mx500m) results in stream</span>
-<span class="n">weights</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-               <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">acc</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">acc</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-
-<span class="n">weighted_dist</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">flow_distance</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;catch&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span>
-                   <span class="n">xytype</span><span class="o">=</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">weighted_dist</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">grid</span><span class="o">.</span><span class="n">extent</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-               <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;cubehelix_r&#39;</span><span class="p">)</span>
-<span class="c1"># plt.legend(handles=patches, loc=1, borderaxespad=0.)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Upstream Cells&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Stream network&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="develop-rainfall-runoff-model">
-<h2>Develop Rainfall-Runoff Model<a class="headerlink" href="#develop-rainfall-runoff-model" title="Permalink to this headline">#</a></h2>
-<p>Now that we have weighted flow distances for each cell in the delineated catchment, we can apply precipitation to each ‘cell’ in order to reconstruct a flow hydrograph.</p>
-<p>First, we must figure out the cell dimensions.  From the <a class="reference external" href="https://hydrosheds.cr.usgs.gov/datadownload.php">USGS Hydrosheds information</a>, we know the resolution is 15 (degree) seconds.  Because of the odd shape of the earth, and the projection of coordinate systems onto the earth, there is a little bit of work involved in converting the DEM resolution to equivalent distances.  For the purpose of this exercise, we will assume cells are 300x300m.  You can check the approximation <a class="reference external" href="https://opendem.info/arc2meters.html">here</a> for a latitude of 49 degrees.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cells can be grouped by their weighted distance to the outlet to simplify </span>
-<span class="c1"># the process of calculating the contribution of each cell to flow at the outlet</span>
-
-<span class="n">dist_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">dist_df</span><span class="p">[</span><span class="s1">&#39;weighted_dist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weighted_dist</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-<span class="c1"># trim the distance dataframe to include only the cells in the catchment,</span>
-<span class="c1"># and round the travel time to the nearest one (hour)</span>
-<span class="n">dist_df</span> <span class="o">=</span> <span class="n">dist_df</span><span class="p">[</span><span class="n">dist_df</span><span class="p">[</span><span class="s1">&#39;weighted_dist&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_date</span> <span class="o">=</span> <span class="n">sample_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">end_date</span> <span class="o">=</span> <span class="n">sample_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="c1"># create an hourly dataframe based on the sample precipitation event</span>
-<span class="c1"># then resample the values to evenly distribute the total daily </span>
-<span class="c1"># precipitation to hourly precipitation</span>
-<span class="n">resampled_df</span> <span class="o">=</span> <span class="n">sample_df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pad</span><span class="p">()</span> <span class="o">/</span> <span class="mi">24</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Note that our ‘weighted distance’ has just provided a relative difference between the flow accumulation cells and non-flow-accumulation cells.  We still must convert these values to some time-dependent form.</p>
-<p>For this exercise, we will assume the average velocity of water is 1 m/s value for the flow accumulation cells, and 0.1 m/s for the other cells.  Therefore precipitation will take on average 300s (0.0833 h) and 3000s (0.833 h) to travel to the outlet for flow-accumulation and non-flow-accumulation cells, respectively.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the number of cells of each distance</span>
-<span class="n">grouped_dists</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dist_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;weighted_dist&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
-<span class="n">grouped_dists</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;num_cells&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create unit hydrographs for each timestep</span>
-<span class="n">runoff_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">resampled_df</span><span class="p">)))</span>
-<span class="n">runoff_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Total Precip (mm)&#39;</span><span class="p">]</span>
-<span class="n">runoff_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">resampled_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">end_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">runoff_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">max_distance</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">grouped_dists</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-
-<span class="n">extended_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">extended_df</span><span class="p">[</span><span class="s1">&#39;Total Precip (mm)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">max_distance</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-<span class="n">extended_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="n">max_distance</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;1H&#39;</span><span class="p">)</span>
-
-<span class="c1"># append the extra time to the runoff dataframe</span>
-<span class="n">runoff_df</span> <span class="o">=</span> <span class="n">runoff_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">extended_df</span><span class="p">)</span>
-<span class="n">runoff_df</span><span class="p">[</span><span class="s1">&#39;Runoff (cms)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>NOTE</strong>: if you re-run the cell below, you need to run the cell above as well, or the runoff dataframe will not reset and the values will keep increasing.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell_size</span> <span class="o">=</span> <span class="mi">300</span> <span class="c1"># assume each pixel represents 300m x 300m </span>
-<span class="n">runoff_coefficient</span> <span class="o">=</span> <span class="mf">0.3</span>
-
-
-<span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">resampled_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">this_hyd</span> <span class="o">=</span> <span class="n">resampled_df</span><span class="p">[[</span><span class="s1">&#39;Total Precip (mm)&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">weight_dist</span><span class="p">,</span> <span class="n">num_cells</span> <span class="ow">in</span> <span class="n">grouped_dists</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-        <span class="k">try</span><span class="p">:</span> 
-            <span class="n">outlet_time</span> <span class="o">=</span> <span class="n">ind</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="n">weight_dist</span><span class="p">)</span>
-            <span class="n">precip</span> <span class="o">=</span> <span class="n">num_cells</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Total Precip (mm)&#39;</span><span class="p">]</span>
-            <span class="n">runoff_vol</span> <span class="o">=</span> <span class="n">precip</span> <span class="o">*</span> <span class="n">runoff_coefficient</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">cell_size</span><span class="o">**</span><span class="mi">2</span> 
-            <span class="n">runoff_rate</span> <span class="o">=</span> <span class="n">runoff_vol</span>  <span class="o">/</span> <span class="mi">3600</span>  <span class="c1"># convert to m^3/s from m^3/h</span>
-            <span class="n">runoff_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">outlet_time</span><span class="p">,</span> <span class="s1">&#39;Runoff (cms)&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">runoff_rate</span>
-        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">)</span>
-            <span class="k">break</span>
-<span class="c1">#             print(err)</span>
-<span class="c1">#             print(ind, row)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-
-<span class="n">sample_start</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2014-12-01&#39;</span><span class="p">)</span>
-<span class="n">sample_end</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2014-12-15&#39;</span><span class="p">)</span>
-
-<span class="n">sample_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">sample_start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">sample_end</span><span class="p">)][[</span><span class="s1">&#39;Total Precip (mm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Snow (cm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Rain (mm)&#39;</span><span class="p">]]</span>
-
-<span class="c1"># print(sample_df.head())</span>
-<span class="c1"># plot the original daily precip</span>
-<span class="c1"># ax.plot(sample_df.index, sample_df[&#39;Total Precip (mm)&#39;], label=&quot;Total Precip [mm]&quot;)</span>
-<span class="c1"># ax.plot(sample_df.index, sample_df[&#39;Total Snow (cm)&#39;], label=&quot;Total Snow [cm]&quot;)</span>
-<span class="c1"># ax.plot(sample_df.index, sample_df[&#39;Total Rain (mm)&#39;], label=&quot;Total Rain [mm]&quot;)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">runoff_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">runoff_df</span><span class="p">[</span><span class="s1">&#39;Runoff (cms)&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Runoff&quot;</span><span class="p">)</span>
-
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Runoff [cms]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Example Rainfall-Runoff Model&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sample_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">sample_df</span><span class="p">[</span><span class="s1">&#39;Total Rain (mm)&#39;</span><span class="p">],</span> 
-         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span>
-         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Total Rain&quot;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Precipitation [mm]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="determine-the-peak-unit-runoff">
-<h3>Determine the Peak Unit Runoff<a class="headerlink" href="#determine-the-peak-unit-runoff" title="Permalink to this headline">#</a></h3>
-<p>First, estimate the drainage area.  Then, find the peak hourly flow.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DA</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">grouped_dists</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">max_UR</span> <span class="o">=</span> <span class="n">runoff_df</span><span class="p">[</span><span class="s1">&#39;Runoff (cms)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">/</span> <span class="n">DA</span> <span class="o">*</span> <span class="mi">1000</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The drainage area is </span><span class="si">{}</span><span class="s1"> km^2 and the peak Unit Runoff is </span><span class="si">{}</span><span class="s1"> L/s/km^2&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">DA</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_UR</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Discuss the limitations of the approach.  Where do uncertainties exist?</p>
-<ul class="simple">
-<li><p>assumed precipitation is constant across days</p></li>
-<li><p>assumed constant runoff coefficient</p></li>
-<li><p>assumed two weights for travel time, constant across time</p></li>
-</ul>
+<section id="measurement-error-sensitivity">
+<h3>Measurement Error &amp; Sensitivity<a class="headerlink" href="#measurement-error-sensitivity" title="Permalink to this headline">#</a></h3>
+<p>In the introduction, we laid out the extent to which we rely on extrapolation in estimating return period flows.  This question is analogous to the assumption that the error in measurement is a random variable following some distribution.  Considering this random error exists in our measurements, what happens to the LP3 fit if we change any of the peak values by some amount?</p>
 </section>
 </section>
 <section id="question-for-reflection">
 <h2>Question for Reflection<a class="headerlink" href="#question-for-reflection" title="Permalink to this headline">#</a></h2>
-<p>For the first part where we estimated the water level at the parking lot outlet based on an assumption that there was zero infiltration, assuming all else is equal, how could we reduce the maximum water level to 5 cm?</p>
+<p>Recall the discussion in the previous notebooks concerning extrapolation.  Return periods in the range of 100 and 200 years are commonly used for input design parameters in hydraulic structures, and ultimately the design values reflect a tradeoff between risk (environmental, financial, worker safety) and construction costs.</p>
+<p>Provide a brief discussion (500 words maximum) about the uncertainty introduced at various levels in deriving the estimate of the 100 year return period for Stave River.  Consider the difference (in this case) in the estimated 100 year return period flow based on using all the data vs. removing some years from the record, and compare it to the difference between the estimates generated between the GEV and LP3 distributions.  Consider how measurement uncertainty might affect the 100 year return flood estimate.</p>
 </section>
 </section>
 
@@ -1365,7 +1396,7 @@ of the DEM and you will get an error message saying:</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Notebook 4: Characterization of Long-Term Runoff</p>
+            <p class="prev-next-title">Notebook 4: Rational Method and Travel Times</p>
         </div>
     </a>
 </div>

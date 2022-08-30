@@ -6,43 +6,38 @@
 # In[1]:
 
 
+import os
 import math
 import pandas as pd
 import numpy as np
 from scipy import stats as st
 
 import matplotlib.pyplot as plt
-from pandas.plotting import register_matplotlib_converters
-register_matplotlib_converters()
-
-from bokeh.plotting import figure, show, output_file
-from bokeh.models import ColumnDataSource, Band
-from bokeh.io import output_notebook
-from bokeh.layouts import gridplot
-output_notebook()
-
-import warnings
-
-import pandas as pd
-from pandas.core.common import SettingWithCopyWarning
-
-warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
 
 
 # ## Introduction
 # 
-# It isn't typically possible to accurately measure surface runoff directly on a *continuous* basis.  Instead, in practice it is much easier and more reliable to install an instrument in the river to measure pressure, which recall is a linear function of the depth of water.  A hydrometric station is often simply a pressure transducer (below) connected to a device to store measurements in memory (such as a data logger).  We then need a way to map these recorded water depth measurements -- referred to as 'stage' measurements -- to **volumetric flow** ($\frac{m^3}{s}$).
+# ### Pressure Transducer
+# 
+# It isn't practical to accurately measure surface runoff directly on a *continuous* basis.  In practice, it is much easier and more reliable to install an instrument at a fixed location in the river to measure water pressure, which recall is a linear function of the depth of water, to collect these measurements at a frequency of minutes or hours, and then to establish a mathematical relation between water depth and volumetric flow.
 # 
 # ![Pressure Transducer](img/transducer.png)
+
+# ### Hydrometric Station
 # 
+# A hydrometric station is often simply a pressure transducer (shown above) connected to a computer (a datalogger) to store measurements in memory.  We then need a way to map these recorded water level measurements to **volumetric flow** ($\frac{m^3}{s}$).  The pressure transducer is often fastened within a protective pipe (as shown in the image below) to protect it from debris moving during high flows.  
+# 
+# Benchmarks are used to validate both the position of the pressure transducer and the calibration of the sensor.  **Benchmark survey is critical to the validation of your measured flow series!**  
+# 
+# >**Note**: Water level or depth is often referred to as 'stage'.
 # 
 # ![Hydrometric Station](img/station.png)
+
+# In Notebook 1, we processed a single discharge measurement taken using the salt dilution method.  Typically we want to collect discharge measurements to describe as much of the expected range of natural flow conditions as possible, from very low flows in the dry season, to the highest flows we can (safely) measure.
 # 
-# In the last exercise, we processed a single discharge measurement taken using the salt dilution method.  Typically we want to collect discharge measurements to describe as much of the expected range of natural flow conditions as possible, from very low flows in the dry season, to the highest flows we can (safely) measure.
+# Go through this notebook and follow along with the development of the stage-discharge rating curve. At the end, there is an open ended question that requires you to reflect on the content of the notebook. 
 # 
-# **Note**: [A folder of references is provided in the repository](https://github.com/dankovacek/Engineering_Hydrology_Notebooks/tree/main/content/notebooks/Notebook_2/References) containing governing standards for hydrometric data collection, as well as a discussion paper on uncertainty in hydrometric data collection.
-# 
-# Go through this notebook and follow along with the development of the stage-discharge rating curve. At the end, there is an open ended question that requires you to reflect on the content of the notebook. Written responses are to be submitted via Canvas, where a response field will be set up.
+# >**Note**: [A folder of references is provided in the repository](https://github.com/dankovacek/Engineering_Hydrology_Notebooks/tree/main/content/notebooks/Notebook_2/References) containing governing standards for hydrometric data collection, as well as a discussion paper on uncertainty in hydrometric data collection.
 
 # ## Stage-Discharge (Rating Curve) Development
 # 
@@ -50,70 +45,79 @@ warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
 # 
 # ![Stage-Discharge Relationship (source: Hamilton & Moore (2012))](img/rating_curve_ex.png)
 # 
-# Each point in the above plot represents an 'instantaneous' discharge measurement, and the water level (stage) at the time the discharge measurement was taken.
+# Each point in the above plot represents an 'instantaneous' or 'point in time' discharge measurement, and the water level (stage) at the time the discharge measurement was taken.
 # 
-# In this exercise, we will develop a stage-discharge relationship from a collection of discharge measurements and the corresponding stage record. Once a valid stage-discharge relationship has been established, it can be used to translate the time series of **stage measurements** to a time series of **discharge measurements**.
+# In this exercise, we will develop a stage-discharge relationship from a collection of discharge measurements and the corresponding stage record. Once a valid stage-discharge relationship has been established, it can be used to translate the time series of **stage** to a time series of **discharge**.
 
 # ## Import the Data
 
-# In[ ]:
+# In[4]:
+
+
+os.listdir('../../notebook_data/notebook_2_data')
+
+
+# In[5]:
 
 
 # import the stage data
-stage_df = pd.read_csv('../../Project_Data/Hidden_Creek_stage_data.csv', parse_dates=['Date'])
-# stage_df.dropna(inplace=True)
-stage_df.loc[:, 'Value'] = pd.to_numeric(stage_df.loc[:, 'Value'], errors='coerce')
+stage_df = pd.read_csv('../../notebook_data/notebook_2_data/WL_data.csv', parse_dates=['Date'])
 
 
-# In[ ]:
+# In[6]:
 
 
-# take a quick look at what we're dealing with
+# take a quick look at the file contents
 stage_df
 
 
-# In[ ]:
+# In[7]:
 
 
 # looking at the data preview above, the water level (stage) label is quite long
-stage_label = 'Value'
+# lets store it in a more convenient variable
+stage_label = 'Water level (daily av.) (m)'
 
-stage_df = stage_df[['Date', 'Value']].copy()
-
-# let's shorten it by renaming the column
-# We want a name to be descriptive, and it should also contain the units
-# note the Date column is unchanged, but needs to be included in the 
-# order the columns appear from left to right
-stage_df.columns = ['Date', 'WL_m']
+stage_df = stage_df[['Date', stage_label]].copy()
 
 
-# In[ ]:
+# Open the rating curve data file (the set of discrete flow measurements).
+
+# In[28]:
 
 
 # import the table of discrete discharge measurements
-rc_df = pd.read_csv('../../Project_Data/Project_QH_table_2021.csv', parse_dates=['Date'])
+rc_df = pd.read_csv('../../notebook_data/notebook_2_data/RC_Data.csv', parse_dates=['Date'])
 
 
-# In[ ]:
+# In[29]:
 
 
 # take a look at the discharge measurements
 rc_df.head(15)
 
 
+# In[30]:
+
+
+print(f'There are a total of {len(rc_df)} discharge measurements.')
+
+
 # ## Plot the Data
 # 
 # ### Plot Measured Discharge and corresponding stage (water level)
 # 
-# From previous site visits, we have collected a total of 9 discharge measurements as can be seen in the `rc_df` dataframe above.  During each measurement, we manually measure the water level to validate the data being recorded continuously by our pressure transducer and datalogger (hydrometric station).  We validate the pressure transducer reading because instrument calibration is not perfect, and can change over time for a number of reasons.  It is important to measure stage by some independent means before and after a discharge measurement in order to to assess the quality of the stage-discharge relationship and any analysis derived from it.  Validating the hydrometric station stage concurrent to a discharge measurement is typically done manually, such as with a benchmark survey.
+# From previous site visits, we have collected a total of 9 discharge measurements as can be seen in the `rc_df` dataframe above.  During each measurement, we manually measure the water level to validate the data being recorded continuously by our pressure transducer and datalogger (hydrometric station).  We validate the pressure transducer reading because instrument calibration is not perfect, and can change over time for a number of reasons.  
+# 
+# It is important to measure stage by some independent means before and after a discharge measurement in order to to assess the quality of the stage-discharge relationship and any analysis derived from it.  Validating the hydrometric station stage concurrent to a discharge measurement is typically done manually, such as by a benchmark survey.
 # 
 
-# In[ ]:
+# In[31]:
 
 
 # plot the discharge measurements on the x-axis, and the corresponding stage on the y axis
-q_measured = 'Flow (m^3/s)'
-wl_measured = 'water level (m above 0 flow ref)'
+q_measured = 'Flow (m3/s)'
+wl_measured = 'Water level (m)'
 rc_df.plot(q_measured, wl_measured, 
            marker='o', color='g',
            linestyle='',
@@ -124,71 +128,64 @@ rc_df.plot(q_measured, wl_measured,
 # 
 # In Notebook 1, we processed a discharge measurement using salt dilution.  Let's update our rating curve with this latest data point.
 # 
-# ### Find the stage on the measurement date (26 September 2010)
+# ### Find the stage on the measurement date
 # 
 # Instead of manually looking up what the water level was on a particular date, we can use an indexing method to directly return the value at the time of interest./
 
-# In[ ]:
+# In[32]:
 
 
-# measurement_date
-msmt_date = '2010-09-20'
+# get the measurement_date from the salt dilution data files
+msmt_date = '2010-09-26'
+# conver the date from a string to a "datetime" type
+msmt_date = pd.to_datetime(msmt_date)
  
 # here, we are indexing the stage dataframe to return 
 # just the row corresponding to the date we're interested in
-msmt_date_data = stage_df[stage_df['Date'] == pd.to_datetime(msmt_date)].copy()
+msmt_date_data = stage_df[stage_df['Date'] == msmt_date]
 
 # now just extract the stage
 # and round to 3 decimals
-msmt_date_data.loc[:, 'WL_m'] = pd.to_numeric(msmt_date_data.loc[:, 'WL_m'])
-msmt_stage = msmt_date_data['WL_m'].round(3)
+msmt_stage = msmt_date_data[stage_label].round(3)
 
-# Note that when we index this way,  
-# a dataframe is still returned
+# Note that the msmt_stage variable is still a dataframe
 print(msmt_stage)
 print('------')
 print('')
 
-# To get just the value
+# To get just the value, use the `.values` attribute 
+# which returns an array
 msmt_stage = msmt_stage.values[0]
-print('The stage on {} was {} m.'.format(msmt_date, msmt_stage))
+print(f'The stage on {msmt_date} was {msmt_stage} m.')
 
 
-# In[ ]:
-
-
-test = stage_df.set_index('Date')
-test[test.index == '2010-09-10']
-
-
-# ### Add Latest Data
+# ### Add the latest data to the discharge table.
 # 
-# In Notebook 1, we calculated discharge using the salt dilution method.  Include this new measurement and see how it compares to the rest of the measurements.
+# In Notebook 1, we calculated discharge using the salt dilution method.  Add this measurement to `rc_df` and see how it compares to the rest of the measurements.
+# 
+# >**Note**: If you make a mistake in adding new discharge measurements, you should re-run the notebook from the cell where `rc_df` is first declared.  Otherwise the erroneous measurement will stay in your table!  Copy the line `rc_df.loc[len(rc_df)] = [pd.to_datetime(msmt_date), Q_calculated, msmt_stage]` and replace the `Q_calculated` and `msmt_stage` variables with random numbers a few times to convince yourself of the outcome.  
 
-# In[ ]:
+# In[33]:
 
 
-# add a new point - get the discharge value 
-# you calculated in the previous tutorial
-# Here we can enter the additional point for the rating curve 
-# from the salt dilution measurement calculation exercise
-# set variables corresponding to the discharge and stage from that measurement
+rc_df
 
-Q_calculated = 12 # enter the value you calculated from Tutorial 1
+
+# In[34]:
+
+
+Q_calculated = 12 # enter the value you calculated from Notebook 1
 concurrent_stage = msmt_stage # we determined msmst_stage in the previous cell
 
 # Add the newly measured point to the rating curve (discharge data) dataframe
-# len(stage_df) + 1 makes it add a row at the bottom
-rc_df.loc[len(rc_df)] = [pd.to_datetime(msmt_date), Q_calculated, msmt_stage]
-rc_df.loc[len(rc_df)] = [pd.to_datetime(msmt_date), 5, 0.36]
+next_idx = len(rc_df)
+# the .loc[] function is a way to index row(s) & column(s) of a table.
+# here we want to add a new complete row, so we use `:` to say "all columns"
+rc_df.loc[len(rc_df), :] = [msmt_date, Q_calculated, msmt_stage]
 
 # print out the updated dataframe and see the new point added
 rc_df
 
-
-# ### Plot the stage-discharge measurement points and the rating curve
-# 
-# The plot below is where you will be able to validate if your answer for question 4 is correct.
 
 # ### Plot a Curve Representing the Standard Stage-Discharge Relationship
 # 
@@ -208,7 +205,7 @@ rc_df
 # | Triangular | 2.5 to 3 |
 # 
 
-# In[ ]:
+# In[35]:
 
 
 # definition of rating curve: calculate Q from h, given the parameters.
@@ -224,11 +221,11 @@ def calc_q(C, h, h0, b):
     return C*(h-h0)**b
 
 
-# Below are rating curve parameters (`h0`, `b`, `C`) that are purposely not a great fit to the discharge data.  
+# Below are rating curve parameters (`h0`, `b`, `C`) that are **a simple visual fit** to the discharge data.  
 # 
-# Try changing the values to see the effect on how the curve fits the measured discharge data.
+# Try changing the values of `h0`, `b`, and `C` to see the effect on how the curve fits the measured discharge data.
 
-# In[ ]:
+# In[36]:
 
 
 h0 = -0.1   # offset parameter
@@ -244,7 +241,7 @@ stage_range = np.linspace(0.001, 1.5, 100)
 manual_fit_q = [calc_q(C, h, h0, b) for h in stage_range]
 
 
-# In[ ]:
+# In[37]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(10,6))
@@ -280,21 +277,15 @@ plt.show()
 # 
 # Note that $h_0$ cannot be fitted this way, and has to be set manually. In this case we start by assuming $h_0=0$.
 
-# In[ ]:
-
-
-print(rc_df)
-
-
-# In[ ]:
+# In[38]:
 
 
 # Find the best-fit line in log-log space
 # set our stage offset to zero
 h0 = 0
 # take the logarithm of the measured streamflows and the stage
-q_log = np.log(rc_df['Flow (m^3/s)'] - h0)
-stage_log = np.log(rc_df['water level (m above 0 flow ref)'])
+q_log = np.log(rc_df['Flow (m3/s)'] - h0)
+stage_log = np.log(rc_df['Water level (m)'])
 
 # find the slope and intercept parameters describing the linear best fit using ordinary least squares (OLS)
 log_slope, log_intercept, log_rval, log_pval, log_stderr = st.linregress(q_log, stage_log)
@@ -308,7 +299,7 @@ log_slope, log_intercept, log_rval, log_pval, log_stderr = st.linregress(q_log, 
 # 
 # The last step is to rearrange the log form of the equation we derived previously ($log(h-h_0) = slope \cdot log(Q) + intercept$) in order to solve for flow (`Q`).  
 
-# In[ ]:
+# In[39]:
 
 
 # calculate the discharge based on the best fit
@@ -330,7 +321,7 @@ def ols_rc_q(slope, intercept, h, h0):
         return None
 
 
-# In[ ]:
+# In[40]:
 
 
 # put best fit results into a dataframe for plotting
@@ -350,15 +341,15 @@ bf_df['manual_fit_q'] = manual_fit_q
 # ### Plot the best fit curve
 # 
 
-# In[ ]:
+# In[65]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(10,6))
 ax.plot(manual_fit_q, stage_range, color='dodgerblue', label='Manual Fit RC')
-ax.plot(bf_df['best_fit_q'].to_numpy(), bf_df['stage'].to_numpy(),
+ax.plot(bf_df['best_fit_q'], bf_df['stage'],
         color='green', label="OLS Best Fit")
 
-ax.plot(rc_df[q_measured].to_numpy(), rc_df[wl_measured].to_numpy(), 
+ax.plot(rc_df[q_measured], rc_df[wl_measured], 
            marker='o', color='r',
            linestyle='',
            label='Discharge measurements')
@@ -370,7 +361,7 @@ ax.legend()
 plt.show()
 
 
-# In[ ]:
+# In[66]:
 
 
 # if you want to export this data to continue working in excel (or another program)
@@ -386,25 +377,19 @@ plt.show()
 # 
 # Apply the rating curve equation we developed above to the long-term water level (stage) time series from our hydrometric station.  Add the result as a new column in the `stage_df` dataframe.  Note the distinction between the stage measured during the discrete measurements, and the "continuous" stage (water level) recorded by our pressure transducer.  It is the pressure-transducer series we want to apply the rating curve equation to, not the water level from the discharge measurements!
 
-# In[ ]:
+# In[67]:
 
 
 # calculate a dicharge based on the best fit or manually fit rating curve
 # for each water level recorded in the measured stage record (stage_df)
 
-stage_df.loc[:, 'RC Q (cms)'] = stage_df['WL_m'].apply(lambda h: ols_rc_q(log_slope, log_intercept, h, 0))
+stage_df.loc[:, 'RC Q (cms)'] = stage_df[stage_label].apply(lambda h: ols_rc_q(log_slope, log_intercept, h, 0))
 
 # add in the parameters we set manually
-stage_df.loc[:, 'Manual Q (cms)'] = stage_df['WL_m'].apply(lambda h: calc_q(C, h, h0, b))
+stage_df.loc[:, 'Manual Q (cms)'] = stage_df[stage_label].apply(lambda h: calc_q(C, h, h0, b))
 
 
-# In[ ]:
-
-
-stage_df
-
-
-# In[ ]:
+# In[69]:
 
 
 # again, if you want to export this dataframe to csv for use in Excel
@@ -413,57 +398,116 @@ stage_df
 
 
 # ### Plot the Resulting Flow series and the rating curve
+
+# In[70]:
+
+
+# here we specify 1, 2 for subplots meaning 1 row and 2 columns
+fig, ax = plt.subplots(1, 2, figsize=(16,6))
+
+# left side plot - rating curve
+ax[0].plot(manual_fit_q, stage_range, color='dodgerblue', label='Manual Fit RC')
+ax[0].plot(bf_df['best_fit_q'], bf_df['stage'],
+        color='green', label="OLS Best Fit")
+
+ax[0].plot(rc_df[q_measured], rc_df[wl_measured], 
+           marker='o', color='r',
+           linestyle='',
+           label='Discharge measurements')
+
+# right side plot -- hydrograph
+ax[1].plot(stage_df['Date'], stage_df['Manual Q (cms)'], color='green', label='Manual Fit RC')
+ax[1].plot(stage_df['Date'], stage_df['RC Q (cms)'],
+        color='dodgerblue', label="OLS Best Fit")
+
+ax[1].plot(rc_df['Date'], rc_df[q_measured], 
+           marker='o', color='r',
+           linestyle='',
+           label='Discharge measurements')
+
+ax[0].set_title('Stage - Discharge Rating Curve')
+ax[0].set_xlabel('Discharge [m^3/s]')
+ax[0].set_ylabel('Stage [m]')
+ax[0].legend()
+# right side plot labels
+ax[1].set_title('Measured Discharge Hydrograph')
+ax[1].set_xlabel('Date')
+ax[1].set_ylabel('Discharge [m^3/s]')
+ax[1].legend()
+plt.show()
+
+
+# ## Summary and Reflection
+# 
+# In this notebook we have used discrete measurements to develop a relationship between water level and volumetric flow.  We've used this relationship to develop what is commonly called a 'measured flow series' (the plot above at right), but it's really just an estimate of a relationship that changes in time due to natural (geomorphological) processes.  As we saw in Notebook 1, there is uncertainty in the flow measurements themselves, as well as the water level.  In this notebook we see how these uncertainties translate to the stage-discharge relationship.
+# 
+# It is typical that the hydrometric station will record a greater range of water level than what is captured during site visits when discrete discharge measurements are taken.  This is because the hydrometric station is installed and left running to measure water level 'continuously' (at some frequency, 15 minutes is fairly common) for years at a time.  In many cases it isn't practical or cost effective to make more than three or four visits per year to the station to collect measurements, download stage data, check datalogger batteries, etc.  As a result, it is typical to have discrete discharge measurements over a narrower range of flow conditions than is measured by the hydrometric station, so our 'measured flow series' must then *extrapolate* from the range of conditions we have actually taken discrete measurements for.  
+# 
+# The 'measured flow series' is used in many applications in resource engineering.  Low flows are used to determine natural or baseline conditions for fish habitat impact assessments, high flows are used to size hydraulic structures, such as dam spillways.  Hydrometric stations are often installed in new locations to support projects that have multi-decade planning horizons.  
+# 
+# ### Questions for Reflection
+# 
+# Ultimately, the rating curve translates measured water level into a discharge series to characterize a water resource and support decisions in policy and design.  In characterizing a water resource, not only is it common to extrapolate beyond the range of measured conditions, it is necessary to extrapolate into the future, introducing new and unique sources of uncertainty.
+# 
+# Briefly describe how your confidence in the flow predicted by the rating curve (the model) changes as a function of water level (low flow, median flow, high flow)?  Then describe your level of confidence in the rating curve accurately representing flow tomorrow, versus one year from now, versus ten years from now.  How might these concerns be addressed?  
+
+# 
 # 
 # The two plots below are linked.  Check the selection tools, and select points on one plot.  When validating data, it is helpful to be able to link the measurements on the rating curve plot and the daily flow series plot.  Consider how you would you check if the low flows were subject to a shift in the hydraulic control over time?    
 
-# In[ ]:
+# ## Additional Information
+# 
+# So far, we've created plots with the `matplotlib` plotting library.  There are many other plotting libraries to explore, such as [Seaborn](https://seaborn.pydata.org/), [Plotly](https://plotly.com/), [Bokeh](https://docs.bokeh.org/en/latest/) and related [Holoviews](https://holoviews.org/) and [Geoviews](https://geoviews.org/) for spatial data. 
+# 
+# Below we recreate the previous plot above and make it interactive.  Sometimes it is very powerful to zoom in on detailed data and have linked behaviour between plots.
+
+# In[71]:
 
 
-print(stage_df.columns)
-print(rc_df.columns)
+from bokeh.plotting import figure, show, output_file
+from bokeh.models import ColumnDataSource, Band
+from bokeh.io import output_notebook
+from bokeh.layouts import gridplot
+
+output_notebook()
 
 
-# In[ ]:
+# In[72]:
 
 
-# output to static HTML file
-#output_file("filename.html")
-
-# customize the tools for interacting with the bokeh plot
+# customize the tools for interacting with the plot
 TOOLS="pan,wheel_zoom,reset,hover,poly_select,box_select"
 
-# Bokeh uses a ColumnDataSource data structure to 
-# link plots and make them more interactive
-
 stage_df = stage_df.reset_index(drop=True)
-
+# the Bokeh plotting library uses a "ColumnDataSource" data structure to 
+# link plots and make them more interactive
 # set data sources for plot linking
-rc_source = ColumnDataSource(data=dict())
-rc_source.data = rc_source.from_df(rc_df)
+rc_source = ColumnDataSource(rc_df)
+ts_source = ColumnDataSource(stage_df)
 
-ts_source = ColumnDataSource(data=dict())
-ts_source.data = ts_source.from_df(stage_df)
-
-#### RATING CURVE PLOT (LET)
+#### RATING CURVE PLOT (left side)
 rc_plot = figure(plot_width=550, plot_height=400,
                 title='Rating Curve Plot',
                 tools=TOOLS)
 
-# plot the measured discharge points
-rc_plot.circle('Flow (m^3/s)', 'water level (m above 0 flow ref)', size=5, color="red", alpha=0.5,
+# plot the measured discharge points as circle glyphs
+rc_plot.circle('Flow (m3/s)', 'Water level (m)', size=5, color="red", alpha=0.5,
               legend_label='Measured Q', source=rc_source)
 
-# plot the rating curve based on the manual rating curve fit
+# plot the rating curve line based on the manual rating curve fit
 rc_plot.line(manual_fit_q, stage_range, line_color='dodgerblue',
              legend_label='Manual Fit')
 
-# plot the rating curve based on the OLS best fit
+# plot the rating curve line based on the OLS best fit
 rc_plot.line(bf_df['best_fit_q'], bf_df['stage'],
              line_color='green', legend_label='OLS Fit')
 
-#### DAILY FLOW SERIES PLOT (RIGHT)
+#### DAILY FLOW SERIES PLOT (right side)
+# we can use the y_range attribute to link the plot scales
 daily_flow_plot = figure(plot_width=550, plot_height=400, 
-                        x_axis_type='datetime', title='Daily Flow Hydrograph')
+                        x_axis_type='datetime', 
+                        title='Daily Flow Hydrograph',
+                        y_range=rc_plot.x_range)
 
 # # plot the flow series based on the OLS best fit
 daily_flow_plot.line('Date', 'RC Q (cms)', 
@@ -476,7 +520,7 @@ daily_flow_plot.line('Date', 'Manual Q (cms)',
                     source=ts_source)
 
 # plot the daily flow series generated from the manual rating curve
-daily_flow_plot.circle('Date', 'Flow (m^3/s)', size=5, color="red", alpha=0.8,
+daily_flow_plot.circle('Date', 'Flow (m3/s)', size=5, color="red", alpha=0.8,
               source=rc_source, legend_label='Measured Q')
 
 # daily_flow_plot.line('Date', 'RC Q (cms)')
@@ -492,26 +536,6 @@ layout = gridplot([[rc_plot, daily_flow_plot]])
 
 # show the results
 show(layout)
-
-
-# ## Summary and Reflection
-# 
-# In this notebook we have used discrete measurements to develop a relationship between water level and volumetric flow.  We've used this relationship to develop what is commonly called a 'measured flow series' (the plot above at right), but it's really just an estimate of a relationship that changes in time due to natural morphological processes.  As we saw in Notebook 1 there is uncertainty in the measurements themselves, and in this notebook we see there is uncertainty in the stage-discharge relationship.
-# 
-# It is typical that the hydrometric station will record a greater range of water level than what is captured during site visits when discrete discharge measurements are taken.  This is because the hydrometric station is installed and left running to measure water level 'continuously' (at some frequency, such as 2 minutes or 15 minutes) for years at a time.  In many cases it isn't practical or cost effective to make more than three or four visits per year to the station to collect measurements, download stage data, check datalogger batteries, etc.  As a result, it is typical to have discrete discharge measurements over a narrower range of flow conditions than is measured by the hydrometric station, so our 'measured flow series' then must *extrapolate* from the range of conditions we have actually taken discrete measurements for.  
-# 
-# The 'measured flow series' is used in many applications in resource engineering.  Low flows are used to determine natural or baseline conditions for fish habitat impact assessments, high flows are used to size hydraulic structures, such as dam spillways.  Hydrometric stations are often installed in new locations to support projects that have multi-decade planning horizons.  
-# 
-# ## Questions for Reflection
-# 
-# Ultimately, the rating curve and measured discharge series are used to characterize a water resource to support decisions in policy and design.  In characterizing a water resource, not only is it common to extrapolate beyond the range of measured conditions, it is necessary to extrapolate into the future.  
-# 
-# Provide a brief discussion (1-2 paragraphs) describing how your confidence in the flow predicted by the rating curve changes as a function of water level?  Compare your level of confidence in the rating curve accurately predicting flow tomorrow, versus one year from now, versus ten years from now.  How might these concerns be addressed?  
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:

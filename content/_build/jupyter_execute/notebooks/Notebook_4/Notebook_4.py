@@ -1,534 +1,708 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Notebook 4: Characterization of Long-Term Runoff
+# # Notebook 4: Rational Method and Travel Times
+# 
+# ## Introduction
+# 
+# In this notebook, we look at two ways of estimating a runoff hydrograph from precipitation data.
+# 
+# First, we'll use the rational method to approximate peak flow and the maximum water level at the basin outlet, and then we'll use an open-source library to make a higher resolution estimate of flow accumulation paths and stream networks using a digital elevation model.
 
 # In[1]:
 
 
-import math
+# import required packages
 import pandas as pd
 import numpy as np
-from scipy import stats as st
+import math
+
+# advanced statistics library
+from scipy import stats
 
 import matplotlib.pyplot as plt
-from pandas.plotting import register_matplotlib_converters
-register_matplotlib_converters()
+import matplotlib.patches as mp
+import matplotlib.colors as colors
 
-from bokeh.plotting import figure, show, output_file
-from bokeh.models import ColumnDataSource, Band
+# SEE COMMENTS ABOUT PYSHEDS LIBRARY IN NEXT CELL
+from pysheds.grid import Grid
+import warnings
+warnings.filterwarnings('ignore')
+
+from bokeh.plotting import figure, show
 from bokeh.io import output_notebook
-from bokeh.layouts import gridplot
+from bokeh.models import LinearColorMapper, LogTicker, ColorBar, BasicTickFormatter
+from bokeh.io import output_notebook
 output_notebook()
 
+get_ipython().run_line_magic('matplotlib', 'inline')
 
-# ## Introduction
-# 
-# In Notebook 2, we developed a rating curve for our location of interest based on discrete discharge measurements made during a series of visits, and we applied this stage-discharge relationship (rating curve) to the continous stage recorded at our hydrometric station (the datalogger recording from a pressure transducer).  
-# 
-# Recall that our hydrometric station has only been running for a couple of years -- this isn't nearly enough data to estimate the **long term** flow characteristics (daily, seasonal, floods, droughts, etc.).  In this notebook, we look in the vicinity of our project location for other stations where records have been kept for much longer, i.e. several decades longer.  We can use concurrent data from nearby stations to develop a model to estimate flow for periods we didn't actually measure at our project location.
-# 
-# First, we'll set up our rating curve as we did in Notebook 2 and rebuild the daily average flow series.
 
-# ## Import the Data
+# ## Import Precipitation Data
+# 
+# For this exercise, we will use historical climate data from the Meteorological Service of Canada (MSC) station at Whistler, BC.
 
 # In[ ]:
 
 
-# import the stage data
-stage_df = pd.read_csv('../../Project_Data/Hidden_Creek_stage_data.csv', parse_dates=['Date'])
-stage_df.set_index('Date', inplace=True)
+# calibration data
+df = pd.read_csv('../../data/Whistler_348_climate.csv', 
+                 index_col='Date/Time', parse_dates=True)
+# note that the 'head' command shows the first five rows of data, 
+# but in this case the columns are abbreviated. 
+# print(df.head())
 
-stage_df.sort_index(inplace=True)
-stage_df['Value'] = stage_df['Value'].astype(float)
+# list all the columns
+# print('')
+# print('__________')
+for c in df.columns:
+    print(c)
 
+stn_name = df['Station Name'].values[0]
+
+
+# ## Plot the Data
+# 
+# It's always a good idea to begin by visualizing the data we're working with.
 
 # In[ ]:
 
 
-# take a quick look at what we're dealing with
-stage_df.head()
+# plot flow at Stave vs. precip at the closest climate stations
+p = figure(width=900, height=400, x_axis_type='datetime')
+p.line(df.index, df['Total Precip (mm)'], alpha=0.8,
+         legend_label="Total Precip [mm]", color='dodgerblue')
 
+p.line(df.index, df['Total Snow (cm)'], alpha=0.8,
+         legend_label="Total Snow [cm]", color="firebrick")
+
+p.line(df.index, df['Total Rain (mm)'], alpha=0.8,
+         legend_label="Total Rain [mm]", color='green')
+
+p.legend.location = 'top_left'
+p.legend.click_policy = 'hide'
+p.xaxis.axis_label = 'Date'#
+p.yaxis.axis_label = 'Daily Rain [mm] / Snow[cm] Volume'
+
+show(p)
+
+
+# ## Simplified Version of Rainfall-Runoff
+# 
+# First, isolate a single precipitation event to use for estimating a runoff hydrograph.  Let's find a nice week for skiing:  
 
 # In[ ]:
 
 
-plt.plot(stage_df.index, stage_df['Value'])
-plt.show()
+fig, ax = plt.subplots(1, 1, figsize=(16,4))
 
+sample_start = pd.to_datetime('2014-12-01')
+sample_end = pd.to_datetime('2014-12-15')
 
-# In[ ]:
+sample_df = df[(df.index > sample_start) & (df.index < sample_end)][['Total Precip (mm)', 'Total Snow (cm)', 'Total Rain (mm)']]
 
+# print(sample_df.head())
 
-# the water level (stage) label is long, 
-# let's create a shortcut reference label
-stage_label = 'water level (m above 0 flow ref)'
-flow_label = 'Flow (m^3/s)'
+ax.plot(sample_df.index, sample_df['Total Precip (mm)'], label="Total Precip [mm]")
+ax.plot(sample_df.index, sample_df['Total Snow (cm)'], label="Total Snow [cm]")
+ax.plot(sample_df.index, sample_df['Total Rain (mm)'], label="Total Rain [mm]")
 
-
-# In[ ]:
-
-
-# import the discharge measurements
-rc_df = pd.read_csv('../../Project_Data/Project_QH_table_2021.csv', parse_dates=['Date'])
-
-
-# In[ ]:
-
-
-# take a look at the discharge measurements
-rc_df
-
-
-# ## Plot the Stage-Discharge Rating Curve and the Best Fit Curve
-# 
-# Recall from Notebook 2: $Q = C(H-h_0)^b$.  If we transform the data to log space, we get a linear relationship:
-# 
-# $$log(Q) = log(C) + b\cdot log(h-h_0)$$
-# 
-# If we rearrange to the form $y = intercept + slope \cdot x$, we can use the scipy function for linear regression (`
-# ()` from the previous tutorial).
-# 
-# Recall the x and y axis parameters are Q and h, respectively, so the linear form of the equation is then: 
-# 
-# $$log(h-h_0) = slope \cdot log(Q) + intercept$$
-# 
-# The above relationship is linear, so we can use ordinary least squares to find the best fit line (in log-log space), and then transform back to linear space.
-# Note that $h_0$ cannot be fitted this way, and has to be set manually. In this case we can assume $h_0=0$.
-
-# In[ ]:
-
-
-# calculate the discharge based on the best fit
-# parameters found by ordinary least squares above
-def ols_rc_q(slope, intercept, h, h0):
-    """
-    Calculate flow (Q) from the linear best fit parameters.
-        -slope: the `log_slope` calculated above (constant)
-        -intercept: `log_intercept` calculated above (constant)
-        -h0 is the same PZF offset used above (constant)
-        -h is the independent variable
-    Returns Q, the discharge in m^3/s.
-    """
-    if slope == 0:
-        return 0
-    try:
-        return np.exp((np.log(h - h0) - intercept) / slope)
-    except ValueError: 
-        return None
-
-
-# In[ ]:
-
-
-# Find the best-fit line in log-log space
-# take the logarithm of the measured streamflows and stage
-h0=0
-q_log = np.log(rc_df[flow_label] - h0)
-stage_log = np.log(rc_df[stage_label])
-
-# find the parameters describing the linear best fit using ordinary least squares (OLS)
-log_slope, log_intercept, log_rval, log_pval, log_stderr = st.linregress(q_log, stage_log)
-
-
-# In[ ]:
-
-
-stage_range = np.linspace(0.001, 1.5, 100)
-# put best fit results into a dataframe for plotting
-# use 0 as the PZF (point of zero flow) (the h0 parameter)
-bf_df = pd.DataFrame()
-bf_df['stage'] = stage_range
-
-# now as before, apply the `ols_rc_q` function to create the stage-discharge
-# curve based on the best-fit equation
-bf_df['best_fit_q'] = [ols_rc_q(log_slope, log_intercept, h, 0.0) for h in stage_range]
-bf_df.sort_values(by='stage', inplace=True)
-
-
-# ## Calculate Daily Average Discharge
-# 
-# From the equation describing the ordinary least squares (OLS) best fit of the measured discharge,
-# calculate daily average flow from daily average water level.
-
-# In[ ]:
-
-
-stage_df['RC Q (cms)'] = stage_df['Value'].apply(lambda h: ols_rc_q(log_slope, log_intercept, h, 0))
-stage_df['Date'] = stage_df.apply(lambda row: pd.to_datetime('{}-{}-{}'.format(row['year'], 
-                                                                               row['month'],
-                                                                              row['day'])), axis=1)
-
-
-# In[ ]:
-
-
-stage_df
-
-
-# ### Plot the Rating Curve and Resultant Flow Series
-
-# The two plots below are linked.  Check the selection tools, and select points on one plot.  When validating data, it is helpful to be able to link the measurements on the rating curve plot and the daily flow series plot.  Consider how you would you check if the low flows were subject to a shift in the hydraulic control over time?    
-
-# In[ ]:
-
-
-# output to static HTML file
-#output_file("filename.html")
-
-# customize the tools for interacting with the bokeh plot
-TOOLS="pan,wheel_zoom,reset,hover,poly_select,box_select"
-
-# Bokeh uses a ColumnDataSource data structure to 
-# link plots and make them more interactive
-# set data sources for plot linking
-stage_df.reset_index(inplace=True, drop=True)
-rc_source = ColumnDataSource(data=dict())
-rc_source.data = rc_source.from_df(rc_df)
-
-ts_source = ColumnDataSource(data=dict())
-ts_source.data = ts_source.from_df(stage_df)
-
-#### RATING CURVE PLOT (LET)
-rc_plot = figure(plot_width=550, plot_height=400,
-                title='Rating Curve Plot',
-                tools=TOOLS)
-
-# plot the measured discharge points
-rc_plot.circle(flow_label, stage_label, size=5, color="red", alpha=0.5,
-              legend_label='Measured Q', source=rc_source)
-
-# plot the rating curve based on the OLS best fit
-rc_plot.line(bf_df['best_fit_q'], bf_df['stage'],
-             line_color='green', legend_label='OLS Fit')
-
-#### DAILY FLOW SERIES PLOT (RIGHT)
-daily_flow_plot = figure(plot_width=550, plot_height=400, 
-                        x_axis_type='datetime', title='Daily Flow Hydrograph')
-
-# # plot the flow series based on the OLS best fit
-daily_flow_plot.line('Date', 'RC Q (cms)', 
-                    legend_label='OLS-based RC Flow', color='dodgerblue',
-                    source=ts_source)
-
-# plot the daily flow series generated from the manual rating curve
-daily_flow_plot.circle('Date', flow_label, size=5, color="red", alpha=0.8,
-              source=rc_source, legend_label='Measured Q')
-
-# daily_flow_plot.line('Date', 'RC Q (cms)')
-# label the axes
-daily_flow_plot.xaxis.axis_label = 'Date'
-daily_flow_plot.yaxis.axis_label = 'Flow (m³/s)'
-daily_flow_plot.legend.location = "top_left"
-rc_plot.xaxis.axis_label = 'Flow (m³/s)'
-rc_plot.yaxis.axis_label = 'Stage (m)'
-rc_plot.legend.location = "bottom_right"
-
-layout = gridplot([[rc_plot, daily_flow_plot]])
-
-
-# In[ ]:
-
-
-# show the results
-show(layout)
-
-
-# ## Characterizing Water Resources using Regional Information
-# 
-# Below are a few points to consider regarding the characterization of the water resource over the **long term**.
-# 
-# 1.  How long has the hydrometric station been operating?  
-# 2.  If we're collecting data to support civil engineering design, to assess financial viability of a project, to inform operations, and to quantify the impact of our use of water resources or our modification of natural flow regimes, have we collected enough data?
-# 3.  How much data is enough?
-# 4.  If we don't have enough, what can we do to better evaluate the water resource?
-# 
-# 
-
-# ## Linear Regression of Daily Streamflow
-# 
-# ![Active WSC Stations in Western Canada](img/wsc_map_view1.png)
-# 
-# Water Survey of Canada (WSC) has operated and maintained hydrometric stations across Canada for over 100 years.  If we can find a regional proxy WSC station in **close proximity to our location of interest, with similar basin characteristics** to those of our project, we can correlate daily streamflow between the two locations, ultimately to generate an estimated (or synthetic) long-term flow series for our project location.
-# 
-# Typically regressions are done by chronological pairing, which effectively says "if the flow at the regional (proxy) station was $Q_p$ at time $t$, the flow at our project location at time $t$ will be approximately $C\cdot Q_p + D$ where $C$ and $D$ are constants.  
-
-# ### Chronological Pairing (CP)
-# 
-# A lot of work goes into finding an appropriate long-term record comparable to our location of interest, but we will assume we have been given a long-term daily flow series to use.
-# 
-# 1.  Find just the concurrent days of record (days where we have flow recorded for both creeks/rivers).
-# 2.  Create a scatter plot where the coordinates of each data point are (flow1, flow2).  It is customary to put the long-term regional station on the x-axis.
-# 3.  Determine the equation describing the line of best fit through the data.
-# 4.  Apply the best fit line equation to the long-term surrogate record to yield an estimated long-term series for the project location.
-# 
-# To further refine this estimate, we can recognize that the mechanisms driving flow across seasons and months can change quite dramatically, and the relationship between the two catchments can also change month-by-month, and/or season by season.  If there is enough data to create seasonal or monthly regressions, we can develop a best-fit equation for each month or season.  The process of steps 2 through 4 then are the same, except we treat each season or month independently.  
-# 
-# The above method is referred to as **chronological pairing (CP)**, as it pairs flow that occurs on the same day.  But what if there are timing differences between stations, or what if the spatial variability of precipitation results in flow events that don't coincide in the short term?  
-
-# ### Empirical Frequency Pairing
-# 
-# To eliminate the temporal constraint on timing of events at the daily level, instead of comparing concurrent days, we can compare magnitudes of flows. This method is referred to as Empirical Frequency Pairing (EFP) and is commonly used in British Columbia.  Empirical frequency pairing still uses concurrent records, however it is the ranked flows in each series that are compared, i.e. the data points on an EFP plot are:  
-# 
-# $$[(R1_{siteA}, R1_{site_B}), (R2_{siteA}, R2_{siteB}), ..., (Rn_{siteA}, Rn_{siteB})]$$  
-# 
-# The steps to derive an estimated long-term flow series for our location of interest are the same (i.e. steps 2-4 above).
-
-# ### Setting up a Regression
-# 
-# The first step is to import the regional data series and find all of the dates with values for both locations.
-# 
-# Previewing the data shows line 1 has information about two distinct parameters.  Where the `PARAM` column value is 1, the `Value` column corresponds to daily discharge ($\frac{m^3}{s}$ and where the `PARAM` column value is 2, the `Value` column corresonds to daily water level ($m$).  We need to correctly set the header line to index 1 (the second row), so that the headings are read correctly.
-
-# In[ ]:
-
-
-flow_de = pd.read_csv('Stave Daily Avg Flow.csv', header=1, parse_dates=True, index_col='Dates')
-flow_de['year'] = flow_de.index.year
-
-print(flow_de.head(10))
-
-flow_de = flow_de.dropna()
-
-max_de = flow_de.loc[flow_de.groupby('year')['flow'].idxmax()].copy()
-max_de.head(10)
-max_de.to_csv('max_de.csv')
-
-
-# In[ ]:
-
-
-# set the header row to index 1, tell the function to set the `Date` column as the index.
-# If you look at the raw csv file, you'll see that there's an information line at the very top,
-# and the second line (index 1 in programming) is where the column headers are
-regional_df = pd.read_csv('../../data/Stave Daily Avg Flow.csv', header=0, parse_dates=True, index_col='Date')
-
-# select only the discharge data (PARAM == 1)
-regional_df = regional_df[regional_df['PARAM'] == 1]
-# 
-# regional_df.columns = ['ID', 'PARAM', 'year', 'month', 'day' 'Regional Flow (m^3/s)', 'SYM']
-# 
-# preview the data
-regional_df.head()
-
-
-# In[ ]:
-
-
-# check the date range covered by the regional data
-print('REGIONAL DATA: Start date = {}, End date = {}'.format(regional_df.index[0], regional_df.index[-1]))
-
-# check the date range covered by our data measured at site
-print('SITE DATA: Start date = {}, End date = {}'.format(stage_df.index[0], stage_df.index[-1]))
-
-
-# ### Obtain Concurrent Data
-# 
-# In the previous step, we can see that the regional dataset encompasses the date range of our site data.  To perform a regression, we want to use concurrent data only.   The `concat`, or concatenate, function [documentation can be found here](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html). 
-
-# In[ ]:
-
-
-regional_df
-
-
-# In[ ]:
-
-
-stage_df
-
-
-# In[ ]:
-
-
-stage_df
-
-
-# In[ ]:
-
-
-# create a new dataframe of concurrent data and plot the data
-# join='inner' says to line up the indices and get the values that are common between the two dataframes
-# axis=1 says line up columns instead of rows
-# print(regional_df)
-stage_df.index = pd.to_datetime(stage_df['Date'])
-
-
-
-concurrent_df = pd.concat([stage_df, regional_df], join='inner', axis=1)
-# stage_df.index = pd.to_datetime(stage_df.index)
-# 
-# filter just the columns we want
-concurrent_df = concurrent_df[['flow', 'RC Q (cms)']]
-# not rename the columns to something that is more indicative of the location of each data source
-concurrent_df.columns = ['Regional_Q', 'Project_Q']
-
-# concurrent_df = concurrent_df[concurrent_df['Regional_Q'] < 6.0]
-
-concurrent_df.head()
-
-concurrent_df.dropna(inplace=True)
-
-
-# In[ ]:
-
-
-# find the best fit equation
-slope, intercept, rval, pval, stderr = st.linregress(concurrent_df['Regional_Q'], concurrent_df['Project_Q'])
-
-
-# In[ ]:
-
-
-print(slope)
-
-
-# ## Regression Plot
-
-# In[ ]:
-
-
-#### Regression Plot
-reg_plot = figure(plot_width=700, plot_height=400,
-                title='Regression Plot (All Concurrent Data)',
-                tools=TOOLS)
-
-# plot the concurrent daily flows
-reg_plot.scatter(concurrent_df['Regional_Q'], concurrent_df['Project_Q'],
-                color='dodgerblue')
-
-#plot the best fit
-q_range = np.linspace(0, concurrent_df['Regional_Q'].max(), 500)
-intercept = 0.2
-slope = 0.15
-reg_line = [slope * q + intercept for q in q_range]
-
-reg_plot.line(q_range, reg_line, legend_label='Q = {:.1f}*Qregional + {:.1f}'.format(slope, intercept),
-             color='firebrick', line_width=2)
-reg_plot.xaxis.axis_label = 'Regional Station Daily Avg. Flow (m^3/s)'
-reg_plot.yaxis.axis_label = 'Project Location Daily Avg. Flow (m^3/s)'
-show(reg_plot)
-
-
-
-# ## Estimate Long-Term Daily Flow at Project Location
-# 
-# The last step in the process of a long-term flow estimate for our project location is to use the equation of the best fit line (the model) to calculate estimated daily flows over periods where flow was not measured at our project location.
-
-# In[ ]:
-
-
-lt_series = regional_df.copy()[['flow']]
-lt_series.columns = ['Regional_Q']
-# map the equation of the best fit line to the regional flow series
-lt_series['Proj_Q'] = lt_series.apply(lambda q: slope * q + intercept, axis=1)
-
-
-# ## Compare the Modelled vs. Measured Flow
-# 
-
-# In[ ]:
-
-
-mod_df = pd.concat([stage_df, lt_series], join='inner', axis=1)
-# keep only the measured and modeled columns
-mod_df = mod_df[['RC Q (cms)', 'Proj_Q']]
-# rename the columns to something more intuitive
-mod_df.columns = ['Measured_Q', 'Modeled_Q']
-
-reg_plot = figure(plot_width=700, plot_height=400,
-                title='Measured vs. Modeled Daily Avg. Flow',
-                tools=TOOLS, x_axis_type='datetime')
-
-reg_plot.line(mod_df.index, mod_df['Measured_Q'], line_width=2,
-             color='dodgerblue', legend_label='Measured Q')
-
-reg_plot.line(mod_df.index, mod_df['Modeled_Q'], line_width=2,
-             color='darkblue', legend_label='Modeled Q',
-             line_dash='dashed')
-
-show(reg_plot)
-
-
-# ### In the above plot, note general patterns, specific exceptions, and any trends
-# 
-# Note the big deviation between the two series in the summer of 2010.  This looks like our model is doing a particularly bad job in the late summer.  How about in other seasons?   How is the model doing at predicting peaks?  
-# 
-# How else can we evaluate how the model is fitting the measured data, noting in particular that we are interested in certain ranges of flows, perhaps for generating energy year-round, or supplying a community with drinking water in a dry season?
-# 
-# Recall how we plotted the flow duration curve in Notebook 3.  The flow duration curve is particularly useful for focusing on how well the model matches measured data across the range of flows (though extremes are de-emphasized).  
-# 
-# ### Plot a comparison of Flow Duration Curves
-
-# In[ ]:
-
-
-print(mod_df['Modeled_Q'])
-
-
-# In[ ]:
-
-
-pct_exceeded = np.linspace(0, 100, 200)
-mod_df.dropna(inplace=True)
-msd_quantiles = np.percentile(mod_df['Measured_Q'], pct_exceeded)
-modeled_quantiles = np.percentile(mod_df['Modeled_Q'], pct_exceeded)
-
-fdc_plot = figure(width=700, height=400, title='Measured vs. Modeled Flow Duration Curve')
-fdc_plot.line(pct_exceeded[::-1], msd_quantiles, legend_label="Measured", line_width=2,
-             color='dodgerblue')
-fdc_plot.line(pct_exceeded[::-1], modeled_quantiles, line_width=2,
-             color='darkblue', legend_label='Modeled', line_dash='dashed')
-fdc_plot.yaxis.axis_label = 'Flow [m^3/s]'
-fdc_plot.xaxis.axis_label = 'Percent of Time Exceeded [%]'
-show(fdc_plot)
-
-
-# ## Estimate the Long-Term Mean Annual Flow for our Project Location
-# 
-# Compare the long term mean annual against the short term, then compare the long-term monthly and annual series.
-
-# In[ ]:
-
-
-lt_mad = lt_series[['Proj_Q']].mean().to_numpy()[0]
-msd_mean = stage_df[['RC Q (cms)']].mean().to_numpy()[0]
-lt_series.dropna(inplace=True)
-lt_median = np.percentile(lt_series['Proj_Q'], 50)
-msd_median = stage_df[['RC Q (cms)']].median().to_numpy()[0]
-
-print('The mean annual flow (MAD) at our project location is {:.1f} m^3/s'.format(lt_mad))
-print('To compare, the average flow over the measured period was {:.1f} m^3/s'.format(msd_mean))
-print('The median flow for the long-term period was {:.1f} m^3/s'.format(lt_median))
-print('To compare, the median flow over the measured period was {:.1f} m^3/s'.format(msd_median))
-
-
-# In[ ]:
-
-
-lt_series['year'] = lt_series.index.year
-annual_series = lt_series[['Proj_Q', 'year']].groupby('year').mean()
-
-stage_df['year'] = stage_df.index.year
-msd_ann = stage_df[['year', 'RC Q (cms)']].groupby('year').mean()
-
-plt.plot(annual_series['Proj_Q'], label='LT Modelled')
-plt.plot([1987, 2017], [lt_mad, lt_mad], label='LT Mean', color='green')
-plt.scatter(msd_ann.index, msd_ann['RC Q (cms)'], color='red')
-plt.title('Mean Annual Series')
+ax.set_xlabel('Date')
+ax.set_ylabel('Precipitation')
+ax.set_title('{}'.format(stn_name))
 plt.legend()
-plt.show()
 
 
-# ## Questions for Reflection
+# First, imagine we are some unfortunate parking lot attendant working a shift in Whistler Village at Parking Lot 5, and we are told by our cruel supervisor we have stand at the lowest point of the parking lot: a catchment basin with an area of $1 km^2$ where water runs off into FitzSimmons Creek.  The sky looks angry, but we're running late for work and put on our running shoes instead of our sturdy waterproof boots.  
 # 
-# 1.  From our regression plot and from the comparison of measured and estimated daily flow series, what do you think about the quality of our model, i.e. how well does the best fit line approximate the concurrent daily flows (blue dots)?  
-# 2.  What range of flow is exceeded 67% OR MORE of the time, how well is this range modelled and what might this flow range be pertinent to?  
-# 3.  What could differences in concurrent flows at the two locations be attributable to?  
-# 4.  How might we modify our model to capture one of the differences you noted in 3?
-# 5.  In the last plot, we see that the ~two years we measured flow at our project location were very close to the long-term mean annual.  What if the two years we happened to measure were 2000 and 2001 and we took these as representative without doing a regression analysis with a long-term regional record?
-
-# ## References
+# Next, assume the travel time is effectively zero across our entire basin (precipitation takes no time to travel to the outlet once it falls on the parking lot surface).  Is this a reasonable assumption in general?  
 # 
-# 1. A.S. Hamilton & R.D. Moore (2012). Quantifying Uncertainty in Streamflow Records , Canadian Water Resources Journal / Revue canadienne des ressources hydriques, 37:1, 3-21, DOI: 10.4296/cwrj3701865
-# 2. Environment Canada (2012).  Hydrometric Manual - Data Computations.  Water Survey of Canada, Weather and Environmental Monitoring Directorate.
+# Under these assumptions, lets reconstruct a runoff hydrograph at the outlet.  First, look at the precipitation data over the twelve days of the big storm. 
+
+# In[ ]:
+
+
+print(sample_df)
+
+
+# ## Convert Volume to volmeteric flow units
+# 
+# Runoff is typically measured in $\frac{m^3}{s}$, so convert $\frac{mm}{day}$ precipitation to $\frac{m^3}{s}$ runoff.
+# 
+# $$1 \frac{mm}{day} \times \frac{1 m}{1000 mm} \times \frac{1 day}{24 h} \times \frac{1 h}{ 3600 s} \times 1 km^2 \times \frac{1000 m \times 1000 m}{1 km^2}= \frac{1}{86.4} \frac{m^3}{s}$$
+
+# In[ ]:
+
+
+# convert to runoff volume
+drainage_area = 1 # km^2
+
+# runoff is typically measured in m^3/s (cms for short -- cubic metres per second), 
+# so express the runoff in cms
+sample_df['runoff_cms'] = sample_df['Total Rain (mm)'] / 86.4
+print(sample_df)
+
+
+# If the channel outlet has a rectangular shape of width 2m, how tall should our boots be?  Assume a 2% slope, and find a reasonable assumption for the roughness of asphalt.
+# 
+# Recall the Manning equation:
+# 
+# $$Q = \frac{1}{n} A R^{2/3} S^{1/2}$$
+# 
+# Where:
+# * **n** is the manning roughness
+# * **A** is cross sectional area of the flow
+# * **R** hydraulic radius (area / wetted perimeter)
+# * **S** is the channel slope
+
+# In[ ]:
+
+
+w_channel = 1.5 # m
+S = 0.005 # channel slope
+n_factor = 0.017  # rough asphalt
+
+def calc_Q(d, w, S, n):
+    """
+    Calculate flow from the Manning equation.
+    """
+    A = d * w
+    wp = w + 2 * d  # wetted perimeter
+    R = A / wp
+    return (1/n) * A * R**(2/3) * S**(1/2)
+
+def solve_depth(w, n_factor, Q, S):
+    """
+    Given a flow, a roughness factor, a channel slope, and a channel width, 
+    calculate flow depth. 
+    """
+    e = 1 / 100  # solve within 1%
+    d = 0
+    Q_est = 0
+    n = 0
+    while (abs(Q_est - Q) > e) & (n < 1000):
+        Q_est = calc_Q(d, w, S, n_factor)
+#         print(Q, Q_est, abs(Q_est - Q))
+        d += 0.001
+        n += 1
+#     print('solved in {} iterations'.format(n))
+    return d 
+    
+
+
+# In[ ]:
+
+
+# For each timestep, we want to solve for the depth of water at our outlet
+sample_df['flow_depth_m'] = sample_df['runoff_cms'].apply(lambda x: solve_depth(w_channel, n_factor, x, S))
+
+
+# In[ ]:
+
+
+plt.plot(sample_df.index, sample_df['flow_depth_m'])
+plt.ylabel('Flow depth [m]')
+
+
+# >**Not only are our feet wet, but if we happen to be there the peak it's potentially dangerous.  As little as 10-15cm of water moving fast enough can sweep you off your feet.**
+
+# ![Recalculating Life](img/recalculating.png)
+
+# ## More Complex Implementation: Spatial Data
+# 
+# As discussed in class, precipitation takes time to travel from where it fell to the basin outlet.  Next we will estimate the runoff response in a real catchment, just upstream from the parking lot example in the FitzSimmons Creek basin.
+
+# ### Step 1: Instantiate a grid from a DEM raster
+# Some sample data is already included, but for extra data, see the [USGS hydrosheds project](https://www.hydrosheds.org/).
+
+# In[ ]:
+
+
+# grid = Grid.from_raster('data/n45w125_con_grid/n45w125_con/n45w125_con', data_name='dem')
+grid = Grid.from_ascii(path='../../data/notebook_5_data/n49w1235_con_grid.asc', 
+                       data_name='dem')
+
+
+# In[ ]:
+
+
+# reset the nodata from -32768 so it doesn't throw off the 
+# DEM plot
+grid.nodata = 0
+
+
+# In[ ]:
+
+
+# store the extents of the map
+map_extents = grid.extent
+min_x, max_x, min_y, max_y = map_extents
+
+
+# ### Plot the DEM
+# 
+# **NOTE:** The cell below may take up to 30 seconds to load.  Please be patient, it is thinking really hard. 
+# 
+# The code below will plot the Digital Elevation Model (DEM).  
+# 
+# Do you recognize any features of the terrain?  Can you locate where it is?
+# 
+# Hover over the map (or touch if using a touchscreen) to see the coordinates in decimal degree units.
+# 
+# What does the [precision of the coordinates represent](http://wiki-1-1930356585.us-east-1.elb.amazonaws.com/wiki/index.php/Decimal_degrees)?  
+# * i.e. what does 5 decimal places in decimal degrees equate to in kilometers?
+# 
+# You can interact with the plot by using the tools on the left (in vertical order from top to bottom):
+# * **pan:** move around the map
+# * **box zoom:** draw a square to zoom in on
+# * **wheel zoom:** use the mousewheel (or pinch gesture on a touchscreen) to zoom in
+# * **box zoom:** draw a square to zoom in on
+# * **tap**: not yet implemented (but you can see the coordinates)
+# * **refresh**: reset the map
+# * **hover**: see the coordinates when hovering over the map with a mouse or pointer
+
+# In[ ]:
+
+
+# set bokeh plot tools
+tools = "pan,wheel_zoom,box_zoom,reset,tap"
+
+# show the precision of the decimal coordinates
+# in the plot to 5 decimal places
+TOOLTIPS = [
+    ("(x,y)", "($x{1.11111}, $y{1.11111})"),
+]
+
+# create a figure, setting the x and y ranges to the appropriate data bounds
+p1 = figure(title="DEM of the Lower Mainland of BC.  Hover to get coordintes.", plot_width=600, plot_height=int(400),
+            x_range = map_extents[:2], y_range = map_extents[2:], 
+            tools=tools, tooltips=TOOLTIPS)
+
+# map elevation to a colour spectrum
+color_mapper = LinearColorMapper(palette="Magma256", low=-200, high=2400)
+
+# np.flipud flips the image data on a vertical axis
+adjusted_img = [np.flipud(grid.dem)]  
+
+p1.image(image=adjusted_img,   
+         x=[min_x],               # lower left x coord
+         y=[min_y],               # lower left y coord
+         dw=[max_x-min_x],        # *data space* width of image
+         dh=[max_y-min_y],        # *data space* height of image
+         color_mapper=color_mapper
+)
+
+color_bar = ColorBar(color_mapper=color_mapper, #ticker=Ticker(),
+                     label_standoff=12, border_line_color=None, location=(0,0))
+
+p1.add_layout(color_bar, 'right')
+
+
+show(p1)
+
+# -123.15512, 49.41293
+#-123.14657, 49.41080
+-123.14350, 49.40251
+
+
+# ### Resolve flats in DEM
+
+# In[ ]:
+
+
+grid.resolve_flats('dem', out_name='inflated_dem')
+
+
+# ### Specify flow direction values
+
+# In[ ]:
+
+
+#         N    NE    E    SE    S    SW    W    NW
+dirmap = (64,  128,  1,   2,    4,   8,    16,  32)
+
+
+# In[ ]:
+
+
+grid.flowdir(data='inflated_dem', out_name='dir', dirmap=dirmap)
+
+
+# In[ ]:
+
+
+fig = plt.figure(figsize=(8,6))
+fig.patch.set_alpha(0)
+
+plt.imshow(grid.dir, extent=grid.extent, cmap='viridis', zorder=2)
+boundaries = ([0] + sorted(list(dirmap)))
+plt.colorbar(boundaries= boundaries,
+             values=sorted(dirmap))
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.title('Flow direction grid')
+plt.grid(zorder=-1)
+plt.tight_layout()
+# plt.savefig('data/img/flow_direction.png', bbox_inches='tight')
+
+
+# In[ ]:
+
+
+# view the values of the raster as an array
+grid.dir
+
+
+# In[ ]:
+
+
+# check the size of the raster
+grid.dir.size
+
+
+# ### Delineate a Catchment
+# 
+# Note that once you've executed the code in the cells below,
+# if you change the Point of Concentration (POC), you'll
+# need to go back to Step 1 and execute the code from there again.
+# 
+# This needs to be done to re-initialize the extents of the data 
+# that are loaded into memory.  The intermediary steps trim the extent
+# of the DEM and you will get an error message saying:
+# 
+# 
+# >`ValueError: Pour point (-123.94307, 49.40783) is out of bounds for dataset with bbox (-123.195000000122, 49.39999999984, -123.15333333347199, 49.421666666498).`
+# 
+# 
+
+# In[ ]:
+
+
+# Specify the Point of Concentration (POC) / Catchment Outlet (a.k.a. pour point) 
+# This location is a tributary of the Capilano River, just above the reservoir above
+# Cleveland Dam.
+x, y = -123.14657, 49.41080
+x, y = -123.14350, 49.40251
+
+# And just for good measure, here's the little tributary in the south-west corner.
+# Note the instructions above about reloading the original data to re-initialize
+# the DEM
+x, y = -123.15512, 49.41293
+
+# Delineate the catchment
+grid.clip_to('dem')
+grid.catchment(data='dir', x=x, y=y, dirmap=dirmap, out_name='catch',
+               recursionlimit=15000, xytype='label', nodata_out=0)
+
+
+# In[ ]:
+
+
+# Clip the bounding box to the catchment we've chosen
+grid.clip_to('catch', pad=(1,1,1,1))
+
+
+# In[ ]:
+
+
+# Create a view of the catchment
+catch = grid.view('catch', nodata=np.nan)
+
+
+# In[ ]:
+
+
+# check the shape to see if we've estimated close enough to the 
+# actual river to delineate the catchment successfully
+print(catch.shape)
+# if we get dimensions of < 10, we've missed and instead pointed at some 
+# little hillslope
+
+
+# In[ ]:
+
+
+print(grid.extent)
+ext_1 = grid.extent
+
+
+# In[ ]:
+
+
+# Plot the catchment
+fig, ax = plt.subplots(figsize=(8,6))
+fig.patch.set_alpha(0)
+
+plt.grid('on', zorder=0)
+im = ax.imshow(catch, extent=grid.extent, zorder=1, cmap='viridis')
+plt.colorbar(im, ax=ax, boundaries=boundaries, values=sorted(dirmap), label='Flow Direction')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.title('Delineated Catchment')
+# plt.savefig('data/img/catchment.png', bbox_inches='tight')
+
+
+# ### Get flow accumulation
+
+# In[ ]:
+
+
+grid.accumulation(data='catch', dirmap=dirmap, out_name='acc')
+
+
+# In[ ]:
+
+
+fig, ax = plt.subplots(figsize=(8,6))
+fig.patch.set_alpha(0)
+plt.grid('on', zorder=0)
+acc_img = np.where(grid.mask, grid.acc + 1, np.nan)
+im = ax.imshow(acc_img, extent=grid.extent, zorder=2,
+               cmap='cubehelix',
+               norm=colors.LogNorm(1, grid.acc.max()))
+plt.colorbar(im, ax=ax, label='Upstream Cells')
+plt.title('Flow Accumulation')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+# plt.savefig('data/img/flow_accumulation.png', bbox_inches='tight')
+
+
+# ### Calculate distances to upstream cells
+
+# In[ ]:
+
+
+grid.flow_distance(data='catch', x=x, y=y, dirmap=dirmap, out_name='dist',
+                   xytype='label', nodata_out=np.nan)
+
+
+# In[ ]:
+
+
+fig, ax = plt.subplots(figsize=(8,6))
+fig.patch.set_alpha(0)
+plt.grid('on', zorder=0)
+im = ax.imshow(grid.dist, extent=grid.extent, zorder=2,
+               cmap='cubehelix_r')
+plt.colorbar(im, ax=ax, label='Distance to outlet (cells)')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+plt.title('Flow Distance')
+# plt.savefig('data/img/flow_distance.png', bbox_inches='tight'),
+
+
+# In[ ]:
+
+
+area_threshold=20
+fig, ax = plt.subplots(figsize=(8,6))
+fig.patch.set_alpha(0)
+plt.grid('on', zorder=0)
+streamnetwork_img = np.where(acc_img>area_threshold, 100, 1+acc_img*0)
+# print([['nan' if np.isnan(i) else cmap[i] for i in j] for j in streamnetwork_img])
+labels = {1:'Catchment', 2: 'Outside Catchment', 100: 'Stream Network'}
+cmap = {1: [0.247, 0.552, 0.266, 0.5], 
+        100: [0.074, 0.231, 0.764, 0.8],
+       2: [0.760, 0.760, 0.760, 0.8]}
+
+arrayShow = np.array([[cmap[2] if np.isnan(i) else cmap[i] for i in j] for j in streamnetwork_img])    
+## create patches as legend
+
+patches =[mp.Patch(color=cmap[i],label=labels[i]) for i in cmap]
+
+#streamnetwork_img = np.where(grid.mask, > 100, 10 , 1)
+# im = ax.imshow(streamnetwork_img, extent=grid.extent, zorder=2,
+#                 cmap='cubehelix')
+im = ax.imshow(arrayShow)
+plt.legend(handles=patches, loc=1, borderaxespad=0.)
+# plt.colorbar(im, ax=ax, label='Upstream Cells')
+plt.title('Stream network')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+# plt.savefig('data/img/stream_network.png', bbox_inches='tight')
+
+
+# ### Calculate weighted travel distance
+# 
+# Assign a travel time to each cell based on the assumption that water travels at one speed (slower) until it reaches a stream network, at which point its speed increases dramatically.
+
+# In[ ]:
+
+
+fig, ax = plt.subplots(figsize=(8,6))
+fig.patch.set_alpha(0)
+
+plt.grid('on', zorder=0)
+grid.clip_to('catch', pad=(1,1,1,1))
+acc = grid.view('acc')
+
+# calculate weights.
+# assume the threshold is 100 accumulation cells 
+# (of roughly 500mx500m) results in stream
+weights = (np.where(acc, 0.1, 0)
+               + np.where((0 < acc) & (acc <= 100), 1, 0)).ravel()
+
+weighted_dist = grid.flow_distance(data='catch', x=x, y=y, weights=weights,
+                   xytype='label', inplace=False)
+
+im = ax.imshow(weighted_dist, extent=grid.extent, zorder=2,
+               cmap='cubehelix_r')
+# plt.legend(handles=patches, loc=1, borderaxespad=0.)
+plt.colorbar(im, ax=ax, label='Upstream Cells')
+plt.title('Stream network')
+plt.xlabel('Longitude')
+plt.ylabel('Latitude')
+
+
+# ## Develop Rainfall-Runoff Model
+# 
+# Now that we have weighted flow distances for each cell in the delineated catchment, we can apply precipitation to each 'cell' in order to reconstruct a flow hydrograph.  
+# 
+# First, we must figure out the cell dimensions.  From the [USGS Hydrosheds information](https://hydrosheds.cr.usgs.gov/datadownload.php), we know the resolution is 15 (degree) seconds.  Because of the odd shape of the earth, and the projection of coordinate systems onto the earth, there is a little bit of work involved in converting the DEM resolution to equivalent distances.  For the purpose of this exercise, we will assume cells are 300x300m.  You can check the approximation [here](https://opendem.info/arc2meters.html) for a latitude of 49 degrees.
+
+# In[ ]:
+
+
+# cells can be grouped by their weighted distance to the outlet to simplify 
+# the process of calculating the contribution of each cell to flow at the outlet
+
+dist_df = pd.DataFrame()
+dist_df['weighted_dist'] = weighted_dist.flatten()
+# trim the distance dataframe to include only the cells in the catchment,
+# and round the travel time to the nearest one (hour)
+dist_df = dist_df[dist_df['weighted_dist'] > 0].round(0)
+
+
+# In[ ]:
+
+
+start_date = sample_df.index.values[0]
+end_date = sample_df.index.values[-1]
+# create an hourly dataframe based on the sample precipitation event
+# then resample the values to evenly distribute the total daily 
+# precipitation to hourly precipitation
+resampled_df = sample_df.resample('1H').pad() / 24
+
+
+# Note that our 'weighted distance' has just provided a relative difference between the flow accumulation cells and non-flow-accumulation cells.  We still must convert these values to some time-dependent form.
+# 
+# For this exercise, we will assume the average velocity of water is 1 m/s value for the flow accumulation cells, and 0.1 m/s for the other cells.  Therefore precipitation will take on average 300s (0.0833 h) and 3000s (0.833 h) to travel to the outlet for flow-accumulation and non-flow-accumulation cells, respectively.
+
+# In[ ]:
+
+
+# get the number of cells of each distance
+grouped_dists = pd.DataFrame(dist_df.groupby('weighted_dist').size())
+grouped_dists.columns = ['num_cells']
+
+
+# In[ ]:
+
+
+# create unit hydrographs for each timestep
+runoff_df = pd.DataFrame(np.zeros(len(resampled_df)))
+runoff_df.columns = ['Total Precip (mm)']
+runoff_df.index = resampled_df.index.copy()
+end_date = pd.to_datetime(runoff_df.index.values[-1]) + pd.DateOffset(hours=1)
+max_distance = max(grouped_dists.index)
+
+extended_df = pd.DataFrame()
+extended_df['Total Precip (mm)'] = [0 for e in range(int(max_distance) + 1)]
+extended_df.index = pd.date_range(end_date, periods=max_distance + 1, freq='1H')
+
+# append the extra time to the runoff dataframe
+runoff_df = runoff_df.append(extended_df)
+runoff_df['Runoff (cms)'] = 0
+
+
+# **NOTE**: if you re-run the cell below, you need to run the cell above as well, or the runoff dataframe will not reset and the values will keep increasing.
+
+# In[ ]:
+
+
+cell_size = 300 # assume each pixel represents 300m x 300m 
+runoff_coefficient = 0.3
+
+
+for ind, row in resampled_df.iterrows():
+    this_hyd = resampled_df[['Total Precip (mm)']].copy()
+    for weight_dist, num_cells in grouped_dists.iterrows():
+        try: 
+            outlet_time = ind + pd.DateOffset(hours=weight_dist)
+            precip = num_cells.values[0] * row['Total Precip (mm)']
+            runoff_vol = precip * runoff_coefficient / 1000 * cell_size**2 
+            runoff_rate = runoff_vol  / 3600  # convert to m^3/s from m^3/h
+            runoff_df.loc[outlet_time, 'Runoff (cms)'] += runoff_rate
+        except KeyError as err:
+            print('error')
+            break
+#             print(err)
+#             print(ind, row)
+
+
+# In[ ]:
+
+
+fig, ax = plt.subplots(1, 1, figsize=(16,4))
+
+sample_start = pd.to_datetime('2014-12-01')
+sample_end = pd.to_datetime('2014-12-15')
+
+sample_df = df[(df.index > sample_start) & (df.index < sample_end)][['Total Precip (mm)', 'Total Snow (cm)', 'Total Rain (mm)']]
+
+# print(sample_df.head())
+# plot the original daily precip
+# ax.plot(sample_df.index, sample_df['Total Precip (mm)'], label="Total Precip [mm]")
+# ax.plot(sample_df.index, sample_df['Total Snow (cm)'], label="Total Snow [cm]")
+# ax.plot(sample_df.index, sample_df['Total Rain (mm)'], label="Total Rain [mm]")
+ax.plot(runoff_df.index, runoff_df['Runoff (cms)'], label="Runoff")
+
+
+ax.set_xlabel('Date')
+ax.set_ylabel('Runoff [cms]', color='blue')
+ax.set_title('Example Rainfall-Runoff Model')
+ax.legend(loc='upper left')
+ax.tick_params(axis='y', colors='blue')
+
+ax1 = ax.twinx()
+ax1.plot(sample_df.index, sample_df['Total Rain (mm)'], 
+         color='green',
+         label="Total Rain")
+ax1.set_ylabel('Precipitation [mm]', color='green')
+ax1.tick_params(axis='y', colors='green')
+ax1.legend(loc='upper right')
+
+
+# ### Determine the Peak Unit Runoff
+# 
+# First, estimate the drainage area.  Then, find the peak hourly flow.
+
+# In[ ]:
+
+
+DA = round(grouped_dists.sum().values[0] * 0.3 * 0.3, 0)
+max_UR = runoff_df['Runoff (cms)'].max() / DA * 1000
+print('The drainage area is {} km^2 and the peak Unit Runoff is {} L/s/km^2'.format(DA, int(max_UR)))
+
+
+# Discuss the limitations of the approach.  Where do uncertainties exist?
+# 
+# * assumed precipitation is constant across days
+# * assumed constant runoff coefficient
+# * assumed two weights for travel time, constant across time
+
+# ## Question for Reflection
+# 
+# For the first part where we estimated the water level at the parking lot outlet based on an assumption that there was zero infiltration, assuming all else is equal, how could we reduce the maximum water level to 5 cm?  
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+

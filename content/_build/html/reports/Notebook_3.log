@@ -23,12 +23,6 @@ import numpy as np
 from scipy import stats as st
 
 import matplotlib.pyplot as plt
-from pandas.plotting import register_matplotlib_converters
-register_matplotlib_converters()
-
-from bokeh.plotting import figure, output_notebook, show
-from datetime import timedelta
-output_notebook()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m

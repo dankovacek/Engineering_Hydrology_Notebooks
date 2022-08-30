@@ -1,712 +1,550 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Notebook 5: Rational Method and Travel Times
+# # Notebook 5: Extreme Values, Uncertainty, and Risk
 # 
-# In this notebook, we look at two ways of estimating a runoff hydrograph from precipitation data.
+# ## Introduction
 # 
-# First, we'll use the rational method to approximate peak flow and the maximum water level at the basin outlet, and then we'll use an open-source library to make a higher resolution estimate of flow accumulation paths and stream networks using a digital elevation model.
+# In Notebook 2, we developed a rating curve from a set of discrete discharge measurements and a continuous record of water level.  At the end of the notebook, you were asked to reflect on how your confidence in the flow predicted by the rating curve changes as a function of water level.  In the near term, our confidence in the rating curve is greatest where we have the most measurements.  Recall that the shape of the rating curve is related to the geometry of the hydraulic control, and that the geometry of the river is constantly evolving.  Without continous validation of the rating curve, we should then be less confident in the rating curve over time, due to this *stream-channel geomorphic response*.  
+# 
+# Estimating the volume of water passing a given location during a major flood is necessary for designing infrastructure such as bridge abutments, hydraulic control structures like weirs and dams, and for designing erosion control measures.  In this notebook, we'll take a closer look at the upper end of the rating curve that governs high-magnitude flow events, where by definition we have fewer opportunities to record discrete flow measurements to robustly define a rating curve, and where measurements can be difficult to obtain accurately.  
+# 
+# It is often very difficult or impossible to get measurements at high flows due to safety, but also due to timing.  Hydrometric stations are often situated in remote locations, and high flow measurement requires additional planning and consideration for safe work procedures, and unique measurement approaches.  With this understanding of uncertainty in the largest *measured* flows, and recognizing that the highest stage recorded by the hydrometric station is generally substantially greater than the stage corresponding to the largest measured flows, extrapolation is unavoidable.  
+# 
+# Beyond extrapolation of the measured flow series at our sites of interest where *in situ* data collection may cover as little as one or two years, the estimation of peak flows for structural design extrapolates event further from measured values.  How can a 1 in 500 year flow be estimated from just two years of data measured on site? The aim of this notebook is to demonstrate the process of flood estimation, building upon the concepts developed in the previous tutorials.
+
+# ### Import libraries
 
 # In[1]:
 
 
-# import required packages
+import math
 import pandas as pd
 import numpy as np
-import math
-
-# advanced statistics library
-from scipy import stats
+from scipy import stats as st
 
 import matplotlib.pyplot as plt
-import matplotlib.patches as mp
-import matplotlib.colors as colors
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
 
-# SEE COMMENTS ABOUT PYSHEDS LIBRARY IN NEXT CELL
-from pysheds.grid import Grid
-import warnings
-warnings.filterwarnings('ignore')
-
-from bokeh.plotting import figure, show
-from bokeh.io import output_notebook
-from bokeh.models import LinearColorMapper, LogTicker, ColorBar, BasicTickFormatter
-from bokeh.io import output_notebook
+from bokeh.plotting import figure, output_notebook, show
+from datetime import timedelta
 output_notebook()
 
-get_ipython().run_line_magic('matplotlib', 'inline')
 
-
-# ### Import Precipitation Data
+# ## Data Imports
 # 
-# For this exercise, we will use historical climate data from the Meteorological Service of Canada (MSC) station at Whistler, BC.
+# ### Import the Daily Average Flow Data
+# 
+# Daily average flow data provided by the Water Survey of Canada (WSC) for the [Stave River](https://wateroffice.ec.gc.ca/report/historical_e.html?y1Max=1&y1Min=1&scale=normal&mode=Graph&stn=08MH147&dataType=Daily&parameterType=Flow&year=2016) (WSC 08MH147) is saved in `data/notebook_5_data/Stave.csv`
+
+# In[4]:
+
+
+df = pd.read_csv('../../notebook_data/notebook_5_data/Stave.csv', header=1, parse_dates=['Date'], index_col='Date')
+df.head()
+
+
+# Note in the csv file the first line tells us that there are two parameters being reported: stage (water level) and flow.  When the `PARAM` column equals 1, the value corresponds to discharge, and where it equals 2 the value corresponds to stage. 
+# 
+# The SYM column refers to data quality information.  
+# 
+# | SYM | Description |
+# |---|---|
+# | A | **Partial Day**: The symbol A indicates that the daily mean value of water level or streamflow was estimated despite gaps of more than 120 minutes in the data string or missing data not significant enough to warrant the use of the E symbol. |
+# | B | **Ice Conditions**: The symbol B indicates that the streamflow value was estimated with consideration for the presence of ice in the stream. Ice conditions alter the open water relationship between water levels and streamflow. |
+# | D | **Dry:** The symbol D indicates that the stream or lake is "dry" or that there is no water at the gauge. This symbol is used for water level data only. |
+# | E | **Estimate:** The symbol E indicates that there was no measured data available for the day or missing period, and the water level or streamflow value was estimated by an indirect method such as interpolation, extrapolation, comparison with other streams or by correlation with meteorological data. |
+# | R | **Revised**: The symbol R indicates that a revision, correction or addition has been made to the historical discharge database after January 1, 1989. |
+# 
+# (from [Water Survey of Canada](https://wateroffice.ec.gc.ca/contactus/faq_e.html#Q12))
 
 # In[ ]:
 
 
-# calibration data
-df = pd.read_csv('../../data/Whistler_348_climate.csv', 
-                 index_col='Date/Time', parse_dates=True)
-# note that the 'head' command shows the first five rows of data, 
-# but in this case the columns are abbreviated. 
-# print(df.head())
-
-# list all the columns
-# print('')
-# print('__________')
-for c in df.columns:
-    print(c)
-    
-stn_name = df['Station Name'].values[0]
+# select just the flow data (PARAM == 1)
+flow_df = df[df['PARAM'] == 1].copy()
+flow_df.loc[:, 'year'] = flow_df.index.year
+print(flow_df.head())
+print('')
+print("There are {} values in the Stave River daily flow series.".format(len(flow_df)))
 
 
-# ### Plot the Data
+# ## Plot the Data
 # 
-# It's always a good idea to begin by visualizing the data we're working with.
+# ### Plot the Daily Average Flow Series
 
 # In[ ]:
 
+
+# customize the tools for interacting with the bokeh plot
+TOOLS="pan,wheel_zoom,reset,hover,poly_select,box_select"
+
+#### Daily Flow Plot
+daily_flow_plot = figure(plot_width=700, plot_height=400,
+                title='Daily Average Flow at Stave River (WSC 08MH147)',
+                tools=TOOLS, x_axis_type='datetime')
+
+daily_flow_plot.line(flow_df.index, flow_df['Value'].to_numpy())
+show(daily_flow_plot)
+
+
+# ## Annual Maximum Flow Series
+# 
+# Estimating return period floods is typically done by deriving a series corresponding to the highest flow recorded in each year.  This series is commonly referred to as the **Annual Maximum Series** (AMS).  It is necessary to use the data collected and managed by others to derive the AMS, and we will consider what this implies as we progress through the notebook.
+
+# ### Create a series representing the maximum flow in each year 
+# 
+# Derive the AMS.  Also calculate the mean and standard deviation of the series.
+
+# In[ ]:
+
+
+# create a series representing the annual maximum daily flow
+# use the 'groupby' function and get the maximum value from each year
+max_df = flow_df.loc[flow_df.groupby('year')['Value'].idxmax()].copy()
+
+max_df['rank'] = max_df['Value'].rank(ascending=False)
+max_df['month'] = max_df.index.month
+max_df['count'] = flow_df.groupby('year').count()['Value'].values
+
+
+# In[ ]:
+
+
+# calculate the mean and standard deviation of the sample
+mean_q, stdev_q = max_df['Value'].mean(), max_df['Value'].std()
+start, end = pd.to_datetime(max_df.index.to_numpy()[0]).strftime('%Y-%m-%d'), pd.to_datetime(max_df.index.to_numpy()[-1]).strftime('%Y-%m-%d')
+print('The daily average flow record goes from {} to {} (n={} years).'.format(start, end, len(max_df)))
+print('Mean = {:.2f} m^3/s; Standard deviation = {:.2f} m^3/s'.format(mean_q, stdev_q))
+print('Preview of the Annual Maximum Flow Series:')
+max_df.head()
+
+
+# ## Plot a histogram of annual maximum flows
+# 
+# If we are going to use statistical methods to estimate return period floods, it is important to consider the shape of the probability distribution, and what that implies about the dominant mechanisms driving peak runoff.  
+
+# In[ ]:
+
+
+fig, ax = plt.subplots(1,1, figsize=(10,6))
+max_df.hist('Value', density=True, ax=ax)
+ax.set_xlabel('Q [m^3/s]')
+ax.set_ylabel('P(X)')
+ax.set_title('Annual Maximum Flow Histogram for Stave River')
+
+
+# In flood frequency analysis, the shape of the sample distribution has implications for the way the parameters of a probability distribution are estimated.  The *sample* in this case is the set of annual maximum flows.  The model parameters that we will use to estimate return period floods assume certain characteristics about the data.  Namely, that values are *independent* (the annual maximum in one year does not have an observable effect on the annual maximum of other years), and *identically distributed* (values are derived from the same distribution, and are stationary over time).  In some cases these are reasonable assumptions (short planning horizon, large sample), and in others not (long planning horizon, small sample).  
+# 
+# Above it appears as though there are two distinct 'modes', or peaks.  Take a moment to consider what might cause multiple modes in the distribution.
+
+# ### In what months does the annual maximum flow typically occur?
+# 
+# 
+
+# In[ ]:
+
+
+fig, ax = plt.subplots(1, 1, figsize=(8, 6))
+max_df.hist('month', ax=ax, label='All years')
+
+complete_max_df = max_df[max_df['count'] > 360]
+complete_max_df.hist('month', ax=ax, 
+                     label='Complete years',)
+ax.set_xlabel('Month')
+ax.set_ylabel('Count')
+ax.set_title('Monthly Count of Annual Maximum Flow Timing')
+ax.legend()
+
+
+# In the plot above, we can see that the annual maximum flow typically occurs from October to January.  Also note that the orange series has been labelled 'complete years'.  Earlier in this notebook it was pointed out that we have to rely on data collected by others.  Below we'll derive a flood frequency curve for Stave River, and in the process we'll illustrate why **quality review of data is critical**.  
+
+# ## Check the record for completeness
+# 
+# It is often necessary to use data collected by others.  It is common for datasets to be missing documentation containing important information about quality or limitations of the data.  **Even given well documented data, it is necessary to do your own quality assurance**.  Below, we will use a daily average flow dataset from the Water Survey of Canada to demonstrate a few ways of validating a dataset.  This is not a manual of quality assurance, but it is used to demonstrate how to incorporate other data to do basic validation.  The general idea is that there are many other environmental signals that have mutual information with the signal of primary interest, in this case daily average streamflow at the Stave River.  For example, would you trust a large spike in runoff if nearby precipitation gauges measured zero rainfall?  Also, how do we deal with missing data?
+
+# ### Completeness of Record
+# 
+# Find the incomplete years, and consider what we observed above regarding the times of the year the annual maximum flood is more likely to occur.  
+
+# In[ ]:
+
+
+df['year'] = df.index.values
+max_df['count'] = flow_df.groupby('year').count()['Value'].values
+print(max_df[max_df['count'] < 365])
+
+
+# It appears as though 1984 and 2001 are the years missing the most data.  Does this mean we should exclude these years from the AMS we use as input in the flood frequency analysis?  Are the years where only a few days of records are missing good enough?  
+# 
+# Even though we obtained our Stave data from WSC, the organizational body governing hydrometric data collection and standards in Canada, we still must review the data for completeness and quality.  
+# 
+# Looking at the printout above showing all of the years with missing days, it might be easy to justify removing 2001 from the dataset, as it is missing more than half of the year, and because we need as large a dataset as possible to buttress our statistical analysis, it is tempting to keep years with only a few missing days.  
+
+# ## Reviewing the Data
+# 
+# Consider the possibility that the annual maximum flood is itself the reason the data is missing.  How might we determine this?
+# 
+# To start, we can check precipitation records at the closest climate stations.  The monthly count plot shown above suggests the annual maximum typically occurs in October to January, and on the basis that synoptic-scale precipitation events typically occur in winter, perhaps we can determine if a major precipitation event occurred during a period when there is a gap in the data.
+# 
+# There are no climate stations from the Meteorological Survey of Canada (MSC) in the immediate vicinity, but there are two within 100 km on either side of the Stave River basin.  
+
+# In[ ]:
+
+
+# whistler is equidistant to the Stave catchment in the opposite direction from the climate station in Hope.
+whis_df = pd.read_csv('../../data/notebook_3_data/Whistler_348_climate.csv', header=0, index_col='Date/Time', parse_dates=True)
+whis_df = whis_df[['Total Precip (mm)', 'Total Rain (mm)', 'Snow on Grnd (cm)']]
+name = 'whis'
+whis_df.columns = ['{}_total_precip'.format(name), '{}_total_rain'.format(name), 
+                   '{}_snow_on_grnd'.format(name)]
+
+# the Laidlaw station is near Hope, BC
+hope_df = pd.read_csv('../../data/notebook_3_data/Laidlaw_794_climate.csv', header=0, index_col='Date/Time', parse_dates=True)
+
+hope_df = hope_df[['Total Precip (mm)', 'Total Rain (mm)', 'Snow on Grnd (cm)']]
+name = 'hope'
+hope_df.columns = ['{}_total_precip'.format(name), '{}_total_rain'.format(name), 
+                   '{}_snow_on_grnd'.format(name)]
+
+# print(hope_df.head())
+
+
+# In[ ]:
+
+
+def find_data_gaps(gap_df, code):
+    """
+    Input a timeseries, and return a dataframe summarizing
+    the start and end times of any gaps in the record.
+    Note that the code assumes frequency is daily.
+    """
+    gap_df['Date'] = pd.to_datetime(gap_df.index.values)
+    gap_df.dropna(subset=['Value'], inplace=True)
+    deltas = gap_df['Date'].diff()[1:]
+    # Filter diffs (here days > 1, but could be seconds, hours, etc)
+    gaps = deltas[deltas > timedelta(days=1)]
+    # Print results
+    return gap_df, gaps   
+
+
+# ### Check flow records against precipitation records
+# 
+# It is common for historical records to be missing data.  Comparing flow records against precipitation records is just one way of checking to see if the gaps in the record might correspond to peak events.  Code is provided to automatically identify gaps in the record to help you see where they occur.  Note that this doesn't guarantee anything about the conditions in Stave River where we have no data, but it does provide some information with which to build a case for treating the dataset.
+
+# In[ ]:
+
+
+# concatenate the precipitation records with the streamflow records
+conc_df = pd.concat([whis_df, hope_df, flow_df], axis=1, join='outer')
+conc_df = conc_df[['Value'] + [e for e in hope_df.columns if 'hope' in e] + [e for e in whis_df.columns if 'whis' in e]]
+
+
+# In[ ]:
+
+
+print(conc_df.max())
+
+
+# In[ ]:
+
+
+from bokeh.models import LinearAxis, Range1d
 
 # plot flow at Stave vs. precip at the closest climate stations
 p = figure(width=900, height=400, x_axis_type='datetime')
-p.line(df.index, df['Total Precip (mm)'], alpha=0.8,
-         legend_label="Total Precip [mm]", color='dodgerblue')
+p.line(conc_df.index, conc_df['Value'], alpha=0.8,
+         legend_label='Stave Flow [m^3/s]', line_color='dodgerblue')
 
-p.line(df.index, df['Total Snow (cm)'], alpha=0.8,
-         legend_label="Total Snow [cm]", color="firebrick")
+# plot on second y axis
+p.extra_y_ranges = {'precip': Range1d(start=0, end=200)}
 
-p.line(df.index, df['Total Rain (mm)'], alpha=0.8,
-         legend_label="Total Rain [mm]", color='green')
+p.line(conc_df.index, conc_df['hope_total_rain'], alpha=0.3,
+         legend_label='Hope precipitation [mm]', color='orange', y_range_name='precip')
+# # p.line(conc_df_trimmed.index, conc_df_trimmed['hope_total_rain'], alpha=0.3,
+# #          label='Hope precipitation [mm]', color='orange', y_range_name='precip')
+p.line(conc_df.index, conc_df['whis_total_rain'], alpha=0.3,
+         legend_label='Whistler precipitation [mm]', color='red', y_range_name='precip')
+
+gap_df, gaps = find_data_gaps(conc_df, 'Stave')
+
+# plot red bands to illustrate where there are gaps in the record
+# ind = 0
+xs, ys = [], []
+ymin, ymax = 0, conc_df['Value'].max()
+
+for i, g in gaps.iteritems():    
+    gap_start = gap_df.iloc[gap_df.index.get_loc(i) - 1]['Date']
+    gap_end = gap_start + g
+    xs.append([gap_start, gap_end, gap_end, gap_start])
+    ys.append([ymax, ymax, ymin, ymin])
+
+p.patches(xs, ys, fill_alpha=0.5,
+        color='red',legend_label='Gap',
+         line_alpha=0)
 
 p.legend.location = 'top_left'
 p.legend.click_policy = 'hide'
 p.xaxis.axis_label = 'Date'#
-p.yaxis.axis_label = 'Daily Rain [mm] / Snow[cm] Volume'
-
+p.yaxis.axis_label = 'Daily Average Flow [m^3/s]'
+p.y_range = Range1d(0, 580)
+p.add_layout(LinearAxis(y_range_name='precip', axis_label='Total Precipitation [mm]'), 'right')
 show(p)
 
 
-# ### Simplified Version of Rainfall-Runoff
+# In[ ]:
+
+
+print(max_df[max_df['count'] < 365])
+
+
+# We can use the interactive plot tools to zoom in on each of the specific years above.  The visibility of series can be toggled by clicking on the corresponding legend item.  
 # 
-# First, isolate a single precipitation event to use for estimating a runoff hydrograph.  Let's find a nice week for skiing:  
+# If we check each of the incomplete years above, we can see that some of the gaps in the Stave record correspond to large precipitation events at the precipitation stations on either side of the Stave River watershed, suggesting perhaps a gap of just a few days is related to a large event.  Consider how including a year that is missing its true largest event might affect the calculations that follow in developing the flood frequency curve.
 
 # In[ ]:
 
 
-fig, ax = plt.subplots(1, 1, figsize=(16,4))
+# create an array of years values of the years you want to exclude
+drop_years = [1984, 1989, 1991, 1993, 2001]
+# here, we filter the years we don't want to include in our annual maximum series 
+max_df_filtered = max_df[~max_df.index.year.isin(drop_years)]
 
-sample_start = pd.to_datetime('2014-12-01')
-sample_end = pd.to_datetime('2014-12-15')
-
-sample_df = df[(df.index > sample_start) & (df.index < sample_end)][['Total Precip (mm)', 'Total Snow (cm)', 'Total Rain (mm)']]
-
-# print(sample_df.head())
-
-ax.plot(sample_df.index, sample_df['Total Precip (mm)'], label="Total Precip [mm]")
-ax.plot(sample_df.index, sample_df['Total Snow (cm)'], label="Total Snow [cm]")
-ax.plot(sample_df.index, sample_df['Total Rain (mm)'], label="Total Rain [mm]")
-
-ax.set_xlabel('Date')
-ax.set_ylabel('Precipitation')
-ax.set_title('{}'.format(stn_name))
-plt.legend()
+print('After reviewing the dataset, there are {} years of record in the AMS.'.format(len(max_df_filtered)))
 
 
-# First, imagine we are some unfortunate parking lot attendant working a shift in Whistler Village at Parking Lot 5, and we are told by our cruel supervisor we have stand at the lowest point of the parking lot: a catchment basin with an area of $1 km^2$ where water runs off into FitzSimmons Creek.  The sky looks angry, but we're running late for work and put on our running shoes instead of our sturdy waterproof boots.  
+# ## Different Ways of Fitting a Probability Distribution to Measured Data
 # 
-# Next, assume the travel time is effectively zero across our entire basin (precipitation takes no time to travel to the outlet once it falls on the parking lot surface).  Is this a reasonable assumption in general?  
+# ### Method of Moments
 # 
-# Under these assumptions, lets reconstruct a runoff hydrograph at the outlet.  First, look at the precipitation data over the twelve days of the big storm. 
+# The method of moments is used to estimate the parameters of a distribution.  The parameters dictate the shape of the PDF, or the curve that approximates the histogram of measured data.  
+# 
+# ![GEV Densities](img/GEV_densities.png)
+# 
+# Source: [Wikipedia](https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution)
+
+# The GEV is a family of distributions, of which the first type (Type 1) is also known as the [Gumbel Distribution](https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution).
+# 
+# The Type 1 GEV (GEV1) and Log-Pearson III are commonly used in flood frequency analysis, though we will not go further in the assumptions underlying the types of distributions here, except to say the tail behaviour (which we are interested in because it defines the flows associated with the highest return periods) is governed by the shape parameter ($\xi$), so it's important.  The GEV1 assumes $\xi = 0$
+# 
+# The probability of non-exceedence is given by the double exponential:
+# 
+# $$G(x) = 1 - e^{-e^{-y}}$$
+# 
+# The return period ($T$) is the inverse of $G(x)$.  The Gumbel reduced variate is given by:
+# 
+# $$y = -\ln{ \left( \ln{ \left(\frac{T}{T-1} \right) } \right) }$$
+# 
+# ![Gumbel table](img/gumbel_table.png)
+# 
+# From above, we know the length of record is $n=29$, so:
+# 
+# | $n$ | $\bar{y}_n$ | $\sigma_n$ |
+# |---|---|---|
+# | 29 | 0.5353 | 1.1086 |
+# 
+# 
+# 
+# A tutorial for fitting a Gumbel distribution using Excel is provided [here.](https://serc.carleton.edu/hydromodules/steps/166250.html)
 
 # In[ ]:
 
 
-print(sample_df)
+def gumbel_formula(t, ybar_n, xbar, sigma_n, sigma):
+    """
+    Return an estimated flood quantile based on the Gumbel formula.
+    The parameters are
+    described above in Table A-8.
+    Inputs are:
+        t: return period (years)
+        ybar_n: gumbel variate (from Table provided),
+        xbar: sample mean,
+        sigma_n: Gumbel standard deviation (from Table provided),
+        sigma: sample standard deviation
+    Returns: flow corresponding to return period t
+    """
+    y = -np.log(np.log(t / (t - 1)))
+    return  xbar + ((y - ybar_n)/sigma_n) * sigma
+
+# define the return periods you want to calculate flows for and their associated probabilities
+tr = [2.3, 5, 10, 20, 50, 100, 200, 500]
+pr = [1/t for t in tr]
+
+# Apply the gumbel formula to the selected return periods to estimate return period flood.
+# Look at the format of the inputs to figure out what to replace #value1 and #value2 
+# below with
+
+# q_gumbel = [gumbel_formula(t, #value1, mean_q, #value2, stdev_q) for t in tr]
+mean_q, stdev_q = max_df['Value'].mean(), max_df['Value'].std()
+q_gumbel_alldata = [gumbel_formula(t, 0.5353, mean_q, 1.1086, stdev_q) for t in tr]
+# repeat for the filtered dataset
+mean1_q, stdev1_q = max_df_filtered['Value'].mean(), max_df_filtered['Value'].std()
+q_gumbel_filtered = [gumbel_formula(t, 0.5396, mean_q, 1.1255, stdev_q) for t in tr]
 
 
-# ### Convert Volume to volmeteric flow units
+# ### Plot the results against the measured data
 # 
-# Runoff is typically measured in $\frac{m^3}{s}$, so convert $\frac{mm}{day}$ precipitation to $\frac{m^3}{s}$ runoff.
+# The appropriate method of fitting a probability distribution to measured data has been argued for decades.
 # 
-# $$1 \frac{mm}{day} \times \frac{1 m}{1000 mm} \times \frac{1 day}{24 h} \times \frac{1 h}{ 3600 s} \times 1 km^2 \times \frac{1000 m \times 1000 m}{1 km^2}= \frac{1}{86.4} \frac{m^3}{s}$$
+# In the case of Stave River, we have 34 years of record.  It's intuitive to think that the highest flow measured in that time has a probability of $\frac{1}{34}$, and a return period of 34 years, but this is incorrect.  Various adjustments to the way in which probabilities are assigned have been proposed over the decades (reference). These adjustments are referred to as *plotting positions*, and their aim is to apply a transformation to the measured data such that the data form a straight line.  If the data fall on the line exactly, the plotting position is said to be unbiased.  
+# 
+# A general plotting position formula is as follows:
+# 
+# $$\frac{1}{T} = P = \frac{m - a}{n + 1 - 2a}$$
+# 
+# Where $m$ is the rank (largest value = 1), $n$ is the sample size (number of years), and $a$ is some empirical value.  
+# 
+# The table below shows something of a history of plotting positions (from Cunnane, 1977):
+# 
+# | Source | Value of $a$ |
+# |---|---|
+# | Hazen (1914) | 0.5 |
+# | California dept. of Public Works (1923) | $\frac{(i-1)}{N}$, $\frac{i}{N}$ |
+# | Weibull (1939) | 0 |
+# | Beard (1943), Gumbel (1943), Kimball (1946) | 0.31 |
+# | Blom (1958) | $\frac{3}{8}$ |
+# | Tukey (1962) |  $\frac{1}{3}$ |
+# | Gringorten (1963) | 0.44 |
 
 # In[ ]:
 
 
-# convert to runoff volume
-drainage_area = 1 # km^2
+# first, we need to sort the measured data by rank
+# and calculate probabilities associated with the measured data.
+# The largest flood value should have rank 1
+max_df = max_df.sort_values('rank')
 
-# runoff is typically measured in m^3/s (cms for short -- cubic metres per second), 
-# so express the runoff in cms
-sample_df['runoff_cms'] = sample_df['Total Rain (mm)'] / 86.4
-print(sample_df)
+# calculate the probabilty P and return period Tr
+max_df['P'] = max_df['rank'] / (len(max_df) + 1)
+max_df['Tr'] = [1/e for e in max_df['P']]
 
-
-# If the channel outlet has a rectangular shape of width 2m, how tall should our boots be?  Assume a 2% slope, and find a reasonable assumption for the roughness of asphalt.
-# 
-# Recall the Manning equation:
-# 
-# $$Q = \frac{1}{n} A R^{2/3} S^{1/2}$$
-# 
-# Where:
-# * **n** is the manning roughness
-# * **A** is cross sectional area of the flow
-# * **R** hydraulic radius (area / wetted perimeter)
-# * **S** is the channel slope
 
 # In[ ]:
 
 
-w_channel = 1.5 # m
-S = 0.005 # channel slope
-n_factor = 0.017  # rough asphalt
+def plotting_position(m, a, n):
+    """
+    Return an adjusted plotting position (probability)
+    based on the rank m, the plotting position a, and the length of record n.
+    """
+    return (m - a) / (n + 1 - 2 * a)
 
-def calc_Q(d, w, S, n):
-    """
-    Calculate flow from the Manning equation.
-    """
-    A = d * w
-    wp = w + 2 * d  # wetted perimeter
-    R = A / wp
-    return (1/n) * A * R**(2/3) * S**(1/2)
 
-def solve_depth(w, n_factor, Q, S):
+# In[ ]:
+
+
+fig, ax = plt.subplots(1, 1, figsize=(10,6))
+plt.plot(tr, q_gumbel_alldata, label="Gumbel (All data)",
+        color='dodgerblue')
+plt.plot(tr, q_gumbel_filtered, label="Gumbel (filtered)",
+        color='dodgerblue', linestyle='--')
+plt.scatter(max_df['Tr'], max_df['Value'], 
+            label='Measured Annual Maxima (all data)', c='red')
+
+ax.set_title('Stave River Annual Maximum Daily Average Flow')
+ax.set_xlabel('Return Period (years)')
+ax.set_ylabel('Q [m^3/s]')
+# ax.set_xlim(0,200)
+plt.xscale('log')
+ax.legend()
+
+
+# ## Log Pearson III Distribution
+# 
+# A distribution commonly used for estimating return period floods in BC is the Log-Pearson III distribution.  Here we will plot it against the GEV1 previously developed, and we'll take a look at the effects of our data review, where we'll plot both the GEV and LP3 using the entire dataset (without excluding any years) as well as a filtered dataset where we remove years where there is some likelihood the annual peak was missing from the record.
+
+# In[ ]:
+
+
+def calculate_LP3(values, Tr):
     """
-    Given a flow, a roughness factor, a channel slope, and a channel width, 
-    calculate flow depth. 
-    """
-    e = 1 / 100  # solve within 1%
-    d = 0
-    Q_est = 0
-    n = 0
-    while (abs(Q_est - Q) > e) & (n < 1000):
-        Q_est = calc_Q(d, w, S, n_factor)
-#         print(Q, Q_est, abs(Q_est - Q))
-        d += 0.001
-        n += 1
-#     print('solved in {} iterations'.format(n))
-    return d 
+    Fit a log-Pearson III distribution to a sample of extreme values
+    given a desired set of return periods (Tr).
+    """    
+    q_skew = st.skew(values)
+    log_skew = st.skew(np.log10(values))
     
+    # calculate the CDF
+    z = pd.Series([st.norm.ppf(1-(1/return_p)) if return_p != 1 else st.norm.ppf(1-(1/return_p + 0.1)) for return_p in tr])
+    lp3 = 2 / log_skew * (np.power((z - log_skew/6)*log_skew/6 + 1, 3)-1)
+    lp3_model = np.power(10, np.mean(np.log10(values)) + lp3 * np.std(np.log10(values)))
+    return lp3_model
 
 
 # In[ ]:
 
 
-# For each timestep, we want to solve for the depth of water at our outlet
-sample_df['flow_depth_m'] = sample_df['runoff_cms'].apply(lambda x: solve_depth(w_channel, n_factor, x, S))
+# now set up the filtered AMS series to calculate the LP3 distribution
+max_df_filtered = max_df_filtered.sort_values('rank')
+
+# calculate the probabilty P and return period Tr
+max_df_filtered['P'] = max_df_filtered['rank'] / (len(max_df_filtered) + 1)
+max_df_filtered['Tr'] = [1/e for e in max_df_filtered['P']]
 
 
 # In[ ]:
 
 
-plt.plot(sample_df.index, sample_df['flow_depth_m'])
-plt.ylabel('Flow depth [m]')
+lp3_model = calculate_LP3(max_df['Value'], tr).to_numpy()
+lp3_model_filtered = calculate_LP3(max_df_filtered['Value'], tr).to_numpy()
+
+fig, ax = plt.subplots(1, 1, figsize=(12,8))
+
+plt.plot(tr, q_gumbel_alldata, label="Gumbel (34 years)", color='dodgerblue')
+plt.plot(tr, q_gumbel_filtered, label="Gumbel (29 years)",
+        color='dodgerblue', linestyle='--')
+plt.plot(tr, lp3_model, label="LP3 (34 years)", color='green')
+plt.plot(tr, lp3_model_filtered, label="LP3 (29 years)", color='green', 
+         linestyle='--')
+
+plt.scatter(max_df['Tr'].to_numpy(), max_df['Value'].to_numpy(), 
+            label='Measured Annual Maxima', c='red')
+
+ax.set_title('Stave River Annual Maximum Daily Average Flow')
+ax.set_xlabel('Return Period (years)')
+ax.set_ylabel('Flow [m^3/s]')
+plt.xscale('log')
+ax.legend()
+plt.show()
 
 
-# >**Not only are our feet wet, but if we happen to be there the peak it's potentially dangerous.  As little as 10-15cm of water moving fast enough can sweep you off your feet.**
-
-# ![Recalculating Life](img/recalculating.png)
-
-# ## More Complex Implementation: Spatial Data
+# ## Risk and Uncertainty in Design 
 # 
-# As discussed in class, precipitation takes time to travel from where it fell to the basin outlet.  Next we will estimate the runoff response in a real catchment, just upstream from the parking lot example in the FitzSimmons Creek basin.
+# It is often the case that engineers are asked to extrapolate well beyond the range of measured data. 
 
-# ### Step 1: Instantiate a grid from a DEM raster
-# Some sample data is already included, but for extra data, see the [USGS hydrosheds project](https://www.hydrosheds.org/).
-
-# In[ ]:
-
-
-# grid = Grid.from_raster('data/n45w125_con_grid/n45w125_con/n45w125_con', data_name='dem')
-grid = Grid.from_ascii(path='../../data/notebook_5_data/n49w1235_con_grid.asc', 
-                       data_name='dem')
-
-
-# In[ ]:
-
-
-# reset the nodata from -32768 so it doesn't throw off the 
-# DEM plot
-grid.nodata = 0
-
-
-# In[ ]:
-
-
-# store the extents of the map
-map_extents = grid.extent
-min_x, max_x, min_y, max_y = map_extents
-
-
-# ### Plot the DEM
+# ## Additional Considerations regarding Distribution Selection
 # 
-# **NOTE:** The cell below may take up to 30 seconds to load.  Please be patient, it is thinking really hard. 
+# [Bulletin 17B](https://water.usgs.gov/osw/bulletin17b/dl_flow.pdf) of the USDOE Hydrology Subcommittee of the Water Resources Council recommends the Log-Pearson Type III as the distribution for defining annual flood series.  Consider what Bulletin 17B says about sample size and extrapolation.  
 # 
-# The code below will plot the Digital Elevation Model (DEM).  
+# The annual maximum flood events are assumed to be **independent and identically distributed (IID).**
 # 
-# Do you recognize any features of the terrain?  Can you locate where it is?
+# Parts D and E (pg 7 in Bulletin 17B) discuss **mixed populations** and **measurement error**, respectively. These will be addressed sequentially.
+
+# ### Mixed Populations
 # 
-# Hover over the map (or touch if using a touchscreen) to see the coordinates in decimal degree units.
+# Here, we'll briefly revisit the histogram of annual maximum flows we saw near the beginning of this notebook.  
 # 
-# What does the [precision of the coordinates represent](http://wiki-1-1930356585.us-east-1.elb.amazonaws.com/wiki/index.php/Decimal_degrees)?  
-# * i.e. what does 5 decimal places in decimal degrees equate to in kilometers?
+# The mechanisms driving flood events may not be homogeneous.  For instance, the annual maximum flow may be due to snowmelt, precipitation, or a combination of the two. Recall from above (and please forgive my bad sketch of a PDF):
 # 
-# You can interact with the plot by using the tools on the left (in vertical order from top to bottom):
-# * **pan:** move around the map
-# * **box zoom:** draw a square to zoom in on
-# * **wheel zoom:** use the mousewheel (or pinch gesture on a touchscreen) to zoom in
-# * **box zoom:** draw a square to zoom in on
-# * **tap**: not yet implemented (but you can see the coordinates)
-# * **refresh**: reset the map
-# * **hover**: see the coordinates when hovering over the map with a mouse or pointer
-
-# In[ ]:
-
-
-# set bokeh plot tools
-tools = "pan,wheel_zoom,box_zoom,reset,tap"
-
-# show the precision of the decimal coordinates
-# in the plot to 5 decimal places
-TOOLTIPS = [
-    ("(x,y)", "($x{1.11111}, $y{1.11111})"),
-]
-
-# create a figure, setting the x and y ranges to the appropriate data bounds
-p1 = figure(title="DEM of the Lower Mainland of BC.  Hover to get coordintes.", plot_width=600, plot_height=int(400),
-            x_range = map_extents[:2], y_range = map_extents[2:], 
-            tools=tools, tooltips=TOOLTIPS)
-
-# map elevation to a colour spectrum
-color_mapper = LinearColorMapper(palette="Magma256", low=-200, high=2400)
-
-# np.flipud flips the image data on a vertical axis
-adjusted_img = [np.flipud(grid.dem)]  
-
-p1.image(image=adjusted_img,   
-         x=[min_x],               # lower left x coord
-         y=[min_y],               # lower left y coord
-         dw=[max_x-min_x],        # *data space* width of image
-         dh=[max_y-min_y],        # *data space* height of image
-         color_mapper=color_mapper
-)
-
-color_bar = ColorBar(color_mapper=color_mapper, #ticker=Ticker(),
-                     label_standoff=12, border_line_color=None, location=(0,0))
-
-p1.add_layout(color_bar, 'right')
-
-
-show(p1)
-
-# -123.15512, 49.41293
-#-123.14657, 49.41080
--123.14350, 49.40251
-
-
-# ### Resolve flats in DEM
-
-# In[ ]:
-
-
-grid.resolve_flats('dem', out_name='inflated_dem')
-
-
-# ### Specify flow direction values
-
-# In[ ]:
-
-
-#         N    NE    E    SE    S    SW    W    NW
-dirmap = (64,  128,  1,   2,    4,   8,    16,  32)
-
-
-# In[ ]:
-
-
-grid.flowdir(data='inflated_dem', out_name='dir', dirmap=dirmap)
-
-
-# In[ ]:
-
-
-fig = plt.figure(figsize=(8,6))
-fig.patch.set_alpha(0)
-
-plt.imshow(grid.dir, extent=grid.extent, cmap='viridis', zorder=2)
-boundaries = ([0] + sorted(list(dirmap)))
-plt.colorbar(boundaries= boundaries,
-             values=sorted(dirmap))
-plt.xlabel('Longitude')
-plt.ylabel('Latitude')
-plt.title('Flow direction grid')
-plt.grid(zorder=-1)
-plt.tight_layout()
-# plt.savefig('data/img/flow_direction.png', bbox_inches='tight')
-
-
-# In[ ]:
-
-
-# view the values of the raster as an array
-grid.dir
-
-
-# In[ ]:
-
-
-# check the size of the raster
-grid.dir.size
-
-
-# ### Delineate a Catchment
+# ![Bimodal Distribution](img/bimodal_diagram.png)
 # 
-# Note that once you've executed the code in the cells below,
-# if you change the Point of Concentration (POC), you'll
-# need to go back to Step 1 and execute the code from there again.
+# How might we check if there is a clear distinction between annual floods derived from different types of event?  High flows generated by snowmelt and those generated by early winter ['pineapple express'](https://oceanservice.noaa.gov/facts/pineapple-express.html) precipitation events are unique, and are likely the reason the probability distribution of the AMS at Stave River shows a bimodal distribution, however **the sample size is small, so the shape of the distribution could also be due to sampling variability**.
+
+# What can we check to understand the processes which drive the largest magnitude runoff (flow) events?
 # 
-# This needs to be done to re-initialize the extents of the data 
-# that are loaded into memory.  The intermediary steps trim the extent
-# of the DEM and you will get an error message saying:
+# * Check time of year
+# * Compare precipitation and snow values to peak events
+# * Look at temperature records
 # 
+# There is a [large body of literature](https://scholar.google.ca/scholar?q=mixed+modes+in+flood+frequency+analysis%27&hl=en&as_sdt=0&as_vis=1&oi=scholart) investigating the treatment of mixed modes in flood frequency analysis.
+
+# ### Measurement Error & Sensitivity
 # 
-# >`ValueError: Pour point (-123.94307, 49.40783) is out of bounds for dataset with bbox (-123.195000000122, 49.39999999984, -123.15333333347199, 49.421666666498).`
-# 
-# 
-
-# In[ ]:
-
-
-# Specify the Point of Concentration (POC) / Catchment Outlet (a.k.a. pour point) 
-# This location is a tributary of the Capilano River, just above the reservoir above
-# Cleveland Dam.
-x, y = -123.14657, 49.41080
-x, y = -123.14350, 49.40251
-
-# And just for good measure, here's the little tributary in the south-west corner.
-# Note the instructions above about reloading the original data to re-initialize
-# the DEM
-x, y = -123.15512, 49.41293
-
-# Delineate the catchment
-grid.clip_to('dem')
-grid.catchment(data='dir', x=x, y=y, dirmap=dirmap, out_name='catch',
-               recursionlimit=15000, xytype='label', nodata_out=0)
-
-
-# In[ ]:
-
-
-# Clip the bounding box to the catchment we've chosen
-grid.clip_to('catch', pad=(1,1,1,1))
-
-
-# In[ ]:
-
-
-# Create a view of the catchment
-catch = grid.view('catch', nodata=np.nan)
-
-
-# In[ ]:
-
-
-# check the shape to see if we've estimated close enough to the 
-# actual river to delineate the catchment successfully
-print(catch.shape)
-# if we get dimensions of < 10, we've missed and instead pointed at some 
-# little hillslope
-
-
-# In[ ]:
-
-
-print(grid.extent)
-ext_1 = grid.extent
-
-
-# In[ ]:
-
-
-# Plot the catchment
-fig, ax = plt.subplots(figsize=(8,6))
-fig.patch.set_alpha(0)
-
-plt.grid('on', zorder=0)
-im = ax.imshow(catch, extent=grid.extent, zorder=1, cmap='viridis')
-plt.colorbar(im, ax=ax, boundaries=boundaries, values=sorted(dirmap), label='Flow Direction')
-plt.xlabel('Longitude')
-plt.ylabel('Latitude')
-plt.title('Delineated Catchment')
-# plt.savefig('data/img/catchment.png', bbox_inches='tight')
-
-
-# ### Get flow accumulation
-
-# In[ ]:
-
-
-grid.accumulation(data='catch', dirmap=dirmap, out_name='acc')
-
-
-# In[ ]:
-
-
-fig, ax = plt.subplots(figsize=(8,6))
-fig.patch.set_alpha(0)
-plt.grid('on', zorder=0)
-acc_img = np.where(grid.mask, grid.acc + 1, np.nan)
-im = ax.imshow(acc_img, extent=grid.extent, zorder=2,
-               cmap='cubehelix',
-               norm=colors.LogNorm(1, grid.acc.max()))
-plt.colorbar(im, ax=ax, label='Upstream Cells')
-plt.title('Flow Accumulation')
-plt.xlabel('Longitude')
-plt.ylabel('Latitude')
-# plt.savefig('data/img/flow_accumulation.png', bbox_inches='tight')
-
-
-# In[ ]:
-
-
-
-
-
-# ### Calculate distances to upstream cells
-
-# In[ ]:
-
-
-grid.flow_distance(data='catch', x=x, y=y, dirmap=dirmap, out_name='dist',
-                   xytype='label', nodata_out=np.nan)
-
-
-# In[ ]:
-
-
-fig, ax = plt.subplots(figsize=(8,6))
-fig.patch.set_alpha(0)
-plt.grid('on', zorder=0)
-im = ax.imshow(grid.dist, extent=grid.extent, zorder=2,
-               cmap='cubehelix_r')
-plt.colorbar(im, ax=ax, label='Distance to outlet (cells)')
-plt.xlabel('Longitude')
-plt.ylabel('Latitude')
-plt.title('Flow Distance')
-# plt.savefig('data/img/flow_distance.png', bbox_inches='tight'),
-
-
-# In[ ]:
-
-
-area_threshold=20
-fig, ax = plt.subplots(figsize=(8,6))
-fig.patch.set_alpha(0)
-plt.grid('on', zorder=0)
-streamnetwork_img = np.where(acc_img>area_threshold, 100, 1+acc_img*0)
-# print([['nan' if np.isnan(i) else cmap[i] for i in j] for j in streamnetwork_img])
-labels = {1:'Catchment', 2: 'Outside Catchment', 100: 'Stream Network'}
-cmap = {1: [0.247, 0.552, 0.266, 0.5], 
-        100: [0.074, 0.231, 0.764, 0.8],
-       2: [0.760, 0.760, 0.760, 0.8]}
-
-arrayShow = np.array([[cmap[2] if np.isnan(i) else cmap[i] for i in j] for j in streamnetwork_img])    
-## create patches as legend
-
-patches =[mp.Patch(color=cmap[i],label=labels[i]) for i in cmap]
-
-#streamnetwork_img = np.where(grid.mask, > 100, 10 , 1)
-# im = ax.imshow(streamnetwork_img, extent=grid.extent, zorder=2,
-#                 cmap='cubehelix')
-im = ax.imshow(arrayShow)
-plt.legend(handles=patches, loc=1, borderaxespad=0.)
-# plt.colorbar(im, ax=ax, label='Upstream Cells')
-plt.title('Stream network')
-plt.xlabel('Longitude')
-plt.ylabel('Latitude')
-# plt.savefig('data/img/stream_network.png', bbox_inches='tight')
-
-
-# ### Calculate weighted travel distance
-# 
-# Assign a travel time to each cell based on the assumption that water travels at one speed (slower) until it reaches a stream network, at which point its speed increases dramatically.
-
-# In[ ]:
-
-
-fig, ax = plt.subplots(figsize=(8,6))
-fig.patch.set_alpha(0)
-
-plt.grid('on', zorder=0)
-grid.clip_to('catch', pad=(1,1,1,1))
-acc = grid.view('acc')
-
-# calculate weights.
-# assume the threshold is 100 accumulation cells 
-# (of roughly 500mx500m) results in stream
-weights = (np.where(acc, 0.1, 0)
-               + np.where((0 < acc) & (acc <= 100), 1, 0)).ravel()
-
-weighted_dist = grid.flow_distance(data='catch', x=x, y=y, weights=weights,
-                   xytype='label', inplace=False)
-
-im = ax.imshow(weighted_dist, extent=grid.extent, zorder=2,
-               cmap='cubehelix_r')
-# plt.legend(handles=patches, loc=1, borderaxespad=0.)
-plt.colorbar(im, ax=ax, label='Upstream Cells')
-plt.title('Stream network')
-plt.xlabel('Longitude')
-plt.ylabel('Latitude')
-
-
-# ## Develop Rainfall-Runoff Model
-# 
-# Now that we have weighted flow distances for each cell in the delineated catchment, we can apply precipitation to each 'cell' in order to reconstruct a flow hydrograph.  
-# 
-# First, we must figure out the cell dimensions.  From the [USGS Hydrosheds information](https://hydrosheds.cr.usgs.gov/datadownload.php), we know the resolution is 15 (degree) seconds.  Because of the odd shape of the earth, and the projection of coordinate systems onto the earth, there is a little bit of work involved in converting the DEM resolution to equivalent distances.  For the purpose of this exercise, we will assume cells are 300x300m.  You can check the approximation [here](https://opendem.info/arc2meters.html) for a latitude of 49 degrees.
-
-# In[ ]:
-
-
-# cells can be grouped by their weighted distance to the outlet to simplify 
-# the process of calculating the contribution of each cell to flow at the outlet
-
-dist_df = pd.DataFrame()
-dist_df['weighted_dist'] = weighted_dist.flatten()
-# trim the distance dataframe to include only the cells in the catchment,
-# and round the travel time to the nearest one (hour)
-dist_df = dist_df[dist_df['weighted_dist'] > 0].round(0)
-
-
-# In[ ]:
-
-
-start_date = sample_df.index.values[0]
-end_date = sample_df.index.values[-1]
-# create an hourly dataframe based on the sample precipitation event
-# then resample the values to evenly distribute the total daily 
-# precipitation to hourly precipitation
-resampled_df = sample_df.resample('1H').pad() / 24
-
-
-# Note that our 'weighted distance' has just provided a relative difference between the flow accumulation cells and non-flow-accumulation cells.  We still must convert these values to some time-dependent form.
-# 
-# For this exercise, we will assume the average velocity of water is 1 m/s value for the flow accumulation cells, and 0.1 m/s for the other cells.  Therefore precipitation will take on average 300s (0.0833 h) and 3000s (0.833 h) to travel to the outlet for flow-accumulation and non-flow-accumulation cells, respectively.
-
-# In[ ]:
-
-
-# get the number of cells of each distance
-grouped_dists = pd.DataFrame(dist_df.groupby('weighted_dist').size())
-grouped_dists.columns = ['num_cells']
-
-
-# In[ ]:
-
-
-# create unit hydrographs for each timestep
-runoff_df = pd.DataFrame(np.zeros(len(resampled_df)))
-runoff_df.columns = ['Total Precip (mm)']
-runoff_df.index = resampled_df.index.copy()
-end_date = pd.to_datetime(runoff_df.index.values[-1]) + pd.DateOffset(hours=1)
-max_distance = max(grouped_dists.index)
-
-extended_df = pd.DataFrame()
-extended_df['Total Precip (mm)'] = [0 for e in range(int(max_distance) + 1)]
-extended_df.index = pd.date_range(end_date, periods=max_distance + 1, freq='1H')
-
-# append the extra time to the runoff dataframe
-runoff_df = runoff_df.append(extended_df)
-runoff_df['Runoff (cms)'] = 0
-
-
-# **NOTE**: if you re-run the cell below, you need to run the cell above as well, or the runoff dataframe will not reset and the values will keep increasing.
-
-# In[ ]:
-
-
-cell_size = 300 # assume each pixel represents 300m x 300m 
-runoff_coefficient = 0.3
-
-
-for ind, row in resampled_df.iterrows():
-    this_hyd = resampled_df[['Total Precip (mm)']].copy()
-    for weight_dist, num_cells in grouped_dists.iterrows():
-        try: 
-            outlet_time = ind + pd.DateOffset(hours=weight_dist)
-            precip = num_cells.values[0] * row['Total Precip (mm)']
-            runoff_vol = precip * runoff_coefficient / 1000 * cell_size**2 
-            runoff_rate = runoff_vol  / 3600  # convert to m^3/s from m^3/h
-            runoff_df.loc[outlet_time, 'Runoff (cms)'] += runoff_rate
-        except KeyError as err:
-            print('error')
-            break
-#             print(err)
-#             print(ind, row)
-
-
-# In[ ]:
-
-
-fig, ax = plt.subplots(1, 1, figsize=(16,4))
-
-sample_start = pd.to_datetime('2014-12-01')
-sample_end = pd.to_datetime('2014-12-15')
-
-sample_df = df[(df.index > sample_start) & (df.index < sample_end)][['Total Precip (mm)', 'Total Snow (cm)', 'Total Rain (mm)']]
-
-# print(sample_df.head())
-# plot the original daily precip
-# ax.plot(sample_df.index, sample_df['Total Precip (mm)'], label="Total Precip [mm]")
-# ax.plot(sample_df.index, sample_df['Total Snow (cm)'], label="Total Snow [cm]")
-# ax.plot(sample_df.index, sample_df['Total Rain (mm)'], label="Total Rain [mm]")
-ax.plot(runoff_df.index, runoff_df['Runoff (cms)'], label="Runoff")
-
-
-ax.set_xlabel('Date')
-ax.set_ylabel('Runoff [cms]', color='blue')
-ax.set_title('Example Rainfall-Runoff Model')
-ax.legend(loc='upper left')
-ax.tick_params(axis='y', colors='blue')
-
-ax1 = ax.twinx()
-ax1.plot(sample_df.index, sample_df['Total Rain (mm)'], 
-         color='green',
-         label="Total Rain")
-ax1.set_ylabel('Precipitation [mm]', color='green')
-ax1.tick_params(axis='y', colors='green')
-ax1.legend(loc='upper right')
-
-
-# ### Determine the Peak Unit Runoff
-# 
-# First, estimate the drainage area.  Then, find the peak hourly flow.
-
-# In[ ]:
-
-
-DA = round(grouped_dists.sum().values[0] * 0.3 * 0.3, 0)
-max_UR = runoff_df['Runoff (cms)'].max() / DA * 1000
-print('The drainage area is {} km^2 and the peak Unit Runoff is {} L/s/km^2'.format(DA, int(max_UR)))
-
-
-# Discuss the limitations of the approach.  Where do uncertainties exist?
-# 
-# * assumed precipitation is constant across days
-# * assumed constant runoff coefficient
-# * assumed two weights for travel time, constant across time
+# In the introduction, we laid out the extent to which we rely on extrapolation in estimating return period flows.  This question is analogous to the assumption that the error in measurement is a random variable following some distribution.  Considering this random error exists in our measurements, what happens to the LP3 fit if we change any of the peak values by some amount?  
 
 # ## Question for Reflection
 # 
-# For the first part where we estimated the water level at the parking lot outlet based on an assumption that there was zero infiltration, assuming all else is equal, how could we reduce the maximum water level to 5 cm?  
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
+# Recall the discussion in the previous notebooks concerning extrapolation.  Return periods in the range of 100 and 200 years are commonly used for input design parameters in hydraulic structures, and ultimately the design values reflect a tradeoff between risk (environmental, financial, worker safety) and construction costs.  
+# 
+# Provide a brief discussion (500 words maximum) about the uncertainty introduced at various levels in deriving the estimate of the 100 year return period for Stave River.  Consider the difference (in this case) in the estimated 100 year return period flow based on using all the data vs. removing some years from the record, and compare it to the difference between the estimates generated between the GEV and LP3 distributions.  Consider how measurement uncertainty might affect the 100 year return flood estimate.

@@ -12,12 +12,12 @@ parts:
 - caption: Rating Curve Development
   chapters:
   - file: notebooks/Notebook_2/Notebook_2
-- caption: Extreme Values, Uncertainty, and Risk
-  chapters:
-  - file: notebooks/Notebook_3/Notebook_3
 - caption: Regional Information Transfer
   chapters:
-  - file: notebooks/Notebook_4/Notebook_4
+  - file: notebooks/Notebook_3/Notebook_3
 - caption: Rainfall-Runoff Model
+  chapters:
+  - file: notebooks/Notebook_4/Notebook_4
+- caption: Extreme Values, Uncertainty, and Risk
   chapters:
   - file: notebooks/Notebook_5/Notebook_5
