@@ -2,7 +2,9 @@
 
 This book consists of a set of interactive notebooks on the topic of applied hydrology, created by [Dan Kovacek](https://civil.ubc.ca/faculty/dan-kovacek/) and [Steven Weijs](https://civil.ubc.ca/faculty/steven-weijs/) at the University of British Columbia.  The notebooks were originally developed as a set of tutorials for courses in engineering hydrology (CIVL 418/551 and IWME 502).  The aim of these notebooks is to introduce students to programmatic data analysis using the open-source *Jupyter Notebook* software, which is a powerful interactive computing environment.
 
-**Students are not expected to have prior experience with programming.**  The emphasis of these notebooks is on hydrological concepts rather than computer science, so all necessary code is provided.  Each notebook will focus on a particular hydrologic concept, and students will be asked to answer questions about the hydrological concept that may require changing variables and re-running code blocks to update results.  The instructions provided with the code in the notebooks will facilitate the exploration of each concept.
+**Students are not expected to have prior experience with programming.**  The emphasis of these notebooks is on hydrological concepts rather than computer science, so all necessary code is provided.  Each notebook focuses on a particular component of hydrological analysis, and students will be asked to answer questions about the underlying concept that may require changing variables and re-running code blocks to update results.  The instructions provided with the code in the notebooks will facilitate the exploration of the concepts from a systems perspective.
+
+>**Note** The content of these notebooks does not represent a prescriptive set of methods for hydrological analysis.  Instead, the intent is to introduce some basic concepts through a series of activities that encourage thinking about uncertainty and sensitivity.
 
 
 ## Getting Started with Interactive Python Notebooks

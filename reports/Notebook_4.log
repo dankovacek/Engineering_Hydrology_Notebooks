@@ -31,16 +31,13 @@ import matplotlib.colors as colors
 
 # SEE COMMENTS ABOUT PYSHEDS LIBRARY IN NEXT CELL
 from pysheds.grid import Grid
-import warnings
-warnings.filterwarnings('ignore')
 
 from bokeh.plotting import figure, show
 from bokeh.io import output_notebook
-from bokeh.models import LinearColorMapper, LogTicker, ColorBar, BasicTickFormatter
+from bokeh.models import LinearColorMapper, LogTicker, ColorBar, BasicTickFormatter, VBar, ColumnDataSource
 from bokeh.io import output_notebook
 output_notebook()
 
-%matplotlib inline
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
