@@ -415,8 +415,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-precipitation-data">
-   Import Precipitation Data
+  <a class="reference internal nav-link" href="#find-import-precipitation-data">
+   Find &amp; Import Precipitation Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -547,8 +547,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-precipitation-data">
-   Import Precipitation Data
+  <a class="reference internal nav-link" href="#find-import-precipitation-data">
+   Find &amp; Import Precipitation Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -708,7 +708,7 @@ title="Print to PDF"
 <h3>Problem Setup<a class="headerlink" href="#problem-setup" title="Permalink to this headline">#</a></h3>
 <p>Let’s imagine you had a summer job in Whistler working on a project to grade and re-pave the area around Day Lot 4, including installing drainage to capture water from the parking lot and divert it to a storm water collection system instead of draining into FitzSimmons Creek.</p>
 <p><img alt="Satellite Image of the Day Lot 4 area in Whistler" src="../../_images/lot4_diagram1.png" /></p>
-<p>It’s summer and the project is scheduled to be completed by fall.  For the sake of this exercise, assume the slope of the parking lot area describes a catchment of roughly <strong>1 <span class="math notranslate nohighlight">\(km^2\)</span></strong> and empties through a temporary channel into a catch basin to be treated before flowing into FitzSimmons Creek.  Unfortunately, beyond the outlet (red dot in the diagram above), the channel has to cross the pedestrian trail that follows the river left bank.  Assume the channel is rectangular in shape, and is 2m wide by 0.25m deep with a hydraulic grade slope of 0.5%.  Assume that sheet flow occurs for 100m in any part of the basin, beyond which channelized flow forms, so we have two times to calculate, <span class="math notranslate nohighlight">\(t_{sheet}\)</span> and <span class="math notranslate nohighlight">\(t_{channel}\)</span>:</p>
+<p>It’s summer and the project is scheduled to be completed by fall.  For the sake of this exercise, assume the slope of the parking lot area describes a catchment of roughly <strong>1 <span class="math notranslate nohighlight">\(km^2\)</span></strong> and empties through a temporary channel into a catch basin to be treated before flowing into FitzSimmons Creek.  Unfortunately, beyond the outlet (red dot in the diagram above), the channel has to cross the pedestrian trail that follows the river left bank.  Assume the channel is rectangular in shape, and is 2m wide by 0.25m deep with a hydraulic grade slope of 0.5%.</p>
 <ul class="simple">
 <li><p><strong>Channel width (w)</strong>: <span class="math notranslate nohighlight">\(2m\)</span></p></li>
 <li><p><strong>Channel Depth (h)</strong>: <span class="math notranslate nohighlight">\(0.25m\)</span></p></li>
@@ -720,8 +720,8 @@ title="Print to PDF"
 </div></blockquote>
 </section>
 </section>
-<section id="import-precipitation-data">
-<h2>Import Precipitation Data<a class="headerlink" href="#import-precipitation-data" title="Permalink to this headline">#</a></h2>
+<section id="find-import-precipitation-data">
+<h2>Find &amp; Import Precipitation Data<a class="headerlink" href="#find-import-precipitation-data" title="Permalink to this headline">#</a></h2>
 <p>We can use the application from the <a class="reference external" href="https://data.pacificclimate.org/portal/pcds/map/">Pacific Climate Impacts Consortium</a> (PCIS) to retrieve climate observations in the Whistler area. For this exercise, we will use historical climate data from the Meteorological Service of Canada (MSC) station at Whistler, BC.  Using the <em>Observation Frequency</em> filter provided, there appear to be a few climate stations with hourly precipitation data:</p>
 <p><img alt="Location of Environment Canada climate stations at Whistler with hourly data." src="../../_images/pcds_hourly_stn.png" /></p>
 <p>We’ll look at one (<em>ID 1048899: Whistler (2014-2022)</em>) as an example.  Well, no we won’t because it turns out this station does not actually have hourly data, nor do any of the others <em>except one</em> (925 - green triangle circled in red).  <strong>You will always be responsible for your own data validation.</strong>  In the PCIS database has hourly data available at only one location in the Whistler area, and it’s from the Ministry of Forests, Lands, and Resource Operations Wildfire Management Branch (FLNRO-WMB) for a brief period in 2005 (ID 925 ZZ REMSATWX1).</p>
@@ -730,12 +730,12 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import precipitation data</span>
 <span class="c1"># note that the ascii file uses the string &#39;None&#39; for NaN </span>
 <span class="c1"># and we need to fix this.  </span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../notebook_data/notebook_4_data/925.ascii&#39;</span><span class="p">,</span>
+<span class="n">hourly_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../notebook_data/notebook_4_data/925.ascii&#39;</span><span class="p">,</span>
 <span class="n">header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39; None&#39;</span><span class="p">],</span> <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39; time&#39;</span><span class="p">])</span>
 <span class="c1"># note that the ascii format imports the column headers with spaces</span>
 <span class="c1"># that need to be cleaned up</span>
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
-<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">hourly_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">hourly_df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+<span class="n">hourly_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

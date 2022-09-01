@@ -163,25 +163,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Extreme Values, Uncertainty, and Risk
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_3/Notebook_3.html">
-   Notebook 3: Extreme Values, Uncertainty, and Risk
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
   Regional Information Transfer
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Notebook_4/Notebook_4.html">
-   Notebook 4: Characterization of Long-Term Runoff
+  <a class="reference internal" href="../Notebook_3/Notebook_3.html">
+   Notebook 3: Regional Information Transfer
   </a>
  </li>
 </ul>
@@ -192,8 +180,20 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../Notebook_4/Notebook_4.html">
+   Notebook 4: Rainfall-Runoff Modelling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Extreme Values, Uncertainty, and Risk
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_5/Notebook_5.html">
-   Notebook 5: Rational Method and Travel Times
+   Notebook 5: Extreme Values, Uncertainty, and Risk
   </a>
  </li>
 </ul>
@@ -578,7 +578,7 @@ title="Print to PDF"
 
 <span class="c1"># numpy is a fundamental library for scientific computing</span>
 <span class="c1"># based on the representation of data as arrays</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np.</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># matplotlib is a plotting library</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -586,10 +586,21 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np.</span>
-                      <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 7&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import libraries</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># --&gt; libraries are collections of functions developed by communities of </span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># open source software developers that typically focus on solving very specific problems</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># pandas is a library that manipulates &quot;dataframes&quot;, table-like structures,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># to efficiently run operations on large datasets</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># numpy is a fundamental library for scientific computing</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># based on the representation of data as arrays</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
 </pre></div>
 </div>
 </div>
