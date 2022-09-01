@@ -30,7 +30,7 @@ import pandas as pd
 
 # numpy is a fundamental library for scientific computing
 # based on the representation of data as arrays
-import numpy as np.
+import numpy as np
 
 # matplotlib is a plotting library
 from matplotlib import pyplot as plt

@@ -46,7 +46,7 @@ temperature_range
 
 # ## Markdown
 # 
-# <img src="img/block_type.png" alt="Block-type dropdown menu" style="width: 400px;">
+# ![Block-type dropdown menu](img/block_type.png)
 # 
 # This cell/block is set to "Markdown" which is an easy way to format text nicely.  
 # 

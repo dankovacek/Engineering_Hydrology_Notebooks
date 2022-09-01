@@ -1,13 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Notebook 4: Rational Method and Travel Times
+# # Notebook 4: Rainfall-Runoff Modelling
 # 
 # ## Introduction
 # 
-# In this notebook, we look at two ways of estimating a runoff hydrograph from precipitation data.
+# In this notebook, we look at several ways of estimating a rainfall-runoff response hydrograph given that information availability is location-specific.
 # 
-# First, we'll use the rational method to approximate peak flow and the maximum water level at the basin outlet, and then we'll use an open-source library to make a higher resolution estimate of flow accumulation paths and stream networks using a digital elevation model.
+# First, we'll use the rational method to approximate peak flow based on empirical data.  We'll also use a slightly more complex model, the Soil Conservation Service Curve Number (SCS-CN) to do the same.  Both the rational method and SCS methods are examples of "lumped" models, where the basin is assumed to be homogeneous and characteristics are then "lumped" together.
+# 
+# Finally, we'll use an open-source geospatial library to make a simple distributed model of the basin from digital elevation data (DEM).  We'll calculate the flow direction and flow accumulation in order to delineate a basin and define the stream network, and use this to construct an hydrograph from a precipitation event.
+# 
+# In all cases, we'll relate the resulting flow to a practical problem involving water level in a hypothetical channel situated at the basin outlet.
 
 # In[1]:
 
@@ -26,104 +30,203 @@ import matplotlib.colors as colors
 
 # SEE COMMENTS ABOUT PYSHEDS LIBRARY IN NEXT CELL
 from pysheds.grid import Grid
-import warnings
-warnings.filterwarnings('ignore')
 
 from bokeh.plotting import figure, show
 from bokeh.io import output_notebook
-from bokeh.models import LinearColorMapper, LogTicker, ColorBar, BasicTickFormatter
+from bokeh.models import LinearColorMapper, LogTicker, ColorBar, BasicTickFormatter, VBar, ColumnDataSource
 from bokeh.io import output_notebook
 output_notebook()
 
-get_ipython().run_line_magic('matplotlib', 'inline')
 
-
-# ## Import Precipitation Data
+# ### Problem Setup
 # 
-# For this exercise, we will use historical climate data from the Meteorological Service of Canada (MSC) station at Whistler, BC.
+# Let's imagine you had a summer job in Whistler working on a project to grade and re-pave the area around Day Lot 4, including installing drainage to capture water from the parking lot and divert it to a storm water collection system instead of draining into FitzSimmons Creek.  
+# 
+# ![Satellite Image of the Day Lot 4 area in Whistler](img/lot4_diagram1.png)
+# 
+# It's summer and the project is scheduled to be completed by fall.  For the sake of this exercise, assume the slope of the parking lot area describes a catchment of roughly **1 $km^2$** and empties through a temporary channel into a catch basin to be treated before flowing into FitzSimmons Creek.  Unfortunately, beyond the outlet (red dot in the diagram above), the channel has to cross the pedestrian trail that follows the river left bank.  Assume the channel is rectangular in shape, and is 2m wide by 0.25m deep with a hydraulic grade slope of 0.5%.  
+# 
+# * **Channel width (w)**: $2m$
+# * **Channel Depth (h)**: $0.25m$
+# * **Hydraulic Grade Line Slope (S)**: 0.005 (0.5%)
+# * **Roughness (n)**: 0.017 (rough asphalt)
+# 
+# >**Note:** Given the drainage area is only $1 km^2$, do you have a sense of what duration of rainfall is appropriate for estimating the peak of the runoff response hydrograph?  *i.e. 1h, 6h, 24h, 48h?* 
 
-# In[ ]:
+# ## Find & Import Precipitation Data
+# 
+# We can use the application from the [Pacific Climate Impacts Consortium](https://data.pacificclimate.org/portal/pcds/map/) (PCIS) to retrieve climate observations in the Whistler area. For this exercise, we will use historical climate data from the Meteorological Service of Canada (MSC) station at Whistler, BC.  Using the *Observation Frequency* filter provided, there appear to be a few climate stations with hourly precipitation data:  
+# 
+# ![Location of Environment Canada climate stations at Whistler with hourly data.](img/pcds_hourly_stn.png)
+# 
+# We'll look at one (*ID 1048899: Whistler (2014-2022)*) as an example.  Well, no we won't because it turns out this station does not actually have hourly data, nor do any of the others *except one* (925 - green triangle circled in red).  **You will always be responsible for your own data validation.**  In the PCIS database has hourly data available at only one location in the Whistler area, and it's from the Ministry of Forests, Lands, and Resource Operations Wildfire Management Branch (FLNRO-WMB) for a brief period in 2005 (ID 925 ZZ REMSATWX1).  
+
+# In[18]:
 
 
-# calibration data
-df = pd.read_csv('../../data/Whistler_348_climate.csv', 
-                 index_col='Date/Time', parse_dates=True)
-# note that the 'head' command shows the first five rows of data, 
-# but in this case the columns are abbreviated. 
-# print(df.head())
-
-# list all the columns
-# print('')
-# print('__________')
-for c in df.columns:
-    print(c)
-
-stn_name = df['Station Name'].values[0]
+# import precipitation data
+# note that the ascii file uses the string 'None' for NaN 
+# and we need to fix this.  
+hourly_df = pd.read_csv('../../notebook_data/notebook_4_data/925.ascii',
+header=1, na_values=[' None'], infer_datetime_format=True, parse_dates=[' time'])
+# note that the ascii format imports the column headers with spaces
+# that need to be cleaned up
+hourly_df.columns = [e.strip() for e in hourly_df.columns]
+hourly_df.set_index('time', inplace=True, drop=True)
 
 
 # ## Plot the Data
 # 
-# It's always a good idea to begin by visualizing the data we're working with.
+# Here we will use the Bokeh data visualization library to plot the precipitation data.   The ability to zoom in and out of different time scales provides a different perspective and helps with data exploration and review.  We don't have much data in this case, but if we did, holy crow, look out.
 
-# In[ ]:
+# In[20]:
 
 
-# plot flow at Stave vs. precip at the closest climate stations
-p = figure(width=900, height=400, x_axis_type='datetime')
-p.line(df.index, df['Total Precip (mm)'], alpha=0.8,
-         legend_label="Total Precip [mm]", color='dodgerblue')
+datasource = ColumnDataSource(df)
 
-p.line(df.index, df['Total Snow (cm)'], alpha=0.8,
-         legend_label="Total Snow [cm]", color="firebrick")
+p = figure(title=f'Hourly Precipitation {df.index[0]:%Y-%m-%d} -{df.index[-1]:%Y-%m-%d}', width=750, height=300, x_axis_type='datetime')
 
-p.line(df.index, df['Total Rain (mm)'], alpha=0.8,
-         legend_label="Total Rain [mm]", color='green')
+p.vbar(x='time', width=pd.Timedelta(hours=1), top='precipitation', 
+bottom=0, source=datasource, legend_label='Precipitation', 
+color='royalblue')
 
 p.legend.location = 'top_left'
-p.legend.click_policy = 'hide'
-p.xaxis.axis_label = 'Date'#
-p.yaxis.axis_label = 'Daily Rain [mm] / Snow[cm] Volume'
-
+p.xaxis.axis_label = 'Date'
+p.yaxis.axis_label = 'Precipitation [mm]'
+p.toolbar_location='above'
 show(p)
 
 
-# ## Simplified Version of Rainfall-Runoff
+# ## Estimating Peak Runoff
 # 
-# First, isolate a single precipitation event to use for estimating a runoff hydrograph.  Let's find a nice week for skiing:  
+# It is rare to find long-term records at a high frequency of measurement, so **we do the best we can with the information available**.  Below, we'll look at a few ways of constructing a hydrograph.  We want to construct a hydrograph because if we can accurately predict its peak (or more generally its shape), we can design hydraulic structures and other water management systems.  We'll start with a very basic estimate that has minimal information requirements, and move to more complex and information-intensive methods.  
+# 
+# In the problem setup we asked *"will the outlet channel be big enough"*.  Water resources problems are often expressed in terms of risk, and typically for this kind of analysis we communicate risk in terms of annual exceedance probability (AEP).  In other words, what is the probability that the flow in the channel will exceed its capacity in a given year?  **These kinds of problems do not have a right answer, they are open-ended and subjective&mdash;meaning there is always some judgment that needs to be applied.**  The topic of risk will be discussed further in Notebook 5.  For now, we want to focus on a few ways of estimating (the peak of) a runoff hydrograph from precipitation data.
+# 
+
+# ### Rational Method
+# 
+# Recall that the peak runoff for a small basin can be estimated by [the following](https://www.tad.usace.army.mil/Portals/53/docs/TAA/AEDDesignRequirements/AED%20Design%20Requirements-%20Hydrology%20Studies_Feb-11.pdf) from the US Army Corps of Engineers (USACE):
+# 
+# $$Q = k\cdot C\cdot I \cdot a$$
+# 
+# Where:
+# 
+# * **k**: 0.278 [-]
+# * **C**: runoff coefficient [-]
+# * **I**: rainfall intensity [mm/hr]
+# * **a**: drainage area [$km^2$]
+# 
+# We have already estimated drainage area, and there are just two additional pieces of information we need to estimate the peak runoff for our basin.  The runoff coefficient "C" can be found in a table of empirical values in the USACE link above, and the rainfall intensity can be estimated from [Intensity-Duration-Frequency](https://climate.weather.gc.ca/prods_servs/engineering_e.html) curve data developed by Environment Canada.  [More information on IDF Curve usage](https://climatedata.ca/resource/best-practices-for-using-idf-curves/).  We can find IDF curves for specific locations using the [web application at climatedata.ca](https://climatedata.ca/download/#idf-download).  The IDF curve for Whistler is below:
+# 
+# ![IDF Curve for Whistler, BC.](img/IDF.png)
+# 
+# We don't really know the appropriate duration yet for our basin, but we can select a few and run calculations to see how sensitive this model is to the duration.  The five diagonal lines represent different return periods (2, 5, 10, 20, 50, 100).  The return period is the inverse of the AEP, and again it represents the probability of occurrence **in any given year**, and it does not suggest an event of any magnitude will occur once in that return period.  
+# 
+# Below we'll use a range of the values that we're not too sure about their effect on the estimated hydrograph (peak flow).
+
+# In[24]:
+
+
+def rational_method_peak_flow(C, I, a):
+    """Calculate peak flow (m^3/s) using the rational method.
+
+    Args:
+        C (float): runoff coefficient
+        I (float): rainfall intensity [mm/hr]
+        a (float): drainage area [km^2]
+    """
+    return 0.278 * C * I * a
+
+
+# In[26]:
+
+
+# here we'll define an array of three runoff coefficient values 
+# to get a sense of the range of possible conditions
+# minimum, maximum, and expected value
+C_values = [0.5, 0.9, 0.7]
+
+# for each return period, we'll read the minimum and maximum intensity
+# and use these to see the range of outcomes
+IDF_dict = {
+    5: (22, 45), # the 2 and 100 year intensities are 22mm, 45mm (5 min)
+    15: (14, 28),
+    60: (7, 15),
+    1440: (2, 4) # 1440 minutes is 24 hours
+}
+        
+
+
+# In[49]:
+
+
+# calculate the range of flow estimates for each C and each return period
+# and create a plot for each runoff coefficient
+figs = []
+rational_results = {}
+colors=['green', 'gold', 'orange', 'red']
+for k, (i_min, i_max) in IDF_dict.items(): 
+    i = 0
+    p = figure(title=f'Duration={k}min', width=600, height=400) 
+    for c in C_values:   
+        Q_min = rational_method_peak_flow(c, i_min, 1)
+        Q_max = rational_method_peak_flow(c, i_max, 1)
+        x = [2, 100]
+        y = [Q_min, Q_max]
+        p.line(x, y, legend_label=f'C={c}', color=colors[i])
+        p.yaxis.axis_label = 'Flow [m^3/s]'
+        p.xaxis.axis_label = 'Return Period'
+        p.legend.location = 'top_left'
+        i += 1
+
+    figs.append(p)
+
+
+# In[50]:
+
+
+from bokeh.layouts import gridplot
+layout = gridplot(figs, ncols=2, width=350, height=300)
+show(layout)
+
+
+# >**Pause and reflect**: From the plots above, is it more critical to get the correct duration, to select an appropriate return period, or to get an accurate estimate of the runoff coefficient?  In other words, how sensitive is the model to the parameters?  
+
+# ### SCS Unit Hydrograph Model
+# 
+# Using the [Soil Conservation Service unit hydrograph model](https://www.hec.usace.army.mil/confluence/hmsdocs/hmstrm/surface-runoff/scs-unit-hydrograph-model), estimate the time of concentration, or the time it takes a drop of rain to flow from any point in the basin to the outlet assuming the area is a plane surface with homogeneous slope and roughness:  
+# 
+# $$t = 6.94 \frac{(L*n)^{0.6}}{I^{0.4}S^{0.3}}$$
+# 
+# $$t_{sheet} = \frac{0.007(NL)^{0.8}}{P_2^{0.5}S^{0.4}}$$
+# 
+# Where:
+# 
+# 
+# Is this a reasonable assumption in general?  **Consider what effect this assumption has on the resulting peak flow.**  
+# 
+# Lets reconstruct a runoff hydrograph at the outlet given the above information.  First, we import some precipitation data from Whistler. 
 
 # In[ ]:
 
 
-fig, ax = plt.subplots(1, 1, figsize=(16,4))
+N = 0.0011
+S = 0.005
+L = 100
 
-sample_start = pd.to_datetime('2014-12-01')
-sample_end = pd.to_datetime('2014-12-15')
+t_sheet = 0
 
-sample_df = df[(df.index > sample_start) & (df.index < sample_end)][['Total Precip (mm)', 'Total Snow (cm)', 'Total Rain (mm)']]
-
-# print(sample_df.head())
-
-ax.plot(sample_df.index, sample_df['Total Precip (mm)'], label="Total Precip [mm]")
-ax.plot(sample_df.index, sample_df['Total Snow (cm)'], label="Total Snow [cm]")
-ax.plot(sample_df.index, sample_df['Total Rain (mm)'], label="Total Rain [mm]")
-
-ax.set_xlabel('Date')
-ax.set_ylabel('Precipitation')
-ax.set_title('{}'.format(stn_name))
-plt.legend()
-
-
-# First, imagine we are some unfortunate parking lot attendant working a shift in Whistler Village at Parking Lot 5, and we are told by our cruel supervisor we have stand at the lowest point of the parking lot: a catchment basin with an area of $1 km^2$ where water runs off into FitzSimmons Creek.  The sky looks angry, but we're running late for work and put on our running shoes instead of our sturdy waterproof boots.  
-# 
-# Next, assume the travel time is effectively zero across our entire basin (precipitation takes no time to travel to the outlet once it falls on the parking lot surface).  Is this a reasonable assumption in general?  
-# 
-# Under these assumptions, lets reconstruct a runoff hydrograph at the outlet.  First, look at the precipitation data over the twelve days of the big storm. 
 
 # In[ ]:
 
 
-print(sample_df)
 
+
+
+# ## Rainfall-Runoff Response by the Rational Method
+# 
+# Below, we find a single precipitation event to use as an example for estimating a runoff hydrograph.  Below we plot a two week period where 
 
 # ## Convert Volume to volmeteric flow units
 # 
@@ -139,11 +242,10 @@ drainage_area = 1 # km^2
 
 # runoff is typically measured in m^3/s (cms for short -- cubic metres per second), 
 # so express the runoff in cms
-sample_df['runoff_cms'] = sample_df['Total Rain (mm)'] / 86.4
-print(sample_df)
+event_df['runoff_cms'] = event_df['Total Rain (mm)'] / 86.4
 
 
-# If the channel outlet has a rectangular shape of width 2m, how tall should our boots be?  Assume a 2% slope, and find a reasonable assumption for the roughness of asphalt.
+# If the channel outlet has a rectangular shape of width 2m, how tall should our boots be?  Assume a 0.5% slope, and find a reasonable assumption for the roughness of asphalt.
 # 
 # Recall the Manning equation:
 # 
@@ -158,7 +260,8 @@ print(sample_df)
 # In[ ]:
 
 
-w_channel = 1.5 # m
+# specify our given information
+w_channel = 2 # m
 S = 0.005 # channel slope
 n_factor = 0.017  # rough asphalt
 
@@ -166,9 +269,9 @@ def calc_Q(d, w, S, n):
     """
     Calculate flow from the Manning equation.
     """
-    A = d * w
+    A = d * w # flow area as (depth x width)
     wp = w + 2 * d  # wetted perimeter
-    R = A / wp
+    R = A / wp # hydraulic radius (area / wetted perimeter)
     return (1/n) * A * R**(2/3) * S**(1/2)
 
 def solve_depth(w, n_factor, Q, S):
@@ -194,17 +297,17 @@ def solve_depth(w, n_factor, Q, S):
 
 
 # For each timestep, we want to solve for the depth of water at our outlet
-sample_df['flow_depth_m'] = sample_df['runoff_cms'].apply(lambda x: solve_depth(w_channel, n_factor, x, S))
+event_df['flow_depth_m'] = event_df['runoff_cms'].apply(lambda x: solve_depth(w_channel, n_factor, x, S))
 
 
 # In[ ]:
 
 
-plt.plot(sample_df.index, sample_df['flow_depth_m'])
+plt.plot(event_df.index, event_df['flow_depth_m'])
 plt.ylabel('Flow depth [m]')
 
 
-# >**Not only are our feet wet, but if we happen to be there the peak it's potentially dangerous.  As little as 10-15cm of water moving fast enough can sweep you off your feet.**
+# >**Not only are our feet wet, but if we happen to be there the peak it's potentially dangerous.  As little as 10-15cm of water quickly enough can sweep you off your feet.**
 
 # ![Recalculating Life](img/recalculating.png)
 
@@ -510,7 +613,7 @@ arrayShow = np.array([[cmap[2] if np.isnan(i) else cmap[i] for i in j] for j in 
 
 patches =[mp.Patch(color=cmap[i],label=labels[i]) for i in cmap]
 
-#streamnetwork_img = np.where(grid.mask, > 100, 10 , 1)
+# streamnetwork_img = np.where(grid.mask, > 100, 10 , 1)
 # im = ax.imshow(streamnetwork_img, extent=grid.extent, zorder=2,
 #                 cmap='cubehelix')
 im = ax.imshow(arrayShow)
@@ -558,7 +661,7 @@ plt.ylabel('Latitude')
 # 
 # Now that we have weighted flow distances for each cell in the delineated catchment, we can apply precipitation to each 'cell' in order to reconstruct a flow hydrograph.  
 # 
-# First, we must figure out the cell dimensions.  From the [USGS Hydrosheds information](https://hydrosheds.cr.usgs.gov/datadownload.php), we know the resolution is 15 (degree) seconds.  Because of the odd shape of the earth, and the projection of coordinate systems onto the earth, there is a little bit of work involved in converting the DEM resolution to equivalent distances.  For the purpose of this exercise, we will assume cells are 300x300m.  You can check the approximation [here](https://opendem.info/arc2meters.html) for a latitude of 49 degrees.
+# First, we must figure out the cell dimensions.  From the [USGS Hydrosheds information](https://hydrosheds.cr.usgs.gov/datadownload.php), we know the resolution is 15 (degree) seconds.  Because the earth is not a perfect sphere, [coordinate projection systems](https://epsg.io/) (CRS) are used to approximate the surface of the earth so that spatial distances can be more accurately represented.
 
 # In[ ]:
 
