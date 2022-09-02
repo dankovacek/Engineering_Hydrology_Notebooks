@@ -18,35 +18,33 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 # import required packages
+import os
 import pandas as pd
 import numpy as np
-import math
+# import math
 
 # advanced statistics library
-from scipy import stats
+# from scipy import stats
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as mp
 import matplotlib.colors as colors
 
-# SEE COMMENTS ABOUT PYSHEDS LIBRARY IN NEXT CELL
-from pysheds.grid import Grid
-
-from bokeh.plotting import figure, show
-from bokeh.io import output_notebook
-from bokeh.models import LinearColorMapper, LogTicker, ColorBar, BasicTickFormatter, VBar, ColumnDataSource
-from bokeh.io import output_notebook
-output_notebook()
-
+working_directory = os.getcwd()
+print(working_directory)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Input [0;32mIn [1][0m, in [0;36m<cell line: 2>[0;34m()[0m
+Input [0;32mIn [1][0m, in [0;36m<cell line: 3>[0;34m()[0m
 [1;32m      1[0m [38;5;66;03m# import required packages[39;00m
-[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
-[1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mmath[39;00m
+[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mos[39;00m
+[0;32m----> 3[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
+[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      5[0m [38;5;66;03m# import math[39;00m
+[1;32m      6[0m 
+[1;32m      7[0m [38;5;66;03m# advanced statistics library[39;00m
+[1;32m      8[0m [38;5;66;03m# from scipy import stats[39;00m
 
 [0;31mModuleNotFoundError[0m: No module named 'pandas'
 ModuleNotFoundError: No module named 'pandas'

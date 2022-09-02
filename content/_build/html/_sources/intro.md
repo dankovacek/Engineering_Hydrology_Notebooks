@@ -4,7 +4,7 @@ This book consists of a set of interactive notebooks on the topic of applied hyd
 
 **Students are not expected to have prior experience with programming.**  The emphasis of these notebooks is on hydrological concepts rather than computer science, so all necessary code is provided.  Each notebook focuses on a particular component of hydrological analysis, and students will be asked to answer questions about the underlying concept that may require changing variables and re-running code blocks to update results.  The instructions provided with the code in the notebooks will facilitate the exploration of the concepts from a systems perspective.
 
->**Note** The content of these notebooks does not represent a prescriptive set of methods for hydrological analysis.  Instead, the intent is to introduce some basic concepts through a series of activities that encourage thinking about uncertainty and sensitivity.
+>**Note** The content of these notebooks does not represent a prescriptive set of methods for hydrological analysis.  Instead, the intent is to introduce some basic concepts through a series of activities that encourage thinking about model uncertainty and sensitivity.
 
 
 ## Getting Started with Interactive Python Notebooks
