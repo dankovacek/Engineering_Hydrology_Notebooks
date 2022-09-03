@@ -139,7 +139,7 @@ flag_check = daily_df['2005-09-28':'2005-09-29'][['Snow on Grnd Flag', 'Mean Tem
 flag_check
 
 
-# No data flags, and no snow on the ground, so we might have a bit more confidence in this data.
+# No data flags, and no snow on the ground, so we might have a bit more confidence in the daily data, although it's difficult to reconcile the timing between the two sets.  It could be a timezone issue, i.e. some agencies report times in UTC which is 7-8 hours ahead, or it could be a matter of how the timestamps are handled when data is aggregated.  
 
 # ### Problem Setup
 # 
@@ -156,12 +156,18 @@ flag_check
 # 
 # >**Note:** Given the drainage area is only $1 km^2$, do you have a sense of what duration of rainfall is appropriate for estimating the peak of the runoff response hydrograph?  *i.e. 1h, 6h, 24h, 48h?* 
 
-# ## Hydrograph Development
+# ## Hydrograph Estimation
 # 
-# It is rare to find long-term records at a high frequency of measurement, so **we do the best we can with the information available**.  Below, we'll look at a few ways of constructing a hydrograph.  We want to construct a hydrograph because if we can accurately predict its peak (or more generally its shape), we can design hydraulic structures and other water management systems.  We'll start with a very basic estimate that has minimal information requirements, and move to more complex and information-intensive methods.  
+# It is rare to find long-term records at a high frequency of measurement, so **we do the best we can with the information available**.  Below, we'll look at a few ways of constructing a hydrograph of varying amounts of detail.  We want to construct a hydrograph, or at least accurately predict its peak, in order to design hydraulic structures and other water management systems.  We'll start with a very basic estimate that has minimal information requirements, and move to more complex and information-intensive methods.  
 # 
-# In the problem setup we asked *"will the outlet channel be big enough"*.  Water resources problems are often expressed in terms of risk, and typically for this kind of analysis we communicate risk in terms of annual exceedance probability (AEP).  In other words, what is the probability that the flow in the channel will exceed its capacity in a given year?  **These kinds of problems do not have a right answer, they are open-ended and subjective&mdash;meaning any answer involves some amount of (engineering) judgment.**  The topic of risk will be discussed further in Notebook 5.  For now, we'll just focus on a few ways of estimating a runoff hydrograph from precipitation data.
+# Water resources problems are often expressed in terms of risk, and typically for this kind of analysis we communicate risk in terms of annual exceedance probability (AEP).  In other words, what is the probability that the flow passing some location will exceed the channel (or built structure) capacity in a given year?  **These kinds of problems do not have a right answer, they are open-ended and subjective&mdash;meaning any answer involves some amount of (engineering) judgment.**  The topic of risk will be discussed further in Notebook 5.  For now, we'll just focus on a few ways of estimating a runoff hydrograph from precipitation data.
 # 
+
+# ### Convert volume (mm or in per hour or day) to volumetric flow units
+# 
+# Runoff is typically measured in $\frac{m^3}{s}$, and precipitation is often reported in mm or in per hour or day.  Convert $\frac{mm}{day}$ precipitation to $\frac{m^3}{s}$.
+# 
+# $$1 \frac{mm}{day} \times \frac{1 m}{1000 mm} \times \frac{1 day}{24 h} \times \frac{1 h}{ 3600 s} \times 1 km^2 \times \frac{1000 m \times 1000 m}{1 km^2}= \frac{1}{86.4} \frac{m^3}{s}$$
 
 # ### Rational Method
 # 
@@ -172,7 +178,7 @@ flag_check
 # Where:
 # 
 # * **Q**: is the peak discharge of the event [$m^3/s$]
-# * **k**: 0.278 [-]
+# * **k**: 0.278 [-]   Note: $\quad 1\frac{mm}{hr} \cdot \frac{1\text{hr}}{3600s} \cdot \frac{1m}{1000mm} \cdot 1 \text{km}^2 \cdot \frac{1\times 10^6 m^2}{1\text{km}^2} = 0.278 \frac{m^3}{s}$
 # * **C**: runoff coefficient [-]
 # * **I**: rainfall intensity [mm/hr]
 # * **a**: drainage area [$km^2$]
@@ -187,34 +193,34 @@ flag_check
 # 
 # Below we'll express the values that we're not too sure about as plausible ranges, and test their effect on the result.
 
-# In[9]:
+# In[48]:
 
 
 def rational_method_peak_flow(C, I, a):
-    """Calculate peak flow (m^3/s) using the rational method.
+    """Calculate peak flow (in) using the rational method.
 
     Args:
-        C (float): runoff coefficient
+        C (float): runoff coefficient [-]
         I (float): rainfall intensity [mm/hr]
         a (float): drainage area [km^2]
     """
     return 0.278 * C * I * a
 
 
-# In[10]:
+# In[49]:
 
 
 # for each return period, we'll read the minimum and maximum intensity
 # and use these to see the range of outcomes
 IDF_dict = {
-    5: (22, 45), # the 2 and 100 year intensities are 22mm, 45mm (5 min)
+    5: (22, 45), # the 2 and 100 year intensities are 22mm, 45mm / h
     15: (14, 28),
     60: (7, 15),
     1440: (2, 4) # 1440 minutes is 24 hours
-}        
+}
 
 
-# In[11]:
+# In[50]:
 
 
 # here we'll define an array of three runoff coefficient values 
@@ -233,6 +239,7 @@ for k, (i_min, i_max) in IDF_dict.items():
     for c in C_values:
         Q_min = rational_method_peak_flow(c, i_min, 1)
         Q_max = rational_method_peak_flow(c, i_max, 1)
+        print(k, c, Q_min, Q_max)
         x = [2, 100]
         y = [Q_min, Q_max]
         p.line(x, y, legend_label=f'C={c}', color=colors[i])
@@ -244,7 +251,7 @@ for k, (i_min, i_max) in IDF_dict.items():
     figs.append(p)
 
 
-# In[12]:
+# In[51]:
 
 
 from bokeh.layouts import gridplot
@@ -287,37 +294,40 @@ show(layout)
 # Where:
 # 
 # * **$N$**: overland roughness coefficient [-]
-# * **$L$**: length of flow path [m]
-# * **$P$**: design (excess) rainfall depth [mm]
-# * **$S$**: slope of hydraulic grade line (land slope) [m/m]
-# * **$V$**: average (shallow flow) velocity [m/s]
+# * **$L$**: length of flow path [ft]
+# * **$P$**: 2-year 24h rainfall depth rainfall depth [in]
+# * **$S$**: slope of hydraulic grade line (land slope) [ft/ft]
+# * **$V$**: average (shallow flow) velocity [ft/s]
+# 
+# From Figure 3-1 of [SCS Curve Number Method documentation](https://www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1044171.pdf), we can estimate the average flow velocity for shallow concentrated flow over unpaved surface (gravel) is 1.2 ft/s (0.37 m/s).  For a 250m channel length this translates to 0.2 hours.  We can use this to estimate the time of concentration for our basin.
+# 
+# >**Note**: Careful with units here!  Lots of older technical documentation is written in imperial units (ft-lb) and we need to be sure that empirical coefficients are not introducing errors in our calculations.
 # 
 
-# In[13]:
+# In[52]:
 
 
 def calculate_t_sheet(n, L, P, s):
+    """
+    n: dimensionless surface roughness [-]
+    s: slope (ft/ft)
+    L: flow path length (ft)
+    P: 
+    """
     return 0.007 * (n * L)**0.8 / ((P**0.5) * s**0.4 )
-
 
 t_t = 0.2 # 0.2 hour channel flow
 n = 0.0011
 s = 0.005
-L = 300 # 100m is roughly 300 ft.
-P_mm = 2 * 24
-P_in = 2 # 48mm is roughly 2 inches
+L = 330 # 100m is roughly 300 ft.
+# From IDF curve, 2-year 24h volume is 2mm/h * 24h = 48mm = ~1.9 inches
+P_in = 1.9
 
 t_sheet = calculate_t_sheet(n, L, P_in, s)
-print(f'Sheet flow time is {t_sheet:.3f}hr + {t_t:.2f} shallow flow = {t_sheet+t_t:.3f} hours.')
+print(f'Time of concentration is approximately {t_sheet+t_t:.2f} hours: {t_sheet:.2f}hr (sheet) + {t_t:.2f} (shallow).')
 
 
-# The time of concentration is about a third of an hour for our small basin.  We can use this to approximate a runoff hydrograph.
-
-# In[ ]:
-
-
-
-
+# Above, we estimated the time of concentration for this very small basin which should help reduce the range of peak flow estimates calculated above, where we assumed a range of 5 minutes to 24 hours duration to get our values for intensity.  We might be justified in narrowing our range between 10 and 30 minutes or so if we are confident in the time of concentration estimate.
 
 # ### SCS Curve Number (CN) Method
 # 
@@ -325,9 +335,9 @@ print(f'Sheet flow time is {t_sheet:.3f}hr + {t_t:.2f} shallow flow = {t_sheet+t
 # 
 # $$Q = \frac{(P-I_a)^2}{(P-I_a) + S} = \frac{(P-0.2S)^2}{(P+0.8S)}$$
 # 
-# * **$P$**: rainfall
-# * **$S$**: potential retention after runoff begins 
-# * **$I_a$**: initial losses before runoff begins ($I_a \approx 0.2S$)
+# * **$P$**: rainfall volume [in/[time]]
+# * **$S$**: potential retention after runoff begins [in]
+# * **$I_a$**: initial losses before runoff begins [in] ($I_a \approx 0.2S$)
 # 
 # $$S = \frac{1000}{\text{CN}} - 10$$
 # 
@@ -337,36 +347,71 @@ print(f'Sheet flow time is {t_sheet:.3f}hr + {t_t:.2f} shallow flow = {t_sheet+t
 # 
 # From Table 2-2a in the CN method document, curve numbers for gravel roads range from 76 to 91 for hydrologic soil groups A, B, C, and D.  
 # 
-# We also need to estimate the time of concentration, which is discussed in Chapter 3 of the SCS CN method document linked above.  From Figure 3-1, the average flow velocity for shallow concentrated flow over unpaved surface (gravel) is 1.2 ft/s (0.37 m/s).  For a 250m channel length this translates to 0.2 hours.
-# 
-# 
-# A model for sheet flow time is as follows:
-# 
-# $$T_t = \frac{0.007(nL)^{0.8}}{P_2^{0.5}s^{0.4}}$$
-# 
+# We also need to estimate the time of concentration, which is discussed in Chapter 3 of the SCS CN method document linked above.  We've already developed an estimate of time of concentration above.  
 
-# In[14]:
+# In[112]:
 
 
-def CN_method_Q(P, CN):
-    S = 1000.0 / CN - 10
-    return ((P - 0.2 * S)**2) / (P + 0.8 * S)
+def CN_method_Q(p_mm, cn):
+    """Calculate peak Q (m^3/s) from the curve number.  
+    CN is the curve number corresponding to soil type.
+    S is a factor related to retention (storage) after runoff begins.
+    P is a rainfall volume.
+    """
+    S = (1000.0 / cn) - 10
+    p_in = p_mm / 25.4 # convert to inches
+    V_in = (p_in - 0.2 * S)**2 / (p_in + 0.8 * S) # in/h
+    # 1 inch = 25.4 mm
+    V_mm = V_in * 25.4 # mm/hr
+    # convert mm volume to m^3/s for 1 km^2
+    V_cms = (V_mm / 3600) * (1E6 / 1000)
+    return V_cms
 
 
-# In[16]:
+# In[115]:
 
 
 CNs = [76, 85, 89, 91]
+# precip values are estimated as a range 
+# from the IDF curves above for 15 min and 60 min 
+# duration for 2 to 100 year return period intensity
+p_estimates_mm = [12, 15, 28] # mm/h
+p_range = list(range(15, 50, 5))
 
-CN_Qs = []
+CN_Q = {}
 
-for cn in CNs:
-    CN_Qs.append(CN_method_Q(, cn))
+for p in p_range:
+    CN_Q[p] = []
+    for cn in CNs:    
+        V_cms = CN_method_Q(p, cn)
+        CN_Q[p].append(V_cms)
 
 
-# As with our rational method estimate, let's see the effect of uncertainty in a few of our parameters.  For this example, let's test the precipitation loss from infiltration, which dictates the excess precipitation volume, the lag time, and the time of concentration.  We'll plot precipitation a range of (constant) loss rates against the hourly data we imported above to better illustrate the assumptions.
 
-# In[17]:
+# #### Plot the results of the CN Method
+
+# In[117]:
+
+
+cn_df = pd.DataFrame(CN_Q)
+fig, ax = plt.subplots(figsize=(6, 4))
+for p in p_range:
+    ax.plot(CNs, cn_df[p], label=f'{p}mm')
+
+ax.set_xlabel('CN')
+ax.set_ylabel('Peak Flow [m^3/s]')
+ax.legend()
+
+
+# ## Distributed Model from Spatial Data
+# 
+# As discussed in class, precipitation takes time to flow to the basin outlet, and there are complex interactions with the atmosphere, vegetation, the ground surface, and the subsurface that make predicting the basin response to precipitation very difficult to model accurately.  Now we'll use DEM data to delineate a basin and make a simple distributed model to create a unit hydrograph.
+# 
+# >**Note**: From here we leave the example 1 $\text{km}^2$ basin example and look at a larger basin in the same area but draining Fitzsimmons Creek.
+
+# As with our rational method estimate, let's see the effect of uncertainty in a few of our parameters.  For this example, we'll test the precipitation loss from infiltration, which dictates the excess precipitation volume, the lag time, and the time of concentration.  We'll plot precipitation a range of (constant) loss rates against the hourly data we imported above to better illustrate the assumptions.
+
+# In[ ]:
 
 
 precip_losses = [1, 2, 4] # mm/hr
@@ -398,7 +443,7 @@ show(p)
 
 # From the above plot, the excess precipitation is the blue area above each of the loss function lines.  Let's plot the three different excess precipitation series.
 
-# In[18]:
+# In[ ]:
 
 
 for l in precip_losses:
@@ -411,7 +456,7 @@ excess_rainfall = hourly_df[[f'excess_{l}' for l in precip_losses] + ['day']].gr
 excess_rainfall
 
 
-# In[19]:
+# In[ ]:
 
 
 hourly_source = ColumnDataSource(hourly_df)
@@ -433,165 +478,11 @@ p.legend.location = 'top_left'
 show(p)
 
 
-# #### Time of concentration
-
-# In[20]:
-
-
-def sheet_flow_time(P, S, N, L):
-    return 0.007 * (N * L)**(0.8) / (P**(0.5) * S**(0.4))
-
-def shallow_flow_time(S, L):
-    return L / (20.3282 * np.sqrt(S))
-
-def calculate_time_of_concentration(P, S, N, L):
-    t_sheet = sheet_flow_time(P, S, N, L)
-    t_shallow = shallow_flow_time(S, L)
-    return t_sheet + t_shallow
-
-def calculate_SCS_peak_flow(C, A, P, S, N, L, t_excess_precip):
-    a = A * 1000 * 1000 # convert km^2 to m^2
-
-    # convert mm per (n-hours duration) to mm/hr
-    p_hourly = P / t_excess_precip
-    p_m = p_hourly / 1000 # convert mm/hr to m/hr
-    t_c = calculate_time_of_concentration(p_m, S, N, L)
-    t_lag = 0.6 * t_c # in hours
-    del_t = t_excess_precip 
-    T_p = t_lag + del_t / 2 # in hours
-    U_p = C * a / T_p
-    # convert peak flow to 
-    return 
-    
-
-
-# In[21]:
-
-
-# approximate the range of excess rainfall we see above
-P_excess = [2, 7, 20]  
-
-# approximate a range of excess precip durations [hours] 
-# from the above plot corresponding to the three excess precip volumes
-excess_precip_durations = [1, 2, 7]
-S = 0.005 # 0.5%
-N = 0.011
-L = 250
-C = 2.08 # conversion constant
-A = 1 # drainage area [km^2]
-
-tcs = []
-i = 0
-for p in P_excess:
-    U_p = calculate_SCS_peak_flow(C, A, p, S, N, L, excess_precip_durations[i])
-    tcs.append(U_p)
-    i += 1
-
-
-# In[22]:
-
-
-tcs
-
-
-# ## Rainfall-Runoff Response by the Rational Method
-# 
-# Below, we find a single precipitation event to use as an example for estimating a runoff hydrograph.  Below we plot a two week period where 
-
-# ## Convert Volume to volmeteric flow units
-# 
-# Runoff is typically measured in $\frac{m^3}{s}$, so convert $\frac{mm}{day}$ precipitation to $\frac{m^3}{s}$ runoff.
-# 
-# $$1 \frac{mm}{day} \times \frac{1 m}{1000 mm} \times \frac{1 day}{24 h} \times \frac{1 h}{ 3600 s} \times 1 km^2 \times \frac{1000 m \times 1000 m}{1 km^2}= \frac{1}{86.4} \frac{m^3}{s}$$
-
-# In[23]:
-
-
-# convert to runoff volume
-drainage_area = 1 # km^2
-
-# runoff is typically measured in m^3/s, 
-# (cms for short -- cubic metres per second), 
-# so express the runoff in cms
-event_df = daily_df['':''].copy()
-event_df['runoff_cms'] = event_df['Total Rain (mm)'] / 86.4
-
-
-# If the channel outlet has a rectangular shape of width 2m, how tall should our boots be?  Assume a 0.5% slope, and find a reasonable assumption for the roughness of asphalt.
-# 
-# Recall the Manning equation:
-# 
-# $$Q = \frac{1}{n} A R^{2/3} S^{1/2}$$
-# 
-# Where:
-# * **n** is the manning roughness
-# * **A** is cross sectional area of the flow
-# * **R** hydraulic radius (area / wetted perimeter)
-# * **S** is the channel slope
-
-# In[24]:
-
-
-# specify our given information
-w_channel = 2 # m
-S = 0.005 # channel slope
-n_factor = 0.017  # rough asphalt
-
-def calc_Q(d, w, S, n):
-    """
-    Calculate flow from the Manning equation.
-    """
-    A = d * w # flow area as (depth x width)
-    wp = w + 2 * d  # wetted perimeter
-    R = A / wp # hydraulic radius (area / wetted perimeter)
-    return (1/n) * A * R**(2/3) * S**(1/2)
-
-def solve_depth(w, n_factor, Q, S):
-    """
-    Given a flow, a roughness factor, a channel slope, and a channel width, 
-    calculate flow depth. 
-    """
-    e = 1 / 100  # solve within 1%
-    d = 0
-    Q_est = 0
-    n = 0
-    while (abs(Q_est - Q) > e) & (n < 1000):
-        Q_est = calc_Q(d, w, S, n_factor)
-#         print(Q, Q_est, abs(Q_est - Q))
-        d += 0.001
-        n += 1
-#     print('solved in {} iterations'.format(n))
-    return d 
-    
-
-
-# In[25]:
-
-
-# For each timestep, we want to solve for the depth of water at our outlet
-event_df['flow_depth_m'] = event_df['runoff_cms'].apply(lambda x: solve_depth(w_channel, n_factor, x, S))
-
-
-# In[26]:
-
-
-plt.plot(daily_df.index, daily_df['flow_depth_m'])
-plt.ylabel('Flow depth [m]')
-
-
-# >**Not only are our feet wet, but if we happen to be there the peak it's potentially dangerous.  As little as 10-15cm of water quickly enough can sweep you off your feet.**
-
-# ![Recalculating Life](img/recalculating.png)
-
-# ## Distributed Model from Spatial Data
-# 
-# As discussed in class, precipitation takes time to flow to the basin outlet, and there are complex interactions with the atmosphere, vegetation, the ground surface, and the subsurface that make predicting the basin response to precipitation very difficult to model accurately.  Now we'll use DEM data to delineate a basin and make a simple distributed model to create a unit hydrograph.
-
 # ### Import the DEM and plot the data
 # 
 # Here we'll use the [Pysheds](https://github.com/mdbartos/pysheds) library to process the DEM.
 
-# In[144]:
+# In[ ]:
 
 
 from pysheds.grid import Grid
@@ -604,7 +495,7 @@ grid = Grid.from_raster(dem_path)
 dem = grid.read_raster(dem_path)
 
 
-# In[145]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
@@ -623,7 +514,7 @@ plt.tight_layout()
 # 
 # The sampling of surface elevations from a DEM often contain depressions and flat regions that must be filled before the raster can be processed and flow paths will resolve. 
 
-# In[146]:
+# In[ ]:
 
 
 # Condition DEM
@@ -649,7 +540,7 @@ inflated_dem = grid.resolve_flats(flooded_dem)
 # | 16 | C | 1 |
 # | 8 | 4 | 2 |
 
-# In[147]:
+# In[ ]:
 
 
 import matplotlib.cm as cmx
@@ -684,7 +575,7 @@ plt.tight_layout()
 # 
 # Recall from the exercise in class how we derived flow accumulation from the flow direction.  Each cell has a direction associated with it.  Flow accumulation in this case is expressed as the number of upstream cells.  
 
-# In[148]:
+# In[ ]:
 
 
 # Calculate flow accumulation
@@ -710,7 +601,7 @@ plt.tight_layout()
 # Below we will delineate a basin corresponding to the hydrometric station located on Fitzsimmons Creek.  Water Survey of Canada have [recently published](https://open.canada.ca/data/en/dataset/0c121878-ac23-46f5-95df-eb9960753375) basin polygons for nearly 7000 stations across Canada.  In addition, pour points are also provided as shape files.  A limitation of Whiteboxtools is we need to specify the pour point as a file (.shp or .geojson) and we can't just provide coordinates.  The pour point is the outlet of the basin.  If we have high resolutoin data and imperfect coordinates of a pour point, we will not get the correct pixel corresponding to the outlet. 
 # 
 
-# In[149]:
+# In[ ]:
 
 
 # Delineate a catchment
@@ -736,7 +627,7 @@ grid.clip_to(catch)
 clipped_catch = grid.view(catch)
 
 
-# In[150]:
+# In[ ]:
 
 
 # Plot the catchment
@@ -750,7 +641,7 @@ plt.ylabel('Latitude')
 plt.title('Delineated Catchment', size=14)
 
 
-# In[151]:
+# In[ ]:
 
 
 # Extract river network
@@ -772,7 +663,7 @@ _ = plt.title('D8 channels', size=14)
 
 # ### Calculate distances to upstream cells
 
-# In[152]:
+# In[ ]:
 
 
 # Calculate distance to outlet from each cell
@@ -795,7 +686,7 @@ plt.title('Flow Distance', size=14)
 # 
 # Assign a travel time to each cell based on the assumption that water travels at one speed (overland flow is slower) until it accumulates into a stream network, at which point its speed increases dramatically.
 
-# In[163]:
+# In[ ]:
 
 
 # Compute flow accumulation
@@ -812,7 +703,7 @@ weights[(acc > 0) & (acc < accumulation_threshold)] = 1
 weighted_dist = grid.distance_to_outlet(x=x_snap, y=y_snap, fdir=fdir, weights=weights, xytype='coordinate')
 
 
-# In[164]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(figsize=(8,6))
@@ -838,7 +729,7 @@ plt.title('Weighted distance to outlet', size=14)
 # 
 # The DEM is from the USGS 3DEP program and is roughly 30x30m resolution (each pixel represents an area of roughly 30m by 30m).  We have reduced the (distance) weight of channel cells, so the distance is proportional to our estimate of hillslope velocity, and we can convert the distance to time by dividing the weighted distance by 1 m/s. 
 
-# In[185]:
+# In[ ]:
 
 
 # get the raster pixel resolution
@@ -854,7 +745,7 @@ dist_df['weighted_dist'] = weighted_dist.flatten()
 dist_df = dist_df[np.isfinite(dist_df['weighted_dist'])].round(0)
 
 
-# In[187]:
+# In[ ]:
 
 
 # get the number of cells of each distance
@@ -862,7 +753,37 @@ grouped_dists = pd.DataFrame(dist_df.groupby('weighted_dist').size())
 grouped_dists.columns = ['num_cells']
 
 
-# In[188]:
+# In[ ]:
+
+
+# plot distributions of weighted distance
+W = np.bincount(weighted_dist[np.isfinite(weighted_dist)].astype(int))
+fig, ax = plt.subplots(figsize=(10, 5))
+plt.fill_between(np.arange(len(W)), W, 0, edgecolor='seagreen', linewidth=1, facecolor='lightgreen', alpha=0.8)
+plt.ylabel(r'Number of cells at distance $x$ from outlet', size=14)
+plt.xlabel(r'Distance from outlet (x) [cells]', size=14)
+plt.title('Width function W(x)', size=16)
+
+
+# In[ ]:
+
+
+flow_velocity = 0.1 # m/s
+
+w_time = weighted_dist * resolution[0] / flow_velocity / 3600
+W_time = np.bincount(w_time[np.isfinite(w_time)].astype(int))
+fig, ax = plt.subplots(figsize=(10, 5))
+plt.fill_between(np.arange(len(W_time)), W_time, 0, edgecolor='seagreen', linewidth=1, facecolor='lightgreen', alpha=0.8)
+plt.ylabel(r'Number of cells $x$ hours from outlet', size=14)
+plt.xlabel(r'Time to outlet $x$ (hours)', size=14)
+plt.title('Width function W(x) ~ Unit Hydrograph', size=16)
+
+
+# ### Calculate total runoff and compare against measured daily volume for the two day record
+# 
+# >**NOTE**: if you update the runoff coefficient below, you must re-run the code from here to re-initialize the `runoff_df` dataframe, otherwise the values will accumulate.
+
+# In[ ]:
 
 
 # create unit hydrographs for each timestep
@@ -873,9 +794,7 @@ end_date = pd.to_datetime(runoff_df.index.values[-1]) + pd.DateOffset(hours=1)
 max_distance = max(grouped_dists.index)
 
 
-
-
-# In[189]:
+# In[ ]:
 
 
 def calculate_flow_time(distance, v):
@@ -884,11 +803,10 @@ def calculate_flow_time(distance, v):
     return np.ceil(distance * resolution[0] / v / 3600)
 
 
-# In[192]:
+# In[ ]:
 
 
 # time of concentration
-flow_velocity = 0.1 # m/s
 max_flow_time = calculate_flow_time(max_distance, flow_velocity)
 print(f'The maximum adjusted flow path is {max_distance} cells, corresponding to a maximum flow travel time of {max_flow_time} hours.')
 
@@ -904,7 +822,7 @@ runoff_df['Runoff (cms)'] = 0
 # 
 # We make it slightly more efficient by grouping cells of equal distance.
 
-# In[197]:
+# In[ ]:
 
 
 runoff_coefficient = 0.3
@@ -914,13 +832,11 @@ for ind, row in hourly_df.iterrows():
     hydrograph = pd.DataFrame()
     for weight_dist, num_cells in grouped_dists.iterrows():
         weighted_time = calculate_flow_time(weight_dist, flow_velocity)
-        outlet_time = ind + pd.Timedelta(hours=weight_dist)
+        outlet_time = ind + pd.Timedelta(hours=weighted_time)
         # round the travel time to nearest hour 
         # to align with hourly streamflow data
-        if weight_dist < 1:
+        if weighted_time < 1:
             outlet_time = ind + pd.Timedelta(hours=1)
-        else:
-            outlet_time = outlet_time.round('H')
             
         precip_vol = num_cells.values[0] * row['precipitation']
         runoff_vol = precip_vol * runoff_coefficient / 1000 * resolution[0]**2 
@@ -928,11 +844,52 @@ for ind, row in hourly_df.iterrows():
         runoff_df.loc[outlet_time, 'Runoff (cms)'] += runoff_rate
 
 
-# In[124]:
+# In[ ]:
+
+
+runoff_df['day'] = runoff_df.index.day
+# convert m^3/s to m^3/hour (cmh)
+runoff_df['runoff_vol_cmh'] = runoff_df['Runoff (cms)'] * 3600
+cumulative_vol = runoff_df[['runoff_vol_cmh', 'day']].groupby('day').sum()
+cumulative_vol
+
+
+# In[ ]:
+
+
+# import runoff time series
+whis_flow_df = pd.read_csv(os.path.join(data_path, '08MG026_daily.csv'),
+header=1, parse_dates=['Date'], index_col=['Date'])
+# whis_flow_df = whis_flow_df[whis_flow_df['2005-09-27': '2005-09-31']]
+# whis_flow_df
+whis_flow_df = whis_flow_df['2005-09-27':'2005-09-30'].round(1)
+whis_flow_df
+
+
+# In[ ]:
+
+
+cumulative_vol.values.flatten()
+whis_flow_df.loc['2005-09-28':'2005-09-29']
+
+
+# In[ ]:
+
+
+# for the whistler runoff, subtract the base flow 
+# assume this is 1.3 cms from Sept. 27th
+whis_flow_df['excess_flow'] = whis_flow_df['Value'] - 1.3
+# convert daily average flow to daily volume in m^3/day
+whis_flow_df['excess_volume'] = whis_flow_df['excess_flow'] * 3600 * 24
+whis_flow_df.loc['2005-09-28':'2005-09-29', 'model_volume'] = cumulative_vol.values.flatten()
+
+
+# In[ ]:
 
 
 fig, ax = plt.subplots(1, 1, figsize=(16,4))
-ax.plot(runoff_df.index, runoff_df['Runoff (cms)'], label="Runoff")
+ax.plot(runoff_df.index, runoff_df['Runoff (cms)'], label="Modeled Hourly Runoff")
+ax.plot(whis_flow_df.index, whis_flow_df['Value'], label='Measured Daily Avg. [m^3/s]')
 
 ax.set_xlabel('Date')
 ax.set_ylabel('Runoff [cms]', color='blue')
@@ -942,44 +899,29 @@ ax.tick_params(axis='y', colors='blue')
 
 ax1 = ax.twinx()
 # plot the precipitation
-ax1.plot(hourly_df.index, hourly_df['precipitation'], 
-         color='green',
+ax1.bar(hourly_df.index, width=pd.Timedelta(hours=1),
+ height=hourly_df['precipitation'], color='green', alpha=0.5,
          label="Total Rain")
 ax1.set_ylabel('Precipitation [mm]', color='green')
 ax1.tick_params(axis='y', colors='green')
 ax1.legend(loc='upper right')
 
 
-# ### Determine the Peak Unit Runoff
+# ### Compare the modeled and measured runoff
 # 
-# First, estimate the drainage area.  Then, find the peak hourly flow.
+# We can't directly compare hourly modeled and daily measured flow, but we can compare the total volume.  Compare the modeled excess runoff from precipitation vs. the measured runoff (adjusted for base flow).  Below we subtract the base flow (assumed to be the first day of measured runoff) from the daily flow series, add up the total volumetric flow over the 2-day precipitation event, and compare it to the total modeled runoff volume (which is already excess) over the same period.
 
 # In[ ]:
 
 
-DA = round(grouped_dists.sum().values[0] * 0.3 * 0.3, 0)
-max_UR = runoff_df['Runoff (cms)'].max() / DA * 1000
-print('The drainage area is {} km^2 and the peak Unit Runoff is {} L/s/km^2'.format(DA, int(max_UR)))
+tot_runoff = whis_flow_df[['excess_volume', 'model_volume']].sum()
+relative_error = 100*( tot_runoff['excess_volume'] - tot_runoff['model_volume']) / tot_runoff['excess_volume']
 
+print(f'Assuming a runoff coefficient of {runoff_coefficient} ({100*runoff_coefficient}% of precipitation turns into runoff, the prediction error in runoff over the two day precipitation event is {relative_error:.0f}%) ')
 
-# Discuss the limitations of the approach.  Where do uncertainties exist?
-# 
-# * assumed precipitation is constant across days
-# * assumed constant runoff coefficient
-# * assumed two weights for travel time, constant across time
 
 # ## Question for Reflection
 # 
-# For the first part where we estimated the water level at the parking lot outlet based on an assumption that there was zero infiltration, assuming all else is equal, how could we reduce the maximum water level to 5 cm?  
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
+# 1. The runoff coefficient value was an assumption that we didn't qualify.  What could be done to provide evidence to support some number?  
+# 2. What factor in our unit hydrograph model controls the magnitude of the peak runoff?
+# 3. How do the three peak runoff estimates compare? 
