@@ -422,6 +422,11 @@ title="Print to PDF"
      Problem Setup
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculate-the-channel-capacity">
+     Calculate the channel capacity
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -564,6 +569,11 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#problem-setup">
      Problem Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculate-the-channel-capacity">
+     Calculate the channel capacity
     </a>
    </li>
   </ul>
@@ -1547,16 +1557,47 @@ Name: Total Precip (mm), dtype: float64
 <h3>Problem Setup<a class="headerlink" href="#problem-setup" title="Permalink to this headline">#</a></h3>
 <p>Let’s imagine you had a summer job in Whistler working on a project to grade and re-pave the area around Day Lot 4, including installing drainage to capture water from the parking lot and divert it to a storm water collection system instead of draining into FitzSimmons Creek.</p>
 <p><img alt="Satellite Image of the Day Lot 4 area in Whistler" src="../../_images/lot4_diagram1.png" /></p>
-<p>It’s summer and the project is scheduled to be completed by fall.  For the sake of this exercise, assume the slope of the parking lot area describes a catchment of roughly <strong>1 <span class="math notranslate nohighlight">\(km^2\)</span></strong> and empties through a temporary channel into a catch basin to be treated before flowing into FitzSimmons Creek.  Unfortunately, beyond the outlet (red dot in the diagram above), the channel has to cross the pedestrian trail that follows the river left bank.  Assume the channel is rectangular in shape, and is 2m wide by 0.25m deep with a hydraulic grade slope of 0.5%.</p>
-<ul class="simple">
-<li><p><strong>Channel width (w)</strong>: <span class="math notranslate nohighlight">\(2m\)</span></p></li>
-<li><p><strong>Channel Depth (h)</strong>: <span class="math notranslate nohighlight">\(0.25m\)</span></p></li>
-<li><p><strong>Hydraulic Grade Line Slope (S)</strong>: 0.005 (0.5%)</p></li>
-<li><p><strong>Roughness (n)</strong>: 0.017 (rough asphalt)</p></li>
-</ul>
+<p>It’s summer and the project is scheduled to be completed by fall.  For the sake of this exercise, assume the slope of the parking lot area describes a catchment of roughly <strong>1 <span class="math notranslate nohighlight">\(km^2\)</span></strong> and empties through a temporary channel into a catch basin to be treated before flowing into FitzSimmons Creek.</p>
 <blockquote>
 <div><p><strong>Note:</strong> Given the drainage area is only <span class="math notranslate nohighlight">\(1 km^2\)</span>, do you have a sense of what duration of rainfall is appropriate for estimating the peak of the runoff response hydrograph?  <em>i.e. 1h, 6h, 24h, 48h?</em></p>
 </div></blockquote>
+<p>There appears to be a low point near the outlet that could serve as an outlet channel which would avoid excavation and accelerate the project schedule, so you go out and survey the channel to get accurate dimensions.  Assume this natural channel has the following geometry.</p>
+<ul class="simple">
+<li><p><strong>Channel width (w)</strong>: <span class="math notranslate nohighlight">\(3m\)</span></p></li>
+<li><p><strong>Channel Depth (h)</strong>: <span class="math notranslate nohighlight">\(0.5m\)</span></p></li>
+<li><p><strong>Hydraulic Grade Line Slope (S)</strong>: 0.005 (0.5%)</p></li>
+<li><p><strong>Roughness (n)</strong>: 0.017 (rough asphalt)</p></li>
+</ul>
+</section>
+<section id="calculate-the-channel-capacity">
+<h3>Calculate the channel capacity<a class="headerlink" href="#calculate-the-channel-capacity" title="Permalink to this headline">#</a></h3>
+<p>Since the dimensions are known it’s much easier to determine its capacity.  We’ll calculate the capacity first and then see how our estimates of peak runoff compare.  Open channel flow is given by the Manning equation:</p>
+<div class="math notranslate nohighlight">
+\[V_{avg} = \frac{R^{2/3}\cdot S^{1/2}}{N} \cdot w \cdot h\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.5</span> <span class="c1"># height, width in metres</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">h</span>
+<span class="n">perim</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">w</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">A</span> <span class="o">/</span> <span class="n">perim</span>
+<span class="n">S</span> <span class="o">=</span> <span class="mf">0.005</span>
+<span class="n">n_manning</span> <span class="o">=</span> <span class="mf">0.017</span>
+
+<span class="c1"># average velocity</span>
+<span class="n">V_avg_open_channel</span> <span class="o">=</span>  <span class="n">R</span><span class="o">**</span><span class="p">(</span><span class="mf">2.0</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span><span class="o">**</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_manning</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The average channel velocity for full capacity flow is </span><span class="si">{</span><span class="n">V_avg_open_channel</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">m/s&#39;</span><span class="p">)</span>
+<span class="n">Q_channel_capacity</span> <span class="o">=</span> <span class="n">V_avg_open_channel</span> <span class="o">*</span> <span class="n">A</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The capacity of the channel is </span><span class="si">{</span><span class="n">Q_channel_capacity</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> m^3/s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The average channel velocity for full capacity flow is 1.5m/s
+The capacity of the channel is 2.2 m^3/s
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="hydrograph-estimation">
@@ -1852,7 +1893,7 @@ Name: Total Precip (mm), dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fda24aaeee0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_4_33_1.png" src="../../_images/Notebook_4_33_1.png" />
+<img alt="../../_images/Notebook_4_35_1.png" src="../../_images/Notebook_4_35_1.png" />
 </div>
 </div>
 </section>
@@ -1897,7 +1938,7 @@ Name: Total Precip (mm), dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Notebook_4_37_0.png" src="../../_images/Notebook_4_37_0.png" />
+<img alt="../../_images/Notebook_4_39_0.png" src="../../_images/Notebook_4_39_0.png" />
 </div>
 </div>
 </section>
@@ -1978,7 +2019,7 @@ Name: Total Precip (mm), dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Notebook_4_41_0.png" src="../../_images/Notebook_4_41_0.png" />
+<img alt="../../_images/Notebook_4_43_0.png" src="../../_images/Notebook_4_43_0.png" />
 </div>
 </div>
 </section>
@@ -2007,7 +2048,7 @@ Name: Total Precip (mm), dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Notebook_4_43_0.png" src="../../_images/Notebook_4_43_0.png" />
+<img alt="../../_images/Notebook_4_45_0.png" src="../../_images/Notebook_4_45_0.png" />
 </div>
 </div>
 </section>
@@ -2059,7 +2100,7 @@ Name: Total Precip (mm), dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Delineated Catchment&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_4_46_1.png" src="../../_images/Notebook_4_46_1.png" />
+<img alt="../../_images/Notebook_4_48_1.png" src="../../_images/Notebook_4_48_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2083,7 +2124,7 @@ Name: Total Precip (mm), dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Notebook_4_47_0.png" src="../../_images/Notebook_4_47_0.png" />
+<img alt="../../_images/Notebook_4_49_0.png" src="../../_images/Notebook_4_49_0.png" />
 </div>
 </div>
 </section>
@@ -2112,7 +2153,7 @@ Name: Total Precip (mm), dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Flow Distance&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_4_49_1.png" src="../../_images/Notebook_4_49_1.png" />
+<img alt="../../_images/Notebook_4_51_1.png" src="../../_images/Notebook_4_51_1.png" />
 </div>
 </div>
 </section>
@@ -2155,7 +2196,7 @@ Name: Total Precip (mm), dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Weighted distance to outlet&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_4_52_1.png" src="../../_images/Notebook_4_52_1.png" />
+<img alt="../../_images/Notebook_4_54_1.png" src="../../_images/Notebook_4_54_1.png" />
 </div>
 </div>
 </section>
@@ -2208,7 +2249,7 @@ Name: Total Precip (mm), dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Width function W(x)&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_4_57_1.png" src="../../_images/Notebook_4_57_1.png" />
+<img alt="../../_images/Notebook_4_59_1.png" src="../../_images/Notebook_4_59_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2229,7 +2270,7 @@ Name: Total Precip (mm), dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Width function W(x) ~ Unit Hydrograph&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_4_58_1.png" src="../../_images/Notebook_4_58_1.png" />
+<img alt="../../_images/Notebook_4_60_1.png" src="../../_images/Notebook_4_60_1.png" />
 </div>
 </div>
 <blockquote>
@@ -2532,7 +2573,7 @@ Name: Total Precip (mm), dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd9d2e94340&gt;
 </pre></div>
 </div>
-<img alt="../../_images/Notebook_4_70_1.png" src="../../_images/Notebook_4_70_1.png" />
+<img alt="../../_images/Notebook_4_72_1.png" src="../../_images/Notebook_4_72_1.png" />
 </div>
 </div>
 </section>
@@ -2766,7 +2807,7 @@ Name: Total Precip (mm), dtype: float64
 <h2>Question for Reflection<a class="headerlink" href="#question-for-reflection" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>What factors in our unit hydrograph model have an effect on the magnitude of the peak runoff?</p></li>
-<li><p>How do the SCS peak runoff estimates compare?</p></li>
+<li><p>How do the SCS peak runoff estimates compare to the channel capacity we determined at the beginning?  Would you feel confident in risking the channel overtopping, risking the aquatic ecosystem in Fitzsimmons Creek and risking violating the Fisheries Act?</p></li>
 <li><p>The runoff coefficient value was an assumption that we didn’t qualify.  At the What could be done to provide evidence to support some number?</p></li>
 <li><p>Do any of the models stand out as being “better” or “worse”?  Can you defend a best and worst model in a few brief points concerning: i) information requirements, ii) complexity, iii) interpretability?</p></li>
 </ol>
