@@ -4,13 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notebook 3: Regional Information Transfer &#8212; Engineering Hydrology</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -20,64 +18,48 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Notebook 4: Rational Method and Travel Times" href="../Notebook_4/Notebook_4.html" />
+    <link rel="next" title="Notebook 4: Rainfall-Runoff Modelling" href="../Notebook_4/Notebook_4.html" />
     <link rel="prev" title="Notebook 2: Rating Curve Development" href="../Notebook_2/Notebook_2.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
+    <meta name="docsearch:language" content="en" />
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -86,15 +68,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
-      
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
       
       <img src="../../_static/logo.png" class="logo" alt="logo">
       
@@ -105,17 +82,16 @@ const thebe_selector_output = ".output, .cell_output"
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Foreword
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Foreword
+  </a>
+ </li>
+</ul>
+<p class="caption">
  <span class="caption-text">
   Introduction
  </span>
@@ -131,13 +107,8 @@ const thebe_selector_output = ".output, .cell_output"
    Example: Clausius-Clapeyron Equation
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../markdown.html">
-   Markdown Files
-  </a>
- </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Flow Measurement
  </span>
@@ -149,7 +120,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Rating Curve Development
  </span>
@@ -161,7 +132,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Regional Information Transfer
  </span>
@@ -173,7 +144,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Rainfall-Runoff Model
  </span>
@@ -181,11 +152,11 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Notebook_4/Notebook_4.html">
-   Notebook 4: Rational Method and Travel Times
+   Notebook 4: Rainfall-Runoff Modelling
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Extreme Values, Uncertainty, and Risk
  </span>
@@ -199,464 +170,233 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
             
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/Notebook_3/Notebook_3.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Notebook_3/Notebook_3.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/dankovacek/Engineering_Hydrology_Notebooks/main?urlpath=tree/content/notebooks/Notebook_3/Notebook_3.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
             </div>
-            
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#characterization-of-long-term-runoff">
+   Characterization of Long-Term Runoff
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-the-data">
+   Import the Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-stage-discharge-rating-curve-and-the-best-fit-curve">
+   Plot the Stage-Discharge Rating Curve and the Best Fit Curve
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-daily-average-discharge">
+   Calculate Daily Average Discharge
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-rating-curve-and-resultant-flow-series">
+     Plot the Rating Curve and Resultant Flow Series
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cumulative-frequency-the-flow-duration-curve-fdc">
+     Cumulative Frequency: The Flow Duration Curve (FDC)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression-of-daily-streamflow">
+   Linear Regression of Daily Streamflow
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chronological-pairing-cp">
+     Chronological Pairing (CP)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#empirical-frequency-pairing">
+     Empirical Frequency Pairing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-up-a-chronological-pairing-regression">
+     Set up a Chronological Pairing Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#obtain-concurrent-data">
+     Obtain Concurrent Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression-plot">
+   Regression Plot
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-long-term-daily-flow-series-for-the-project-location">
+   Create long-term daily flow series for the project location
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-the-model-flow-series-to-the-measured-series">
+   Compare the model flow series to the measured series
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#in-the-above-plot-note-general-patterns-specific-exceptions-and-any-trends">
+     In the above plot, note general patterns, specific exceptions, and any trends
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#best-fit">
+     Best-fit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#compare-measured-vs-modeled-flow-duration-curves">
+     Compare measured vs. modeled flow duration curves
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimate-the-long-term-mean-annual-flow-for-our-project-location">
+   Estimate the Long-Term Mean Annual Flow for our Project Location
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#questions-for-reflection">
+   Questions for Reflection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
-    <div id="rtd-footer-container"></div>
 </div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/dankovacek/Engineering_Hydrology_Notebooks/main?urlpath=tree/content/notebooks/Notebook_3/Notebook_3.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/dankovacek/Engineering_Hydrology_Notebooks/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Notebook_3/Notebook_3.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/notebooks/Notebook_3/Notebook_3.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
-</div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#characterization-of-long-term-runoff">
-   Characterization of Long-Term Runoff
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-the-data">
-   Import the Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-stage-discharge-rating-curve-and-the-best-fit-curve">
-   Plot the Stage-Discharge Rating Curve and the Best Fit Curve
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#calculate-daily-average-discharge">
-   Calculate Daily Average Discharge
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-rating-curve-and-resultant-flow-series">
-     Plot the Rating Curve and Resultant Flow Series
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cumulative-frequency-the-flow-duration-curve-fdc">
-     Cumulative Frequency: The Flow Duration Curve (FDC)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linear-regression-of-daily-streamflow">
-   Linear Regression of Daily Streamflow
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chronological-pairing-cp">
-     Chronological Pairing (CP)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#empirical-frequency-pairing">
-     Empirical Frequency Pairing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#set-up-a-chronological-pairing-regression">
-     Set up a Chronological Pairing Regression
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#obtain-concurrent-data">
-     Obtain Concurrent Data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regression-plot">
-   Regression Plot
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-long-term-daily-flow-series-for-the-project-location">
-   Create long-term daily flow series for the project location
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#compare-the-model-flow-series-to-the-measured-series">
-   Compare the model flow series to the measured series
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#in-the-above-plot-note-general-patterns-specific-exceptions-and-any-trends">
-     In the above plot, note general patterns, specific exceptions, and any trends
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#best-fit">
-     Best-fit
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-measured-vs-modeled-flow-duration-curves">
-     Compare measured vs. modeled flow duration curves
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#estimate-the-long-term-mean-annual-flow-for-our-project-location">
-   Estimate the Long-Term Mean Annual Flow for our Project Location
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#questions-for-reflection">
-   Questions for Reflection
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
-</ul>
-
-    </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Notebook 3: Regional Information Transfer</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#characterization-of-long-term-runoff">
-   Characterization of Long-Term Runoff
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#import-the-data">
-   Import the Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-stage-discharge-rating-curve-and-the-best-fit-curve">
-   Plot the Stage-Discharge Rating Curve and the Best Fit Curve
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#calculate-daily-average-discharge">
-   Calculate Daily Average Discharge
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-rating-curve-and-resultant-flow-series">
-     Plot the Rating Curve and Resultant Flow Series
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cumulative-frequency-the-flow-duration-curve-fdc">
-     Cumulative Frequency: The Flow Duration Curve (FDC)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#linear-regression-of-daily-streamflow">
-   Linear Regression of Daily Streamflow
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chronological-pairing-cp">
-     Chronological Pairing (CP)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#empirical-frequency-pairing">
-     Empirical Frequency Pairing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#set-up-a-chronological-pairing-regression">
-     Set up a Chronological Pairing Regression
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#obtain-concurrent-data">
-     Obtain Concurrent Data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regression-plot">
-   Regression Plot
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-long-term-daily-flow-series-for-the-project-location">
-   Create long-term daily flow series for the project location
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#compare-the-model-flow-series-to-the-measured-series">
-   Compare the model flow series to the measured series
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#in-the-above-plot-note-general-patterns-specific-exceptions-and-any-trends">
-     In the above plot, note general patterns, specific exceptions, and any trends
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#best-fit">
-     Best-fit
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compare-measured-vs-modeled-flow-duration-curves">
-     Compare measured vs. modeled flow duration curves
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#estimate-the-long-term-mean-annual-flow-for-our-project-location">
-   Estimate the Long-Term Mean Annual Flow for our Project Location
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#questions-for-reflection">
-   Questions for Reflection
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
-                
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="notebook-3-regional-information-transfer">
-<h1>Notebook 3: Regional Information Transfer<a class="headerlink" href="#notebook-3-regional-information-transfer" title="Permalink to this headline">#</a></h1>
-<section id="characterization-of-long-term-runoff">
-<h2>Characterization of Long-Term Runoff<a class="headerlink" href="#characterization-of-long-term-runoff" title="Permalink to this headline">#</a></h2>
+  <div class="section" id="notebook-3-regional-information-transfer">
+<h1>Notebook 3: Regional Information Transfer<a class="headerlink" href="#notebook-3-regional-information-transfer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="characterization-of-long-term-runoff">
+<h2>Characterization of Long-Term Runoff<a class="headerlink" href="#characterization-of-long-term-runoff" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -668,32 +408,19 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">math</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">st</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
-</pre></div>
 </div>
 </div>
-</div>
-</section>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In Notebook 2, we developed a rating curve for our location of interest based on discrete discharge measurements made during a series of visits, and we applied this stage-discharge relationship (rating curve) to the continous stage recorded at our hydrometric station to generate a discharge (flow) time series.</p>
 <p>Recall that our hydrometric station has only been running for a couple of years – this isn’t nearly enough data to estimate the <strong>long term</strong> flow characteristics (daily, seasonal, floods, droughts, etc.).  In this notebook, we look in the vicinity of our project location for other stations where records have been kept for much longer—ideally with complete historical records of 25+ years.  <strong>It’s also critical that we find records that are concurrent with the period we measured at our project location.</strong>  We can use concurrent data from nearby stations to develop a model to estimate flow for periods we didn’t actually measure at our project location.  This type of model is called a <em>regional information transfer</em> model.</p>
 <p>First, we’ll set up our rating curve as we did in Notebook 2 and recalculate the daily average flow series.</p>
 <blockquote>
 <div><p><strong>Note</strong>: throughout these notebooks, the short form cms (cubic metres per second) is used interchangeably, and denoted as <code class="docutils literal notranslate"><span class="pre">m3/s</span></code>, <code class="docutils literal notranslate"><span class="pre">m^3/s</span></code> and  <span class="math notranslate nohighlight">\(m^3/s\)</span>.</p>
 </div></blockquote>
-</section>
-<section id="import-the-data">
-<h2>Import the Data<a class="headerlink" href="#import-the-data" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="import-the-data">
+<h2>Import the Data<a class="headerlink" href="#import-the-data" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the stage data (from the Notebook 2 data folder)</span>
@@ -778,7 +505,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9161f1af70&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f82ffa23fa0&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_3_7_1.png" src="../../_images/Notebook_3_7_1.png" />
@@ -896,7 +623,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/danbot/.local/lib/python3.8/site-packages/numpy/core/fromnumeric.py:3199: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/danbot/Documents/code/data_analysis/lib/python3.8/site-packages/numpy/core/fromnumeric.py:3199: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
   return asarray(a).ndim
 </pre></div>
 </div>
@@ -988,9 +715,9 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
-</section>
-<section id="plot-the-stage-discharge-rating-curve-and-the-best-fit-curve">
-<h2>Plot the Stage-Discharge Rating Curve and the Best Fit Curve<a class="headerlink" href="#plot-the-stage-discharge-rating-curve-and-the-best-fit-curve" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="plot-the-stage-discharge-rating-curve-and-the-best-fit-curve">
+<h2>Plot the Stage-Discharge Rating Curve and the Best Fit Curve<a class="headerlink" href="#plot-the-stage-discharge-rating-curve-and-the-best-fit-curve" title="Permalink to this headline">¶</a></h2>
 <p>Recall the form of the rating curve equation from Notebook 2: <span class="math notranslate nohighlight">\(Q = C(H-h_0)^b\)</span>.  If we transform the data to log space, we get a linear relationship:</p>
 <div class="math notranslate nohighlight">
 \[log(Q) = log(C) + b\cdot log(h-h_0)\]</div>
@@ -1053,9 +780,9 @@ Note that <span class="math notranslate nohighlight">\(h_0\)</span> cannot be fi
 </div>
 </div>
 </div>
-</section>
-<section id="calculate-daily-average-discharge">
-<h2>Calculate Daily Average Discharge<a class="headerlink" href="#calculate-daily-average-discharge" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="calculate-daily-average-discharge">
+<h2>Calculate Daily Average Discharge<a class="headerlink" href="#calculate-daily-average-discharge" title="Permalink to this headline">¶</a></h2>
 <p>From the equation describing the ordinary least squares (OLS) best fit of the measured discharge,
 calculate daily average flow from daily average water level.</p>
 <div class="cell docutils container">
@@ -1084,11 +811,9 @@ calculate daily average flow from daily average water level.</p>
     <tr style="text-align: right;">
       <th></th>
       <th>Water level (daily av.) (m)</th>
-      <th>RC Q (cms)</th>
     </tr>
     <tr>
       <th>Date</th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -1096,27 +821,22 @@ calculate daily average flow from daily average water level.</p>
     <tr>
       <th>2009-01-01</th>
       <td>0.240</td>
-      <td>1.235033</td>
     </tr>
     <tr>
       <th>2009-01-02</th>
       <td>0.236</td>
-      <td>1.206657</td>
     </tr>
     <tr>
       <th>2009-01-03</th>
       <td>0.234</td>
-      <td>1.192538</td>
     </tr>
     <tr>
       <th>2009-01-04</th>
       <td>0.233</td>
-      <td>1.185495</td>
     </tr>
     <tr>
       <th>2009-01-05</th>
       <td>0.231</td>
-      <td>1.171445</td>
     </tr>
   </tbody>
 </table>
@@ -1207,8 +927,8 @@ calculate daily average flow from daily average water level.</p>
 </div>
 </div>
 </div>
-<section id="plot-the-rating-curve-and-resultant-flow-series">
-<h3>Plot the Rating Curve and Resultant Flow Series<a class="headerlink" href="#plot-the-rating-curve-and-resultant-flow-series" title="Permalink to this headline">#</a></h3>
+<div class="section" id="plot-the-rating-curve-and-resultant-flow-series">
+<h3>Plot the Rating Curve and Resultant Flow Series<a class="headerlink" href="#plot-the-rating-curve-and-resultant-flow-series" title="Permalink to this headline">¶</a></h3>
 <p>The two plots below are linked.  Check the selection tools, and select points on one plot.  When validating data, it is helpful to be able to link the measurements on the rating curve plot and the daily flow series plot.  Consider how you would you check if the low flows were subject to a shift in the hydraulic control over time?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1250,9 +970,9 @@ calculate daily average flow from daily average water level.</p>
 <img alt="../../_images/Notebook_3_22_0.png" src="../../_images/Notebook_3_22_0.png" />
 </div>
 </div>
-</section>
-<section id="cumulative-frequency-the-flow-duration-curve-fdc">
-<h3>Cumulative Frequency: The Flow Duration Curve (FDC)<a class="headerlink" href="#cumulative-frequency-the-flow-duration-curve-fdc" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="cumulative-frequency-the-flow-duration-curve-fdc">
+<h3>Cumulative Frequency: The Flow Duration Curve (FDC)<a class="headerlink" href="#cumulative-frequency-the-flow-duration-curve-fdc" title="Permalink to this headline">¶</a></h3>
 <p>In order to illustrate the variability of flow in a river, it is common to map flow magnitude to cumulative frequency, or the proportion of time the flow in the river equals or exceeds some amount.  A flow duration curve presents flow magnitude from 0% to 100% exceedance, where values approaching zero are high flows that are very rarely exceeded.  Conversely, values approaching 100% exceedance are low flows that are almost always exceeded.  <strong>50% exceedance represents the median flow</strong>  Note that these values are based on the sample, and the flow duration curve is generally used to describe the overall distribution of flow and not for estimating extremes.  A <em>flow duration</em> curve is also referred to as a <em>flow exceedance</em> curve.</p>
 <p>Let’s plot a flow duration curve for the measured flow series we created above by applying the rating curve equation to the stage series.</p>
 <div class="cell docutils container">
@@ -1284,15 +1004,15 @@ calculate daily average flow from daily average water level.</p>
 <p><img alt="Comparison of flow exceedance curves for two basins in BC and Alberta, with a focus on low-flow range." src="../../_images/FDC_comparison_low_flow.png" /></p>
 <p>An FDC is also informative to compare <strong>different estimates at the same location</strong>, such as a measured vs. modeled flow series.</p>
 <p>Next we’ll develop a regional regression model and then use the FDC to evaluate the quality of our model <em>over specific flow quantiles</em> – this is important for the different end-uses of the data.</p>
-</section>
-</section>
-<section id="linear-regression-of-daily-streamflow">
-<h2>Linear Regression of Daily Streamflow<a class="headerlink" href="#linear-regression-of-daily-streamflow" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="linear-regression-of-daily-streamflow">
+<h2>Linear Regression of Daily Streamflow<a class="headerlink" href="#linear-regression-of-daily-streamflow" title="Permalink to this headline">¶</a></h2>
 <p><img alt="Active WSC Stations in Western Canada" src="../../_images/wsc_map_view1.png" /></p>
 <p>Water Survey of Canada (WSC) has operated and maintained hydrometric stations across Canada for over 100 years.  If we can find a regional proxy WSC station in <strong>close proximity to our location of interest, with similar basin characteristics</strong> to those of our project, we can correlate daily streamflow between the two locations, ultimately to generate an estimated (also called synthetic or modeled) long-term flow series for our project location.</p>
 <p>Typically regressions are done by chronological pairing, which effectively says “if the flow at the regional (proxy) station was <span class="math notranslate nohighlight">\(Q_p\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, the flow at our project location at time <span class="math notranslate nohighlight">\(t\)</span> will be approximately linearly proportional.</p>
-<section id="chronological-pairing-cp">
-<h3>Chronological Pairing (CP)<a class="headerlink" href="#chronological-pairing-cp" title="Permalink to this headline">#</a></h3>
+<div class="section" id="chronological-pairing-cp">
+<h3>Chronological Pairing (CP)<a class="headerlink" href="#chronological-pairing-cp" title="Permalink to this headline">¶</a></h3>
 <p>A lot of work goes into finding an appropriate long-term record comparable to our location of interest, but we will assume we have been given a long-term daily flow series to use.</p>
 <ol class="simple">
 <li><p>Find just the concurrent days of record (days where we have flow recorded at <strong>both creeks/rivers</strong>).</p></li>
@@ -1302,16 +1022,16 @@ calculate daily average flow from daily average water level.</p>
 </ol>
 <p>To further refine this estimate, we can recognize that the mechanisms driving flow across seasons and months can change quite dramatically, and the relationship between the two catchments can also change month-by-month, and/or season by season.  If there is enough data to create seasonal or monthly regressions, we can develop a best-fit equation for each month or season.  The process of steps 2 through 4 then are the same, except we treat each season or month independently.</p>
 <p>The above method is referred to as <strong>chronological pairing (CP)</strong>, as it pairs flows occurring at the same time.  But what if there are timing differences between stations, or what if the spatial variability of precipitation results in flow events that don’t coincide in the short term?</p>
-</section>
-<section id="empirical-frequency-pairing">
-<h3>Empirical Frequency Pairing<a class="headerlink" href="#empirical-frequency-pairing" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="empirical-frequency-pairing">
+<h3>Empirical Frequency Pairing<a class="headerlink" href="#empirical-frequency-pairing" title="Permalink to this headline">¶</a></h3>
 <p>To eliminate the temporal constraint on timing of events at the daily level, instead of comparing concurrent days, we can compare magnitudes of flows. This method is referred to as Empirical Frequency Pairing (EFP) and is commonly used in British Columbia.  Empirical frequency pairing still uses concurrent records, however it is the ranked flows in each series that are compared, i.e. the data points on an EFP plot are:</p>
 <div class="math notranslate nohighlight">
 \[[(R1_{siteA}, R1_{site_B}), (R2_{siteA}, R2_{siteB}), ..., (Rn_{siteA}, Rn_{siteB})]\]</div>
 <p>The steps to derive an estimated long-term flow series for our location of interest are the same (i.e. steps 2-4 above).</p>
-</section>
-<section id="set-up-a-chronological-pairing-regression">
-<h3>Set up a Chronological Pairing Regression<a class="headerlink" href="#set-up-a-chronological-pairing-regression" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="set-up-a-chronological-pairing-regression">
+<h3>Set up a Chronological Pairing Regression<a class="headerlink" href="#set-up-a-chronological-pairing-regression" title="Permalink to this headline">¶</a></h3>
 <p>The first step is to import the regional data series and find all of the dates with values for both locations.</p>
 <p>Previewing the data shows line 1 has information about two distinct parameters.  Where the <code class="docutils literal notranslate"><span class="pre">PARAM</span></code> column value is 1, the <code class="docutils literal notranslate"><span class="pre">Value</span></code> column corresponds to daily discharge (<span class="math notranslate nohighlight">\(\frac{m^3}{s}\)</span> and where the <code class="docutils literal notranslate"><span class="pre">PARAM</span></code> column value is 2, the <code class="docutils literal notranslate"><span class="pre">Value</span></code> column corresonds to daily water level (<span class="math notranslate nohighlight">\(m\)</span>).</p>
 <blockquote>
@@ -1415,9 +1135,9 @@ calculate daily average flow from daily average water level.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="obtain-concurrent-data">
-<h3>Obtain Concurrent Data<a class="headerlink" href="#obtain-concurrent-data" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="obtain-concurrent-data">
+<h3>Obtain Concurrent Data<a class="headerlink" href="#obtain-concurrent-data" title="Permalink to this headline">¶</a></h3>
 <p>From the previous step, we can see that the regional dataset encompasses the date range of our site data.  To perform a linear regression, we want to use <strong>concurrent data only</strong>.   The <code class="docutils literal notranslate"><span class="pre">concat</span></code>, or concatenate, function <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html">documentation can be found here</a>.</p>
 <blockquote>
 <div><p><strong>Note</strong>: the <code class="docutils literal notranslate"><span class="pre">concat</span></code> function is used to combine dataframes.  We want to combine two dataframes based on concurrent days.  The <code class="docutils literal notranslate"><span class="pre">concat</span></code> function requires the dataframes to have <code class="docutils literal notranslate"><span class="pre">datetime</span></code>/<code class="docutils literal notranslate"><span class="pre">timestamp</span></code> type indices.</p>
@@ -1527,10 +1247,10 @@ calculate daily average flow from daily average water level.</p>
 </table>
 </div></div></div>
 </div>
-</section>
-</section>
-<section id="regression-plot">
-<h2>Regression Plot<a class="headerlink" href="#regression-plot" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="regression-plot">
+<h2>Regression Plot<a class="headerlink" href="#regression-plot" title="Permalink to this headline">¶</a></h2>
 <p>Plot the concurrent daily flows between the project location and the regional station to see if there is a correlation between the two that could be used to develop a model for our project location.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1592,15 +1312,15 @@ calculate daily average flow from daily average water level.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9161caacd0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f82fd87cee0&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_3_42_1.png" src="../../_images/Notebook_3_42_1.png" />
 </div>
 </div>
-</section>
-<section id="create-long-term-daily-flow-series-for-the-project-location">
-<h2>Create long-term daily flow series for the project location<a class="headerlink" href="#create-long-term-daily-flow-series-for-the-project-location" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="create-long-term-daily-flow-series-for-the-project-location">
+<h2>Create long-term daily flow series for the project location<a class="headerlink" href="#create-long-term-daily-flow-series-for-the-project-location" title="Permalink to this headline">¶</a></h2>
 <p>The last step in the process of a long-term flow estimate for our project location is to use the equation of the best fit line (the model) to calculate estimated daily flows over periods where flow was not measured at our project location.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1635,9 +1355,9 @@ calculate daily average flow from daily average water level.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="compare-the-model-flow-series-to-the-measured-series">
-<h2>Compare the model flow series to the measured series<a class="headerlink" href="#compare-the-model-flow-series-to-the-measured-series" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="compare-the-model-flow-series-to-the-measured-series">
+<h2>Compare the model flow series to the measured series<a class="headerlink" href="#compare-the-model-flow-series-to-the-measured-series" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compare the modeled vs. measured flow series </span>
@@ -1671,14 +1391,10 @@ calculate daily average flow from daily average water level.</p>
       <th>PARAM</th>
       <th>Value</th>
       <th>SYM</th>
-      <th>Model_Q</th>
-      <th>residuals</th>
       <th>Model_q_cms</th>
     </tr>
     <tr>
       <th>Date</th>
-      <th></th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -1696,8 +1412,6 @@ calculate daily average flow from daily average water level.</p>
       <td>0.240</td>
       <td>B</td>
       <td>1.384534</td>
-      <td>0.149501</td>
-      <td>1.384534</td>
     </tr>
     <tr>
       <th>2009-01-02</th>
@@ -1706,8 +1420,6 @@ calculate daily average flow from daily average water level.</p>
       <td>1</td>
       <td>0.230</td>
       <td>B</td>
-      <td>1.365869</td>
-      <td>0.159212</td>
       <td>1.365869</td>
     </tr>
     <tr>
@@ -1718,8 +1430,6 @@ calculate daily average flow from daily average water level.</p>
       <td>0.225</td>
       <td>B</td>
       <td>1.356537</td>
-      <td>0.163999</td>
-      <td>1.356537</td>
     </tr>
     <tr>
       <th>2009-01-04</th>
@@ -1729,8 +1439,6 @@ calculate daily average flow from daily average water level.</p>
       <td>0.208</td>
       <td>B</td>
       <td>1.324807</td>
-      <td>0.139312</td>
-      <td>1.324807</td>
     </tr>
     <tr>
       <th>2009-01-05</th>
@@ -1739,8 +1447,6 @@ calculate daily average flow from daily average water level.</p>
       <td>1</td>
       <td>0.200</td>
       <td>B</td>
-      <td>1.309875</td>
-      <td>0.138430</td>
       <td>1.309875</td>
     </tr>
   </tbody>
@@ -1762,21 +1468,21 @@ calculate daily average flow from daily average water level.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9160bae610&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f82fd82e700&gt;
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_3_49_1.png" src="../../_images/Notebook_3_49_1.png" />
 </div>
 </div>
-<section id="in-the-above-plot-note-general-patterns-specific-exceptions-and-any-trends">
-<h3>In the above plot, note general patterns, specific exceptions, and any trends<a class="headerlink" href="#in-the-above-plot-note-general-patterns-specific-exceptions-and-any-trends" title="Permalink to this headline">#</a></h3>
+<div class="section" id="in-the-above-plot-note-general-patterns-specific-exceptions-and-any-trends">
+<h3>In the above plot, note general patterns, specific exceptions, and any trends<a class="headerlink" href="#in-the-above-plot-note-general-patterns-specific-exceptions-and-any-trends" title="Permalink to this headline">¶</a></h3>
 <p>Note the big deviation between the two series in the summer of 2010.  This looks like our model is doing a particularly bad job in the late summer.  How about in other seasons?   How is the model doing at predicting peaks?</p>
 <blockquote>
 <div><p><strong>Note</strong>: in the figure above, we label one series as “Measured Q” but in reality recall it is not <em>directly</em> measured.  It is itself a model of the relationship between stage and discharge.  <strong>The rating curve equation is the model!</strong></p>
 </div></blockquote>
-</section>
-<section id="best-fit">
-<h3>Best-fit<a class="headerlink" href="#best-fit" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="best-fit">
+<h3>Best-fit<a class="headerlink" href="#best-fit" title="Permalink to this headline">¶</a></h3>
 <p>The least-squares best fit is a common way to define the linear relationship between two variables.  It is a minimization of the sum of squared differences between the line (the model) and the observation.  Because it uses the square difference, it is sensitive to outliers.  It is good practice to check the residuals of the model to see if our model contains bias, and make an adjustment if warranted.  We can exclude outliers from the best fit (but still show them in the plot!), or we could use the L1-norm, which is the sum of absolute differences which is more robust to outliers.</p>
 <p>Below, we’ll apply the best fit model to the regional data for the period of measured record, we’ll calculate the difference (residuals) between modeled and measured flows, and then we’ll plot these residuals to look for bias in our model.</p>
 <div class="cell docutils container">
@@ -1819,9 +1525,9 @@ calculate daily average flow from daily average water level.</p>
 <img alt="../../_images/Notebook_3_53_1.png" src="../../_images/Notebook_3_53_1.png" />
 </div>
 </div>
-</section>
-<section id="compare-measured-vs-modeled-flow-duration-curves">
-<h3>Compare measured vs. modeled flow duration curves<a class="headerlink" href="#compare-measured-vs-modeled-flow-duration-curves" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="compare-measured-vs-modeled-flow-duration-curves">
+<h3>Compare measured vs. modeled flow duration curves<a class="headerlink" href="#compare-measured-vs-modeled-flow-duration-curves" title="Permalink to this headline">¶</a></h3>
 <p>How else can we evaluate how the model is fitting the measured data, noting in particular that we are interested in certain ranges of flows, perhaps for generating energy year-round, or supplying a community with drinking water in a dry season?</p>
 <p>Recall how we plotted the flow duration curve in Notebook 3.  The flow duration curve is particularly useful for focusing on how well the model matches measured data across the range of flows (though extremes are de-emphasized).</p>
 <p>What do the differences between flow duration curves shown below suggest about how well our model represents the project area?</p>
@@ -1848,16 +1554,16 @@ calculate daily average flow from daily average water level.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f915ae14af0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f82fc445fd0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_3_55_1.png" src="../../_images/Notebook_3_55_1.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="estimate-the-long-term-mean-annual-flow-for-our-project-location">
-<h2>Estimate the Long-Term Mean Annual Flow for our Project Location<a class="headerlink" href="#estimate-the-long-term-mean-annual-flow-for-our-project-location" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="estimate-the-long-term-mean-annual-flow-for-our-project-location">
+<h2>Estimate the Long-Term Mean Annual Flow for our Project Location<a class="headerlink" href="#estimate-the-long-term-mean-annual-flow-for-our-project-location" title="Permalink to this headline">¶</a></h2>
 <p>Compare the long term mean annual against the short term, then compare the long-term monthly and annual series.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1984,16 +1690,16 @@ The median flow over the measured period was 2.7 m^3/s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f915adbdee0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f82fc3de6d0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/Notebook_3_59_1.png" src="../../_images/Notebook_3_59_1.png" />
 </div>
 </div>
 <p>The two series above highlight the difference a long-term estimate can make.  If we were to base a model on the short term measured series (blue), we might underestimate the flow available in the winter months (when energy is especially valuable), or overestimate the snowmelt in spring <strong>over the long term</strong>.</p>
-</section>
-<section id="questions-for-reflection">
-<h2>Questions for Reflection<a class="headerlink" href="#questions-for-reflection" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="questions-for-reflection">
+<h2>Questions for Reflection<a class="headerlink" href="#questions-for-reflection" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
 <li><p>From our regression plot and from the comparison of measured and estimated daily flow series, what do you think about the quality of our model, i.e. how well does the best fit line approximate the concurrent daily flows (blue dots)?</p></li>
 <li><p>What flow is exceeded 50% OR MORE of the time, how well is this range modelled and what might this flow range be pertinent to for a hydropower project?</p></li>
@@ -2001,15 +1707,15 @@ The median flow over the measured period was 2.7 m^3/s
 <li><p>How might we modify our model to capture one of the differences you noted in 3?</p></li>
 <li><p>In the last plot, we see that the ~two years we measured had a dramatically higher spring runoff compared to the long-term, and lower winter base flows.  What we took these years as representative without modeling the long-term flow distribution?</p></li>
 </ol>
-</section>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
 <li><p>A.S. Hamilton &amp; R.D. Moore (2012). Quantifying Uncertainty in Streamflow Records , Canadian Water Resources Journal / Revue canadienne des ressources hydriques, 37:1, 3-21, DOI: 10.4296/cwrj3701865</p></li>
 <li><p>Environment Canada (2012).  Hydrometric Manual - Data Computations.  Water Survey of Canada, Weather and Environmental Monitoring Directorate.</p></li>
 </ol>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -2033,48 +1739,34 @@ The median flow over the measured period was 2.7 m^3/s
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../Notebook_2/Notebook_2.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Notebook 2: Rating Curve Development</p>
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../Notebook_2/Notebook_2.html" title="previous page">Notebook 2: Rating Curve Development</a>
+    <a class='right-next' id="next-link" href="../Notebook_4/Notebook_4.html" title="next page">Notebook 4: Rainfall-Runoff Modelling</a>
+
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="../Notebook_4/Notebook_4.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Notebook 4: Rational Method and Travel Times</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
+        
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Dan Kovacek<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Dan Kovacek<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
     </div>
-    
-</div>
+  </footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-
+  
   </body>
 </html>
