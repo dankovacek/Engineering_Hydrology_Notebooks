@@ -3,7 +3,7 @@
 Launch the main notebook in "interactive mode" using Binder:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dankovacek/run_of_river_intro.git/main)
 
-The notebook files themselves are saved under [content/notebooks/](https://github.com/dankovacek/Engineering_Hydrology_Notebooks).
+The notebook files themselves are saved under [content/notebooks/](https://github.com/dankovacek/Engineering_Hydrology_Notebooks/tree/main/content/notebooks).
 
 ## Notes on Compiling and Updating the Book 
 
