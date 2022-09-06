@@ -5,6 +5,7 @@ The notebook files themselves are saved under [content/notebooks/](https://githu
 Launch the main notebook using Binder:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dankovacek/run_of_river_intro.git/main)
 
+## Notes on Compiling and Updating the Book 
 
 Info for [building books and hosting on Github Pages](https://jupyterbook.org/publish/gh-pages.html)
 
