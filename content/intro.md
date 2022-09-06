@@ -18,7 +18,7 @@ The Jupyter notebook exercises in this course can be accessed in the following w
 
 ### Set up and Preparation
 
-[Detailed installation instructions can be found here.](https://nbviewer.jupyter.org/github/ehmatthes/intro_programming/blob/master/notebooks/programming_environment.ipynb)  Please ensure you have Python installed (version should be Python 3.6 or greater) and you can open Jupyter and run a notebook.  
+[Detailed installation instructions can be found here.](https://nbviewer.jupyter.org/github/ehmatthes/intro_programming/blob/master/notebooks/programming_environment.ipynb)  Please ensure you have Python installed (version should be Python 3.6 or greater) and you can open Jupyter and run a notebook.
 
 A discussion thread dedicated to installation and setup will be created on Canvas.  If you still have difficulty after reviewing the resources provided here, please post questions (with as much detail as you can provide) to the Canvas discussion forum and the instructor and TA will be available to help.
 
