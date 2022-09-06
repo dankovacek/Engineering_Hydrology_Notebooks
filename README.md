@@ -1,5 +1,7 @@
 ## Jupyter Book and Binder
 
+The notebook files themselves are saved under [content/notebooks/](https://github.com/dankovacek/Engineering_Hydrology_Notebooks).
+
 Launch the main notebook using Binder:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dankovacek/run_of_river_intro.git/main)
 
