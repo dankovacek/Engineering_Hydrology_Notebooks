@@ -5,3 +5,4 @@ scipy
 matplotlib
 pysheds
 rasterio
+jupyter_bokeh
