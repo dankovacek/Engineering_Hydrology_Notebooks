@@ -54,3 +54,7 @@ Typing the following (you can replace `pandas` with the name of the package you 
 ![Command to install a Python package.](img/package_install.png)
 
 And executing the cell (shift + enter), or the 'run' button.
+
+## License
+
+The set of notebooks making up this Jupyter Book is licensed under the standard [MIT license](../LICENSE).
