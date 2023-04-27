@@ -57,4 +57,4 @@ And executing the cell (shift + enter), or the 'run' button.
 
 ## License
 
-The set of notebooks making up this Jupyter Book is licensed under the standard [MIT license](../LICENSE).
+The set of notebooks making up this Jupyter Book is licensed under the [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/legalcode).
